@@ -1,0 +1,50 @@
+DEVLOG FOR Block Pursuit"
+Jun 2023
+
+* IDEAS
+- Make a box puzzle game for mobile.
+
+
+14/6	* Starting with simple prototype
+		* Square play area
+		* Player can roll around the game area and box has different colors on each side
+		* Box stops at walls
+		
+
+		ISSUES
+		
+		// - Content -
+		// Load Screen between scenes
+
+		// - Mechanics Stuff -		
+		
+		// - Data stuff -
+		// Need to fix up saving system. 
+		
+		// - Animation Stuff -
+		
+		// - Terrain -
+		
+		// - Crafting  Stuff -
+		
+		// - Items Stuff -
+		
+		// - UI stuff -
+		// Make basic UI
+
+		// - LevelCreation Stuff -
+		
+		
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
+
+		CHECKLIST FOR BETTER PLAYER EXPERIENCE
+
+		* BUGS, CRASHES, SLOW PERFORMANCE
+		* MISLEADING MARKETING
+		* NOT ENGAGING WITH COMMUNITY
+		* CONFIGURABLE CONTROLS, 
+		* TEXT TO SMALL, 
+		* CONTRAST, 
+		* MISSING FEATURE
+
+------ ------- ------
