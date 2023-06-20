@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +18,9 @@ public class PlayerController : MonoBehaviour
 
     Vector2Int position = Vector2Int.one;
 
+    private Section holdingSection;
+
+    [SerializeField] GameObject redBox;
 
     private void Awake()
     {
@@ -29,18 +30,37 @@ public class PlayerController : MonoBehaviour
 
     private void InitPosition()
     {
-        transform.localPosition = new Vector3(position.x,position.y,0);
+        transform.localPosition = new Vector3(position.x,position.y,-2);
     }
 
     private void OnEnable()
     {
         // Subscribe to input
         Inputs.Instance.Controls.Main.Move.performed += MoveInput;
+        Inputs.Instance.Controls.Main.Interact.performed += PickUpOrPlace;
     }
     
     private void OnDisable()
     {
         Inputs.Instance.Controls.Main.Move.performed -= MoveInput;
+        Inputs.Instance.Controls.Main.Interact.performed -= PickUpOrPlace;
+    }
+
+    private void PickUpOrPlace(InputAction.CallbackContext context)
+    {
+        Debug.Log("PICK UP");
+        //Place red box where looking to pick up
+        GameObject newRedBox = Instantiate(redBox);
+        newRedBox.transform.position = transform.position + current.movement + Vector3.forward;
+
+        // check if there is a pickable in front of player
+        // Check if player is not on that pickable
+        // Pick Up
+
+        // Placing
+        // Check if all boxes fit in game in front of player
+        // Place
+
     }
 
     private void MoveInput(InputAction.CallbackContext context)
@@ -126,20 +146,20 @@ public class PlayerController : MonoBehaviour
     private void PlacePlayerAtIndex()
     {
         position = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
-        Debug.Log("Player placed at: "+position);
+        //Debug.Log("Player placed at: "+position);
     }
 
     private void CheckForStored()
     {
         if(stored != null)
         {
-            Debug.Log("Loading Stored movement: "+stored);
+            //Debug.Log("Loading Stored movement: "+stored);
             MoveInputAsVector((Vector2)stored);
             stored = null;
         }
         else
         {
-            Debug.Log("Movement Held: "+ Inputs.Instance.Controls.Main.Move.ReadValue<Vector2>());
+            //Debug.Log("Movement Held: "+ Inputs.Instance.Controls.Main.Move.ReadValue<Vector2>());
             if (Inputs.Instance.Controls.Main.Move.IsPressed()) MoveInputAsVector(Inputs.Instance.Controls.Main.Move.ReadValue<Vector2>()); 
             else moving = false;
         }

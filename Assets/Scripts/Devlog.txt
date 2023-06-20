@@ -9,7 +9,13 @@ Jun 2023
 		* Square play area
 		* Player can roll around the game area and box has different colors on each side
 		* Box stops at walls
-		
+		* Added colored ribbons to show adjecent colors, dont now if to keep
+15/6	* Changes so no ribbons are visible
+		* Changed camera to perspective
+		* Added a lock and a paintbucket
+
+
+
 
 		ISSUES
 		
