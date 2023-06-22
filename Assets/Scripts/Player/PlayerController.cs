@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
     public PlayerControls playerControls;
+    public LevelCreator levelCreator;
     private const int StepSize = 1;
 
     private MovementAction current;
@@ -16,21 +18,23 @@ public class PlayerController : MonoBehaviour
     private bool moving = false;
     MovementAction newMovement;
 
-    Vector2Int position = Vector2Int.one;
+    Vector2Int position = new Vector2Int(5,4);
+    Vector2Int target = new Vector2Int(5,5);
 
-    private Section holdingSection;
+    public Section holdingSection;
 
     [SerializeField] GameObject redBox;
 
     private void Awake()
     {
         //playerControls = new PlayerControls();
+        levelCreator = FindObjectOfType<LevelCreator>();
         InitPosition();    
     }
 
     private void InitPosition()
     {
-        transform.localPosition = new Vector3(position.x,position.y,-2);
+        transform.localPosition = new Vector3(position.x,position.y,0);
     }
 
     private void OnEnable()
@@ -50,17 +54,22 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("PICK UP");
         //Place red box where looking to pick up
-        GameObject newRedBox = Instantiate(redBox);
-        newRedBox.transform.position = transform.position + current.movement + Vector3.forward;
+        //GameObject newRedBox = Instantiate(redBox);
+        //newRedBox.transform.position = transform.position + current.movement + Vector3.forward;
 
-        // check if there is a pickable in front of player
-        // Check if player is not on that pickable
-        // Pick Up
-
-        // Placing
-        // Check if all boxes fit in game in front of player
-        // Place
-
+        if (levelCreator.heldSection == null)
+        {
+            // check if there is a pickable in front of player
+            levelCreator.PickupSectionAt(position, target, current.rotationIndex);
+        }
+        else
+        {
+            Debug.Log("Request placing at " + target+ "with rotation "+rotation);
+            levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
+            // Placing
+            // Check if all boxes fit in game in front of player
+            // Place
+        }
     }
 
     private void MoveInput(InputAction.CallbackContext context)
@@ -81,31 +90,31 @@ public class PlayerController : MonoBehaviour
         {
             if(WalkableTile(position + Vector2Int.right))
             {
-                newMovement = new MovementAction(transform.position,transform.rotation,Vector3.right, Vector3.down);
+                newMovement = new MovementAction(transform.position,transform.rotation,Vector3.right, Vector3.down,0);
                 Debug.Log("Right");
-            }
-            else return;
-        }
-        if(direction.x < 0){
-            if (WalkableTile(position + Vector2Int.left))
-            {
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.left, Vector3.up);
-                Debug.Log("Left");
             }
             else return;
         }
         if(direction.y > 0){
             if (WalkableTile(position + Vector2Int.up))
             {
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right);
+                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right,1);
                 Debug.Log("Up");
+            }
+            else return;
+        }
+        if(direction.x < 0){
+            if (WalkableTile(position + Vector2Int.left))
+            {
+                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.left, Vector3.up,2);
+                Debug.Log("Left");
             }
             else return;
         }
         if(direction.y < 0){
             if (WalkableTile(position + Vector2Int.down))
             {
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.down, Vector3.left);
+                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.down, Vector3.left,3);
                 Debug.Log("Down");
             }
             else return;
@@ -136,10 +145,14 @@ public class PlayerController : MonoBehaviour
             transform.position = current.TargetPosition;
             transform.rotation = current.TargetRotation;
 
+            
+
             stepTimer = 0;
             moving = false;
             PlacePlayerAtIndex();
-            CheckForStored(); 
+            CheckForStored();
+            Debug.Log("Sending Rotation index as: "+current.rotationIndex);
+            levelCreator.UpdateHeld(target,current.rotationIndex);
         }
     }
 
@@ -147,6 +160,10 @@ public class PlayerController : MonoBehaviour
     {
         position = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
         //Debug.Log("Player placed at: "+position);
+        Vector2Int forwardVector = new Vector2Int(Mathf.RoundToInt(current.movement.x), Mathf.RoundToInt(current.movement.y));
+        Debug.Log("Movement forward: " + forwardVector);
+        target = position + forwardVector;
+        Debug.Log("target: " + target);
     }
 
     private void CheckForStored()
@@ -171,15 +188,17 @@ public class PlayerController : MonoBehaviour
         public Vector3 rotation;
         public Vector3 TargetPosition;
         public Quaternion TargetRotation;
+        public int rotationIndex;
 
-        public MovementAction(Vector3 currentPos, Quaternion currentRot, Vector3 move, Vector3 rot)
+        public MovementAction(Vector3 currentPos, Quaternion currentRot, Vector3 move, Vector3 rot, int rotIndex)
         {
             movement = move;
             rotation = rot;
 
             //Calulate Target
             TargetPosition = currentPos + move;
-            TargetRotation = Quaternion.Euler(rot*90f)* currentRot;
+            TargetRotation = Quaternion.Euler(rot * 90f) * currentRot;
+            rotationIndex = rotIndex;
         }
     }
 

@@ -13,6 +13,7 @@ Jun 2023
 15/6	* Changes so no ribbons are visible
 		* Changed camera to perspective
 		* Added a lock and a paintbucket
+22/6	* Picking up sections and dropping them now works, will not let you drop on to other tiles
 
 
 

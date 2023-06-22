@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.GraphicsBuffer;
 
 public class Section : MonoBehaviour
 {
@@ -9,18 +11,22 @@ public class Section : MonoBehaviour
     //public List<Vector2Int> Occupying { get; private set; }
     int rotation = 0;
     [SerializeField] GameTile floorPrefab;
+    private int pickedupRotationIndex = 0;
+    [SerializeField] private GameObject pivot;
+    [SerializeField] private GameObject[] visualTypes;
 
 
-    internal void DefinePremade()
+    public GameObject LevelHolder { get; private set; }
+
+    public void SetLevelHolder(GameObject levelHolder)
     {
-        foreach (GameTile tile in GameTiles)
-        {
-            tile.Pos = new Vector2Int(Mathf.RoundToInt(tile.transform.localPosition.x), Mathf.RoundToInt(tile.transform.localPosition.y));
-        }
+        LevelHolder = levelHolder;
+        pivot.transform.SetParent(levelHolder.transform, true);
     }
 
     internal void CreateAsSectionType(SectionType type)
     {
+        Debug.Log("Creating as section type: position is: "+ transform.position+ "at parent "+transform.parent);
         switch (type)
         {
             case SectionType.I:
@@ -49,17 +55,69 @@ public class Section : MonoBehaviour
 
                 GameTile newFloor = Instantiate(floorPrefab,transform,false);
                 newFloor.transform.localPosition = new Vector3(i, j, 0);
-                newFloor.Pos = new Vector2Int(i,j);
                 GameTiles.Add(newFloor);
             }
         }
     }
 
-    public void PlaceAt(Vector2Int pos)
+    public void PlaceAt(Vector2Int target, int rotationIndex)
     {
-        // Sets occupying index by approximating the box current position
-        transform.localPosition = new Vector3(pos.x,pos.y,transform.position.z);
+        transform.SetParent(pivot.transform,true);
+        
+        Vector3 targetPosition = new Vector3(target.x, target.y, pivot.transform.position.z);
+
+        Debug.Log("Setting Visuals to rotation: " + ((4 + rotationIndex - pickedupRotationIndex) % 4 + " since indexes is " + rotationIndex + "," + pickedupRotationIndex));
+
+        rotation = (rotationIndex - pickedupRotationIndex + rotation)%4;
+
+        Quaternion targetRotation = Quaternion.Euler(0, 0, rotation * 90f);
+        pivot.transform.SetLocalPositionAndRotation(targetPosition, targetRotation);
+
+        UpdateTilePos();
+    }
+
+    internal void PickedUpAtRotationIndex(int rotationIndex)
+    {
+        Debug.Log("Setting Pickeduprotation to :" + rotationIndex);
+        pickedupRotationIndex = rotationIndex;
+    }
+
+    internal void SetPivotPosition(GameTile pickedTile)
+    {
+        transform.SetParent(pivot.transform.parent, true);
+        pivot.transform.position = pickedTile.transform.position;
+        transform.SetParent(pivot.transform, true);
+    }
+
+    internal void Held(bool held, bool valid)
+    {
+        Debug.Log("Update Valid: "+valid);
+        visualTypes[0].gameObject.SetActive(!held);
+        visualTypes[1].gameObject.SetActive(held && valid);
+        visualTypes[2].gameObject.SetActive(held && !valid);        
+    }
+
+    internal void SetVisualTo(Vector2Int target, int rotationIndex)
+    {
+        transform.SetParent(pivot.transform, true);
+
+        Vector3 targetPosition = new Vector3(target.x, target.y, pivot.transform.position.z);
+
+        //Debug.Log("Setting Visuals to rotation: "+ ((4 + rotationIndex - pickedupRotationIndex)%4+" since indexes is "+rotationIndex+","+pickedupRotationIndex));
+
+        Quaternion targetRotation = Quaternion.Euler(0, 0, (4 + rotationIndex - pickedupRotationIndex+rotation) % 4 * 90f);
+        pivot.transform.SetLocalPositionAndRotation(targetPosition,targetRotation);
+        UpdateTilePos();
+    }
+
+    internal void UpdateTilePos()
+    {
+        // Set tiles POS
         foreach (GameTile tile in GameTiles)
+        {
             tile.Pos = new Vector2Int(Mathf.RoundToInt(tile.transform.position.x), Mathf.RoundToInt(tile.transform.position.y));
+            Debug.Log("Setting tile position to: " + tile.Pos);
+            tile.section = this;
+        }
     }
 }
