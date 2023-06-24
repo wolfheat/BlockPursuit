@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HoleMaterial
+  m_Name: FillAreaMaterial
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -132,8 +132,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.2517484, b: 0.34905657, a: 0.45490196}
-    - _Color: {r: 0, g: 0.25174838, b: 0.34905654, a: 0.45490196}
+    - _BaseColor: {r: 0.91764706, g: 0.76786774, b: 0.27450985, a: 0.36078432}
+    - _Color: {r: 0.91764706, g: 0.7678677, b: 0.2745098, a: 0.36078432}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

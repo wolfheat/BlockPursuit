@@ -66,7 +66,7 @@ public class Section : MonoBehaviour
         
         Vector3 targetPosition = new Vector3(target.x, target.y, pivot.transform.position.z);
 
-        Debug.Log("Setting Visuals to rotation: " + ((4 + rotationIndex - pickedupRotationIndex) % 4 + " since indexes is " + rotationIndex + "," + pickedupRotationIndex));
+        //Debug.Log("Setting Visuals to rotation: " + ((4 + rotationIndex - pickedupRotationIndex) % 4 + " since indexes is " + rotationIndex + "," + pickedupRotationIndex));
 
         rotation = (rotationIndex - pickedupRotationIndex + rotation)%4;
 
@@ -116,7 +116,7 @@ public class Section : MonoBehaviour
         foreach (GameTile tile in GameTiles)
         {
             tile.Pos = new Vector2Int(Mathf.RoundToInt(tile.transform.position.x), Mathf.RoundToInt(tile.transform.position.y));
-            Debug.Log("Setting tile position to: " + tile.Pos);
+            //Debug.Log("Setting tile position to: " + tile.Pos);
             tile.section = this;
         }
     }

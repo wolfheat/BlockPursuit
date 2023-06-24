@@ -48,6 +48,7 @@ MonoBehaviour:
   <GameTiles>k__BackingField: []
   floorPrefab: {fileID: -8929078896511073480, guid: 706bbd12e52313e47a3ffe12823c42d1, type: 3}
   pivot: {fileID: 7978316683461290398}
+  visualTypes: []
 --- !u!1001 &1928938971577891437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,6 +99,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5564589974332916674, guid: 67e4bd0ae50f00e4b8cdccfdbc87da38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719137551541958523, guid: 67e4bd0ae50f00e4b8cdccfdbc87da38, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8393683891084776435, guid: 67e4bd0ae50f00e4b8cdccfdbc87da38, type: 3}

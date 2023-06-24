@@ -14,6 +14,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] GameTile holePrefab;
     [SerializeField] GameTile floorPrefab;
     [SerializeField] GameTile wallPrefab;
+    [SerializeField] GameObject fillAreaPrefab;
 
     [SerializeField] GameObject lockPrefab;
     [SerializeField] GameObject bucketPrefab;
@@ -25,9 +26,10 @@ public class LevelCreator : MonoBehaviour
 
     public Section heldSection;
     
-    public static GameTile[,] TileLevel { get; set; }
+    public static GameTile[,,] TileLevel { get; set; }
 
     public List<Section> sections = new List<Section>();
+    public List<GameObject> fillAreas = new List<GameObject>();
 
     public static int TileSize = 1;
     public static int LevelWidth = 20;
@@ -36,7 +38,7 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TileLevel = new GameTile[LevelWidth, LevelHeight];
+        TileLevel = new GameTile[LevelWidth, LevelHeight,2];
         CreateLevel();      
     }
     
@@ -45,7 +47,7 @@ public class LevelCreator : MonoBehaviour
         if(TileLevel == null ) return false;
         if (pos.x > TileLevel.GetLength(0) || pos.y > TileLevel.GetLength(1)) 
             return false;
-        if(TileLevel[pos.x, pos.y] == null) return true;
+        if(TileLevel[pos.x, pos.y,1] == null) return true;
         return false;
     }
     
@@ -54,12 +56,16 @@ public class LevelCreator : MonoBehaviour
         if(TileLevel == null ) return false;
         if (pos.x > TileLevel.GetLength(0) || pos.y > TileLevel.GetLength(1)) 
             return false;
-        if(TileLevel[pos.x, pos.y] == null) return false;
-        return (TileLevel[pos.x, pos.y].walkable) ? true : false;
+        if(TileLevel[pos.x, pos.y, 1] == null) return false;
+        return (TileLevel[pos.x, pos.y, 1].walkable) ? true : false;
     }
     
     private void CreateLevel()
-    {        
+    {
+        CreateFillArea(new Vector2Int(6,6),new Vector2Int(10, 11));
+
+
+
         CreatePremadeSection(LshapePrefab, new Vector2Int(5, 5), 0);
         CreatePremadeSection(LshapePrefab, new Vector2Int(4, 4), 0);
         CreatePremadeSection(IshapePrefab, new Vector2Int(9, 6), 0);
@@ -68,6 +74,24 @@ public class LevelCreator : MonoBehaviour
         PlaceAllSections();
     }
 
+    private void CreateFillArea(Vector2Int from, Vector2Int to)
+    {
+        for (int i = from.x; i < to.x ; i++)
+        {
+            for (int j = from.y; j < to.y; j++)
+            {
+                CreateFillAreaTile(new Vector2Int(i,j));
+            }
+        }
+    }
+
+    private void CreateFillAreaTile(Vector2Int pos)
+    {
+        GameObject newFillAreaTile = Instantiate(fillAreaPrefab, levelHolder.transform,false);
+        newFillAreaTile.transform.position = new Vector3(pos.x,pos.y,0.5f);
+        fillAreas.Add(newFillAreaTile);
+    }
+    
     private void CreatePremadeSection(Section section, Vector2Int pos, int rotationIndex)
     {
         Section newSection = Instantiate(section, levelHolder.transform,false);
@@ -91,8 +115,8 @@ public class LevelCreator : MonoBehaviour
     private bool PossiblePickup(Vector2Int from, Vector2Int target)
     {
         if (target.x > TileLevel.GetLength(0) || target.y > TileLevel.GetLength(1)) return false;
-        if (TileLevel[target.x,target.y] == null) return false;
-        if (TileLevel[from.x,from.y].section != TileLevel[target.x,target.y].section) return true;
+        if (TileLevel[target.x,target.y, 1] == null) return false;
+        if (TileLevel[from.x,from.y, 1].section != TileLevel[target.x,target.y, 1].section) return true;
         return false;
     }
     
@@ -101,7 +125,7 @@ public class LevelCreator : MonoBehaviour
         Debug.Log("Request to pick up from " + from + " target:" + target + " Possible = "+ PossiblePickup(from, target)+" in direction: "+rotationIndex);
         if(!PossiblePickup(from,target)) return;
 
-        GameTile pickedTile = TileLevel[target.x, target.y];
+        GameTile pickedTile = TileLevel[target.x, target.y, 1];
         heldSection = pickedTile.section;
 
         heldSection.SetPivotPosition(pickedTile);
@@ -110,7 +134,7 @@ public class LevelCreator : MonoBehaviour
 
         foreach (GameTile tile in heldSection.GameTiles)
         {
-            TileLevel[tile.Pos.x, tile.Pos.y] = null;
+            TileLevel[tile.Pos.x, tile.Pos.y, 1] = null;
         }
 
         heldSection.Held(true, true);
@@ -125,7 +149,7 @@ public class LevelCreator : MonoBehaviour
         heldSection.PlaceAt(pos,rotationIndex);
         foreach (GameTile tile in heldSection.GameTiles)
         {
-            TileLevel[tile.Pos.x, tile.Pos.y] = tile;
+            TileLevel[tile.Pos.x, tile.Pos.y, 1] = tile;
         }
         heldSection = null;
     }
@@ -136,8 +160,8 @@ public class LevelCreator : MonoBehaviour
         {
             foreach (GameTile tile in section.GameTiles)
             {
-                Debug.Log("TileLEvel pos: "+tile.Pos);
-                TileLevel[tile.Pos.x, tile.Pos.y] = tile;
+                //Debug.Log("TileLEvel pos: "+tile.Pos);
+                TileLevel[tile.Pos.x, tile.Pos.y, 1] = tile;
             }
         }
     }

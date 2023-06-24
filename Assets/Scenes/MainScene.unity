@@ -2996,6 +2996,7 @@ MonoBehaviour:
   holePrefab: {fileID: -6261119503001127452, guid: 0adfcfaa416b15e4aadcf55840a244da, type: 3}
   floorPrefab: {fileID: -2306118345812176105, guid: c2c2fc1c2d596fe4bbb88fee28703d9c, type: 3}
   wallPrefab: {fileID: 7756931592651432872, guid: c345880d08061994f9e31fb010f1c1d1, type: 3}
+  fillAreaPrefab: {fileID: 4557877097391354521, guid: a148b1e82b2122d46b203c4a954809fb, type: 3}
   lockPrefab: {fileID: 3434485031794288923, guid: 9876fe946ec52e3479ac3f0b6231bb9c, type: 3}
   bucketPrefab: {fileID: 3609679283550623492, guid: 2f0d824eefb01a74699e6b47925d9ffa, type: 3}
   sectionPrefab: {fileID: 6310376913410558923, guid: 283ae3f2f52ffe04bade1c4a7dd90c6e, type: 3}
@@ -3005,6 +3006,7 @@ MonoBehaviour:
   LshapePrefab: {fileID: 6278177196333134981, guid: ec88280680f3db64b9e7e61139e21f24, type: 3}
   heldSection: {fileID: 0}
   sections: []
+  fillAreas: []
 --- !u!1001 &463113599
 PrefabInstance:
   m_ObjectHideFlags: 0
