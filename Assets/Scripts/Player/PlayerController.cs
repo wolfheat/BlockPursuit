@@ -52,6 +52,14 @@ public class PlayerController : MonoBehaviour
 
     private void PickUpOrPlace(InputAction.CallbackContext context)
     {
+
+        if (moving)
+        {
+            Debug.Log("Moving Can not pick up while moving");
+            return;
+        }
+
+
         Debug.Log("PICK UP");
         //Place red box where looking to pick up
         //GameObject newRedBox = Instantiate(redBox);
@@ -89,34 +97,22 @@ public class PlayerController : MonoBehaviour
         if (direction.x > 0)
         {
             if(WalkableTile(position + Vector2Int.right))
-            {
                 newMovement = new MovementAction(transform.position,transform.rotation,Vector3.right, Vector3.down,0);
-                Debug.Log("Right");
-            }
             else return;
         }
         if(direction.y > 0){
             if (WalkableTile(position + Vector2Int.up))
-            {
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right,1);
-                Debug.Log("Up");
-            }
             else return;
         }
         if(direction.x < 0){
             if (WalkableTile(position + Vector2Int.left))
-            {
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.left, Vector3.up,2);
-                Debug.Log("Left");
-            }
             else return;
         }
         if(direction.y < 0){
             if (WalkableTile(position + Vector2Int.down))
-            {
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.down, Vector3.left,3);
-                Debug.Log("Down");
-            }
             else return;
         }
 
@@ -151,7 +147,6 @@ public class PlayerController : MonoBehaviour
             moving = false;
             PlacePlayerAtIndex();
             CheckForStored();
-            Debug.Log("Sending Rotation index as: "+current.rotationIndex);
             levelCreator.UpdateHeld(target,current.rotationIndex);
         }
     }
@@ -161,9 +156,7 @@ public class PlayerController : MonoBehaviour
         position = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
         //Debug.Log("Player placed at: "+position);
         Vector2Int forwardVector = new Vector2Int(Mathf.RoundToInt(current.movement.x), Mathf.RoundToInt(current.movement.y));
-        Debug.Log("Movement forward: " + forwardVector);
         target = position + forwardVector;
-        Debug.Log("target: " + target);
     }
 
     private void CheckForStored()

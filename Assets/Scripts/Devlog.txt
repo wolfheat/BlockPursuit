@@ -3,6 +3,8 @@ Jun 2023
 
 * IDEAS
 - Make a box puzzle game for mobile.
+- Possible game mode
+	* Use set of pieces to cover a marked floor area to complete level
 
 
 14/6	* Starting with simple prototype
@@ -14,7 +16,8 @@ Jun 2023
 		* Changed camera to perspective
 		* Added a lock and a paintbucket
 22/6	* Picking up sections and dropping them now works, will not let you drop on to other tiles
-
+24/6	* Added colored borders to clarify pieces
+		* New game idea, cover area?
 
 
 

@@ -92,7 +92,7 @@ public class LevelCreator : MonoBehaviour
     {
         if (target.x > TileLevel.GetLength(0) || target.y > TileLevel.GetLength(1)) return false;
         if (TileLevel[target.x,target.y] == null) return false;
-        if (TileLevel[from.x,from.y] != TileLevel[target.x,target.y]) return true;
+        if (TileLevel[from.x,from.y].section != TileLevel[target.x,target.y].section) return true;
         return false;
     }
     
