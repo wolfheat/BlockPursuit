@@ -53,12 +53,7 @@ public class PlayerController : MonoBehaviour
     private void PickUpOrPlace(InputAction.CallbackContext context)
     {
 
-        if (moving)
-        {
-            Debug.Log("Moving Can not pick up while moving");
-            return;
-        }
-
+        
 
         Debug.Log("PICK UP");
         //Place red box where looking to pick up
@@ -72,6 +67,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
             Debug.Log("Request placing at " + target+ "with rotation "+rotation);
             levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
             // Placing
@@ -133,6 +129,13 @@ public class PlayerController : MonoBehaviour
 
     private void DoMove()
     {
+        // PLace actual player at the target position directly so picking up tiles act from this position even during the move animation
+        if (stepTimer == 0)
+        {
+            PlacePlayerAtIndex();
+            levelCreator.UpdateHeld(target, current.rotationIndex);
+        }
+
         stepTimer += Time.deltaTime;
         transform.position += current.movement* Time.deltaTime/stepTime;
         transform.Rotate(current.rotation, 90f * Time.deltaTime / stepTime, Space.World);
@@ -145,18 +148,17 @@ public class PlayerController : MonoBehaviour
 
             stepTimer = 0;
             moving = false;
-            PlacePlayerAtIndex();
             CheckForStored();
-            levelCreator.UpdateHeld(target,current.rotationIndex);
         }
     }
 
     private void PlacePlayerAtIndex()
     {
-        position = new Vector2Int(Mathf.RoundToInt(transform.localPosition.x), Mathf.RoundToInt(transform.localPosition.y));
+        position = new Vector2Int(Mathf.RoundToInt(current.TargetPosition.x), Mathf.RoundToInt(current.TargetPosition.y));
         //Debug.Log("Player placed at: "+position);
         Vector2Int forwardVector = new Vector2Int(Mathf.RoundToInt(current.movement.x), Mathf.RoundToInt(current.movement.y));
         target = position + forwardVector;
+
     }
 
     private void CheckForStored()
