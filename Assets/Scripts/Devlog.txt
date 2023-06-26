@@ -18,7 +18,7 @@ Jun 2023
 22/6	* Picking up sections and dropping them now works, will not let you drop on to other tiles
 24/6	* Added colored borders to clarify pieces
 		* New game idea, cover area?
-26/6	* Tested player as solid pink, added start menu and some menu sounds
+26/6	* Tested player as solid pink, added start menu and some menu sounds, changed font
 		
 
 

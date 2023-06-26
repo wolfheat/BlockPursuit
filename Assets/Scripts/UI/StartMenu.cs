@@ -36,7 +36,13 @@ public class StartMenu : MonoBehaviour
 	}
 	public void QuitGameClicked()
 	{
-		Debug.Log("QuitGame Clicked");	
+		Debug.Log("QuitGame Clicked");
+
+#if UNITY_EDITOR
+	UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+	Application.Quit();
 	}
 
 }

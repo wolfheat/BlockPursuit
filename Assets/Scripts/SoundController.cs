@@ -131,10 +131,6 @@ public class SoundController : MonoBehaviour
     }
     public void PlaySFX(SFX type, bool playMulti=true)
 	{
-        Debug.Log("Play SFX: "+type);
-
-        Debug.Log("Soze of menu: "+menu.Length);
-
         // If not able to play multiple sounds exit if already playing
         if (!playMulti) if (sfxSource.isPlaying) return;
 
