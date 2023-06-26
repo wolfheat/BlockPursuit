@@ -39,7 +39,7 @@ public class LevelCreator : MonoBehaviour
     void Start()
     {
         TileLevel = new GameTile[LevelWidth, LevelHeight,2];
-        CreateLevel();      
+        //CreateLevel();      
     }
     
     public static bool IsEmptyAndCanTakeObject(Vector2Int pos)
@@ -60,7 +60,7 @@ public class LevelCreator : MonoBehaviour
         return (TileLevel[pos.x, pos.y, 1].walkable) ? true : false;
     }
     
-    private void CreateLevel()
+    public void CreateLevel()
     {
         CreateFillArea(new Vector2Int(6,6),new Vector2Int(10, 11));
 
