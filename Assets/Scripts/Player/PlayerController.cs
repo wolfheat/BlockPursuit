@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool moving = false;
     MovementAction newMovement;
 
+    Vector2Int initPosition = new Vector2Int(5,4);
     Vector2Int position = new Vector2Int(5,4);
     Vector2Int target = new Vector2Int(5,5);
 
@@ -32,8 +32,16 @@ public class PlayerController : MonoBehaviour
         InitPosition();    
     }
 
-    private void InitPosition()
+    public void SetInitPosition(Vector2Int pos)
     {
+        initPosition = pos;
+        InitPosition();
+    }
+    
+    public void InitPosition()
+    {
+        position = initPosition;
+        target = initPosition + Vector2Int.up;
         transform.localPosition = new Vector3(position.x,position.y,0);
     }
 
@@ -52,8 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void PickUpOrPlace(InputAction.CallbackContext context)
     {
-
-        
+        if (GameSettings.IsPaused) return;
 
         Debug.Log("PICK UP");
         //Place red box where looking to pick up
@@ -78,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
     private void MoveInput(InputAction.CallbackContext context)
     {
+        if (GameSettings.IsPaused) return;
+
         Vector2 direction = context.ReadValue<Vector2>();
         MoveInputAsVector(direction);
     }
@@ -114,7 +123,7 @@ public class PlayerController : MonoBehaviour
 
         current = newMovement;
         moving = true;
-        
+        DoMove(); // Adding this prevents player from picking up piece the same frame moving starts
     }
 
     private bool WalkableTile(Vector2Int pos)

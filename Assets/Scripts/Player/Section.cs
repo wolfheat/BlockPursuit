@@ -116,8 +116,16 @@ public class Section : MonoBehaviour
         foreach (GameTile tile in GameTiles)
         {
             tile.Pos = new Vector2Int(Mathf.RoundToInt(tile.transform.position.x), Mathf.RoundToInt(tile.transform.position.y));
-            //Debug.Log("Setting tile position to: " + tile.Pos);
+            Debug.Log("Setting tile position to: " + tile.Pos);
             tile.section = this;
+        }
+    }
+
+    internal void DestroyParts()
+    {
+        for (int i = GameTiles.Count-1; i >= 0; i--)
+        {
+            Destroy(GameTiles[i].gameObject);
         }
     }
 }

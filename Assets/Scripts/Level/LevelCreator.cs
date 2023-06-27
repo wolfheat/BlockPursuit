@@ -30,10 +30,13 @@ public class LevelCreator : MonoBehaviour
 
     public List<Section> sections = new List<Section>();
     public List<GameObject> fillAreas = new List<GameObject>();
+    public List<Vector2Int> fillAreasPositions = new List<Vector2Int>();
 
     public static int TileSize = 1;
     public static int LevelWidth = 20;
     public static int LevelHeight = 20;
+
+    bool haveWalls = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +48,7 @@ public class LevelCreator : MonoBehaviour
     public static bool IsEmptyAndCanTakeObject(Vector2Int pos)
     {
         if(TileLevel == null ) return false;
-        if (pos.x > TileLevel.GetLength(0) || pos.y > TileLevel.GetLength(1)) 
+        if (pos.x < 0|| pos.y < 0 || pos.x >= TileLevel.GetLength(0) || pos.y >= TileLevel.GetLength(1)) 
             return false;
         if(TileLevel[pos.x, pos.y,1] == null) return true;
         return false;
@@ -54,24 +57,73 @@ public class LevelCreator : MonoBehaviour
     public static bool IsWalkable(Vector2Int pos)
     {
         if(TileLevel == null ) return false;
-        if (pos.x > TileLevel.GetLength(0) || pos.y > TileLevel.GetLength(1)) 
+        if (pos.x < 0 || pos.y < 0 || pos.x >= TileLevel.GetLength(0) || pos.y >= TileLevel.GetLength(1)) 
             return false;
         if(TileLevel[pos.x, pos.y, 1] == null) return false;
         return (TileLevel[pos.x, pos.y, 1].walkable) ? true : false;
     }
     
-    public void CreateLevel()
+    public void LoadNextLevel()
+    {         
+        LoadLevel(GameSettings.CurrentLevel);
+        GameSettings.IsPaused = false;
+    }
+
+    public void LoadLevel(int level)
     {
-        CreateFillArea(new Vector2Int(6,6),new Vector2Int(10, 11));
+        if(!haveWalls) CreateWalls();
 
 
+        Debug.Log("Loading Level "+level);
+        if(level == 0)
+        {
+            CreateFillArea(new Vector2Int(6, 6), new Vector2Int(10, 11));
 
-        CreatePremadeSection(LshapePrefab, new Vector2Int(5, 5), 0);
-        CreatePremadeSection(LshapePrefab, new Vector2Int(4, 4), 0);
-        CreatePremadeSection(IshapePrefab, new Vector2Int(9, 6), 0);
-        CreatePremadeSection(OshapePrefab, new Vector2Int(7, 6), 0);
-        CreatePremadeSection(TshapePrefab, new Vector2Int(6, 9), 0);
-        PlaceAllSections();
+            CreatePremadeSection(LshapePrefab, new Vector2Int(5, 5), 0);
+            CreatePremadeSection(LshapePrefab, new Vector2Int(4, 4), 0);
+            CreatePremadeSection(IshapePrefab, new Vector2Int(9, 6), 0);
+            CreatePremadeSection(OshapePrefab, new Vector2Int(7, 6), 0);
+            CreatePremadeSection(TshapePrefab, new Vector2Int(6, 9), 0);
+            CreatePremadeSection(OshapePrefab, new Vector2Int(4, 8), 0);
+            PlaceAllSections();
+
+            FindObjectOfType<PlayerController>().SetInitPosition(new Vector2Int(5,4));
+        }        
+        else if(level == 1)
+        {
+            CreateFillArea(new Vector2Int(6, 6), new Vector2Int(8, 8));
+
+            CreatePremadeSection(OshapePrefab, new Vector2Int(7, 6), 0);
+            CreatePremadeSection(TshapePrefab, new Vector2Int(6, 9), 0);
+            CreatePremadeSection(OshapePrefab, new Vector2Int(4, 8), 0);
+            PlaceAllSections();
+
+
+            FindObjectOfType<PlayerController>().SetInitPosition(new Vector2Int(7,6));
+        }
+        else
+        {
+            CreateFillArea(new Vector2Int(6, 6), new Vector2Int(8, 8));
+            CreatePremadeSection(OshapePrefab, new Vector2Int(7, 6), 0);
+            CreatePremadeSection(OshapePrefab, new Vector2Int(9, 7), 0);
+            PlaceAllSections();
+            FindObjectOfType<PlayerController>().SetInitPosition(new Vector2Int(7, 6));
+        }
+    }
+
+    private void CreateWalls()
+    {
+        for (int i = -1; i <= LevelWidth; i++)
+        {
+            for (int j = -1; j <= LevelHeight; j++)
+            {
+                if (i < 0 || j < 0 || i == LevelWidth || j == LevelHeight)
+                {
+                    CreateWall(new Vector3Int(i,j,0));
+                }
+            }
+        }
+        haveWalls = true;
     }
 
     private void CreateFillArea(Vector2Int from, Vector2Int to)
@@ -90,6 +142,7 @@ public class LevelCreator : MonoBehaviour
         GameObject newFillAreaTile = Instantiate(fillAreaPrefab, levelHolder.transform,false);
         newFillAreaTile.transform.position = new Vector3(pos.x,pos.y,0.5f);
         fillAreas.Add(newFillAreaTile);
+        fillAreasPositions.Add(pos);
     }
     
     private void CreatePremadeSection(Section section, Vector2Int pos, int rotationIndex)
@@ -114,7 +167,7 @@ public class LevelCreator : MonoBehaviour
 
     private bool PossiblePickup(Vector2Int from, Vector2Int target)
     {
-        if (target.x > TileLevel.GetLength(0) || target.y > TileLevel.GetLength(1)) return false;
+        if (target.x < 0 || target.y < 0 || target.x >= TileLevel.GetLength(0) || target.y >= TileLevel.GetLength(1)) return false;
         if (TileLevel[target.x,target.y, 1] == null) return false;
         if (TileLevel[from.x,from.y, 1].section != TileLevel[target.x,target.y, 1].section) return true;
         return false;
@@ -152,6 +205,48 @@ public class LevelCreator : MonoBehaviour
             TileLevel[tile.Pos.x, tile.Pos.y, 1] = tile;
         }
         heldSection = null;
+
+        bool isComplete = CheckIfComplete();
+        if (isComplete)
+        {
+            ClearLevel();
+
+            //Next level
+            GameSettings.CurrentLevel++;
+            GameSettings.IsPaused = true;
+
+            FindObjectOfType<UIController>().ShowLevelComplete();
+        }
+    }
+
+    private void ClearLevel()
+    {
+        for (int i = sections.Count-1; i >= 0; i--)
+        {
+            sections[i].DestroyParts();
+            Destroy(sections[i].gameObject);
+        }
+        sections.Clear();   
+        for (int i = fillAreas.Count-1; i >= 0; i--)
+        {
+            Destroy(fillAreas[i].gameObject);
+        }
+        fillAreas.Clear();
+        fillAreasPositions.Clear();
+
+
+    }
+
+    private bool CheckIfComplete()
+    {
+        int counter = 0;
+        foreach (Vector2Int pos in fillAreasPositions)
+        {
+            if (TileLevel[pos.x,pos.y,1]!=null) counter++;
+        }
+        Debug.Log("Checking if complete: ("+counter+"/"+fillAreasPositions.Count+")");
+        if(counter == fillAreasPositions.Count) return true; 
+        else return false;
     }
 
     private void PlaceAllSections()

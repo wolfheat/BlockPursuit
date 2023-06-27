@@ -1,16 +1,25 @@
-using TMPro;
+using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] StartMenu startMenu;
-
+    [SerializeField] LevelComplete levelComplete;
 
     private void Start()
     {
         Debug.Log("toggle on Start Menu");
-        startMenu.ShowMenu();
+        startMenu.ShowPanel();
     }
     
+    public void ShowLevelComplete()
+    {
+        Debug.Log("Show Level Complete Panel");
+        levelComplete.ShowPanel();
+    }
+
+    internal void ShowMainLevel()
+    {
+        startMenu.ShowPanel();
+    }
 }

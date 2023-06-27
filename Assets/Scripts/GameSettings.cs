@@ -10,11 +10,15 @@ public class GameSettings : MonoBehaviour
 	public static float GameScale { get; private set; }
 
 	public static bool UseMusic { get; private set; } = true;
-	public static bool IsPaused { get; set; } = true;
+
 	public static bool AtMenu { get; set; } = true;
 	public static bool CanShoot { get; set; } = true;
 	public static GameState CurrentGameState { get; set; } = GameState.Menu;
 	
+	public static bool IsPaused { get; set; } = true;
+	public static int CurrentLevel { get; set; } = 0;
+
+
 	[SerializeField] bool useMusicSetting;
 
 
