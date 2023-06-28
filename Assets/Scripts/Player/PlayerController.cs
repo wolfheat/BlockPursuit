@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameSettings.IsPaused) return;
 
-        Debug.Log("PICK UP");
+        //Debug.Log("PICK UP");
         //Place red box where looking to pick up
         //GameObject newRedBox = Instantiate(redBox);
         //newRedBox.transform.position = transform.position + current.movement + Vector3.forward;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         else
         {
 
-            Debug.Log("Request placing at " + target+ "with rotation "+rotation);
+            //Debug.Log("Request placing at " + target+ "with rotation "+rotation);
             levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
             // Placing
             // Check if all boxes fit in game in front of player

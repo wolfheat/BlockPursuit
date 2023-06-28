@@ -26,7 +26,7 @@ public class Section : MonoBehaviour
 
     internal void CreateAsSectionType(SectionType type)
     {
-        Debug.Log("Creating as section type: position is: "+ transform.position+ "at parent "+transform.parent);
+        //Debug.Log("Creating as section type: position is: "+ transform.position+ "at parent "+transform.parent);
         switch (type)
         {
             case SectionType.I:
@@ -91,7 +91,7 @@ public class Section : MonoBehaviour
 
     internal void Held(bool held, bool valid)
     {
-        Debug.Log("Update Valid: "+valid);
+        //Debug.Log("Update Valid: "+valid);
         visualTypes[0].gameObject.SetActive(!held);
         visualTypes[1].gameObject.SetActive(held && valid);
         visualTypes[2].gameObject.SetActive(held && !valid);        
@@ -116,7 +116,7 @@ public class Section : MonoBehaviour
         foreach (GameTile tile in GameTiles)
         {
             tile.Pos = new Vector2Int(Mathf.RoundToInt(tile.transform.position.x), Mathf.RoundToInt(tile.transform.position.y));
-            Debug.Log("Setting tile position to: " + tile.Pos);
+            //Debug.Log("Setting tile position to: " + tile.Pos);
             tile.section = this;
         }
     }

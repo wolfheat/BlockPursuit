@@ -8,6 +8,7 @@ public enum GameTileType {Hole,Walkable,Stone}
 
 public class LevelCreator : MonoBehaviour
 {
+    private UIController UI;
 
     [SerializeField] GameObject levelHolder;
 
@@ -42,6 +43,7 @@ public class LevelCreator : MonoBehaviour
     void Start()
     {
         TileLevel = new GameTile[LevelWidth, LevelHeight,2];
+        UI = FindObjectOfType<UIController>();
         //CreateLevel();      
     }
     
@@ -175,14 +177,14 @@ public class LevelCreator : MonoBehaviour
     
     public void PickupSectionAt(Vector2Int from, Vector2Int target, int rotationIndex)
     {
-        Debug.Log("Request to pick up from " + from + " target:" + target + " Possible = "+ PossiblePickup(from, target)+" in direction: "+rotationIndex);
+        //Debug.Log("Request to pick up from " + from + " target:" + target + " Possible = "+ PossiblePickup(from, target)+" in direction: "+rotationIndex);
         if(!PossiblePickup(from,target)) return;
 
         GameTile pickedTile = TileLevel[target.x, target.y, 1];
         heldSection = pickedTile.section;
 
         heldSection.SetPivotPosition(pickedTile);
-        Debug.Log("Set Rotation to "+rotationIndex);
+        //Debug.Log("Set Rotation to "+rotationIndex);
         heldSection.PickedUpAtRotationIndex(rotationIndex);
 
         foreach (GameTile tile in heldSection.GameTiles)
@@ -209,13 +211,13 @@ public class LevelCreator : MonoBehaviour
         bool isComplete = CheckIfComplete();
         if (isComplete)
         {
+            GameSettings.IsPaused = true;
             ClearLevel();
 
             //Next level
             GameSettings.CurrentLevel++;
-            GameSettings.IsPaused = true;
 
-            FindObjectOfType<UIController>().ShowLevelComplete();
+            UI.ShowLevelComplete();
         }
     }
 
@@ -293,7 +295,7 @@ public class LevelCreator : MonoBehaviour
     {
         if(heldSection != null)
         {
-            Debug.Log("Update Held section");
+            //Debug.Log("Update Held section");
             heldSection.SetVisualTo(target, rotationIndex);
 
             if(HeldPlacable()) heldSection.Held(true, true);
@@ -303,10 +305,10 @@ public class LevelCreator : MonoBehaviour
 
     private bool HeldPlacable()
     {
-        Debug.Log("Held placable check");
+        //Debug.Log("Held placable check");
         foreach (GameTile tile in heldSection.GameTiles)
         {
-            Debug.Log("Checking if tile placable at: "+tile.Pos+" :"+ IsEmptyAndCanTakeObject(tile.Pos));
+            //Debug.Log("Checking if tile placable at: "+tile.Pos+" :"+ IsEmptyAndCanTakeObject(tile.Pos));
             if (!IsEmptyAndCanTakeObject(tile.Pos)) return false;
         }
         return true;    

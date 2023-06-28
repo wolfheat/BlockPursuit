@@ -16,7 +16,7 @@ public class GameSettings : MonoBehaviour
 	public static GameState CurrentGameState { get; set; } = GameState.Menu;
 	
 	public static bool IsPaused { get; set; } = true;
-	public static int CurrentLevel { get; set; } = 0;
+	public static int CurrentLevel { get; set; } = 1;
 
 
 	[SerializeField] bool useMusicSetting;

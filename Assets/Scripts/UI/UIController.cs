@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
     
     public void ShowLevelComplete()
     {
-        Debug.Log("Show Level Complete Panel");
+        Debug.Log("Show Level Complete Panel: ID "+gameObject.GetInstanceID());
         levelComplete.ShowPanel();
     }
 
