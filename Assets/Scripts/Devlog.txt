@@ -22,10 +22,10 @@ Jun 2023
 27/6	* Fixed so player cant interact outside game area, added a wall		
 		* Think I fixed issue where player could pick up piece same frame as starting to move
 		* Added separate levels to the game and a complete game screen
+30/6	* Updated Level Clear graphics, changed start menu buttons etc
 
 		TODO
-		* Check if fill area is filled and complete level if so, show complete panel
-
+		* Make menu usable by keyboard
 
 
 		ISSUES

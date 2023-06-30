@@ -3,15 +3,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerControls playerControls;
-    public LevelCreator levelCreator;
+    [SerializeField] GameObject playerHolder;
+
+    public void ShowPlayer() => playerHolder.SetActive(true);
+    public void HidePlayer() => playerHolder.SetActive(false);
+
+
+    [HideInInspector] public PlayerControls playerControls;
+    [HideInInspector] public LevelCreator levelCreator;
     private const int StepSize = 1;
 
     private MovementAction current;
     private Vector2? stored;
 
-    private Vector3 rotation = Vector3.up;
-    private Vector3 movement = Vector3.up;
     private float stepTime = 0.15f;
     private float stepTimer = 0;
     private bool moving = false;
@@ -22,14 +26,15 @@ public class PlayerController : MonoBehaviour
     Vector2Int target = new Vector2Int(5,5);
 
     public Section holdingSection;
-
     [SerializeField] GameObject redBox;
+
+
 
     private void Awake()
     {
-        //playerControls = new PlayerControls();
         levelCreator = FindObjectOfType<LevelCreator>();
-        InitPosition();    
+        InitPosition();
+        HidePlayer();
     }
 
     public void SetInitPosition(Vector2Int pos)
@@ -143,6 +148,7 @@ public class PlayerController : MonoBehaviour
         {
             PlacePlayerAtIndex();
             levelCreator.UpdateHeld(target, current.rotationIndex);
+            GameSettings.StepsCounter++;
         }
 
         stepTimer += Time.deltaTime;

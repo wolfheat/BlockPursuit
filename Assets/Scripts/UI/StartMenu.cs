@@ -14,13 +14,16 @@ public class StartMenu : BasePanel
     public void StartGameClicked()
 	{
 		Debug.Log("StartGame Clicked");
-		GameSettings.CurrentGameState = GameState.RunGame;
-		HidePanel();
-		FindObjectOfType<LevelCreator>().LoadNextLevel();
+		GameSettings.StoredAction = GameAction.LoadNextLevel;
+		FindObjectOfType<TransitionScreen>().StartTransition();
 	}
 	public void SettingsClicked()
 	{
 		Debug.Log("Settings Clicked");
+	}
+	public void AchievementsClicked()
+	{
+		Debug.Log("Achievements Clicked");
 	}
 	public void CreditsClicked()
 	{

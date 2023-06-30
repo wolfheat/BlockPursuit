@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public enum GameState { Menu, RunGame, Transition}
+public enum GameAction { LoadNextLevel, LoadStartMenu, ShowLevelComplete, none}
 
 public class GameSettings : MonoBehaviour
 {
@@ -9,7 +10,15 @@ public class GameSettings : MonoBehaviour
 	public static float AspectRatio { get; private set; }
 	public static float GameScale { get; private set; }
 
+	// USED
+
 	public static bool UseMusic { get; private set; } = true;
+	public static GameAction StoredAction { get; set; } = GameAction.none;	
+	public static float LevelStartTime { get; set; }	
+	public static int StepsCounter { get; set; }	
+	public static int MoveCounter { get; set; }	
+
+	//OLD
 
 	public static bool AtMenu { get; set; } = true;
 	public static bool CanShoot { get; set; } = true;

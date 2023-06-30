@@ -44,7 +44,6 @@ public class LevelCreator : MonoBehaviour
     {
         TileLevel = new GameTile[LevelWidth, LevelHeight,2];
         UI = FindObjectOfType<UIController>();
-        //CreateLevel();      
     }
     
     public static bool IsEmptyAndCanTakeObject(Vector2Int pos)
@@ -69,6 +68,8 @@ public class LevelCreator : MonoBehaviour
     {         
         LoadLevel(GameSettings.CurrentLevel);
         GameSettings.IsPaused = false;
+        GameSettings.CurrentGameState = GameState.RunGame;
+        FindObjectOfType<PlayerController>().ShowPlayer();
     }
 
     public void LoadLevel(int level)
@@ -208,20 +209,22 @@ public class LevelCreator : MonoBehaviour
         }
         heldSection = null;
 
+        GameSettings.MoveCounter++;
+
         bool isComplete = CheckIfComplete();
         if (isComplete)
         {
+            FindObjectOfType<PlayerController>().HidePlayer();
             GameSettings.IsPaused = true;
-            ClearLevel();
 
             //Next level
             GameSettings.CurrentLevel++;
-
-            UI.ShowLevelComplete();
+            GameSettings.StoredAction = GameAction.ShowLevelComplete;
+            FindObjectOfType<TransitionScreen>().StartTransition();
         }
     }
 
-    private void ClearLevel()
+    public void ClearLevel()
     {
         for (int i = sections.Count-1; i >= 0; i--)
         {
