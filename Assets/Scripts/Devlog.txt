@@ -34,38 +34,32 @@ Jun 2023
 		* Added loading and saving system
 		* Added player inventory
 		* Added tiles definitions as scriptable objects
+		
+		
+		TODO:
 
-		TODO
-		* Make menu usable by keyboard
-		* Make system to stored what level player completed and use that to update select level page
-		* Make Tile Definition SO that describes tiles and used to fill dictionary and populate inventory
-		* Make cleared levels show differently in the level select.
-		* Make player gain gold and tiles when completing levels
+		ISSUES:
 
-
-		ISSUES
 
 		// - Content -
-		// Load Screen between scenes
+		* Change Load Screen between scenes to animation or not?
+		* Add level text on each level
 
 		// - Mechanics Stuff -		
 		
 		// - Data stuff -
-		// Need to fix up saving system. 
-		
-		// - Animation Stuff -
-		
-		// - Terrain -
-		
-		// - Crafting  Stuff -
-		
-		// - Items Stuff -
+		* Make system to store what level player completed and use that to update select level page
+		* Make player gain gold and tiles when completing levels
 		
 		// - UI stuff -
-		// Make basic UI
+		* Make menu usable by keyboard
+		* Make cleared levels show differently in the level select.
+		* Add Start level popup if unlock is needed, show cost, show inventory at the same time?
+		* 
 
 		// - LevelCreation Stuff -
-		
+		* Create randomized level creation for Bronze,Silver,Gold versions
+		* Create all levels for main levels
 		
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
 

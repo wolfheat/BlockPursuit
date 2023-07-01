@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] SavingUtility savingUtility;
     [SerializeField] LevelCreator levelCreator;
     [SerializeField] IngameUIController ingameUIController;
+    [SerializeField] InventoryUI inventoryUI;
 
 
     private void OnEnable()
@@ -74,6 +75,15 @@ public class UIController : MonoBehaviour
                 levelComplete.ShowPanel();
                 levelComplete.UpdateStats();
 
+                break;
+             case GameAction.ShowInventory:
+                GameSettings.IsPaused = true;
+                inventoryUI.ShowPanel();
+                inventoryUI.UpdateInventoryUI();
+                break;
+            case GameAction.HideInventory:
+                inventoryUI.HidePanel();
+                GameSettings.IsPaused = false;
                 break;
             case GameAction.none:
                 break;

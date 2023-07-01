@@ -16,4 +16,9 @@ public class IngameUIController : MonoBehaviour
         tiles.text = sum.ToString();
     }
 
+    public void ShowInventoryClicked()
+    {
+        GameSettings.StoredAction = GameAction.ShowInventory;
+        FindObjectOfType<TransitionScreen>().StartTransition();
+    }
 }

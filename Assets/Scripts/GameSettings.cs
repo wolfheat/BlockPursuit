@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum GameState { Menu, RunGame, Transition}
-public enum GameAction { LoadNextLevel, LoadStartMenu, ShowLevelSelect ,ShowLevelComplete, none}
+public enum GameAction { LoadNextLevel, LoadStartMenu, ShowInventory, HideInventory, ShowLevelSelect ,ShowLevelComplete, none}
 
 public class GameSettings : MonoBehaviour
 {
@@ -18,9 +18,10 @@ public class GameSettings : MonoBehaviour
 	public static int MoveCounter { get; set; }	
 	public static PlayerInventory PlayerInventory { get; set; }	
 
-	//OLD
+	public static bool UseFast => StoredAction == GameAction.ShowInventory || StoredAction == GameAction.HideInventory;
+    //OLD
 
-	public static bool AtMenu { get; set; } = true;
+    public static bool AtMenu { get; set; } = true;
 	public static bool CanShoot { get; set; } = true;
 	public static GameState CurrentGameState { get; set; } = GameState.Menu;
 	
