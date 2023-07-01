@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelComplete : BasePanel
 {
+    [SerializeField] UIController UIController;
+    [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI movesText;
     [SerializeField] TextMeshProUGUI stepsText;
@@ -13,13 +12,19 @@ public class LevelComplete : BasePanel
 	{
 		Debug.Log("Next Level Clicked");
 		GameSettings.StoredAction = GameAction.LoadNextLevel;
-        FindObjectOfType<TransitionScreen>().StartTransition();
+        UIController.StartTransition();
+    }
+	public void SelectLevelClicked()
+	{
+		Debug.Log("Select Level Clicked");
+		GameSettings.StoredAction = GameAction.ShowLevelSelect;
+        UIController.StartTransition();
     }
 	public void MainMenuClicked()
 	{
 		Debug.Log("Main Menu Clicked");
 		GameSettings.StoredAction = GameAction.LoadStartMenu;
-        FindObjectOfType<TransitionScreen>().StartTransition();
+        UIController.StartTransition();
 
     }
 
@@ -34,5 +39,8 @@ public class LevelComplete : BasePanel
         timeText.text = timeString;
         movesText.text = GameSettings.MoveCounter.ToString();
         stepsText.text = GameSettings.StepsCounter.ToString();
+        
+        //FIX
+        levelText.text = (GameSettings.CurrentLevel-1).ToString();
     }
 }

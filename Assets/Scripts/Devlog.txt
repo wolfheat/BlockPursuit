@@ -5,6 +5,13 @@ Jun 2023
 - Make a box puzzle game for mobile.
 - Possible game mode
 	* Use set of pieces to cover a marked floor area to complete level
+	* Randomized levels played to earn tiles, tiles can unlock main levels?
+
+	* Have a window show earn 10gold free or watch ad get 100gold or random tile, activated behind a button which player can press.
+	* After completing level show ad if more than 5min has passed?
+
+
+
 
 
 14/6	* Starting with simple prototype
@@ -23,9 +30,17 @@ Jun 2023
 		* Think I fixed issue where player could pick up piece same frame as starting to move
 		* Added separate levels to the game and a complete game screen
 30/6	* Updated Level Clear graphics, changed start menu buttons etc
+1/7		* Created a Level select screen
+		* Added loading and saving system
+		* Added player inventory
+		* Added tiles definitions as scriptable objects
 
 		TODO
 		* Make menu usable by keyboard
+		* Make system to stored what level player completed and use that to update select level page
+		* Make Tile Definition SO that describes tiles and used to fill dictionary and populate inventory
+		* Make cleared levels show differently in the level select.
+		* Make player gain gold and tiles when completing levels
 
 
 		ISSUES

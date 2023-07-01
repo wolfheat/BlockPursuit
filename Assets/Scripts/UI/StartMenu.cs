@@ -14,7 +14,7 @@ public class StartMenu : BasePanel
     public void StartGameClicked()
 	{
 		Debug.Log("StartGame Clicked");
-		GameSettings.StoredAction = GameAction.LoadNextLevel;
+		GameSettings.StoredAction = GameAction.ShowLevelSelect;
 		FindObjectOfType<TransitionScreen>().StartTransition();
 	}
 	public void SettingsClicked()

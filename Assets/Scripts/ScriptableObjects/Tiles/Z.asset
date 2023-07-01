@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a614c8c6e226249a0e83a6a937e4b2, type: 3}
+  m_Name: Z
+  m_EditorClassIdentifier: 
+  tileName: Z
+  sprite: {fileID: 21300000, guid: 351a88ac0750d2943a3467c6e41490c3, type: 3}
