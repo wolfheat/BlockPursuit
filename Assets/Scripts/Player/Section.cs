@@ -6,7 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Section : MonoBehaviour
 {
-    int[,] cubesID;
     [field: SerializeField] public List<GameTile> GameTiles { get; set; }
     //public List<Vector2Int> Occupying { get; private set; }
     int rotation = 0;
@@ -22,42 +21,6 @@ public class Section : MonoBehaviour
     {
         LevelHolder = levelHolder;
         pivot.transform.SetParent(levelHolder.transform, true);
-    }
-
-    internal void CreateAsSectionType(SectionType type)
-    {
-        //Debug.Log("Creating as section type: position is: "+ transform.position+ "at parent "+transform.parent);
-        switch (type)
-        {
-            case SectionType.I:
-                cubesID = new int[4, 1] { { 1 }, { 1 }, { 1 }, { 1 }};
-                break;
-            case SectionType.O:
-                cubesID = new int[2, 2] { { 1, 1 }, { 1, 1 }};
-                break;
-            case SectionType.L:
-                cubesID = new int[3, 2] { { 1, 1 }, { 1, 0 }, { 1, 0}};
-                break;
-            default:
-                break;
-        }
-        Create();
-    }
-
-    private void Create()
-    {
-        GameTiles = new List<GameTile>();
-        for (int i = 0; i < cubesID.GetLength(0); i++) 
-        {
-            for (int j = 0; j < cubesID.GetLength(1); j++)
-            {
-                if (cubesID[i, j] == 0) continue;
-
-                GameTile newFloor = Instantiate(floorPrefab,transform,false);
-                newFloor.transform.localPosition = new Vector3(i, j, 0);
-                GameTiles.Add(newFloor);
-            }
-        }
     }
 
     public void PlaceAt(Vector2Int target, int rotationIndex)
@@ -96,14 +59,19 @@ public class Section : MonoBehaviour
         visualTypes[1].gameObject.SetActive(held && valid);
         visualTypes[2].gameObject.SetActive(held && !valid);        
     }
+    
+    internal void Used(bool used)
+    {
+        visualTypes[0].gameObject.SetActive(used);
+        visualTypes[1].gameObject.SetActive(false);
+        visualTypes[2].gameObject.SetActive(false);        
+    }
 
     internal void SetVisualTo(Vector2Int target, int rotationIndex)
     {
         transform.SetParent(pivot.transform, true);
 
         Vector3 targetPosition = new Vector3(target.x, target.y, pivot.transform.position.z);
-
-        //Debug.Log("Setting Visuals to rotation: "+ ((4 + rotationIndex - pickedupRotationIndex)%4+" since indexes is "+rotationIndex+","+pickedupRotationIndex));
 
         Quaternion targetRotation = Quaternion.Euler(0, 0, (4 + rotationIndex - pickedupRotationIndex+rotation) % 4 * 90f);
         pivot.transform.SetLocalPositionAndRotation(targetPosition,targetRotation);

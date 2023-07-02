@@ -6,6 +6,6 @@ using UnityEngine;
 public class TileDefinition : ScriptableObject
 {
     [SerializeField] string tileName;
-    [SerializeField] Sprite sprite;
+    public Sprite sprite;
 
 }

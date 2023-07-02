@@ -34,9 +34,17 @@ Jun 2023
 		* Added loading and saving system
 		* Added player inventory
 		* Added tiles definitions as scriptable objects
-		
-		
+2/7		* Changes Font and start menu layout
+		* Made mashup
+		* Tiles can now be placed by shift click, preview is showned when shift is held, shows if placable
+		* Tiles rotate by scroll wheel and piece type change by right click
+
+
 		TODO:
+
+		* Make SO that stores level definitions, have definitions generate from games state, have pieces paintable while in game
+
+		* Its possible to double click start level and create multiples
 
 		ISSUES:
 
