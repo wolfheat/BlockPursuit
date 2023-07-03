@@ -89,6 +89,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LCtrl"",
+                    ""type"": ""Button"",
+                    ""id"": ""deebb438-e249-421e-942f-ee7e7fdba6a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e2312d1-fa98-4813-b0ca-e2b7d06e554e"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LCtrl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Main_LeftClick = m_Main.FindAction("LeftClick", throwIfNotFound: true);
         m_Main_RightClick = m_Main.FindAction("RightClick", throwIfNotFound: true);
         m_Main_Shift = m_Main.FindAction("Shift", throwIfNotFound: true);
+        m_Main_LCtrl = m_Main.FindAction("LCtrl", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +360,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_LeftClick;
     private readonly InputAction m_Main_RightClick;
     private readonly InputAction m_Main_Shift;
+    private readonly InputAction m_Main_LCtrl;
     public struct MainActions
     {
         private @PlayerControls m_Wrapper;
@@ -350,6 +372,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_Main_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_Main_RightClick;
         public InputAction @Shift => m_Wrapper.m_Main_Shift;
+        public InputAction @LCtrl => m_Wrapper.m_Main_LCtrl;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -380,6 +403,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shift.started += instance.OnShift;
             @Shift.performed += instance.OnShift;
             @Shift.canceled += instance.OnShift;
+            @LCtrl.started += instance.OnLCtrl;
+            @LCtrl.performed += instance.OnLCtrl;
+            @LCtrl.canceled += instance.OnLCtrl;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -405,6 +431,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shift.started -= instance.OnShift;
             @Shift.performed -= instance.OnShift;
             @Shift.canceled -= instance.OnShift;
+            @LCtrl.started -= instance.OnLCtrl;
+            @LCtrl.performed -= instance.OnLCtrl;
+            @LCtrl.canceled -= instance.OnLCtrl;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -431,5 +460,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
+        void OnLCtrl(InputAction.CallbackContext context);
     }
 }

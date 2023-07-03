@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static System.Collections.Specialized.BitVector32;
 
 public enum TileType{O,L,J,I,S,T,Z}
 public enum GameTileType {Hole,Walkable,Stone}
@@ -17,7 +17,10 @@ public class LevelCreator : MonoBehaviour
 {
     private UIController UI;
 
-    [SerializeField] GameObject levelHolder;
+    [SerializeField] GameObject goalHolder;
+    [SerializeField] GameObject tileHolder;
+    [SerializeField] GameObject toolHolder;
+    [SerializeField] GameObject wallHolder;
 
     [SerializeField] GameTile holePrefab;
     [SerializeField] GameTile floorPrefab;
@@ -28,6 +31,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] GameObject bucketPrefab;
 
     [SerializeField] List<Section> sectionPrefabs = new List<Section>();
+    [SerializeField] List<LevelDefinition> levels = new List<LevelDefinition>();
 
     public Section paintSection;
     public Section heldSection;
@@ -71,10 +75,35 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadNextLevel()
     {         
-        LoadLevel(GameSettings.CurrentLevel);
+        if(levels.Count == 0) LoadLevel(GameSettings.CurrentLevel);
+        else LoadLevelByDefinition(GameSettings.CurrentLevel);
+
         GameSettings.IsPaused = false;
         GameSettings.CurrentGameState = GameState.RunGame;
         FindObjectOfType<PlayerController>().ShowPlayer();
+        UI.UpdateStats();
+    }
+
+    public void LoadLevelByDefinition(int level)
+    {
+        if (level >= levels.Count) return;
+
+        if (!haveWalls) CreateWalls();
+
+        LevelDefinition levelToLoad = levels[level];
+
+        LoadLevelDefinition(levelToLoad);
+
+    }
+
+    private void LoadLevelDefinition(LevelDefinition level)
+    {
+        Debug.Log("Loading Level: "+level.name);
+        foreach (Vector2Int pos in level.goals)
+            CreateGoalTile(new Vector2Int(pos.x, pos.y));
+        foreach (TilePlacementDefinition tile in level.tiles)
+            CreateSectionByTiletype(tile.type, tile.position, tile.rotation);
+        FindObjectOfType<PlayerController>().SetInitPosition(level.playerStart);
     }
 
     public void LoadLevel(int level)
@@ -134,34 +163,45 @@ public class LevelCreator : MonoBehaviour
         {
             for (int j = from.y; j < to.y; j++)
             {
-                CreateFillAreaTile(new Vector2Int(i,j));
+                CreateGoalTile(new Vector2Int(i,j));
             }
         }
     }
 
-    private void CreateFillAreaTile(Vector2Int pos)
+    public List<Vector2Int> GetFillAreaPositions()
     {
-        GameObject newFillAreaTile = Instantiate(fillAreaPrefab, levelHolder.transform,false);
+        List<Vector2Int> test = new List<Vector2Int>();
+        return fillAreas.Select(a => new Vector2Int(Mathf.RoundToInt(a.transform.position.x), Mathf.RoundToInt(a.transform.position.y))).ToList();
+    }
+
+    public List<TilePlacementDefinition> GetTilePlacementList()
+    {
+        return sections.Select(a => new TilePlacementDefinition(a.TileType,new Vector2Int(Mathf.RoundToInt(a.OriginalPivot.transform.position.x), Mathf.RoundToInt(a.OriginalPivot.transform.position.y)),a.Rotation)).ToList();
+    }
+
+    private void CreateGoalTile(Vector2Int pos)
+    {
+        GameObject newFillAreaTile = Instantiate(fillAreaPrefab, goalHolder.transform,false);
         newFillAreaTile.transform.position = new Vector3(pos.x,pos.y,0.5f);
         fillAreas.Add(newFillAreaTile);
         fillAreasPositions.Add(pos);
     }
     
-    private void CreatePremadeSection(Section section, Vector2Int pos, int rotationIndex)
+    private void CreatePremadeSection(Section section, Vector2Int pos, int rotationIndex,TileType t)
     {
-        Section newSection = Instantiate(section, levelHolder.transform,false);
-        newSection.SetLevelHolder(levelHolder);
+        Section newSection = Instantiate(section, tileHolder.transform,false);
+        newSection.SetHolder(tileHolder);
         newSection.PlaceAt(pos, rotationIndex);
+        newSection.TileType = t;
         PlaceSectionInArray(newSection);
         sections.Add(newSection);
-
     }
 
     public void CreateSectionByTiletype(TileType sectionType, Vector2Int pos, int rotationIndex=0)
     {
         Debug.Log("Creating Section By Tiletype" + sectionType+" id: "+ (int)sectionType+" size of array: "+ sectionPrefabs.Count);  
 
-        CreatePremadeSection(sectionPrefabs[(int)sectionType],pos,rotationIndex);
+        CreatePremadeSection(sectionPrefabs[(int)sectionType],pos,rotationIndex,sectionType);
     }
 
     private bool PossiblePickup(Vector2Int from, Vector2Int target)
@@ -280,36 +320,38 @@ public class LevelCreator : MonoBehaviour
 
     private void CreateWall(Vector3Int pos)
     {
-        GameTile newWall = Instantiate(wallPrefab, levelHolder.transform, true);
+        GameTile newWall = Instantiate(wallPrefab, wallHolder.transform, true);
         newWall.transform.position = pos;
     }
 
-    internal void ChangeTool(int type)
+    internal void DestroyCurrentTool(int type)
     {
         if(paintSection != null)
         {
             paintSection.DestroyParts();
             Destroy(paintSection.gameObject);
         }
-
-        paintSection = Instantiate(sectionPrefabs[type],levelHolder.transform);
-        paintSection.SetLevelHolder(levelHolder);
     }
     
     internal void UpdatePaint(int type, Vector2Int target, int rotationIndex)
     {
         if(paintSection == null)
-        {
-            paintSection = Instantiate(sectionPrefabs[type],levelHolder.transform,false);
-        }
-        paintSection.SetLevelHolder(levelHolder);
+            CreateNewPaintTool(type);
+            
         paintSection.SetVisualTo(target, rotationIndex);
 
         if(SectionPlacable(paintSection)) paintSection.Held(true, true);
         else paintSection.Held(true, false);
 
     }
-    
+
+    private void CreateNewPaintTool(int type)
+    {
+        paintSection = Instantiate(sectionPrefabs[type], toolHolder.transform, false);
+        paintSection.SetHolder(toolHolder);
+        paintSection.TileType = (TileType)type;
+    }
+
     internal void UpdateHeld(Vector2Int target, int rotationIndex)
     {
         if(heldSection != null)
@@ -331,8 +373,27 @@ public class LevelCreator : MonoBehaviour
         return true;    
     }
 
-    internal void HidePaint()
+    internal void RemovePaintIfPresent()
     {
-        paintSection?.Used(false);
+        if(paintSection != null)
+        {
+            paintSection.DestroyParts();
+            paintSection = null;
+        }
+    }
+
+    internal void RemoveTileAtPosition(Vector2Int pos)
+    {
+        if (TileLevel[pos.x, pos.y,1] == null) return;
+
+        Section section = TileLevel[pos.x, pos.y, 1].section;
+        Debug.Log("Remove section: "+section);
+
+        foreach (GameTile tile in section.GameTiles)
+        {
+            TileLevel[tile.Pos.x, tile.Pos.y, 1] = null;
+        }
+        section.DestroyParts();
+        Destroy(section.gameObject);
     }
 }

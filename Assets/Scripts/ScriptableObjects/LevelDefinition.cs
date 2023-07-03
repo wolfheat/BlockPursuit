@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelDefinition", menuName = "New Level")]
 public class LevelDefinition : ScriptableObject
 {
-    [SerializeField] string levelName;
+    public string levelName;
 
     // Generated
-    [SerializeField] Vector2Int playerStart;
-    [SerializeField] List<TileDefinition> tiles;
-    [SerializeField] List<Vector2Int> goals;
+    public Vector2Int playerStart;
+    public List<TilePlacementDefinition> tiles;
+    public List<Vector2Int> goals;
 
-    [SerializeField] List<TileTypeRequirement> unlockRequirements;
+    public List<TileTypeRequirement> unlockRequirements;
+
+    public void SetLevelDefinition(string v, List<TilePlacementDefinition> s, List<Vector2Int> g, Vector2Int startPos)
+    {
+        levelName = v;
+        tiles = s;
+        goals = g;
+        playerStart = startPos;
+    }
 }

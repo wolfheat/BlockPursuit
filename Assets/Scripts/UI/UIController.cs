@@ -96,4 +96,9 @@ public class UIController : MonoBehaviour
     {
         transitionScreen.StartTransition();
     }
+
+    internal void UpdateStats()
+    {
+        ingameUIController.UpdateStats();
+    }
 }

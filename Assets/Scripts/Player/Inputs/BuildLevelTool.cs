@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +11,9 @@ public class BuildLevelTool : MonoBehaviour
     LevelCreator levelCreator;
     private int activeTool = 0;
     private int rotation = 0;
+
+    
+
 
     private void Awake()
     {
@@ -39,18 +43,11 @@ public class BuildLevelTool : MonoBehaviour
     {
         if (Inputs.Instance.Controls.Main.Shift.IsPressed())
         {
-            // Figure out position to place tile
-            Vector3 clickScreenPosition = Mouse.current.position.ReadValue();
-            clickScreenPosition.z = -Camera.main.transform.position.z;
-
-            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(clickScreenPosition);
-
-            Vector2Int clickIndex = new Vector2Int(Mathf.RoundToInt(clickPosition.x), Mathf.RoundToInt(clickPosition.y));
-            levelCreator.UpdatePaint(activeTool, clickIndex,rotation);
+            levelCreator.UpdatePaint(activeTool, GetMouseTileIndex(),rotation);
         }
         else
         {
-            levelCreator.HidePaint();
+            levelCreator.RemovePaintIfPresent();
         }
     }
 
@@ -62,20 +59,12 @@ public class BuildLevelTool : MonoBehaviour
     {
         if (Inputs.Instance.Controls.Main.Shift.IsPressed())
         {
-            Debug.Log("Click");
-
-            // Figure out position to place tile
-            Vector3 clickScreenPosition = Mouse.current.position.ReadValue();
-            clickScreenPosition.z = -Camera.main.transform.position.z;
-
-            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(clickScreenPosition);
-
-            Vector2Int clickIndex = new Vector2Int(Mathf.RoundToInt(clickPosition.x), Mathf.RoundToInt(clickPosition.y));
-
-            Debug.Log("Click position: "+ clickIndex + " click point is "+clickScreenPosition);
-
-            levelCreator.PlacePaintSectionIfPossibleAt(clickIndex,rotation);
-
+            levelCreator.PlacePaintSectionIfPossibleAt(GetMouseTileIndex(), rotation);
+        }
+        else if (Inputs.Instance.Controls.Main.LCtrl.IsPressed())
+        {            
+            Debug.Log("Remove Section under position: "+ GetMouseTileIndex());
+            levelCreator.RemoveTileAtPosition(GetMouseTileIndex());
         }
     }
     
@@ -92,7 +81,8 @@ public class BuildLevelTool : MonoBehaviour
     private void UpdateShownTool()
     {
         toolImage.sprite = tileTypes[activeTool].sprite;
-        levelCreator.ChangeTool(activeTool);
+        if(Inputs.Instance.Controls.Main.Shift.IsPressed())
+            levelCreator.DestroyCurrentTool(activeTool);
     }
 
     private void NextTool()
@@ -102,4 +92,13 @@ public class BuildLevelTool : MonoBehaviour
         UpdateShownTool();
     }
 
+
+    private Vector2Int GetMouseTileIndex()
+    {
+        Vector3 clickScreenPosition = Mouse.current.position.ReadValue();
+        clickScreenPosition.z = -Camera.main.transform.position.z;
+        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(clickScreenPosition);
+
+        return new Vector2Int(Mathf.RoundToInt(clickPosition.x), Mathf.RoundToInt(clickPosition.y));
+    }
 }

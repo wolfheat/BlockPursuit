@@ -38,13 +38,18 @@ Jun 2023
 		* Made mashup
 		* Tiles can now be placed by shift click, preview is showned when shift is held, shows if placable
 		* Tiles rotate by scroll wheel and piece type change by right click
-
+3/7		* Made tile definition work so it can be saved into a scriptable object during runtime and loaded into game as level
+		
 
 		TODO:
 
-		* Make SO that stores level definitions, have definitions generate from games state, have pieces paintable while in game
+		* Make it possible to paint goal tiles in editor / maybe have TAB to switsh to edit mode and back
 
+		* Clean Up tile definition and way levels are stored when created at runtime
+		
 		* Its possible to double click start level and create multiples
+
+		* Currently not possible to turn on spt, should it be possible? Decide.
 
 		ISSUES:
 

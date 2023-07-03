@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour
     MovementAction newMovement;
 
     Vector2Int initPosition = new Vector2Int(5,4);
-    Vector2Int position = new Vector2Int(5,4);
+    //Vector2Int position = new Vector2Int(5,4);
     Vector2Int target = new Vector2Int(5,5);
 
     public Section holdingSection;
     [SerializeField] GameObject redBox;
 
-
+    public Vector2Int Position { get; private set; }
 
     private void Awake()
     {
@@ -45,9 +45,9 @@ public class PlayerController : MonoBehaviour
     
     public void InitPosition()
     {
-        position = initPosition;
+        Position = initPosition;
         target = initPosition + Vector2Int.up;
-        transform.localPosition = new Vector3(position.x,position.y,0);
+        transform.localPosition = new Vector3(Position.x,Position.y,0);
     }
 
     private void OnEnable()
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         if (levelCreator.heldSection == null)
         {
             // check if there is a pickable in front of player
-            levelCreator.PickupSectionAt(position, target, current.rotationIndex);
+            levelCreator.PickupSectionAt(Position, target, current.rotationIndex);
         }
         else
         {
@@ -106,22 +106,22 @@ public class PlayerController : MonoBehaviour
 
         if (direction.x > 0)
         {
-            if(WalkableTile(position + Vector2Int.right))
+            if(WalkableTile(Position + Vector2Int.right))
                 newMovement = new MovementAction(transform.position,transform.rotation,Vector3.right, Vector3.down,0);
             else return;
         }
         if(direction.y > 0){
-            if (WalkableTile(position + Vector2Int.up))
+            if (WalkableTile(Position + Vector2Int.up))
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right,1);
             else return;
         }
         if(direction.x < 0){
-            if (WalkableTile(position + Vector2Int.left))
+            if (WalkableTile(Position + Vector2Int.left))
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.left, Vector3.up,2);
             else return;
         }
         if(direction.y < 0){
-            if (WalkableTile(position + Vector2Int.down))
+            if (WalkableTile(Position + Vector2Int.down))
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.down, Vector3.left,3);
             else return;
         }
@@ -169,10 +169,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlacePlayerAtIndex()
     {
-        position = new Vector2Int(Mathf.RoundToInt(current.TargetPosition.x), Mathf.RoundToInt(current.TargetPosition.y));
+        Position = new Vector2Int(Mathf.RoundToInt(current.TargetPosition.x), Mathf.RoundToInt(current.TargetPosition.y));
         //Debug.Log("Player placed at: "+position);
         Vector2Int forwardVector = new Vector2Int(Mathf.RoundToInt(current.movement.x), Mathf.RoundToInt(current.movement.y));
-        target = position + forwardVector;
+        target = Position + forwardVector;
 
     }
 

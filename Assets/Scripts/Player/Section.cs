@@ -1,39 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.GraphicsBuffer;
 
 public class Section : MonoBehaviour
 {
     [field: SerializeField] public List<GameTile> GameTiles { get; set; }
     //public List<Vector2Int> Occupying { get; private set; }
-    int rotation = 0;
+
+    public TileType TileType { get; set; }
+    public Vector2Int Position { get; set; }
+    public int Rotation{ get; set; }
+
     [SerializeField] GameTile floorPrefab;
     private int pickedupRotationIndex = 0;
+    [SerializeField] private GameObject originalPivot;
     [SerializeField] private GameObject pivot;
     [SerializeField] private GameObject[] visualTypes;
 
+    public GameObject OriginalPivot { get => originalPivot; private set { originalPivot = value;} }
 
-    public GameObject LevelHolder { get; private set; }
+    public GameObject TileHolder { get; private set; }
 
-    public void SetLevelHolder(GameObject levelHolder)
+    public void SetHolder(GameObject tileHolder)
     {
-        LevelHolder = levelHolder;
-        pivot.transform.SetParent(levelHolder.transform, true);
+        TileHolder = tileHolder;
+        pivot.transform.SetParent(tileHolder.transform, true);
     }
 
     public void PlaceAt(Vector2Int target, int rotationIndex)
     {
         transform.SetParent(pivot.transform,true);
         
+        Position = target;
         Vector3 targetPosition = new Vector3(target.x, target.y, pivot.transform.position.z);
 
         //Debug.Log("Setting Visuals to rotation: " + ((4 + rotationIndex - pickedupRotationIndex) % 4 + " since indexes is " + rotationIndex + "," + pickedupRotationIndex));
 
-        rotation = (rotationIndex - pickedupRotationIndex + rotation)%4;
+        Rotation = (rotationIndex - pickedupRotationIndex + Rotation) %4;
 
-        Quaternion targetRotation = Quaternion.Euler(0, 0, rotation * 90f);
+
+        Quaternion targetRotation = Quaternion.Euler(0, 0, Rotation * 90f);
         pivot.transform.SetLocalPositionAndRotation(targetPosition, targetRotation);
 
         UpdateTilePos();
@@ -73,7 +78,7 @@ public class Section : MonoBehaviour
 
         Vector3 targetPosition = new Vector3(target.x, target.y, pivot.transform.position.z);
 
-        Quaternion targetRotation = Quaternion.Euler(0, 0, (4 + rotationIndex - pickedupRotationIndex+rotation) % 4 * 90f);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, (4 + rotationIndex - pickedupRotationIndex+ Rotation) % 4 * 90f);
         pivot.transform.SetLocalPositionAndRotation(targetPosition,targetRotation);
         UpdateTilePos();
     }
@@ -95,5 +100,6 @@ public class Section : MonoBehaviour
         {
             Destroy(GameTiles[i].gameObject);
         }
+        Destroy(pivot.gameObject);
     }
 }
