@@ -7,7 +7,7 @@ public class BuildLevelToolEditor : Editor
 {
 
     public string path = "Assets/Scripts/ScriptableObjects/Levels/";
-    private int counter;
+    private int counter = 10;
 
     public override void OnInspectorGUI()
     {

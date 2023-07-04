@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum TileType{O,L,J,I,S,T,Z}
+public enum TileType{O,L,J,I,S,T,Z, Goal}
 public enum GameTileType {Hole,Walkable,Stone}
 
 [Serializable]
@@ -206,8 +206,33 @@ public class LevelCreator : MonoBehaviour
         return sections.Select(a => new TilePlacementDefinition(a.TileType,new Vector2Int(Mathf.RoundToInt(a.OriginalPivot.transform.position.x), Mathf.RoundToInt(a.OriginalPivot.transform.position.y)),a.Rotation)).ToList();
     }
 
+    public void RemoveGoalTile(Vector2Int pos)
+    {
+        GameObject goalExists = GoalExistsAtPos(pos);
+        if (goalExists != null)
+        {
+            fillAreas.Remove(goalExists);
+            Destroy(goalExists);
+        }        
+    }
+    
+    private GameObject GoalExistsAtPos(Vector2Int pos)
+    {
+        foreach (GameObject goal in fillAreas)
+        {
+            Vector2Int goalPosition = new Vector2Int(Mathf.RoundToInt(goal.transform.position.x), Mathf.RoundToInt(goal.transform.position.y));
+            if (pos == goalPosition)
+            {
+                return goal;
+            }
+        }
+        return null;
+    }
+
     private void CreateGoalTile(Vector2Int pos)
     {
+        if (GoalExistsAtPos(pos)) return;
+
         GameObject newFillAreaTile = Instantiate(fillAreaPrefab, goalHolder.transform,false);
         newFillAreaTile.transform.position = new Vector3(pos.x,pos.y,0.5f);
         fillAreas.Add(newFillAreaTile);
@@ -264,6 +289,12 @@ public class LevelCreator : MonoBehaviour
         if (paintSection == null) return;
 
         if(!SectionPlacable(paintSection)) return;
+
+        if (paintSection.TileType == TileType.Goal)
+        {
+            CreateGoalTile(pos);
+            return;
+        } 
 
         paintSection.Held(false, false);
         paintSection.PlaceAt(pos,rotationIndex);
@@ -366,7 +397,8 @@ public class LevelCreator : MonoBehaviour
             
         paintSection.SetVisualTo(target, rotationIndex);
 
-        if(SectionPlacable(paintSection)) paintSection.Held(true, true);
+        if(paintSection.TileType == TileType.Goal) paintSection.Held(true, true);
+        else if (SectionPlacable(paintSection)) paintSection.Held(true, true);
         else paintSection.Held(true, false);
 
     }
@@ -420,6 +452,7 @@ public class LevelCreator : MonoBehaviour
             TileLevel[tile.Pos.x, tile.Pos.y, 1] = null;
         }
         section.DestroyParts();
+        sections.Remove(section);   
         Destroy(section.gameObject);
     }
 }

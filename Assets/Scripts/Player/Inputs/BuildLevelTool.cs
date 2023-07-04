@@ -9,6 +9,7 @@ public class BuildLevelTool : MonoBehaviour
     [SerializeField] Image toolImage;
     [SerializeField] List<TileDefinition> tileTypes;
     LevelCreator levelCreator;
+    private int GoalIndex;
     private int activeTool = 0;
     private int rotation = 0;
 
@@ -18,6 +19,7 @@ public class BuildLevelTool : MonoBehaviour
     private void Awake()
     {
         levelCreator = FindObjectOfType<LevelCreator>();
+        GoalIndex = tileTypes.Count-1;
     }
 
     private void OnEnable()
@@ -73,8 +75,10 @@ public class BuildLevelTool : MonoBehaviour
         }
         else if (Inputs.Instance.Controls.Main.LCtrl.IsPressed())
         {            
-            Debug.Log("Remove Section under position: "+ GetMouseTileIndex());
-            levelCreator.RemoveTileAtPosition(GetMouseTileIndex());
+            if(activeTool == GoalIndex)
+                levelCreator.RemoveGoalTile(GetMouseTileIndex());
+            else            
+                levelCreator.RemoveTileAtPosition(GetMouseTileIndex());
         }
     }
     
@@ -89,7 +93,7 @@ public class BuildLevelTool : MonoBehaviour
     }
 
     private void UpdateShownTool()
-    {
+    {        
         toolImage.sprite = tileTypes[activeTool].sprite;
         if(Inputs.Instance.Controls.Main.Shift.IsPressed())
             levelCreator.DestroyCurrentTool(activeTool);

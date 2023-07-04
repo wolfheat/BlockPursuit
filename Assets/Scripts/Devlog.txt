@@ -41,6 +41,7 @@ Jun 2023
 3/7		* Made tile definition work so it can be saved into a scriptable object during runtime and loaded into game as level
 4/7		* Levels are now selectable by WASD in levelselect and level starts with Space
 		* ESC takes player to start menu from Level Select
+		* Goals are now placable at levelcreator and saved to level definition
 
 		TODO:
 

@@ -2764,6 +2764,7 @@ MonoBehaviour:
   - {fileID: 6278177196333134981, guid: 6627c158c0f6522478b0c1e8f678a407, type: 3}
   - {fileID: 6278177196333134981, guid: 4fc6d21ad9da93d4ca6a2282e64b567d, type: 3}
   - {fileID: 6278177196333134981, guid: ea2c0291fdfa0bf40ae4cb93f0ec44d3, type: 3}
+  - {fileID: 6278177196333134981, guid: b21f43d68624d7547b667d297922a8ac, type: 3}
   levels:
   - {fileID: 11400000, guid: 737d215f0c694e94f81ce1b8ef86539c, type: 2}
   - {fileID: 11400000, guid: 737d215f0c694e94f81ce1b8ef86539c, type: 2}
@@ -2771,6 +2772,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a51c3dd7dc3b4a44496391ee7c5f01b6, type: 2}
   - {fileID: 11400000, guid: d8d30e432ec378a429ecf771fd8861ef, type: 2}
   - {fileID: 11400000, guid: c2e7ce34d40c71446ac304a1b6c67c01, type: 2}
+  - {fileID: 11400000, guid: 57f6a0397ff3d734d952bb7f77dc6fce, type: 2}
   paintSection: {fileID: 0}
   heldSection: {fileID: 0}
   sections: []
@@ -11407,6 +11409,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b9ef3137d6baf7f41a563c5074598a22, type: 2}
   - {fileID: 11400000, guid: f699a479977f0784a803f0991bf94b7b, type: 2}
   - {fileID: 11400000, guid: 9ac2ba9b6e418ee46b8fe5eca2f2681d, type: 2}
+  - {fileID: 11400000, guid: 5dd1b10d9c8ce0b4c87119e946666694, type: 2}
 --- !u!1 &1746550268
 GameObject:
   m_ObjectHideFlags: 0
