@@ -39,36 +39,41 @@ Jun 2023
 		* Tiles can now be placed by shift click, preview is showned when shift is held, shows if placable
 		* Tiles rotate by scroll wheel and piece type change by right click
 3/7		* Made tile definition work so it can be saved into a scriptable object during runtime and loaded into game as level
-		
+4/7		* Levels are now selectable by WASD in levelselect and level starts with Space
+		* ESC takes player to start menu from Level Select
 
 		TODO:
 
-		* Make it possible to paint goal tiles in editor / maybe have TAB to switsh to edit mode and back
 
-		* Clean Up tile definition and way levels are stored when created at runtime
+		* Make it possible to paint goal tiles in editor / maybe have TAB to switch to edit mode and back
+			- Goal tile should be tile along the paintables
+
 		
-		* Its possible to double click start level and create multiples
 
 		* Currently not possible to turn on spt, should it be possible? Decide.
 
-		ISSUES:
+		MAYBE:
+		* Possible remove Next button after clearing level so player has to go to select screen?
 
+		ISSUES:
+		* Its possible to double click start level and create multiples
 
 		// - Content -
+		* Integrate pause menu with player inventory? Sounds like a good solution
 		* Change Load Screen between scenes to animation or not?
-		* Add level text on each level
-
+		
 		// - Mechanics Stuff -		
 		
 		// - Data stuff -
+		* Clean Up tile definition and way levels are stored when created at runtime
 		* Make system to store what level player completed and use that to update select level page
 		* Make player gain gold and tiles when completing levels
 		
 		// - UI stuff -
-		* Make menu usable by keyboard
+		* Make main menu usable by keyboard
 		* Make cleared levels show differently in the level select.
-		* Add Start level popup if unlock is needed, show cost, show inventory at the same time?
-		* 
+		* Add Start level popup if unlock is needed, show cost, show inventory at the same time? Maybe show this in level select instead. 
+			- Selected menu shows up with more info in a info box under the selection grid
 
 		// - LevelCreation Stuff -
 		* Create randomized level creation for Bronze,Silver,Gold versions

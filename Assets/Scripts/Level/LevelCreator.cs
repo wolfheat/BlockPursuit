@@ -73,10 +73,36 @@ public class LevelCreator : MonoBehaviour
         return (TileLevel[pos.x, pos.y, 1].walkable) ? true : false;
     }
     
+    public void LoadPrevLevel()
+    {
+        GameSettings.CurrentLevel--;
+        if (GameSettings.CurrentLevel < 0) GameSettings.CurrentLevel = 0;
+
+        LoadLevelByDefinition(GameSettings.CurrentLevel);
+
+        GameSettings.IsPaused = false;
+        GameSettings.CurrentGameState = GameState.RunGame;
+        FindObjectOfType<PlayerController>().ShowPlayer();
+        UI.UpdateStats();
+    }
+    
+    public void LoadSelectedLevel()
+    {   
+        LoadLevelByDefinition(GameSettings.CurrentLevel);
+
+        GameSettings.IsPaused = false;
+        GameSettings.CurrentGameState = GameState.RunGame;
+        FindObjectOfType<PlayerController>().ShowPlayer();
+        UI.UpdateStats();
+    }
+    
     public void LoadNextLevel()
-    {         
-        if(levels.Count == 0) LoadLevel(GameSettings.CurrentLevel);
-        else LoadLevelByDefinition(GameSettings.CurrentLevel);
+    {
+        if (GameSettings.CurrentLevel >= levels.Count) return;
+
+        GameSettings.CurrentLevel++;
+        
+        LoadLevelByDefinition(GameSettings.CurrentLevel);
 
         GameSettings.IsPaused = false;
         GameSettings.CurrentGameState = GameState.RunGame;
@@ -92,6 +118,7 @@ public class LevelCreator : MonoBehaviour
 
         LevelDefinition levelToLoad = levels[level];
 
+        ClearLevel();
         LoadLevelDefinition(levelToLoad);
 
     }
@@ -273,7 +300,6 @@ public class LevelCreator : MonoBehaviour
             GameSettings.IsPaused = true;
 
             //Next level
-            GameSettings.CurrentLevel++;
             GameSettings.StoredAction = GameAction.ShowLevelComplete;
             FindObjectOfType<TransitionScreen>().StartTransition();
         }

@@ -16,7 +16,7 @@ public class IngameUIController : MonoBehaviour
         int sum = GameSettings.PlayerInventory.Tiles.Sum(x=>x.Value);
         tiles.text = sum.ToString();
 
-        level.text = "Level "+GameSettings.CurrentLevel.ToString();
+        level.text = "Level "+(GameSettings.CurrentLevel+1).ToString();
 
 
     }

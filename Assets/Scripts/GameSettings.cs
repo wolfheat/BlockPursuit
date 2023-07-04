@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum GameState { Menu, RunGame, Transition}
-public enum GameAction { LoadNextLevel, LoadStartMenu, ShowInventory, HideInventory, ShowLevelSelect ,ShowLevelComplete, none}
+public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowInventory, HideInventory, ShowLevelSelect ,ShowLevelComplete, none}
 
 public class GameSettings : MonoBehaviour
 {

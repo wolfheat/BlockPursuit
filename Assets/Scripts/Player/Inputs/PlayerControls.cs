@@ -98,6 +98,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc969c07-1dcf-411e-81de-fc9db2ebf4a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -276,6 +285,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LCtrl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06807f1d-638f-4496-8d5c-575aff905c4e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -292,6 +312,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Main_RightClick = m_Main.FindAction("RightClick", throwIfNotFound: true);
         m_Main_Shift = m_Main.FindAction("Shift", throwIfNotFound: true);
         m_Main_LCtrl = m_Main.FindAction("LCtrl", throwIfNotFound: true);
+        m_Main_ESC = m_Main.FindAction("ESC", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -361,6 +382,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_RightClick;
     private readonly InputAction m_Main_Shift;
     private readonly InputAction m_Main_LCtrl;
+    private readonly InputAction m_Main_ESC;
     public struct MainActions
     {
         private @PlayerControls m_Wrapper;
@@ -373,6 +395,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @RightClick => m_Wrapper.m_Main_RightClick;
         public InputAction @Shift => m_Wrapper.m_Main_Shift;
         public InputAction @LCtrl => m_Wrapper.m_Main_LCtrl;
+        public InputAction @ESC => m_Wrapper.m_Main_ESC;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -406,6 +429,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LCtrl.started += instance.OnLCtrl;
             @LCtrl.performed += instance.OnLCtrl;
             @LCtrl.canceled += instance.OnLCtrl;
+            @ESC.started += instance.OnESC;
+            @ESC.performed += instance.OnESC;
+            @ESC.canceled += instance.OnESC;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -434,6 +460,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LCtrl.started -= instance.OnLCtrl;
             @LCtrl.performed -= instance.OnLCtrl;
             @LCtrl.canceled -= instance.OnLCtrl;
+            @ESC.started -= instance.OnESC;
+            @ESC.performed -= instance.OnESC;
+            @ESC.canceled -= instance.OnESC;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -461,5 +490,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnShift(InputAction.CallbackContext context);
         void OnLCtrl(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
     }
 }

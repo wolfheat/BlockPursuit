@@ -51,11 +51,11 @@ public class UIController : MonoBehaviour
     {
         switch (GameSettings.StoredAction)
         {
-            case GameAction.LoadNextLevel:
+            case GameAction.LoadSelectedLevel:
                 levelComplete.HidePanel();
                 startMenu.HidePanel();
                 levelSelect.HidePanel();
-                levelCreator.LoadNextLevel();
+                levelCreator.LoadSelectedLevel();
                 GameSettings.LevelStartTime = Time.time;
                 GameSettings.MoveCounter = 0;
                 GameSettings.StepsCounter = 0;
@@ -68,13 +68,13 @@ public class UIController : MonoBehaviour
             case GameAction.ShowLevelSelect:
                 startMenu.HidePanel();
                 levelSelect.ShowPanel();
-                levelSelect.SelectFirstLevel();
+                levelSelect.UpdateSelectedLevel();
                 break;
             case GameAction.ShowLevelComplete:
                 levelCreator.ClearLevel();
                 levelComplete.ShowPanel();
                 levelComplete.UpdateStats();
-
+                levelSelect.UpdateLevelVisability();
                 break;
              case GameAction.ShowInventory:
                 GameSettings.IsPaused = true;

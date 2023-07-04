@@ -11,7 +11,7 @@ public class LevelComplete : BasePanel
 	public void NextLevelClicked()
 	{
 		Debug.Log("Next Level Clicked");
-		GameSettings.StoredAction = GameAction.LoadNextLevel;
+		GameSettings.StoredAction = GameAction.LoadSelectedLevel;
         UIController.StartTransition();
     }
 	public void SelectLevelClicked()
@@ -41,6 +41,6 @@ public class LevelComplete : BasePanel
         stepsText.text = GameSettings.StepsCounter.ToString();
         
         //FIX
-        levelText.text = (GameSettings.CurrentLevel-1).ToString();
+        levelText.text = (GameSettings.CurrentLevel+1).ToString();
     }
 }
