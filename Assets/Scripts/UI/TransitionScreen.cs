@@ -15,15 +15,20 @@ public class TransitionScreen : MonoBehaviour
     private Color EndColor = new Color(0,0,0,1);
 
     public Action GameDarkEvent;
+    public Action GameDarkEventComplete;
+
 
     public void StartTransition()
     {
+        if(GameSettings.InTransition) return;
         StartCoroutine(TransitionCoroutine());
     }
 
 
     private IEnumerator TransitionCoroutine()
     {
+        GameSettings.InTransition = true;
+
         float transitionTime = HalfTransitionTime;
         float darkTime = DarkTime;
 
@@ -63,8 +68,9 @@ public class TransitionScreen : MonoBehaviour
             yield return null;
         }
         image.color = StartColor;
-        panel.SetActive(false); 
-
+        panel.SetActive(false);
+        GameSettings.InTransition = false;
+        GameDarkEventComplete.Invoke();
     }
 
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum GameState { Menu, RunGame, Transition}
-public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowInventory, HideInventory, ShowLevelSelect ,ShowLevelComplete, none}
+public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowInventory, HideInventory, ShowLevelSelect ,ShowLevelComplete, RestartLevel, none }
 
 public class GameSettings : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class GameSettings : MonoBehaviour
 	public static int StepsCounter { get; set; }	
 	public static int MoveCounter { get; set; }	
 	public static PlayerInventory PlayerInventory { get; set; }	
+	public static bool InTransition { get; set; }	
 
 	public static bool UseFast => StoredAction == GameAction.ShowInventory || StoredAction == GameAction.HideInventory;
     //OLD
@@ -27,9 +28,9 @@ public class GameSettings : MonoBehaviour
 	
 	public static bool IsPaused { get; set; } = true;
 	public static int CurrentLevel { get; set; } = 1;
+	public static int CurrentDifficultLevel { get; internal set; } = 0;
 
-
-	[SerializeField] bool useMusicSetting;
+    [SerializeField] bool useMusicSetting;
 
 
 	private void Awake()

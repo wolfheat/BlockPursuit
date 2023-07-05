@@ -42,36 +42,42 @@ Jun 2023
 4/7		* Levels are now selectable by WASD in levelselect and level starts with Space
 		* ESC takes player to start menu from Level Select
 		* Goals are now placable at levelcreator and saved to level definition
+		* Goal tile should be tile along the paintables
+5/7		* Created 15 easy levels 15 medium levels ad 5 hard levels, separated them into different lists
+		* Added Tabs to level select, maybe make these tinted when not available and then unlocked by completing a tier	
+		* Tiers of levels now work in the level select, playe can change tier with the tabs.
+		* TAB now enables/disables the edit mode
+		* Added restart Level button, for now just loads the same level
+		* Integrated Unitys Navigation system for UI so Buttons can be navigated and activated by Enter or Space
+		* Added Inventory as pause/abandon page, integrated ESC and menu button to open it.
+		* Limited transitions to only take place one at a time.
+		* Fixed bug where player could move and use tiles when inventory was active. Made sure player cant interact at all while inventory is up
+		* Doubleclicking level wont load more than one level any more
+
+		* Currenlty timer stop after transition, stop at complete?
 
 		TODO:
-
-
-		* Make it possible to paint goal tiles in editor / maybe have TAB to switch to edit mode and back
-			- Goal tile should be tile along the paintables
-
 		
-
-		* Currently not possible to turn on spt, should it be possible? Decide.
-
 		MAYBE:
-		* Possible remove Next button after clearing level so player has to go to select screen?
-
+		
 		ISSUES:
-		* Its possible to double click start level and create multiples
 
 		// - Content -
-		* Integrate pause menu with player inventory? Sounds like a good solution
+		* Currently not possible to turn on spot, should it be possible? Decide.
 		* Change Load Screen between scenes to animation or not?
 		
 		// - Mechanics Stuff -		
 		
 		// - Data stuff -
 		* Clean Up tile definition and way levels are stored when created at runtime
+		* Make player progress and settings store between sessions.
 		* Make system to store what level player completed and use that to update select level page
-		* Make player gain gold and tiles when completing levels
+		* Make player gain gold and tiles when completing levels, animation for this?
 		
 		// - UI stuff -
+		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings?)
 		* Make main menu usable by keyboard
+		* Make level select tabs more fansy?
 		* Make cleared levels show differently in the level select.
 		* Add Start level popup if unlock is needed, show cost, show inventory at the same time? Maybe show this in level select instead. 
 			- Selected menu shows up with more info in a info box under the selection grid

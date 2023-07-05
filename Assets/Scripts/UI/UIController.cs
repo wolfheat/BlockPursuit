@@ -16,11 +16,13 @@ public class UIController : MonoBehaviour
     private void OnEnable()
     {
         transitionScreen.GameDarkEvent += DoStoredAction;
+        transitionScreen.GameDarkEventComplete += DarkEventComplete;
         savingUtility.LoadingComplete += UpdateInventoryFromStored;        
     }
     private void OnDisable()
     {
         transitionScreen.GameDarkEvent -= DoStoredAction;
+        transitionScreen.GameDarkEventComplete -= DarkEventComplete;
         savingUtility.LoadingComplete -= UpdateInventoryFromStored;        
     }
 
@@ -47,39 +49,63 @@ public class UIController : MonoBehaviour
 
     }
 
+    private void HideAllPanels()
+    {
+        levelComplete.HidePanel();
+        startMenu.HidePanel();
+        levelSelect.HidePanel();
+        inventoryUI.HidePanel();
+        ingameUIController.HidePanel();
+    }
+
+    internal void DarkEventComplete()
+    {
+
+        if(GameSettings.StoredAction != GameAction.ShowInventory)
+        {
+            GameSettings.IsPaused = false;
+        }
+    }
+
     internal void DoStoredAction()
     {
         switch (GameSettings.StoredAction)
         {
             case GameAction.LoadSelectedLevel:
-                levelComplete.HidePanel();
-                startMenu.HidePanel();
-                levelSelect.HidePanel();
+                HideAllPanels();
+                ingameUIController.ShowPanel();
                 levelCreator.LoadSelectedLevel();
                 GameSettings.LevelStartTime = Time.time;
                 GameSettings.MoveCounter = 0;
                 GameSettings.StepsCounter = 0;
                 break;
+            case GameAction.RestartLevel:
+                levelCreator.RestartLevel();
+                GameSettings.LevelStartTime = Time.time;
+                GameSettings.MoveCounter = 0;
+                GameSettings.StepsCounter = 0;
+                break;
             case GameAction.LoadStartMenu:
-                levelComplete.HidePanel();
-                levelSelect.HidePanel();
+                HideAllPanels();
                 startMenu.ShowPanel();
+                startMenu.SetSelected();
                 break;
             case GameAction.ShowLevelSelect:
-                startMenu.HidePanel();
+                HideAllPanels();   
                 levelSelect.ShowPanel();
-                levelSelect.UpdateSelectedLevel();
+                levelSelect.SetSelected();
                 break;
             case GameAction.ShowLevelComplete:
                 levelCreator.ClearLevel();
+                HideAllPanels();   
                 levelComplete.ShowPanel();
                 levelComplete.UpdateStats();
-                levelSelect.UpdateLevelVisability();
                 break;
              case GameAction.ShowInventory:
                 GameSettings.IsPaused = true;
                 inventoryUI.ShowPanel();
                 inventoryUI.UpdateInventoryUI();
+                inventoryUI.SetSelected();
                 break;
             case GameAction.HideInventory:
                 inventoryUI.HidePanel();

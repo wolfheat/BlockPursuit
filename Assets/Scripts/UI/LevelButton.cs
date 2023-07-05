@@ -1,9 +1,13 @@
 using TMPro;
 using UnityEngine;
 
+
+public enum DifficultLevel{Easy,Medium,Hard}
+
 public class LevelButton : MonoBehaviour
 {
     public int level;
+    public DifficultLevel difficulty;
     public TextMeshProUGUI levelIDText;
     public GameObject selectedBorder;
 
@@ -15,7 +19,7 @@ public class LevelButton : MonoBehaviour
 
     public void RequestStartLevel()
     {
-        Debug.Log("Request start level "+level);
+        FindObjectOfType<LevelSelect>().RequestStartSelectedLevel(level, difficulty);
     }
 
     public void Select(bool doSelect = true)

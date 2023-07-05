@@ -1,5 +1,9 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class LevelComplete : BasePanel
 {
@@ -8,7 +12,39 @@ public class LevelComplete : BasePanel
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI movesText;
     [SerializeField] TextMeshProUGUI stepsText;
-	public void NextLevelClicked()
+
+    [SerializeField] Button mainSelectedButton;
+    private void OnEnable()
+    {
+        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
+    }
+
+    private void OnDisable()
+    {
+        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
+    }
+
+    private void Awake()
+    {
+        //Select first Button
+        //buttons[selectedButton].Select();
+        SetSelected();
+    }
+
+    private void RequestESC(InputAction.CallbackContext context)
+    {
+        if (!Enabled()) return;
+        Debug.Log("ESC from menu");
+        
+    }
+
+    public void SetSelected()
+    {
+        Debug.Log("Selecting LEvelComplete First OK Button");
+        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);
+    }
+
+    public void NextLevelClicked()
 	{
 		Debug.Log("Next Level Clicked");
 		GameSettings.StoredAction = GameAction.LoadSelectedLevel;
@@ -42,5 +78,7 @@ public class LevelComplete : BasePanel
         
         //FIX
         levelText.text = (GameSettings.CurrentLevel+1).ToString();
+
+        SetSelected();
     }
 }

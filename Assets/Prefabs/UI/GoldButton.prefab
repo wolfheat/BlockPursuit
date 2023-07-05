@@ -103,7 +103,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.44, g: 0.44, b: 0.44, a: 0}
     m_HighlightedColor: {r: 0.29659086, g: 0.18409087, b: 0.525, a: 1}
     m_PressedColor: {r: 0.29803923, g: 0.18431373, b: 0.5254902, a: 1}
-    m_SelectedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    m_SelectedColor: {r: 0.65882355, g: 0.14117648, b: 0.14117648, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

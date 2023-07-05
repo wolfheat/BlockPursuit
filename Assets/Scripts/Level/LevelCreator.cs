@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public enum TileType{O,L,J,I,S,T,Z, Goal}
 public enum GameTileType {Hole,Walkable,Stone}
@@ -31,7 +32,14 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] GameObject bucketPrefab;
 
     [SerializeField] List<Section> sectionPrefabs = new List<Section>();
-    [SerializeField] List<LevelDefinition> levels = new List<LevelDefinition>();
+    
+    
+    public List<LevelDefinition> levelsEasy = new List<LevelDefinition>();
+    public List<LevelDefinition> levelsMedium = new List<LevelDefinition>();
+    public List<LevelDefinition> levelsHard = new List<LevelDefinition>();
+
+    private List<LevelDefinition>[] levels;
+
 
     public Section paintSection;
     public Section heldSection;
@@ -51,6 +59,7 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levels = new List<LevelDefinition>[3] {levelsEasy,levelsMedium,levelsHard };
         TileLevel = new GameTile[LevelWidth, LevelHeight,2];
         UI = FindObjectOfType<UIController>();
     }
@@ -78,7 +87,7 @@ public class LevelCreator : MonoBehaviour
         GameSettings.CurrentLevel--;
         if (GameSettings.CurrentLevel < 0) GameSettings.CurrentLevel = 0;
 
-        LoadLevelByDefinition(GameSettings.CurrentLevel);
+        LoadLevelByDefinition(GameSettings.CurrentLevel, GameSettings.CurrentDifficultLevel);
 
         GameSettings.IsPaused = false;
         GameSettings.CurrentGameState = GameState.RunGame;
@@ -86,9 +95,15 @@ public class LevelCreator : MonoBehaviour
         UI.UpdateStats();
     }
     
+    public void RestartLevel()
+    {
+        Debug.Log("Restarting level, currently just loading same again");
+        LoadSelectedLevel();
+    }
+    
     public void LoadSelectedLevel()
     {   
-        LoadLevelByDefinition(GameSettings.CurrentLevel);
+        LoadLevelByDefinition(GameSettings.CurrentLevel,GameSettings.CurrentDifficultLevel);
 
         GameSettings.IsPaused = false;
         GameSettings.CurrentGameState = GameState.RunGame;
@@ -98,11 +113,11 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadNextLevel()
     {
-        if (GameSettings.CurrentLevel >= levels.Count) return;
+        if (GameSettings.CurrentLevel >= levelsEasy.Count) return;
 
         GameSettings.CurrentLevel++;
         
-        LoadLevelByDefinition(GameSettings.CurrentLevel);
+        LoadLevelByDefinition(GameSettings.CurrentLevel, GameSettings.CurrentDifficultLevel);
 
         GameSettings.IsPaused = false;
         GameSettings.CurrentGameState = GameState.RunGame;
@@ -110,13 +125,13 @@ public class LevelCreator : MonoBehaviour
         UI.UpdateStats();
     }
 
-    public void LoadLevelByDefinition(int level)
+    public void LoadLevelByDefinition(int level, int diff)
     {
-        if (level >= levels.Count) return;
+        if (level >= levels[diff].Count) return;
 
         if (!haveWalls) CreateWalls();
 
-        LevelDefinition levelToLoad = levels[level];
+        LevelDefinition levelToLoad = levels[diff][level];
 
         ClearLevel();
         LoadLevelDefinition(levelToLoad);
@@ -212,6 +227,7 @@ public class LevelCreator : MonoBehaviour
         if (goalExists != null)
         {
             fillAreas.Remove(goalExists);
+            fillAreasPositions.Remove(pos);
             Destroy(goalExists);
         }        
     }

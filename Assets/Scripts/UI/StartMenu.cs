@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StartMenu : BasePanel
@@ -7,10 +8,18 @@ public class StartMenu : BasePanel
 	[SerializeField] private GameObject buttonHolder;
 	[SerializeField] private List<Image> images;
 
+    [SerializeField] Button mainSelectedButton;
     private void Start()
     {
         ShowPanel();
+		SetSelected();		
     }
+
+    public void SetSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);	
+    }
+
     public void StartGameClicked()
 	{
 		Debug.Log("StartGame Clicked");
