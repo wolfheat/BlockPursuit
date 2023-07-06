@@ -7,7 +7,6 @@ public class UIController : MonoBehaviour
     [SerializeField] LevelComplete levelComplete;
     [SerializeField] LevelSelect levelSelect;
     [SerializeField] TransitionScreen transitionScreen;
-    [SerializeField] SavingUtility savingUtility;
     [SerializeField] LevelCreator levelCreator;
     [SerializeField] IngameUIController ingameUIController;
     [SerializeField] InventoryUI inventoryUI;
@@ -17,13 +16,13 @@ public class UIController : MonoBehaviour
     {
         transitionScreen.GameDarkEvent += DoStoredAction;
         transitionScreen.GameDarkEventComplete += DarkEventComplete;
-        savingUtility.LoadingComplete += UpdateInventoryFromStored;        
+        SavingUtility.LoadingComplete += UpdateInventoryFromStored;        
     }
     private void OnDisable()
     {
         transitionScreen.GameDarkEvent -= DoStoredAction;
         transitionScreen.GameDarkEventComplete -= DarkEventComplete;
-        savingUtility.LoadingComplete -= UpdateInventoryFromStored;        
+        SavingUtility.LoadingComplete -= UpdateInventoryFromStored;        
     }
 
     private void Start()
@@ -34,17 +33,7 @@ public class UIController : MonoBehaviour
 
     internal void UpdateInventoryFromStored()
     {
-        Debug.Log("Update Inventory from stored");
-        if(GameSettings.PlayerInventory == null)
-        {
-            Debug.Log("Player settings = null");
-            int tileVersions = FindObjectOfType<TileLibrary>().tileDefinitions.Count;
-            GameSettings.PlayerInventory = new PlayerInventory(tileVersions);
-        }else if (GameSettings.PlayerInventory.Tiles.Count == 0)
-        {
-            Debug.Log("tiles count = 0");
-        }
-
+        Debug.Log("Update Inventory from stored");        
         ingameUIController.UpdateStats();
 
     }
@@ -61,7 +50,7 @@ public class UIController : MonoBehaviour
     internal void DarkEventComplete()
     {
 
-        if(GameSettings.StoredAction != GameAction.ShowInventory)
+        if(GameSettings.StoredAction == GameAction.HideInventory || GameSettings.StoredAction == GameAction.LoadSelectedLevel)
         {
             GameSettings.IsPaused = false;
         }
@@ -99,7 +88,6 @@ public class UIController : MonoBehaviour
                 levelCreator.ClearLevel();
                 HideAllPanels();   
                 levelComplete.ShowPanel();
-                levelComplete.UpdateStats();
                 break;
              case GameAction.ShowInventory:
                 GameSettings.IsPaused = true;

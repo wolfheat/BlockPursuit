@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject playerHolder;
+    [SerializeField] PlayerLevelsDefinition playerLevelsDefinition;
 
     public void ShowPlayer() => playerHolder.SetActive(true);
     public void HidePlayer() => playerHolder.SetActive(false);
@@ -22,11 +23,10 @@ public class PlayerController : MonoBehaviour
     MovementAction newMovement;
 
     Vector2Int initPosition = new Vector2Int(5,4);
-    //Vector2Int position = new Vector2Int(5,4);
     Vector2Int target = new Vector2Int(5,5);
 
     public Section holdingSection;
-    [SerializeField] GameObject redBox;
+
 
     public Vector2Int Position { get; private set; }
 
@@ -67,25 +67,12 @@ public class PlayerController : MonoBehaviour
     {
         if (GameSettings.IsPaused) return;
 
-        //Debug.Log("PICK UP");
-        //Place red box where looking to pick up
-        //GameObject newRedBox = Instantiate(redBox);
-        //newRedBox.transform.position = transform.position + current.movement + Vector3.forward;
-
+        Debug.Log("PICK UP - IsPaused = "+GameSettings.IsPaused);
+        
         if (levelCreator.heldSection == null)
-        {
-            // check if there is a pickable in front of player
             levelCreator.PickupSectionAt(Position, target, current.rotationIndex);
-        }
         else
-        {
-
-            //Debug.Log("Request placing at " + target+ "with rotation "+rotation);
             levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
-            // Placing
-            // Check if all boxes fit in game in front of player
-            // Place
-        }
     }
 
     private void MoveInput(InputAction.CallbackContext context)

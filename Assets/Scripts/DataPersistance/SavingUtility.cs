@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class SavingUtility : MonoBehaviour
 {
 
-    private const string LocalSaveLovation = "/player-data.json";
+    private const string LocalSaveLocation = "/player-data.json";
     public static SavingUtility Instance { get; set; }
 
-    public Action LoadingComplete;  
+    public static Action LoadingComplete;  
 
     private void Start()
     {
@@ -37,8 +37,8 @@ public class SavingUtility : MonoBehaviour
     public void SaveToFile()
     {
         IDataService dataService = new JsonDataService();
-        if (dataService.SaveData(LocalSaveLovation, GameSettings.PlayerInventory, false))
-            Debug.Log("Saved in: "+LocalSaveLovation);
+        if (dataService.SaveData(LocalSaveLocation, FindObjectOfType<PlayerInventory>(), false))
+            Debug.Log("Saved in: "+LocalSaveLocation);
         else
             Debug.LogError("Could not save file.");
     }
@@ -50,12 +50,14 @@ public class SavingUtility : MonoBehaviour
         IDataService dataService = new JsonDataService();
         try
         {
-            GameSettings.PlayerInventory = dataService.LoadData<PlayerInventory>(LocalSaveLovation, false);
+            FindObjectOfType<PlayerInventory>().DefineInventory(dataService.LoadData<PlayerInventory>(LocalSaveLocation, false));
+
             Debug.Log(" - Loading items from file! - "); 
         }
         catch (Exception e)
         {
             Debug.LogError("Exception: " + e.Message);
+            FindObjectOfType<PlayerInventory>().DefineEmptyDefinition();
         }
         finally
         {

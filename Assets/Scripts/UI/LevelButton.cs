@@ -1,15 +1,24 @@
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public enum DifficultLevel{Easy,Medium,Hard}
 
-public class LevelButton : MonoBehaviour
+public class LevelButton : MonoBehaviour, ISelectHandler
 {
     public int level;
     public DifficultLevel difficulty;
     public TextMeshProUGUI levelIDText;
     public GameObject selectedBorder;
+    public LevelDefinition levelDefinition;
+    public PlayerLevelDefinition playerLevelDefinition;
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        Debug.Log("selecteded a button: "+level);
+        int cost = levelDefinition.unlockRequirements.Count>0? levelDefinition.unlockRequirements[0].amount : 0;
+        FindObjectOfType<InfoScreen>().UpdateInfo(level, (int)difficulty, cost, playerLevelDefinition);
+    }
 
     public void SetLevel(int l)
     {

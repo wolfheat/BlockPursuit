@@ -16,7 +16,7 @@ public class GameSettings : MonoBehaviour
 	public static float LevelStartTime { get; set; }	
 	public static int StepsCounter { get; set; }	
 	public static int MoveCounter { get; set; }	
-	public static PlayerInventory PlayerInventory { get; set; }	
+	//public static PlayerInventory PlayerInventory { get; set; }	
 	public static bool InTransition { get; set; }	
 
 	public static bool UseFast => StoredAction == GameAction.ShowInventory || StoredAction == GameAction.HideInventory;
@@ -40,7 +40,6 @@ public class GameSettings : MonoBehaviour
 		ScreenWidth = ScreenHeight * ((float)Screen.width/ (float)Screen.height);
 		AspectRatio = ScreenWidth/ScreenHeight;
 		GameScale = ScreenHeight/ Screen.height;
-
 		//Inputs.Instance.Controls.MainActionMap.X.performed += _ => CanShoot = !CanShoot;
 	}
 

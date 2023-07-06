@@ -53,16 +53,37 @@ Jun 2023
 		* Limited transitions to only take place one at a time.
 		* Fixed bug where player could move and use tiles when inventory was active. Made sure player cant interact at all while inventory is up
 		* Doubleclicking level wont load more than one level any more
+6/7		* Changed cube tiles to flat quads instead. Fixed borders for all changed colors.
+		* Timer now stop before transition, time for completion more accurate?
+		* Unlock requirements info panel added to level select
+		* Semi done with level loading, need rework
 
-		* Currenlty timer stop after transition, stop at complete?
+		
+		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
+		* Paid player get free gold every 5 min without watching ad.
+
+		* Add "cleared" to level select, locked and unlocked?
+
+		* Make a selected level be still selected after pressing unlock
+			* maybe show separate unlock screen
 
 		TODO:
-		
+		* Port to Android build, make input controls for mobile
+		* Make sure game scales correctly for different mobile resolutions
+		* Implement Ads for gaining coins
+		* Have game features unlocked by gold in shop
+		* Make Shop Screen
+		* Change player to something else than a cube, character etc?
+
+
 		MAYBE:
+		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)
 		
 		ISSUES:
 
 		// - Content -
+		* Have some kind of tutorial?
+		* Figure out theme and color scheme that fits the game
 		* Currently not possible to turn on spot, should it be possible? Decide.
 		* Change Load Screen between scenes to animation or not?
 		
@@ -75,9 +96,7 @@ Jun 2023
 		* Make player gain gold and tiles when completing levels, animation for this?
 		
 		// - UI stuff -
-		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings?)
-		* Make main menu usable by keyboard
-		* Make level select tabs more fansy?
+		* Make level select tabs more fancy?
 		* Make cleared levels show differently in the level select.
 		* Add Start level popup if unlock is needed, show cost, show inventory at the same time? Maybe show this in level select instead. 
 			- Selected menu shows up with more info in a info box under the selection grid

@@ -12,14 +12,18 @@ public class IngameUIController : BasePanel
     InventoryUI inventory;
     TransitionScreen transitionScreen;
 
+    PlayerInventory playerInventory;
+
     private void OnEnable()
     {
         Inputs.Instance.Controls.Main.ESC.performed += RequestInventory;
+        PlayerInventory.InventoryUdate += UpdateStats;
     }
     
     private void OnDisable()
     {
         Inputs.Instance.Controls.Main.ESC.performed -= RequestInventory;
+        PlayerInventory.InventoryUdate -= UpdateStats;
     }
 
     private void RequestInventory(InputAction.CallbackContext context)
@@ -31,18 +35,18 @@ public class IngameUIController : BasePanel
     private void Start()
     {
         inventory = FindObjectOfType<InventoryUI>();
+        playerInventory = FindObjectOfType<PlayerInventory>();
         transitionScreen = FindObjectOfType<TransitionScreen>();
     }
 
     public void UpdateStats()
     {
-        coins.text = GameSettings.PlayerInventory.Coins.ToString();
+        coins.text = playerInventory.Coins.ToString();
 
         //Calculate total Tiles
-        int sum = GameSettings.PlayerInventory.Tiles.Sum(x=>x.Value);
-        tiles.text = sum.ToString();
+        tiles.text = playerInventory.Tiles.ToString();
 
-        level.text = "Level "+(GameSettings.CurrentLevel+1).ToString();
+        level.text = "Level "+((char)(GameSettings.CurrentDifficultLevel+'A'))+"."+(GameSettings.CurrentLevel+1).ToString();
     }
 
 

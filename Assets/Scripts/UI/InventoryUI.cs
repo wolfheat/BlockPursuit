@@ -7,9 +7,16 @@ using UnityEngine.UI;
 
 public class InventoryUI : BasePanel
 {
-    [SerializeField] List<TextMeshProUGUI> inventoryTilesTexts = new List<TextMeshProUGUI>();
+    [SerializeField] TextMeshProUGUI inventoryTilesText;
 
     [SerializeField] Button mainSelectedButton;
+
+    private PlayerInventory playerInventory;
+
+    private void Awake()
+    {
+        playerInventory = FindObjectOfType<PlayerInventory>();
+    }
 
     public void SetSelected()
     {
@@ -18,8 +25,7 @@ public class InventoryUI : BasePanel
 
     public void UpdateInventoryUI()
     {
-        for (int i = 0; i < GameSettings.PlayerInventory.Tiles.Count; i++)
-            inventoryTilesTexts[i].text = GameSettings.PlayerInventory.Tiles[i].ToString();
+        inventoryTilesText.text = playerInventory.Tiles.ToString();
     }
     public void CloseInventoryRequest()
     {

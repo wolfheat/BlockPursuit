@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelDefinition", menuName = "New Level")]
 public class LevelDefinition : ScriptableObject
 {
     public string levelName;
+    public int levelID;
+    public bool unlocked = false;
 
     // Generated
     public Vector2Int playerStart;
@@ -17,6 +20,7 @@ public class LevelDefinition : ScriptableObject
 
     public void SetLevelDefinition(string v, List<TilePlacementDefinition> s, List<Vector2Int> g, Vector2Int startPos)
     {
+        levelID = GetInstanceID();
         levelName = v;
         tiles = s;
         goals = g;

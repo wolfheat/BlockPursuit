@@ -14,6 +14,7 @@ public struct TileTypeRequirement
     public int amount;
 }
 
+
 public class LevelCreator : MonoBehaviour
 {
     private UIController UI;
@@ -32,14 +33,9 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] GameObject bucketPrefab;
 
     [SerializeField] List<Section> sectionPrefabs = new List<Section>();
-    
-    
-    public List<LevelDefinition> levelsEasy = new List<LevelDefinition>();
-    public List<LevelDefinition> levelsMedium = new List<LevelDefinition>();
-    public List<LevelDefinition> levelsHard = new List<LevelDefinition>();
 
-    private List<LevelDefinition>[] levels;
-
+    LevelComplete levelComplete;
+    
 
     public Section paintSection;
     public Section heldSection;
@@ -59,8 +55,8 @@ public class LevelCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levels = new List<LevelDefinition>[3] {levelsEasy,levelsMedium,levelsHard };
         TileLevel = new GameTile[LevelWidth, LevelHeight,2];
+        levelComplete = FindObjectOfType<LevelComplete>();
         UI = FindObjectOfType<UIController>();
     }
     
@@ -113,7 +109,7 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadNextLevel()
     {
-        if (GameSettings.CurrentLevel >= levelsEasy.Count) return;
+        if (GameSettings.CurrentLevel >= Levels.LevelDefinitions[GameSettings.CurrentDifficultLevel].Count) return;
 
         GameSettings.CurrentLevel++;
         
@@ -127,11 +123,11 @@ public class LevelCreator : MonoBehaviour
 
     public void LoadLevelByDefinition(int level, int diff)
     {
-        if (level >= levels[diff].Count) return;
+        if (level >= Levels.LevelDefinitions[diff].Count) return;
 
         if (!haveWalls) CreateWalls();
 
-        LevelDefinition levelToLoad = levels[diff][level];
+        LevelDefinition levelToLoad = Levels.LevelDefinitions[diff][level];
 
         ClearLevel();
         LoadLevelDefinition(levelToLoad);
@@ -345,6 +341,7 @@ public class LevelCreator : MonoBehaviour
         {
             FindObjectOfType<PlayerController>().HidePlayer();
             GameSettings.IsPaused = true;
+            levelComplete.UpdateStats();
 
             //Next level
             GameSettings.StoredAction = GameAction.ShowLevelComplete;
