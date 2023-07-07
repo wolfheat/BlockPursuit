@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Medium11
   m_EditorClassIdentifier: 
   levelName: Level
+  levelID: -211
+  unlocked: 0
   playerStart: {x: 9, y: 8}
   tiles:
   - type: 5

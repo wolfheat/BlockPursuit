@@ -57,14 +57,16 @@ Jun 2023
 		* Timer now stop before transition, time for completion more accurate?
 		* Unlock requirements info panel added to level select
 		* Semi done with level loading, need rework
+7/7		* Updated loading system
+		* Players best time, moves and steps are now stored and shown on level select
+		* ESC now take player to level select from level complete and to main menu from level select
 
-		
-		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
-		* Paid player get free gold every 5 min without watching ad.
+
 
 		* Add "cleared" to level select, locked and unlocked?
 
-		* Make a selected level be still selected after pressing unlock
+		* Make correct level be selected when returning to level select
+		* Make a selected level be still selected after pressing unlock, 
 			* maybe show separate unlock screen
 
 		TODO:
@@ -75,6 +77,9 @@ Jun 2023
 		* Make Shop Screen
 		* Change player to something else than a cube, character etc?
 
+		ADS:
+		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
+		* Paid player get free gold every 5 min without watching ad.
 
 		MAYBE:
 		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)

@@ -31,10 +31,15 @@ public class UIController : MonoBehaviour
         startMenu.ShowPanel();
     }
 
+    internal void UpdateIngameLevelShown()
+    {
+        ingameUIController.UpdateLevel();
+    }
+    
     internal void UpdateInventoryFromStored()
     {
         Debug.Log("Update Inventory from stored");        
-        ingameUIController.UpdateStats();
+        ingameUIController.UpdateInventory();
 
     }
 
@@ -113,6 +118,6 @@ public class UIController : MonoBehaviour
 
     internal void UpdateStats()
     {
-        ingameUIController.UpdateStats();
+        ingameUIController.UpdateInventory();
     }
 }

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Easy3
   m_EditorClassIdentifier: 
   levelName: Easy3
+  levelID: -103
+  unlocked: 1
   playerStart: {x: 7, y: 8}
   tiles:
   - type: 0

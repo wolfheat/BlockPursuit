@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Hard1
   m_EditorClassIdentifier: 
   levelName: Hard1
+  levelID: -301
+  unlocked: 0
   playerStart: {x: 6, y: 10}
   tiles:
   - type: 5

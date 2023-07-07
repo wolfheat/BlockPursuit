@@ -10,6 +10,8 @@ public class LevelDefinition : ScriptableObject
     public string levelName;
     public int levelID;
     public bool unlocked = false;
+    public int LevelDiff { get; private set;}
+    public int LevelIndex { get; private set;}
 
     // Generated
     public Vector2Int playerStart;
@@ -18,6 +20,7 @@ public class LevelDefinition : ScriptableObject
 
     public List<TileTypeRequirement> unlockRequirements;
 
+
     public void SetLevelDefinition(string v, List<TilePlacementDefinition> s, List<Vector2Int> g, Vector2Int startPos)
     {
         levelID = GetInstanceID();
@@ -25,5 +28,10 @@ public class LevelDefinition : ScriptableObject
         tiles = s;
         goals = g;
         playerStart = startPos;
+    }
+    public void SetLevelIndex(int diff, int index)
+    {
+        LevelDiff = diff;
+        LevelIndex = index;
     }
 }

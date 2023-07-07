@@ -14,6 +14,8 @@ public class LevelComplete : BasePanel
     [SerializeField] TextMeshProUGUI stepsText;
 
     [SerializeField] Button mainSelectedButton;
+
+    LevelSelect levelSelect;
     private void OnEnable()
     {
         Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
@@ -28,6 +30,7 @@ public class LevelComplete : BasePanel
     {
         //Select first Button
         //buttons[selectedButton].Select();
+        levelSelect = FindObjectOfType<LevelSelect>();
         SetSelected();
     }
 
@@ -35,7 +38,7 @@ public class LevelComplete : BasePanel
     {
         if (!Enabled()) return;
         Debug.Log("ESC from menu");
-        
+        SelectLevelClicked();
     }
 
     public void SetSelected()
@@ -73,11 +76,23 @@ public class LevelComplete : BasePanel
 
 
         timeText.text = timeString;
-        movesText.text = GameSettings.MoveCounter.ToString();
-        stepsText.text = GameSettings.StepsCounter.ToString();
-        
+        int moves = GameSettings.MoveCounter;
+        movesText.text = moves.ToString();
+        int steps = GameSettings.StepsCounter;
+        stepsText.text = steps.ToString();
+        LevelDefinition current = GameSettings.CurrentLevelDefinition;
+
+
         //FIX
-        levelText.text = (GameSettings.CurrentLevel+1).ToString();
+        levelText.text = "Level " + StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
+
+        PlayerLevelData levelData = new PlayerLevelData(current.levelID, steps, moves, timeTaken);
+
+        //Add Data into SaveFile
+        PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddOrUpdateLevel(levelData);
+
+        // Update Button info as well
+        levelSelect.UpdateButtonPlayerLevelData(bestLevelData);
 
         SetSelected();
     }

@@ -11,13 +11,6 @@ public class InventoryUI : BasePanel
 
     [SerializeField] Button mainSelectedButton;
 
-    private PlayerInventory playerInventory;
-
-    private void Awake()
-    {
-        playerInventory = FindObjectOfType<PlayerInventory>();
-    }
-
     public void SetSelected()
     {
         EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);
@@ -25,7 +18,7 @@ public class InventoryUI : BasePanel
 
     public void UpdateInventoryUI()
     {
-        inventoryTilesText.text = playerInventory.Tiles.ToString();
+        inventoryTilesText.text = SavingUtility.playerGameData.Tiles.ToString();
     }
     public void CloseInventoryRequest()
     {

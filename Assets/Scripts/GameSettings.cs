@@ -13,10 +13,10 @@ public class GameSettings : MonoBehaviour
 	// USED
 	public static bool UseMusic { get; private set; } = true;
 	public static GameAction StoredAction { get; set; } = GameAction.none;	
+	public static LevelDefinition CurrentLevelDefinition { get; set; }	
 	public static float LevelStartTime { get; set; }	
 	public static int StepsCounter { get; set; }	
 	public static int MoveCounter { get; set; }	
-	//public static PlayerInventory PlayerInventory { get; set; }	
 	public static bool InTransition { get; set; }	
 
 	public static bool UseFast => StoredAction == GameAction.ShowInventory || StoredAction == GameAction.HideInventory;

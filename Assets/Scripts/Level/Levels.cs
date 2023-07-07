@@ -13,7 +13,18 @@ public class Levels : MonoBehaviour
     private void Awake()
     {
         LevelDefinitions = new List<LevelDefinition>[3] { levelsEasy, levelsMedium, levelsHard };
+
+        DefineLevelIndexes();
     }
 
-
+    private void DefineLevelIndexes()
+    {
+        for (int i = 0; i < LevelDefinitions.Length; i++)
+        {
+            for(int j = 0; j< LevelDefinitions[i].Count; j++)
+            {
+                LevelDefinitions[i][j].SetLevelIndex(i,j);
+            }
+        }
+    }
 }

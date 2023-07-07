@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Easy11 (Kinda Medium)
   m_EditorClassIdentifier: 
   levelName: Level
+  levelID: -111
+  unlocked: 0
   playerStart: {x: 10, y: 8}
   tiles:
   - type: 0

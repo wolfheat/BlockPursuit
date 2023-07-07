@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -12,18 +13,16 @@ public class IngameUIController : BasePanel
     InventoryUI inventory;
     TransitionScreen transitionScreen;
 
-    PlayerInventory playerInventory;
-
     private void OnEnable()
     {
         Inputs.Instance.Controls.Main.ESC.performed += RequestInventory;
-        PlayerInventory.InventoryUdate += UpdateStats;
+        PlayerGameData.InventoryUpdate += UpdateInventory;
     }
     
     private void OnDisable()
     {
         Inputs.Instance.Controls.Main.ESC.performed -= RequestInventory;
-        PlayerInventory.InventoryUdate -= UpdateStats;
+        PlayerGameData.InventoryUpdate -= UpdateInventory;
     }
 
     private void RequestInventory(InputAction.CallbackContext context)
@@ -35,20 +34,19 @@ public class IngameUIController : BasePanel
     private void Start()
     {
         inventory = FindObjectOfType<InventoryUI>();
-        playerInventory = FindObjectOfType<PlayerInventory>();
         transitionScreen = FindObjectOfType<TransitionScreen>();
     }
 
-    public void UpdateStats()
+    public void UpdateLevel()
     {
-        coins.text = playerInventory.Coins.ToString();
-
-        //Calculate total Tiles
-        tiles.text = playerInventory.Tiles.ToString();
-
-        level.text = "Level "+((char)(GameSettings.CurrentDifficultLevel+'A'))+"."+(GameSettings.CurrentLevel+1).ToString();
+        level.text = "Level "+StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
     }
 
+    public void UpdateInventory()
+    {
+        coins.text = SavingUtility.playerGameData.Coins.ToString();
+        tiles.text = SavingUtility.playerGameData.Tiles.ToString();        
+    }
 
     public void RestartLevelRequest()
     {

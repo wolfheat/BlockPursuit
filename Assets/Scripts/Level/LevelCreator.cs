@@ -80,6 +80,7 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadPrevLevel()
     {
+        /*
         GameSettings.CurrentLevel--;
         if (GameSettings.CurrentLevel < 0) GameSettings.CurrentLevel = 0;
 
@@ -89,6 +90,7 @@ public class LevelCreator : MonoBehaviour
         GameSettings.CurrentGameState = GameState.RunGame;
         FindObjectOfType<PlayerController>().ShowPlayer();
         UI.UpdateStats();
+        */
     }
     
     public void RestartLevel()
@@ -99,7 +101,7 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadSelectedLevel()
     {   
-        LoadLevelByDefinition(GameSettings.CurrentLevel,GameSettings.CurrentDifficultLevel);
+        LoadLevelByDefinition(GameSettings.CurrentLevelDefinition);
 
         GameSettings.IsPaused = false;
         GameSettings.CurrentGameState = GameState.RunGame;
@@ -109,6 +111,7 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadNextLevel()
     {
+        /*
         if (GameSettings.CurrentLevel >= Levels.LevelDefinitions[GameSettings.CurrentDifficultLevel].Count) return;
 
         GameSettings.CurrentLevel++;
@@ -119,18 +122,15 @@ public class LevelCreator : MonoBehaviour
         GameSettings.CurrentGameState = GameState.RunGame;
         FindObjectOfType<PlayerController>().ShowPlayer();
         UI.UpdateStats();
+        */
     }
 
-    public void LoadLevelByDefinition(int level, int diff)
+    public void LoadLevelByDefinition(LevelDefinition level)
     {
-        if (level >= Levels.LevelDefinitions[diff].Count) return;
-
         if (!haveWalls) CreateWalls();
 
-        LevelDefinition levelToLoad = Levels.LevelDefinitions[diff][level];
-
         ClearLevel();
-        LoadLevelDefinition(levelToLoad);
+        LoadLevelDefinition(level);
 
     }
 

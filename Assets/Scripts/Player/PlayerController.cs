@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject playerHolder;
-    [SerializeField] PlayerLevelsDefinition playerLevelsDefinition;
+    [SerializeField] PlayerLevelDataList playerLevelsDefinition;
 
     public void ShowPlayer() => playerHolder.SetActive(true);
     public void HidePlayer() => playerHolder.SetActive(false);
