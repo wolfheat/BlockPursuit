@@ -60,7 +60,7 @@ Jun 2023
 7/7		* Updated loading system
 		* Players best time, moves and steps are now stored and shown on level select
 		* ESC now take player to level select from level complete and to main menu from level select
-
+		* Fixed up loading system and unlocking levels
 
 
 		* Add "cleared" to level select, locked and unlocked?

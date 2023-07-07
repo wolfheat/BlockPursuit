@@ -15,11 +15,8 @@ public class LevelButton : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        int cost = 0;
-        if(levelDefinition!= null)
-            cost = levelDefinition.unlockRequirements.Count>0? levelDefinition.unlockRequirements[0].amount : 0;
         Debug.Log("Selecting level button, updating playerdata.time to "+playerLevelData.bestTime);
-        FindObjectOfType<InfoScreen>().UpdateInfo(level, (int)difficulty, cost, levelDefinition, playerLevelData);
+        FindObjectOfType<InfoScreen>().UpdateInfo(this);
     }
 
     public void SetLevel(int l)

@@ -2533,9 +2533,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 819952016}
-        m_TargetAssemblyTypeName: LevelSelect, Assembly-CSharp
-        m_MethodName: UnlockActiveLevel
+      - m_Target: {fileID: 1957501902}
+        m_TargetAssemblyTypeName: InfoScreen, Assembly-CSharp
+        m_MethodName: UnLock
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

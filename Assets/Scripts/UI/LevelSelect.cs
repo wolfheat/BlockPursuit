@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -63,8 +64,6 @@ public class LevelSelect : BasePanel
 
     public void UpdateButtonPlayerLevelData(PlayerLevelData data)
     {
-        //Debug.Log("Updating player data for button ("+GameSettings.CurrentDifficultLevel+","+GameSettings.CurrentLevel+")");   
-        Debug.Log("LevelData level index = ("+GameSettings.CurrentLevelDefinition.LevelDiff+","+ GameSettings.CurrentLevelDefinition.LevelIndex + ")");   
         //Find button
         LevelButton buttonToUpdate = buttonLists[GameSettings.CurrentLevelDefinition.LevelDiff][GameSettings.CurrentLevelDefinition.LevelIndex];
         buttonToUpdate.playerLevelData = data;
@@ -73,48 +72,30 @@ public class LevelSelect : BasePanel
     private void GenerateButtonLevels()
     {
         Debug.Log("Generating Button Levels");
-        for (int i = 0; i < Levels.LevelDefinitions[0].Count; i++)
+
+        for (int i = 0; i < 3; i++)
         {
-            LevelButton newButton = Instantiate(levelButtonPrefab, levelEasyButtonHolder.transform);
-            newButton.SetLevel(i);
-            newButton.difficulty = DifficultLevel.Easy;
-            newButton.levelDefinition = Levels.LevelDefinitions[0][i];
+            for (int j = 0; j < Levels.LevelDefinitions[i].Count; j++)
+            {
+                //Reset all buttons to locked by default
+                Levels.LevelDefinitions[i][j].unlocked = false;
 
-            PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
-            if(levelDef.levelID != -1)
-                newButton.playerLevelData = levelDef;
+                LevelButton newButton = Instantiate(levelButtonPrefab, levelButtonHolders[i].transform);
+                newButton.SetLevel(j);
+                newButton.difficulty = DifficultLevel.Easy;
+                newButton.levelDefinition = Levels.LevelDefinitions[i][j];
 
-            easybuttonList.Add(newButton);
+                PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
+                if (levelDef.levelID != -1)
+                {
+                    newButton.playerLevelData = levelDef;
+                    Levels.LevelDefinitions[i][j].unlocked = true;
+                }
+
+                buttonLists[i].Add(newButton);
+            }
+            if(i>0) levelButtonHolders[i].gameObject.SetActive(false);
         }
-        for (int i = 0; i < Levels.LevelDefinitions[1].Count; i++)
-        {
-            LevelButton newButton = Instantiate(mediumLevelButtonPrefab, levelMediumButtonHolder.transform);
-            newButton.SetLevel(i);
-            newButton.difficulty = DifficultLevel.Medium;
-            newButton.levelDefinition = Levels.LevelDefinitions[1][i];
-
-            PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
-            if (levelDef.levelID != -1)
-                newButton.playerLevelData = levelDef;
-
-            mediumButtonList.Add(newButton);
-        }
-        for (int i = 0; i < Levels.LevelDefinitions[2].Count; i++)
-        {
-            LevelButton newButton = Instantiate(HardLevelButtonPrefab, levelHardButtonHolder.transform);
-            newButton.SetLevel(i);
-            newButton.difficulty = DifficultLevel.Hard;
-            newButton.levelDefinition = Levels.LevelDefinitions[2][i];
-
-            PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
-            if (levelDef.levelID != -1)
-                newButton.playerLevelData = levelDef;
-
-            HardButtonList.Add(newButton);
-        }
-        levelMediumButtonHolder.gameObject.SetActive(false);
-        levelHardButtonHolder.gameObject.SetActive(false);
-
     }
 
     public void SetSelected()   
@@ -133,7 +114,7 @@ public class LevelSelect : BasePanel
         }
 
         // Update Level Info
-        infoScreen.UpdateInfo(LevelID,LevelDiff,unlockCost, buttonLists[activeTab][selectedLevel].levelDefinition, buttonLists[activeTab][selectedLevel].playerLevelData);
+        infoScreen.UpdateInfo(buttonLists[activeTab][selectedLevel]);
     }
 
 
@@ -182,6 +163,5 @@ public class LevelSelect : BasePanel
         selectedLevel = 0;
         SetSelected();
     }
-
 
 }

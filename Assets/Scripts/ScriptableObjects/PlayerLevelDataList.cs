@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public struct PlayerLevelData
@@ -17,8 +14,14 @@ public struct PlayerLevelData
         bestMoves = move;
         bestTime = time;
     }
+    public PlayerLevelData(int ID)
+    {
+        levelID = ID;
+        bestSteps = -1;
+        bestMoves = -1;
+        bestTime = -1;
+    }
 }
-
 
 //[CreateAssetMenu(fileName = "PlayerLevelsDefinition", menuName = "New Player LevelDefinition")]
 public class PlayerLevelDataList
@@ -30,6 +33,23 @@ public class PlayerLevelDataList
         LevelsList = new List<PlayerLevelData>();
     }
 
+    public PlayerLevelData AddNewLevel(int ID)
+    {
+        Debug.Log("Adding new Level data to save file");
+
+        if (LevelExists(ID,out int index))
+        {
+            Debug.LogWarning("Should not exist allready");
+            return LevelsList[index];
+        }
+        else
+        {
+            PlayerLevelData data = new PlayerLevelData(ID);
+            LevelsList.Add(data);
+            return data;
+        }
+    }
+    
     public PlayerLevelData AddOrUpdateLevel(PlayerLevelData data)
     {
         Debug.Log("Adding Level completion data to save file");
@@ -38,11 +58,11 @@ public class PlayerLevelDataList
         {
             PlayerLevelData foundLevel = LevelsList[index];
             //Update existing
-            if (data.bestTime < foundLevel.bestTime)
+            if (foundLevel.bestTime == -1 || data.bestTime < foundLevel.bestTime)
                 foundLevel.bestTime = data.bestTime;
-            if (data.bestMoves < foundLevel.bestMoves)
+            if (foundLevel.bestMoves == -1 || data.bestMoves < foundLevel.bestMoves)
                 foundLevel.bestMoves = data.bestMoves;
-            if (data.bestSteps < foundLevel.bestSteps)
+            if (foundLevel.bestSteps == -1 || data.bestSteps < foundLevel.bestSteps)
                 foundLevel.bestSteps = data.bestSteps;
 
             // Place the modified level into the list
@@ -85,7 +105,7 @@ public class PlayerLevelDataList
                 return lvl;
             }
         }
-        Debug.Log("Did not find Level definition for "+id);
+        //Debug.Log("Did not find Level definition for "+id);
         return new PlayerLevelData() { levelID = -1};
     }
 }
