@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60e2d3639fde9b545b681ba4f6c6c1a3, type: 3}
-  m_Name: Medium8
+  m_Name: Medium8OLD
   m_EditorClassIdentifier: 
   levelName: Level
   levelID: -208
   unlocked: 0
-  playerStart: {x: 8, y: 7}
+  playerStart: {x: 9, y: 8}
   tiles:
-  - type: 5
-    position: {x: 10, y: 3}
-    rotation: 1
-  - type: 5
-    position: {x: 7, y: 3}
-    rotation: 1
   - type: 1
-    position: {x: 6, y: 5}
-    rotation: 1
+    position: {x: 6, y: 8}
+    rotation: 0
   - type: 4
-    position: {x: 9, y: 5}
-    rotation: 1
+    position: {x: 6, y: 6}
+    rotation: 0
+  - type: 5
+    position: {x: 8, y: 6}
+    rotation: 0
   - type: 1
-    position: {x: 11, y: 7}
+    position: {x: 10, y: 8}
     rotation: 3
+  - type: 3
+    position: {x: 11, y: 5}
+    rotation: 1
   goals:
   - {x: 11, y: 10}
   - {x: 10, y: 10}

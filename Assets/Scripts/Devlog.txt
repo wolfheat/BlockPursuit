@@ -65,6 +65,7 @@ Jun 2023
 		* Added screen for paying lock up fee
 
 
+		* Have resultscreen show new best for new records
 
 		* Have selected tab show more clearly, lower contrast of unselected?
 		* Change selected color from dark red to something else?

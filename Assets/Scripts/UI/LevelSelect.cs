@@ -167,6 +167,9 @@ public class LevelSelect : BasePanel
         levelButtonHolders[tabID].SetActive(true);
         activeTab = tabID;
         selectedLevel = 0;
+
+        // Change to first not cleared? 
+        selectedButton = buttonLists[tabID][0];
         SetSelected();
     }
 
