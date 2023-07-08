@@ -61,11 +61,19 @@ Jun 2023
 		* Players best time, moves and steps are now stored and shown on level select
 		* ESC now take player to level select from level complete and to main menu from level select
 		* Fixed up loading system and unlocking levels
+8/7		* Added checkmark for completed levels and lock for unlocked levels
+		* Added screen for paying lock up fee
+
+
+
+		* Have selected tab show more clearly, lower contrast of unselected?
+		* Change selected color from dark red to something else?
 
 
 		* Add "cleared" to level select, locked and unlocked?
 
 		* Make correct level be selected when returning to level select
+
 		* Make a selected level be still selected after pressing unlock, 
 			* maybe show separate unlock screen
 

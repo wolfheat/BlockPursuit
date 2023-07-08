@@ -12,17 +12,29 @@ public class LevelButton : MonoBehaviour, ISelectHandler
     public GameObject selectedBorder;
     public LevelDefinition levelDefinition;
     public PlayerLevelData playerLevelData;
+    [SerializeField] GameObject checkmark;
+    [SerializeField] GameObject lockObject;
 
     public void OnSelect(BaseEventData eventData)
     {
         Debug.Log("Selecting level button, updating playerdata.time to "+playerLevelData.bestTime);
-        FindObjectOfType<InfoScreen>().UpdateInfo(this);
+        FindObjectOfType<LevelSelect>().UpdateLatestSelectedInfo(this);
     }
 
     public void SetLevel(int l)
     {
         level = l;
         levelIDText.text = (l+1).ToString();
+    }
+    
+    public void ShowCheckmark()
+    {
+        checkmark.SetActive(true);
+    }
+    
+    public void Unlock()
+    {
+        lockObject.SetActive(false);
     }
 
     public void RequestStartLevel()

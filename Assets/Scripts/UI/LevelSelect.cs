@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,16 +13,16 @@ public class LevelSelect : BasePanel
     private GameObject[] levelButtonHolders;
     private List<LevelButton>[] buttonLists;
 
-    [SerializeField] LevelButton levelButtonPrefab;
-    [SerializeField] LevelButton mediumLevelButtonPrefab;
-    [SerializeField] LevelButton HardLevelButtonPrefab;
+    [SerializeField] private LevelButton[] LevelButtonPrefabs;
 
     [SerializeField] UIController UIController;
     [SerializeField] LevelCreator levelCreator;
+    [SerializeField] UnlockScreen unlockScreen;
     [SerializeField] InfoScreen infoScreen;
 
     private int selectedLevel = 0;
     private int activeTab = 0;
+    private LevelButton selectedButton;
 
     private SavingUtility savingUtility;
 
@@ -34,6 +35,7 @@ public class LevelSelect : BasePanel
     {
         levelButtonHolders = new GameObject[3] { levelEasyButtonHolder,levelMediumButtonHolder,levelHardButtonHolder};
         buttonLists = new List<LevelButton>[3] { easybuttonList, mediumButtonList, HardButtonList };
+        //LevelButtonPrefabs = new LevelButton[3] { levelButtonPrefab, mediumLevelButtonPrefab, hardLevelButtonPrefab };
         //GenerateButtonLevels();
     }
 
@@ -60,6 +62,7 @@ public class LevelSelect : BasePanel
     {
         Debug.Log("Loaded transmitted");
         GenerateButtonLevels();
+        selectedButton = buttonLists[0][0];
     }
 
     public void UpdateButtonPlayerLevelData(PlayerLevelData data)
@@ -67,22 +70,23 @@ public class LevelSelect : BasePanel
         //Find button
         LevelButton buttonToUpdate = buttonLists[GameSettings.CurrentLevelDefinition.LevelDiff][GameSettings.CurrentLevelDefinition.LevelIndex];
         buttonToUpdate.playerLevelData = data;
+        buttonToUpdate.ShowCheckmark();
     }
 
     private void GenerateButtonLevels()
     {
         Debug.Log("Generating Button Levels");
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < Levels.LevelDefinitions.Length; i++)
         {
             for (int j = 0; j < Levels.LevelDefinitions[i].Count; j++)
             {
                 //Reset all buttons to locked by default
                 Levels.LevelDefinitions[i][j].unlocked = false;
 
-                LevelButton newButton = Instantiate(levelButtonPrefab, levelButtonHolders[i].transform);
+                LevelButton newButton = Instantiate(LevelButtonPrefabs[i], levelButtonHolders[i].transform);
                 newButton.SetLevel(j);
-                newButton.difficulty = DifficultLevel.Easy;
+                newButton.difficulty = (DifficultLevel)i;
                 newButton.levelDefinition = Levels.LevelDefinitions[i][j];
 
                 PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
@@ -90,6 +94,10 @@ public class LevelSelect : BasePanel
                 {
                     newButton.playerLevelData = levelDef;
                     Levels.LevelDefinitions[i][j].unlocked = true;
+
+                    newButton.Unlock();
+                    if (levelDef.bestTime != -1)
+                        newButton.ShowCheckmark();
                 }
 
                 buttonLists[i].Add(newButton);
@@ -98,23 +106,18 @@ public class LevelSelect : BasePanel
         }
     }
 
+    public void UpdateLatestSelectedInfo(LevelButton button)
+    {
+        selectedButton = button;
+        infoScreen.UpdateInfo(button);
+    }
+
     public void SetSelected()   
     {
-        Debug.Log("Select Level: "+ selectedLevel+" of type "+activeTab);
-        Debug.Log("Buttons: "+ buttonLists[activeTab].Count);
-        EventSystem.current.SetSelectedGameObject(buttonLists[activeTab][selectedLevel].gameObject);
-
-        int LevelID = buttonLists[activeTab][selectedLevel].level;
-        int LevelDiff = (int)buttonLists[activeTab][selectedLevel].difficulty;
-        int unlockCost = 0;
-        if(buttonLists[activeTab][selectedLevel].levelDefinition.unlockRequirements.Count > 0)
-        {
-            LevelDefinition definition = buttonLists[activeTab][selectedLevel].levelDefinition;
-            unlockCost = definition.unlockRequirements[0].amount;
-        }
+        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
 
         // Update Level Info
-        infoScreen.UpdateInfo(buttonLists[activeTab][selectedLevel]);
+        infoScreen.UpdateInfo(selectedButton);
     }
 
 
@@ -139,8 +142,11 @@ public class LevelSelect : BasePanel
     public void RequestStartSelectedLevel(LevelDefinition level)
     {
         Debug.Log("Request start selected level");
-        if (level?.unlockRequirements?.Count > 0) {
+        if (!level.unlocked && level?.unlockRequirements?.Count > 0) {
             Debug.Log("Level Has unlock requirement = " + level.unlockRequirements[0].amount+" tiles");
+            unlockScreen.SetInfo(level);
+            unlockScreen.ShowPanel();
+            HidePanel();
             return;
         }
         GameSettings.CurrentLevelDefinition = level;
@@ -164,4 +170,8 @@ public class LevelSelect : BasePanel
         SetSelected();
     }
 
+    internal void Unlock()
+    {
+       infoScreen.UnLock();
+    }
 }

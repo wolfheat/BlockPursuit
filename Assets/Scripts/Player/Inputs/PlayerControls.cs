@@ -116,6 +116,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Plus"",
+                    ""type"": ""Button"",
+                    ""id"": ""6eacadc8-0ead-459d-a7d4-a267bdd758f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -314,6 +323,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TAB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1431e22-5319-40ca-98ce-c13942d828f6"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Plus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -861,6 +881,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Main_LCtrl = m_Main.FindAction("LCtrl", throwIfNotFound: true);
         m_Main_ESC = m_Main.FindAction("ESC", throwIfNotFound: true);
         m_Main_TAB = m_Main.FindAction("TAB", throwIfNotFound: true);
+        m_Main_Plus = m_Main.FindAction("Plus", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
@@ -944,6 +965,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_LCtrl;
     private readonly InputAction m_Main_ESC;
     private readonly InputAction m_Main_TAB;
+    private readonly InputAction m_Main_Plus;
     public struct MainActions
     {
         private @PlayerControls m_Wrapper;
@@ -958,6 +980,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LCtrl => m_Wrapper.m_Main_LCtrl;
         public InputAction @ESC => m_Wrapper.m_Main_ESC;
         public InputAction @TAB => m_Wrapper.m_Main_TAB;
+        public InputAction @Plus => m_Wrapper.m_Main_Plus;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -997,6 +1020,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @TAB.started += instance.OnTAB;
             @TAB.performed += instance.OnTAB;
             @TAB.canceled += instance.OnTAB;
+            @Plus.started += instance.OnPlus;
+            @Plus.performed += instance.OnPlus;
+            @Plus.canceled += instance.OnPlus;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -1031,6 +1057,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @TAB.started -= instance.OnTAB;
             @TAB.performed -= instance.OnTAB;
             @TAB.canceled -= instance.OnTAB;
+            @Plus.started -= instance.OnPlus;
+            @Plus.performed -= instance.OnPlus;
+            @Plus.canceled -= instance.OnPlus;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -1178,6 +1207,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLCtrl(InputAction.CallbackContext context);
         void OnESC(InputAction.CallbackContext context);
         void OnTAB(InputAction.CallbackContext context);
+        void OnPlus(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

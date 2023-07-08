@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIController : MonoBehaviour
 {
@@ -17,12 +18,14 @@ public class UIController : MonoBehaviour
         transitionScreen.GameDarkEvent += DoStoredAction;
         transitionScreen.GameDarkEventComplete += DarkEventComplete;
         SavingUtility.LoadingComplete += UpdateInventoryFromStored;        
+        Inputs.Instance.Controls.Main.Plus.performed += AddTiles;        
     }
     private void OnDisable()
     {
         transitionScreen.GameDarkEvent -= DoStoredAction;
         transitionScreen.GameDarkEventComplete -= DarkEventComplete;
         SavingUtility.LoadingComplete -= UpdateInventoryFromStored;        
+        Inputs.Instance.Controls.Main.Plus.performed -= AddTiles;        
     }
 
     private void Start()
@@ -36,6 +39,12 @@ public class UIController : MonoBehaviour
         ingameUIController.UpdateLevel();
     }
     
+    internal void AddTiles(InputAction.CallbackContext context)
+    {
+        Debug.Log("Adding tile to player");
+        SavingUtility.playerGameData.AddTiles(1);
+
+    }
     internal void UpdateInventoryFromStored()
     {
         Debug.Log("Update Inventory from stored");        
