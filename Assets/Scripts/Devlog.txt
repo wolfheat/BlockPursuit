@@ -63,9 +63,11 @@ Jun 2023
 		* Fixed up loading system and unlocking levels
 8/7		* Added checkmark for completed levels and lock for unlocked levels
 		* Added screen for paying lock up fee
+9/7		* Added Personal Best text for result screen
+		* Added text showing improvement for personal best
+		* Made first uncleared level select by default on level select
 
 
-		* Have resultscreen show new best for new records
 
 		* Have selected tab show more clearly, lower contrast of unselected?
 		* Change selected color from dark red to something else?

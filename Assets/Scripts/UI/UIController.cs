@@ -96,7 +96,7 @@ public class UIController : MonoBehaviour
             case GameAction.ShowLevelSelect:
                 HideAllPanels();   
                 levelSelect.ShowPanel();
-                levelSelect.SetSelected();
+                levelSelect.SetSelectedLevelToDefaultForActiveTab();
                 break;
             case GameAction.ShowLevelComplete:
                 levelCreator.ClearLevel();

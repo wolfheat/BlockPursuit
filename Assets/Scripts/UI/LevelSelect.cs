@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
+
 public class LevelSelect : BasePanel
 {
     [SerializeField] GameObject levelEasyButtonHolder;
@@ -23,6 +25,7 @@ public class LevelSelect : BasePanel
     private int selectedLevel = 0;
     private int activeTab = 0;
     private LevelButton selectedButton;
+    [SerializeField] private TierButton[] tierButtons;
 
     private SavingUtility savingUtility;
 
@@ -156,9 +159,17 @@ public class LevelSelect : BasePanel
         UIController.StartTransition();
     }
     
-    public void RequestShowTab(int tabID)
+    public void RequestShowTab(TierButton tierButton)
     {
-        Debug.Log("Request show tab "+tabID);
+        SwitchToTab(tierButton);
+
+        SetSelected();
+    }
+
+    private void SwitchToTab(TierButton tierButton)
+    {
+        int tabID = tierButton.ID;// tierButton.ID;
+        Debug.Log("Request show tab " + tabID);
 
         //Disable current Tab
         levelButtonHolders[activeTab].SetActive(false);
@@ -166,11 +177,53 @@ public class LevelSelect : BasePanel
         //Enable requested tab
         levelButtonHolders[tabID].SetActive(true);
         activeTab = tabID;
-        selectedLevel = 0;
 
-        // Change to first not cleared? 
-        selectedButton = buttonLists[tabID][0];
+        SetSelectedLevelToDefaultForActiveTab();
+        
+
+        HighLightCorrectTierButtons(tierButton);
+
+    }
+
+    public void SetSelectedLevelToDefaultForActiveTab()
+    {
+        selectedLevel = FindDefaultLevelToSelectForTab(activeTab);
+
+        selectedButton = buttonLists[activeTab][selectedLevel];
+
         SetSelected();
+
+    }
+
+    private void HighLightCorrectTierButtons(TierButton tierButton)
+    {
+        foreach (TierButton button in tierButtons)
+            button.HighLight(button.ID==tierButton.ID?true:false);  
+    }
+
+    private int FindDefaultLevelToSelectForTab(int tabID)
+    {
+        // Make the selected level the first one that is not completed
+        for (int i = 0; i < buttonLists[tabID].Count; i++)
+        {
+            // Unlocked but not completed
+            if (buttonLists[tabID][i].playerLevelData.bestTime == -1)
+            {
+                return i;
+            }
+
+        }
+
+        for (int i = 0; i < buttonLists[tabID].Count; i++)
+        {
+            // First locked level
+            if (!buttonLists[tabID][i].levelDefinition.unlocked)
+            {
+                return i;
+            }
+
+        }
+        return 0;
     }
 
     internal void Unlock()

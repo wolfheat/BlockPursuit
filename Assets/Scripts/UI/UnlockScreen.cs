@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UnlockScreen : BasePanel
 {
@@ -12,6 +13,24 @@ public class UnlockScreen : BasePanel
     [SerializeField] LevelSelect levelSelect;
 
     private LevelDefinition currentLevel;
+
+    private void OnEnable()
+    {
+        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
+    }
+
+    private void OnDisable()
+    {
+        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
+    }
+
+    private void RequestESC(InputAction.CallbackContext context)
+    {
+        if (!Enabled()) return;
+        Debug.Log("ESC from menu");
+        CancelClicked();
+    }
+
 
     public void SetInfo(LevelDefinition level)
     {

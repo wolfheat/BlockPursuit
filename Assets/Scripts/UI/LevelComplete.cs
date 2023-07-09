@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class LevelComplete : BasePanel
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI movesText;
     [SerializeField] TextMeshProUGUI stepsText;
+    [SerializeField] GameObject[] personalBests;
+    [SerializeField] TextMeshProUGUI[] improvements;
 
     [SerializeField] Button mainSelectedButton;
 
@@ -84,17 +87,46 @@ public class LevelComplete : BasePanel
 
 
         //FIX
-        levelText.text = "Level " + StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
+        levelText.text = StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
 
         PlayerLevelData levelData = new PlayerLevelData(current.levelID, steps, moves, timeTaken);
 
         //Add Data into SaveFile
+        PlayerLevelData oldLevelData = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(levelData.levelID);
         PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddOrUpdateLevel(levelData);
 
+        //Show new record if applicable
+        ShowPersonalBestIfRecord(oldLevelData, bestLevelData);
 
         // Update Button info as well
         levelSelect.UpdateButtonPlayerLevelData(bestLevelData);
 
         SetSelected();
+    }
+
+    private void ShowPersonalBestIfRecord(PlayerLevelData oldLevelData, PlayerLevelData bestLevelData)
+    {
+        foreach (var best in personalBests)
+            best.SetActive(false);
+
+        foreach (var improvement in improvements)
+            improvement.gameObject.SetActive(false);
+
+        if (bestLevelData.bestMoves < oldLevelData.bestMoves)
+        {
+            personalBests[0].SetActive(true);
+            improvements[0].gameObject.SetActive(true);
+            improvements[0].text = (bestLevelData.bestMoves-oldLevelData.bestMoves).ToString();
+        }
+        if (bestLevelData.bestSteps < oldLevelData.bestSteps) { 
+            personalBests[1].SetActive(true);
+            improvements[1].gameObject.SetActive(true);
+            improvements[1].text = (bestLevelData.bestSteps - oldLevelData.bestSteps).ToString();
+        }
+        if (bestLevelData.bestTime < oldLevelData.bestTime){
+            personalBests[2].SetActive(true);
+            improvements[2].gameObject.SetActive(true);
+            improvements[2].text = StringConverter.TimeAsString(bestLevelData.bestTime - oldLevelData.bestTime);
+        }
     }
 }
