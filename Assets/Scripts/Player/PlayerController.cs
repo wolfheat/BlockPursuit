@@ -33,21 +33,21 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         levelCreator = FindObjectOfType<LevelCreator>();
-        InitPosition();
+        
         HidePlayer();
     }
 
     public void SetInitPosition(Vector2Int pos)
     {
-        initPosition = pos;
-        InitPosition();
+        Position = pos;
+        target = pos + Vector2Int.up;
+        transform.localPosition = new Vector3(Position.x,Position.y,0);
+        //current = new MovementAction(transform.localPosition, Quaternion.LookRotation(Vector3.back, Vector3.up), Vector3.up, Vector3.back,1);
+        current = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right, 1);
     }
     
     public void InitPosition()
     {
-        Position = initPosition;
-        target = initPosition + Vector2Int.up;
-        transform.localPosition = new Vector3(Position.x,Position.y,0);
     }
 
     private void OnEnable()
@@ -65,10 +65,12 @@ public class PlayerController : MonoBehaviour
 
     private void PickUpOrPlace(InputAction.CallbackContext context)
     {
+        PickUpOrPlace();
+    }
+    public void PickUpOrPlace()
+    {
         if (GameSettings.IsPaused) return;
 
-        Debug.Log("PICK UP - IsPaused = "+GameSettings.IsPaused);
-        
         if (levelCreator.heldSection == null)
             levelCreator.PickupSectionAt(Position, target, current.rotationIndex);
         else
@@ -77,13 +79,14 @@ public class PlayerController : MonoBehaviour
 
     private void MoveInput(InputAction.CallbackContext context)
     {
-        if (GameSettings.IsPaused) return;
-
         Vector2 direction = context.ReadValue<Vector2>();
         MoveInputAsVector(direction);
     }
-    private void MoveInputAsVector(Vector2 direction)
+
+    public void MoveInputAsVector(Vector2 direction)
     {
+        if (GameSettings.IsPaused) return;
+
         if (moving)
         {
             stored = direction;
@@ -173,7 +176,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Movement Held: "+ Inputs.Instance.Controls.Main.Move.ReadValue<Vector2>());
+            //Debug.Log("Movement     Held: "+ Inputs.Instance.Controls.Main.Move.ReadValue<Vector2>());
             if (Inputs.Instance.Controls.Main.Move.IsPressed()) MoveInputAsVector(Inputs.Instance.Controls.Main.Move.ReadValue<Vector2>()); 
             else moving = false;
         }

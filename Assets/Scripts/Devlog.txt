@@ -66,26 +66,21 @@ Jun 2023
 9/7		* Added Personal Best text for result screen
 		* Added text showing improvement for personal best
 		* Made first uncleared level select by default on level select
+		* Made Tabs highlight when selected
+10/7	* Added touch inputs for mobile
 
 
+		* Make restart level confirmation screen
 
-		* Have selected tab show more clearly, lower contrast of unselected?
-		* Change selected color from dark red to something else?
-
-
-		* Add "cleared" to level select, locked and unlocked?
-
-		* Make correct level be selected when returning to level select
-
-		* Make a selected level be still selected after pressing unlock, 
-			* maybe show separate unlock screen
+		* Issue with ingame menu not scaling correctly when changing res.
+		* Issue with using landscape, disable or fix?
 
 		TODO:
 		* Port to Android build, make input controls for mobile
 		* Make sure game scales correctly for different mobile resolutions
 		* Implement Ads for gaining coins
-		* Have game features unlocked by gold in shop
 		* Make Shop Screen
+		* Have game features unlocked by gold in shop
 		* Change player to something else than a cube, character etc?
 
 		ADS:
@@ -97,6 +92,10 @@ Jun 2023
 		
 		ISSUES:
 
+		// - BUGS -
+		* Fix nullref error at start of game
+
+
 		// - Content -
 		* Have some kind of tutorial?
 		* Figure out theme and color scheme that fits the game
@@ -107,18 +106,14 @@ Jun 2023
 		
 		// - Data stuff -
 		* Clean Up tile definition and way levels are stored when created at runtime
-		* Make player progress and settings store between sessions.
-		* Make system to store what level player completed and use that to update select level page
 		* Make player gain gold and tiles when completing levels, animation for this?
 		
 		// - UI stuff -
-		* Make level select tabs more fancy?
-		* Make cleared levels show differently in the level select.
-		* Add Start level popup if unlock is needed, show cost, show inventory at the same time? Maybe show this in level select instead. 
-			- Selected menu shows up with more info in a info box under the selection grid
+		* Change selected color from dark red to something else?
+		* Make level select tabs more fancy?	
 
 		// - LevelCreation Stuff -
-		* Create randomized level creation for Bronze,Silver,Gold versions
+		* Create randomized level creation for Bronze, Silver, Gold versions
 		* Create all levels for main levels
 		
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		

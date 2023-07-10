@@ -144,42 +144,6 @@ public class LevelCreator : MonoBehaviour
         FindObjectOfType<PlayerController>().SetInitPosition(level.playerStart);
     }
 
-    public void LoadLevel(int level)
-    {
-        if(!haveWalls) CreateWalls();
-
-
-        Debug.Log("Loading Level "+level);
-        if(level == 4)
-        {
-            CreateFillArea(new Vector2Int(6, 6), new Vector2Int(10, 11));
-
-            CreateSectionByTiletype(TileType.L, new Vector2Int(4, 5), 0);
-            CreateSectionByTiletype(TileType.L, new Vector2Int(5, 4), 0);
-            CreateSectionByTiletype(TileType.I, new Vector2Int(9, 6), 0);
-            CreateSectionByTiletype(TileType.O, new Vector2Int(7, 6), 0);
-            CreateSectionByTiletype(TileType.T, new Vector2Int(6, 9), 0);
-            CreateSectionByTiletype(TileType.O, new Vector2Int(4, 8), 0);
-            FindObjectOfType<PlayerController>().SetInitPosition(new Vector2Int(5,4));
-        }        
-        else if(level == 1)
-        {
-            CreateFillArea(new Vector2Int(6, 6), new Vector2Int(8, 8));
-
-            CreateSectionByTiletype(TileType.O, new Vector2Int(7, 6), 0);
-            CreateSectionByTiletype(TileType.T, new Vector2Int(6, 9), 0);
-            CreateSectionByTiletype(TileType.O, new Vector2Int(4, 8), 0);
-            FindObjectOfType<PlayerController>().SetInitPosition(new Vector2Int(7,6));
-        }
-        else
-        {
-            CreateFillArea(new Vector2Int(6, 6), new Vector2Int(8, 8));
-            CreateSectionByTiletype(TileType.O, new Vector2Int(7, 6), 0);
-            CreateSectionByTiletype(TileType.O, new Vector2Int(9, 7), 0);
-            FindObjectOfType<PlayerController>().SetInitPosition(new Vector2Int(7, 6));
-        }
-    }
-
     private void CreateWalls()
     {
         for (int i = -1; i <= LevelWidth; i++)
