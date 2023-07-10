@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class SavingUtility : MonoBehaviour
 {
 
-    private const string LocalSaveLocation = "/player-data.json";
+    private const string SaveFileName = "/player-data.txt";
     public static SavingUtility Instance { get; set; }
 
     public static Action LoadingComplete;  
@@ -30,10 +29,13 @@ public class SavingUtility : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        // No matter if on Editor PC build or Android
+        SaveToFile();
+
 #if UNITY_EDITOR
         Debug.Log("Exiting in Unity Editor = Do not Save to file");
-        SaveToFile();
 #else
+
 #endif
     }
 
@@ -41,8 +43,8 @@ public class SavingUtility : MonoBehaviour
     {
         LogWhatsSaved();
         IDataService dataService = new JsonDataService();
-        if (dataService.SaveData(LocalSaveLocation, playerGameData, false))
-            Debug.Log("Saved in: "+LocalSaveLocation);
+        if (dataService.SaveData(SaveFileName, playerGameData, false))
+            Debug.Log("Saved in: "+SaveFileName);
         else
             Debug.LogError("Could not save file.");
     }
@@ -64,7 +66,7 @@ public class SavingUtility : MonoBehaviour
         IDataService dataService = new JsonDataService();
         try
         {
-            playerGameData = dataService.LoadData<PlayerGameData>(LocalSaveLocation, false);
+            playerGameData = dataService.LoadData<PlayerGameData>(SaveFileName, false);
 
             Debug.Log(" - Loading items from file! - "); 
         }

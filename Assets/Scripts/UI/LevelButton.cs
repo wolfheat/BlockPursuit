@@ -37,9 +37,9 @@ public class LevelButton : MonoBehaviour, ISelectHandler
         lockObject.SetActive(false);
     }
 
-    public void RequestStartLevel()
+    public void ClickingButton()
     {
-        FindObjectOfType<LevelSelect>().RequestStartSelectedLevel(levelDefinition);
+        FindObjectOfType<LevelSelect>().ConfirmLevelSelectJumpToStartButton(this);
     }
 
     public void Select(bool doSelect = true)

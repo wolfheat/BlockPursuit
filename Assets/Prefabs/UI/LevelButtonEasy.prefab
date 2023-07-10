@@ -510,7 +510,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 325240859844980377}
         m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
-        m_MethodName: RequestStartLevel
+        m_MethodName: ClickingButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

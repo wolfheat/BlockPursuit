@@ -1,8 +1,5 @@
-﻿using System;
-using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InfoScreen : MonoBehaviour
 {

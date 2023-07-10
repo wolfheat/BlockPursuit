@@ -67,8 +67,15 @@ Jun 2023
 		* Added text showing improvement for personal best
 		* Made first uncleared level select by default on level select
 		* Made Tabs highlight when selected
-10/7	* Added touch inputs for mobile
+10/7	* Added touch inputs for mobile / fixed scaling issue
+		* Might have fixed issue where app did not save progress
+		* Fixed so clicking level or using space jumps to start button in infoscreen	
 
+		* Strange issue which text on mobile not aligning correctly on resultscreen.
+		* Fix unlocking so player pays and the unlock window opens when clicking unlock
+		* Maybe just have player return to the last played level on info screen?
+
+		* Change game to Landscape mode??
 
 		* Make restart level confirmation screen
 

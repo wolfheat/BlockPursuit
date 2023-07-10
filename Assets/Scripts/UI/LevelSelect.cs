@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
 
 public class LevelSelect : BasePanel
 {
@@ -25,6 +21,7 @@ public class LevelSelect : BasePanel
     private int selectedLevel = 0;
     private int activeTab = 0;
     private LevelButton selectedButton;
+    [SerializeField] private GameObject startbutton;
     [SerializeField] private TierButton[] tierButtons;
 
     private SavingUtility savingUtility;
@@ -111,8 +108,12 @@ public class LevelSelect : BasePanel
 
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
-        selectedButton = button;
-        infoScreen.UpdateInfo(button);
+        if (selectedButton != button)
+        {
+            selectedButton = button;
+            infoScreen.UpdateInfo(button);
+        }else
+            Debug.Log("Button already selected");
     }
 
     public void SetSelected()   
@@ -141,9 +142,26 @@ public class LevelSelect : BasePanel
     {
         Debug.Log("Request start Random level of tier: "+tier);
     }
-    
-    public void RequestStartSelectedLevel(LevelDefinition level)
+
+    public void ConfirmLevelSelectJumpToStartButton(LevelButton button)
     {
+        Debug.Log("Selecting button by clicking");
+        if (infoScreen.latestButton != button)
+        {
+            UpdateLatestSelectedInfo(button);
+            SetSelected();
+        }
+        else
+        {
+            //This is what should happen
+            EventSystem.current.SetSelectedGameObject(startbutton.gameObject);
+        }
+
+    }
+    public void RequestStartSelectedLevel()
+    {
+        LevelDefinition level = infoScreen.latestButton.levelDefinition;
+
         Debug.Log("Request start selected level");
         if (!level.unlocked && level?.unlockRequirements?.Count > 0) {
             Debug.Log("Level Has unlock requirement = " + level.unlockRequirements[0].amount+" tiles");
