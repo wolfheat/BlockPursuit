@@ -70,45 +70,54 @@ Jun 2023
 10/7	* Added touch inputs for mobile / fixed scaling issue
 		* Might have fixed issue where app did not save progress
 		* Fixed so clicking level or using space jumps to start button in infoscreen	
+11/7	* Fixed so keyboard input or touch works like intended in level select
+		* Fixed unlocking so player pays and the unlock window opens when clicking unlock
+		* Changed Touch inputs to new better inputs
+		* Inventory now only show just coins and tiles
+		* Added restart Confirmation Screen
+		* Added Touch change button
 
-		* Strange issue which text on mobile not aligning correctly on resultscreen.
-		* Fix unlocking so player pays and the unlock window opens when clicking unlock
-		* Maybe just have player return to the last played level on info screen?
 
-		* Change game to Landscape mode??
 
-		* Make restart level confirmation screen
-
-		* Issue with ingame menu not scaling correctly when changing res.
-		* Issue with using landscape, disable or fix?
-
-		TODO:
-		* Port to Android build, make input controls for mobile
-		* Make sure game scales correctly for different mobile resolutions
-		* Implement Ads for gaining coins
-		* Make Shop Screen
-		* Have game features unlocked by gold in shop
-		* Change player to something else than a cube, character etc?
 
 		ADS:
+		* Implement Ads for gaining coins
 		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
 		* Paid player get free gold every 5 min without watching ad.
 
 		MAYBE:
 		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)
+		* IDEA -  Maybe have collectables that are tiles that form a collection that can be used to clear a set of special levels,
+			but the player has to decide which tiles to bring into the levels themself. Many levels can be cleared with different set of tiles
+			, but With right combination all levels can be cleared if tiles are selected in a clever way.
 		
+		RESOLUTION:
+		* Make mobile detect what size the on screen touch inputs should be to fit the player
+		* Issue with ingame menu not scaling correctly when changing res.
+		* Change game to Landscape mode??
+		* Strange issue which text on mobile not aligning correctly on resultscreen.
+		* Issue with using landscape, disable or fix?
+		* Make sure game scales correctly for different mobile resolutions
+
 		ISSUES:
 
 		// - BUGS -
-		* Fix nullref error at start of game
-
 
 		// - Content -
+		* Make Shop Screen
 		* Have some kind of tutorial?
+		* Have game features unlocked by gold in shop
+		* Change player to something else than a cube, character etc?
+		* Show in tutorial the different input modes for touch
 		* Figure out theme and color scheme that fits the game
 		* Currently not possible to turn on spot, should it be possible? Decide.
 		* Change Load Screen between scenes to animation or not?
 		
+		// - Tutorial - 
+		* Show Input from touch
+		* Show shuffling technique like in A.2
+		* Show that sometimes there are more tile parts than goals, just need to fill them
+
 		// - Mechanics Stuff -		
 		
 		// - Data stuff -

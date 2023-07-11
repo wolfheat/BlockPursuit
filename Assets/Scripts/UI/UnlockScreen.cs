@@ -36,7 +36,7 @@ public class UnlockScreen : BasePanel
     {
         currentLevel = level;
         levelText.text = StringConverter.LevelAsString(level.LevelDiff,level.LevelIndex);
-        costText.text = "x"+level.unlockRequirements[0].amount.ToString();
+        costText.text = "x"+ (level.unlockRequirements.Count==0?0:level.unlockRequirements[0].amount);
         EventSystem.current.SetSelectedGameObject(okButton);
     }
 
@@ -49,20 +49,23 @@ public class UnlockScreen : BasePanel
     
     public void OkClicked()
     {
-        Debug.Log("Pay " + currentLevel.unlockRequirements[0].amount +" tiles to unlock level "+currentLevel.levelID);
-        if(SavingUtility.playerGameData.Tiles < currentLevel.unlockRequirements[0].amount)
+        if(currentLevel.unlockRequirements.Count == 0)
+        {
+            Debug.Log("No requirements found");
+        }
+        else if(SavingUtility.playerGameData.Tiles < currentLevel.unlockRequirements[0].amount)
+        {
             Debug.Log("You only got "+ SavingUtility.playerGameData.Tiles+" but update costs "+ currentLevel.unlockRequirements[0].amount+" you cant afford");
-            // Show popup here cant afford?
+            return;
+        }
         else
         {
+            //Pay fee and unlock level
             SavingUtility.playerGameData.Tiles -= currentLevel.unlockRequirements[0].amount;
-            CancelClicked();
-            //Maybe show animation lock removed?
-            levelSelect.Unlock();
-
         }
 
-
+        CancelClicked();
+        //Maybe show animation lock removed?
+        levelSelect.Unlock();
     }
-
 }

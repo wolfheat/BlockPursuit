@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class InventoryUI : BasePanel
 {
     [SerializeField] TextMeshProUGUI inventoryTilesText;
+    [SerializeField] TextMeshProUGUI inventoryCoinsText;
 
     [SerializeField] Button mainSelectedButton;
 
@@ -19,6 +20,7 @@ public class InventoryUI : BasePanel
     public void UpdateInventoryUI()
     {
         inventoryTilesText.text = SavingUtility.playerGameData.Tiles.ToString();
+        inventoryCoinsText.text = SavingUtility.playerGameData.Coins.ToString();
     }
     public void CloseInventoryRequest()
     {

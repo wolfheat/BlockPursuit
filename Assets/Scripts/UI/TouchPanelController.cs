@@ -6,29 +6,33 @@ public enum ControlSide{Right,Left,None}
 public class TouchPanelController : MonoBehaviour
 {
     PlayerController playerController;
-    [SerializeField] GameObject[] rightControls;
-    [SerializeField] GameObject[] leftControls;
+
+    private int activeControls = 0;
+
+    [SerializeField] GameObject middle;
+    [SerializeField] GameObject right;
+    [SerializeField] GameObject left;
+    private GameObject[] controls;
+
     // Start is called before the first frame update
     void Start()
     {
+        controls = new GameObject[] {middle,right,left };
+
         playerController = FindObjectOfType<PlayerController>();
-        SetControlSide(ControlSide.Left);    
+
     }
 
-    public void SetControlSide(ControlSide side)
+    public void ChangeTouch()
     {
-        foreach (var control in rightControls)
-        {
-            control.SetActive(side==ControlSide.Right?true:false);
-        }
-        foreach (var control in leftControls)
-        {
-            control.SetActive(side==ControlSide.Left?true:false);
-        }
+        controls[activeControls].SetActive(false);
+        activeControls = (activeControls+1)%controls.Length;
+        controls[activeControls].SetActive(true);
     }
 
     public void DirectionTouch(int dir)
     {
+        Debug.Log("TOUCH: "+dir);
         Vector2 dirVector = Vector2.right;
         if (dir == 1)
             dirVector = Vector2.up;

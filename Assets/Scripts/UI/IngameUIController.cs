@@ -12,6 +12,7 @@ public class IngameUIController : BasePanel
 
     InventoryUI inventory;
     TransitionScreen transitionScreen;
+    RestartPanelController restartPanel;
 
     private void OnEnable()
     {
@@ -35,6 +36,7 @@ public class IngameUIController : BasePanel
     {
         inventory = FindObjectOfType<InventoryUI>();
         transitionScreen = FindObjectOfType<TransitionScreen>();
+        restartPanel = FindObjectOfType<RestartPanelController>();
     }
 
     public void UpdateLevel()
@@ -51,9 +53,10 @@ public class IngameUIController : BasePanel
     public void RestartLevelRequest()
     {
         if (GameSettings.InTransition) return;
-        Debug.Log("Restart Level");
-        GameSettings.StoredAction = GameAction.RestartLevel;
-        transitionScreen.StartTransition();
+
+        restartPanel.ShowPanel();
+        restartPanel.SetSelected();
+        GameSettings.IsPaused = true;
     }
     public void ShowInventoryClicked()
     {

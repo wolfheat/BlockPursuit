@@ -10,42 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60e2d3639fde9b545b681ba4f6c6c1a3, type: 3}
-  m_Name: Medium14
+  m_Name: Medium14Fixed
   m_EditorClassIdentifier: 
   levelName: Level
-  levelID: -214
+  levelID: -8101398
   unlocked: 0
-  playerStart: {x: 8, y: 11}
+  playerStart: {x: 7, y: 11}
   tiles:
   - type: 1
-    position: {x: 9, y: 11}
-    rotation: 2
+    position: {x: 5, y: 15}
+    rotation: 0
   - type: 2
-    position: {x: 9, y: 9}
-    rotation: 2
+    position: {x: 5, y: 7}
+    rotation: 0
   - type: 5
-    position: {x: 8, y: 9}
+    position: {x: 6, y: 13}
+    rotation: 0
+  - type: 5
+    position: {x: 6, y: 8}
+    rotation: 0
+  - type: 5
+    position: {x: 6, y: 12}
     rotation: 3
   - type: 5
-    position: {x: 8, y: 12}
+    position: {x: 6, y: 9}
     rotation: 1
-  - type: 5
-    position: {x: 7, y: 12}
-    rotation: 2
-  - type: 5
-    position: {x: 7, y: 9}
-    rotation: 2
   goals:
   - {x: 10, y: 13}
   - {x: 10, y: 12}
   - {x: 10, y: 11}
   - {x: 11, y: 13}
-  - {x: 11, y: 12}
-  - {x: 11, y: 11}
-  - {x: 11, y: 10}
   - {x: 10, y: 10}
   - {x: 10, y: 9}
-  - {x: 11, y: 9}
   - {x: 11, y: 8}
   - {x: 10, y: 8}
   - {x: 10, y: 14}
@@ -60,4 +56,8 @@ MonoBehaviour:
   - {x: 9, y: 6}
   - {x: 10, y: 6}
   - {x: 11, y: 6}
+  - {x: 9, y: 13}
+  - {x: 9, y: 8}
+  - {x: 11, y: 12}
+  - {x: 11, y: 9}
   unlockRequirements: []

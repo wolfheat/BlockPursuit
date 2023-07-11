@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,7 +21,6 @@ public class LevelSelect : BasePanel
 
     private int selectedLevel = 0;
     private int activeTab = 0;
-    private LevelButton selectedButton;
     [SerializeField] private GameObject startbutton;
     [SerializeField] private TierButton[] tierButtons;
 
@@ -62,7 +62,7 @@ public class LevelSelect : BasePanel
     {
         Debug.Log("Loaded transmitted");
         GenerateButtonLevels();
-        selectedButton = buttonLists[0][0];
+        infoScreen.latestButton = buttonLists[0][0];
     }
 
     public void UpdateButtonPlayerLevelData(PlayerLevelData data)
@@ -108,20 +108,18 @@ public class LevelSelect : BasePanel
 
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
-        if (selectedButton != button)
-        {
-            selectedButton = button;
+        if (infoScreen.latestButton != button)
             infoScreen.UpdateInfo(button);
-        }else
+        else
             Debug.Log("Button already selected");
     }
 
     public void SetSelected()   
     {
-        EventSystem.current.SetSelectedGameObject(selectedButton.gameObject);
+        EventSystem.current.SetSelectedGameObject(infoScreen.latestButton.gameObject);
 
         // Update Level Info
-        infoScreen.UpdateInfo(selectedButton);
+        //infoScreen.UpdateInfo(selectedButton);
     }
 
 
@@ -145,38 +143,50 @@ public class LevelSelect : BasePanel
 
     public void ConfirmLevelSelectJumpToStartButton(LevelButton button)
     {
-        Debug.Log("Selecting button by clicking");
-        if (infoScreen.latestButton != button)
-        {
-            UpdateLatestSelectedInfo(button);
-            SetSelected();
-        }
+        if (Inputs.Instance.Controls.UI.Submit.WasPressedThisFrame())
+            ClickLevelByKeyboard(button);
         else
-        {
-            //This is what should happen
-            EventSystem.current.SetSelectedGameObject(startbutton.gameObject);
-        }
+            ClickLevelByTouch(button);
+    }
+
+    private void ClickLevelByTouch(LevelButton button)
+    {
+        Debug.Log("Click by Mouse");
+        // Click level by Mouse or touch
+        // Do nothing? Only want to select with touch
 
     }
+
+    private void ClickLevelByKeyboard(LevelButton button)
+    {
+        // Info screen already showing now start level or show unlock screen
+        Debug.Log("Click by Keyboard");
+        if (!infoScreen.latestButton.levelDefinition.unlocked)
+            ShowUnlockPanel();
+        else
+            EventSystem.current.SetSelectedGameObject(startbutton.gameObject);
+    }
+
     public void RequestStartSelectedLevel()
     {
+
+        // Else start the level
         LevelDefinition level = infoScreen.latestButton.levelDefinition;
 
-        Debug.Log("Request start selected level");
-        if (!level.unlocked && level?.unlockRequirements?.Count > 0) {
-            Debug.Log("Level Has unlock requirement = " + level.unlockRequirements[0].amount+" tiles");
-            unlockScreen.SetInfo(level);
-            unlockScreen.ShowPanel();
-            HidePanel();
-            return;
-        }
         GameSettings.CurrentLevelDefinition = level;
         UIController.UpdateIngameLevelShown();
 
         GameSettings.StoredAction = GameAction.LoadSelectedLevel;
         UIController.StartTransition();
     }
-    
+
+    public void ShowUnlockPanel()
+    {
+        unlockScreen.SetInfo(infoScreen.latestButton.levelDefinition);
+        unlockScreen.ShowPanel();
+        HidePanel();
+    }
+
     public void RequestShowTab(TierButton tierButton)
     {
         SwitchToTab(tierButton);
@@ -207,7 +217,7 @@ public class LevelSelect : BasePanel
     {
         selectedLevel = FindDefaultLevelToSelectForTab(activeTab);
 
-        selectedButton = buttonLists[activeTab][selectedLevel];
+        infoScreen.latestButton = buttonLists[activeTab][selectedLevel];
 
         SetSelected();
 

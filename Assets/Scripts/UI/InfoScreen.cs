@@ -63,8 +63,9 @@ public class InfoScreen : MonoBehaviour
     public void UnLock()
     {
         Debug.Log("Infoscreen unlock button "+latestButton.levelDefinition.LevelIndex);
-        latestButton.levelDefinition.unlocked = true;
+
         latestButton.Unlock();
+        latestButton.levelDefinition.unlocked = true;
 
         //Add Data into SaveFile
         PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddNewLevel(latestButton.levelDefinition.levelID);
@@ -72,6 +73,7 @@ public class InfoScreen : MonoBehaviour
         latestButton.playerLevelData = bestLevelData;
 
         UpdateInfo(latestButton);
+        
         levelSelect.SetSelected();
         //EventSystem.current.SetSelectedGameObject(latestButton.gameObject);
     }
