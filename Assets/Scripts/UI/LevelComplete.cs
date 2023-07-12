@@ -13,6 +13,8 @@ public class LevelComplete : BasePanel
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI movesText;
     [SerializeField] TextMeshProUGUI stepsText;
+    [SerializeField] TextMeshProUGUI coinGainText;
+    [SerializeField] TextMeshProUGUI tileGainText;
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
 
@@ -70,21 +72,23 @@ public class LevelComplete : BasePanel
 
     }
 
-    internal void UpdateStats()
+    internal void UpdateStats(int coins, int tiles)
     {
         int timeTaken = Mathf.RoundToInt(Time.time - GameSettings.LevelStartTime);
         int minutes = (timeTaken / 60);
         int sec = (timeTaken % 60);
         string timeString = (minutes>0?(minutes+"m"):"")+sec+"s";
-
-
         timeText.text = timeString;
+
         int moves = GameSettings.MoveCounter;
         movesText.text = moves.ToString();
+
         int steps = GameSettings.StepsCounter;
         stepsText.text = steps.ToString();
-        LevelDefinition current = GameSettings.CurrentLevelDefinition;
 
+        coinGainText.text = coins.ToString();
+        tileGainText.text = tiles.ToString();
+        LevelDefinition current = GameSettings.CurrentLevelDefinition;
 
         //FIX
         levelText.text = StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);

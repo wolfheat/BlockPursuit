@@ -129,4 +129,11 @@ public class UIController : MonoBehaviour
     {
         ingameUIController.UpdateInventory();
     }
+
+    public void RequestDoubleAds()
+    { 
+        Debug.Log("Requested Show Double Reward Ads");
+
+    }
+
 }

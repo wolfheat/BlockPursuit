@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 [CustomEditor(typeof(BuildLevelTool))]
 public class BuildLevelToolEditor : Editor

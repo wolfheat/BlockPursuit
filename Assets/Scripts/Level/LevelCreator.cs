@@ -305,7 +305,15 @@ public class LevelCreator : MonoBehaviour
         {
             FindObjectOfType<PlayerController>().HidePlayer();
             GameSettings.IsPaused = true;
-            levelComplete.UpdateStats();
+
+            int coinGain = 55;
+            int tileGain = 1;
+
+            // Determin reward
+            SavingUtility.playerGameData.AddCoins(coinGain);
+            SavingUtility.playerGameData.AddTiles(tileGain);
+
+            levelComplete.UpdateStats(coinGain,tileGain);
 
             //Next level
             GameSettings.StoredAction = GameAction.ShowLevelComplete;

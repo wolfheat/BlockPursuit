@@ -76,11 +76,26 @@ Jun 2023
 		* Inventory now only show just coins and tiles
 		* Added restart Confirmation Screen
 		* Added Touch change button
+12/7	* Adding coins and tiles after completing level.
+		
 
+		* Fix aligning of text for level complete screen
 
-
+		* Add effect when gaining gold or tile, animated coins and tile adding up to total 
+			in ingameUI until full before transitioning to result screen?
 
 		ADS:
+		* Add Ads screen and Icon. Icon shows every 5 min since last used.
+			* X2  get X2 rewards for next hour by watching video
+			* Take 10coins free or watch ad for +50gold ever 5 minute
+			* OR Just watch ad for +50gold ever 5 minute
+			* At reward screen have watch add to double coins button (this will make it optional)
+			* Every 5 or 10 ad watches gives a guaranteed tile? (Maybe special tile for special levels?!?)
+
+
+
+
+
 		* Implement Ads for gaining coins
 		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
 		* Paid player get free gold every 5 min without watching ad.
