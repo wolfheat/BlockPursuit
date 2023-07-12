@@ -1,6 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+namespace BuildTool
+{
+
 [CustomEditor(typeof(BuildLevelTool))]
 public class BuildLevelToolEditor : Editor
 {
@@ -35,4 +38,5 @@ public class BuildLevelToolEditor : Editor
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
+}
 }
