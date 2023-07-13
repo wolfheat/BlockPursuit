@@ -1,3 +1,5 @@
+using GoogleMobileAds.Sample;
+using MyGameAds;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +14,8 @@ public class UIController : MonoBehaviour
     [SerializeField] IngameUIController ingameUIController;
     [SerializeField] InventoryUI inventoryUI;
 
+    private Time lastInterstitial;
+    private Time lastRewarded;
 
     private void OnEnable()
     {
@@ -102,6 +106,9 @@ public class UIController : MonoBehaviour
                 levelCreator.ClearLevel();
                 HideAllPanels();   
                 levelComplete.ShowPanel();
+                // Load Ad here? This is in the middle of the transition To show Level Complete
+                FindObjectOfType<InterstitialController>().LoadAd();
+
                 break;
              case GameAction.ShowInventory:
                 GameSettings.IsPaused = true;
@@ -133,7 +140,7 @@ public class UIController : MonoBehaviour
     public void RequestDoubleAds()
     { 
         Debug.Log("Requested Show Double Reward Ads");
-
+        FindObjectOfType<RewardedController>().LoadAd();
     }
 
 }
