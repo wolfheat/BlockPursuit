@@ -50,7 +50,7 @@ namespace MyGameAds
 
 
             });
-                StartCoroutine(SimpleWaitForShowAds());
+                //StartCoroutine(SimpleWaitForShowAds());
         }
 
         private IEnumerator SimpleWaitForShowAds()
@@ -71,6 +71,9 @@ namespace MyGameAds
                     Debug.Log(String.Format("Rewarded ad granted a reward: {0} {1}",
                                             reward.Amount,
                                             reward.Type));
+                    FindObjectOfType<LevelComplete>().GetReward();
+
+
                 });
             }
             else

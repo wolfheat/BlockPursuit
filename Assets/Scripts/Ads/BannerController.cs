@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
+using System.Collections;
 
 namespace MyGameAds
 {
@@ -11,6 +12,19 @@ namespace MyGameAds
         public bool AdLoadedShown=false;
 
         private BannerView _bannerView;
+
+        private void Start()
+        {
+            // Currently just waiting for 3 seconds to show Banner. Later find out how to read that it has loaded
+            LoadAd();
+            StartCoroutine(ShowBanner());
+        }
+
+        private IEnumerator ShowBanner()
+        {
+            yield return new WaitForSeconds(3);
+            ShowAd();
+        }
 
         public void CreateBannerView()
         {

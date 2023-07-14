@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] RewardedController rewardedController;
+    [SerializeField] InterstitialController interstitialController;
+
     [SerializeField] StartMenu startMenu;
     [SerializeField] LevelComplete levelComplete;
     [SerializeField] LevelSelect levelSelect;
@@ -85,6 +88,9 @@ public class UIController : MonoBehaviour
                 GameSettings.LevelStartTime = Time.time;
                 GameSettings.MoveCounter = 0;
                 GameSettings.StepsCounter = 0;
+
+                interstitialController.LoadAd();
+
                 break;
             case GameAction.RestartLevel:
                 levelCreator.RestartLevel();
@@ -107,7 +113,8 @@ public class UIController : MonoBehaviour
                 HideAllPanels();   
                 levelComplete.ShowPanel();
                 // Load Ad here? This is in the middle of the transition To show Level Complete
-                FindObjectOfType<InterstitialController>().LoadAd();
+                interstitialController.ShowAd();
+                rewardedController.LoadAd();
 
                 break;
              case GameAction.ShowInventory:

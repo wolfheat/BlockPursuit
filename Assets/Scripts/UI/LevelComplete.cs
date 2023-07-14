@@ -21,6 +21,8 @@ public class LevelComplete : BasePanel
     [SerializeField] Button mainSelectedButton;
 
     LevelSelect levelSelect;
+    private int latestCoins;
+
     private void OnEnable()
     {
         Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
@@ -86,6 +88,8 @@ public class LevelComplete : BasePanel
         int steps = GameSettings.StepsCounter;
         stepsText.text = steps.ToString();
 
+        latestCoins = coins;
+
         coinGainText.text = coins.ToString();
         tileGainText.text = tiles.ToString();
         LevelDefinition current = GameSettings.CurrentLevelDefinition;
@@ -106,6 +110,10 @@ public class LevelComplete : BasePanel
         levelSelect.UpdateButtonPlayerLevelData(bestLevelData);
 
         SetSelected();
+
+        // Delete intertitial here?
+
+
     }
 
     private void ShowPersonalBestIfRecord(PlayerLevelData oldLevelData, PlayerLevelData bestLevelData)
@@ -131,6 +139,22 @@ public class LevelComplete : BasePanel
             personalBests[2].SetActive(true);
             improvements[2].gameObject.SetActive(true);
             improvements[2].text = StringConverter.TimeAsString(bestLevelData.bestTime - oldLevelData.bestTime);
+        }
+    }
+
+    internal void GetReward()
+    {
+        if (Enabled())
+        {
+            Debug.Log("Level complete is active reward Player with double coins");
+
+            // Determin reward
+            coinGainText.text = (latestCoins*2).ToString();
+            SavingUtility.playerGameData.AddCoins(latestCoins);
+        }
+        else
+        {
+            Debug.Log("Level complete is not active.");
         }
     }
 }

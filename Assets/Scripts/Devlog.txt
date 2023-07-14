@@ -77,7 +77,18 @@ Jun 2023
 		* Added restart Confirmation Screen
 		* Added Touch change button
 12/7	* Adding coins and tiles after completing level.
+13/7	* Working on Implementing Ads
+14/7	* MobAds seems to work
+		* Fixed better touch arrows for mobile
+		* Player is now rewarded double coins if watching rewarded ad
+
+
+		* Error where level 2 is seen as locked if the first selected level when showing level select screen, even when its unlocked.
 		
+		* Maybe always have banner on bottom showing?
+			* Make the Touch Arrows better
+
+		* Exiting android app wont close the app only minimize it?
 
 		* Fix aligning of text for level complete screen
 
@@ -85,6 +96,12 @@ Jun 2023
 			in ingameUI until full before transitioning to result screen?
 
 		ADS:
+		* Implementation needs more work
+			* Determine when to load the interstitial ads and when to show
+			* Do it need consent to preload?
+			* Implement recieving coins from rewarded ad.
+
+
 		* Add Ads screen and Icon. Icon shows every 5 min since last used.
 			* X2  get X2 rewards for next hour by watching video
 			* Take 10coins free or watch ad for +50gold ever 5 minute

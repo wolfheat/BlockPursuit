@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
+using System.Collections;
 
 namespace MyGameAds
 {
@@ -9,6 +10,9 @@ namespace MyGameAds
     {
         public GameObject AdLoadedStatus;
         private InterstitialAd _interstitialAd;
+
+        public bool Loaded { get; private set; }
+
 
         public void LoadAd()
         {
@@ -48,9 +52,7 @@ namespace MyGameAds
                 // Inform the UI that the ad is ready.
                 AdLoadedStatus?.SetActive(true);
 
-                //Also show the Ad
-                ShowAd();
-
+                Loaded = true;
             });
         }
 
@@ -78,6 +80,8 @@ namespace MyGameAds
                 _interstitialAd.Destroy();
                 _interstitialAd = null;
             }
+
+            Loaded = false;
 
             // Inform the UI that the ad is not ready.
             AdLoadedStatus?.SetActive(false);

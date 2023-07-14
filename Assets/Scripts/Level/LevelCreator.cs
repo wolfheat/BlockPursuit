@@ -1,3 +1,4 @@
+using MyGameAds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,9 @@ public class LevelCreator : MonoBehaviour
 
     [SerializeField] GameObject lockPrefab;
     [SerializeField] GameObject bucketPrefab;
+
+    [SerializeField] RewardedController rewardedController;
+    [SerializeField] InterstitialController interstitialController;
 
     [SerializeField] List<Section> sectionPrefabs = new List<Section>();
 
@@ -318,6 +322,11 @@ public class LevelCreator : MonoBehaviour
             //Next level
             GameSettings.StoredAction = GameAction.ShowLevelComplete;
             FindObjectOfType<TransitionScreen>().StartTransition();
+
+            // Level Complete show interstitial and load rewarded
+            // Maybe check time since last ad was shown?
+            //interstitialController.ShowAd();
+            //rewardedController.LoadAd();
         }
     }
     
