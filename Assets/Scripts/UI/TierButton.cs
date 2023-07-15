@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 enum TierName{Bronze,Silver,Gold}
@@ -11,7 +10,7 @@ public class TierButton : MonoBehaviour
     [SerializeField] Color HighLightColor;
     [SerializeField] Color DiffuseColor;
 
-    public int ID;
+    public int ID = 0;
 
     private void Awake()
     {

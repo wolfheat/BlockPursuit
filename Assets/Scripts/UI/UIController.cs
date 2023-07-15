@@ -1,6 +1,4 @@
-using GoogleMobileAds.Sample;
 using MyGameAds;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +13,8 @@ public class UIController : MonoBehaviour
     [SerializeField] TransitionScreen transitionScreen;
     [SerializeField] LevelCreator levelCreator;
     [SerializeField] IngameUIController ingameUIController;
-    [SerializeField] InventoryUI inventoryUI;
+    [SerializeField] InventoryBar inventoryBar;
+    [SerializeField] PauseUI inventoryUI;
 
     private Time lastInterstitial;
     private Time lastRewarded;
@@ -55,7 +54,7 @@ public class UIController : MonoBehaviour
     internal void UpdateInventoryFromStored()
     {
         Debug.Log("Update Inventory from stored");        
-        ingameUIController.UpdateInventory();
+        inventoryBar.UpdateInventory();
 
     }
 
@@ -122,9 +121,11 @@ public class UIController : MonoBehaviour
                 inventoryUI.ShowPanel();
                 inventoryUI.UpdateInventoryUI();
                 inventoryUI.SetSelected();
+                ingameUIController.HidePanel();
                 break;
             case GameAction.HideInventory:
                 inventoryUI.HidePanel();
+                ingameUIController.ShowPanel();
                 GameSettings.IsPaused = false;
                 break;
             case GameAction.none:
@@ -141,7 +142,7 @@ public class UIController : MonoBehaviour
 
     internal void UpdateStats()
     {
-        ingameUIController.UpdateInventory();
+        inventoryBar.UpdateInventory();
     }
 
     public void RequestDoubleAds()

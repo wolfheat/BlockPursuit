@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static Unity.Collections.AllocatorManager;
 
 public class UnlockScreen : BasePanel
 {
@@ -35,7 +36,7 @@ public class UnlockScreen : BasePanel
     public void SetInfo(LevelDefinition level)
     {
         currentLevel = level;
-        levelText.text = StringConverter.LevelAsString(level.LevelDiff,level.LevelIndex);
+        levelText.text = "to unlock level "+ StringConverter.LevelAsString(level.LevelDiff,level.LevelIndex)+"?";
         costText.text = "x"+ (level.unlockRequirements.Count==0?0:level.unlockRequirements[0].amount);
         EventSystem.current.SetSelectedGameObject(okButton);
     }
@@ -55,13 +56,13 @@ public class UnlockScreen : BasePanel
         }
         else if(SavingUtility.playerGameData.Tiles < currentLevel.unlockRequirements[0].amount)
         {
-            Debug.Log("You only got "+ SavingUtility.playerGameData.Tiles+" but update costs "+ currentLevel.unlockRequirements[0].amount+" you cant afford");
+            Debug.Log("You only got "+ SavingUtility.playerGameData.Tiles+" but update costs is "+ currentLevel.unlockRequirements[0].amount+", you cant afford the update!");
             return;
         }
         else
         {
             //Pay fee and unlock level
-            SavingUtility.playerGameData.Tiles -= currentLevel.unlockRequirements[0].amount;
+            SavingUtility.playerGameData.RemoveTiles(currentLevel.unlockRequirements[0].amount);
         }
 
         CancelClicked();

@@ -1,53 +1,43 @@
-using System;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class IngameUIController : BasePanel
 {
-    [SerializeField] TextMeshProUGUI coins;
-    [SerializeField] TextMeshProUGUI tiles;
     [SerializeField] TextMeshProUGUI level;
 
-    InventoryUI inventory;
+    PauseUI pauseMenu;
+    UIController UIController;
     TransitionScreen transitionScreen;
     RestartPanelController restartPanel;
 
     private void OnEnable()
     {
-        Inputs.Instance.Controls.Main.ESC.performed += RequestInventory;
-        PlayerGameData.InventoryUpdate += UpdateInventory;
-    }
-    
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestInventory;
-        PlayerGameData.InventoryUpdate -= UpdateInventory;
+        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
     }
 
-    private void RequestInventory(InputAction.CallbackContext context)
+    private void OnDisable()
     {
-        if (!Enabled()) return;
-        ShowInventoryClicked();
+        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
     }
 
     private void Start()
     {
-        inventory = FindObjectOfType<InventoryUI>();
+        pauseMenu = FindObjectOfType<PauseUI>();
+        UIController = FindObjectOfType<UIController>();
         transitionScreen = FindObjectOfType<TransitionScreen>();
         restartPanel = FindObjectOfType<RestartPanelController>();
     }
 
+    private void RequestESC(InputAction.CallbackContext context)
+    {
+        if (!Enabled()) return;
+        Debug.Log("ESC from in game");
+        ShowInventory();
+    }
     public void UpdateLevel()
     {
         level.text = "Level "+StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
-    }
-
-    public void UpdateInventory()
-    {
-        coins.text = SavingUtility.playerGameData.Coins.ToString();
-        tiles.text = SavingUtility.playerGameData.Tiles.ToString();        
     }
 
     public void RestartLevelRequest()
@@ -58,19 +48,12 @@ public class IngameUIController : BasePanel
         restartPanel.SetSelected();
         GameSettings.IsPaused = true;
     }
-    public void ShowInventoryClicked()
+    public void ShowInventory()
     {
-        if (!inventory.Enabled())
-        {
-            if (GameSettings.IsPaused) return; // Transitioning already
-            GameSettings.IsPaused = true;
-            GameSettings.StoredAction = GameAction.ShowInventory;
-            transitionScreen.StartTransition();
-        }
-        else
-        {
-            GameSettings.StoredAction = GameAction.HideInventory;
-            transitionScreen.StartTransition();
-        }
+        if (GameSettings.InTransition) return;
+
+        Debug.Log("Main Menu Clicked");
+        GameSettings.StoredAction = GameAction.ShowInventory;
+        UIController.StartTransition();
     }
 }

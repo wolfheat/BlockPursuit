@@ -108,10 +108,7 @@ public class LevelSelect : BasePanel
 
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
-        if (infoScreen.latestButton != button)
-            infoScreen.UpdateInfo(button);
-        else
-            Debug.Log("Button already selected");
+        infoScreen.UpdateInfo(button);
     }
 
     public void SetSelected()   

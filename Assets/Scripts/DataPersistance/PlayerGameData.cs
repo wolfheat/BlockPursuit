@@ -43,4 +43,9 @@ public class PlayerGameData
         InventoryUpdate.Invoke();
         return true;
     }
+
+    internal void DefineSavingUtility(SavingUtility savingUtility)
+    {
+        PlayerLevelDataList.DefineSavingUtility(savingUtility);
+    }
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using static Unity.Collections.AllocatorManager;
 
 public class SavingUtility : MonoBehaviour
 {
@@ -12,6 +13,15 @@ public class SavingUtility : MonoBehaviour
     public static Action LoadingComplete;  
 
     public static PlayerGameData playerGameData;
+
+
+    private void OnDisable()
+    {
+        // Unsure if this will run on mobile when exiting
+        PlayerLevelDataList.PlayerLevelDataListUpdate -= OnPlayerSaveDataUpdated;
+        PlayerGameData.InventoryUpdate -= OnPlayerSaveDataUpdated;
+    }
+
 
     private void Start()
     {
@@ -27,16 +37,9 @@ public class SavingUtility : MonoBehaviour
         StartCoroutine(LoadFromFile());
     }
 
-    private void OnApplicationQuit()
+    private void OnPlayerSaveDataUpdated()
     {
-        // No matter if on Editor PC build or Android
         SaveToFile();
-
-#if UNITY_EDITOR
-        Debug.Log("Exiting in Unity Editor = Do not Save to file");
-#else
-
-#endif
     }
 
     public void SaveToFile()
@@ -67,6 +70,10 @@ public class SavingUtility : MonoBehaviour
         try
         {
             playerGameData = dataService.LoadData<PlayerGameData>(SaveFileName, false);
+
+            // Add listener to update of data to save
+            PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
+            PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
 
             Debug.Log(" - Loading items from file! - "); 
         }

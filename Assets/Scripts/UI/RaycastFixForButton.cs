@@ -11,6 +11,6 @@ public class RaycastFixForButton : MonoBehaviour
     {
         button = GetComponent<Image>();
 
-        button.alphaHitTestMinimumThreshold = 0.02f;
+        button.alphaHitTestMinimumThreshold = 0.01f;
     }
 }

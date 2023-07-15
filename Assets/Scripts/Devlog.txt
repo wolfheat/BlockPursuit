@@ -81,21 +81,25 @@ Jun 2023
 14/7	* MobAds seems to work
 		* Fixed better touch arrows for mobile
 		* Player is now rewarded double coins if watching rewarded ad
+15/7	* Changed layout for infoscreen locked
+		* Found issue with first level not shown correctly on info when changing tabs or entering page
+		* Made Inventory a Bar and visible throughout the game
+		* Renamed old inventory to pausescreen
+		* 
 
+		* Need to know how many tiles player has on unlock screen and on level select. Make one static on the top that is always shown?
 
-		* Error where level 2 is seen as locked if the first selected level when showing level select screen, even when its unlocked.
-		
-		* Maybe always have banner on bottom showing?
-			* Make the Touch Arrows better
-
-		* Exiting android app wont close the app only minimize it?
-
-		* Fix aligning of text for level complete screen
+		* Make new input method wher drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
 
 		* Add effect when gaining gold or tile, animated coins and tile adding up to total 
 			in ingameUI until full before transitioning to result screen?
 
+		* Figure out how to read that game returned from ad and run level complete SetSelected to select default button
+			* Maybe not necessary due to ads only being on mobile and it only use touch
+
+
 		ADS:
+		* Maybe always have banner on bottom showing?
 		* Implementation needs more work
 			* Determine when to load the interstitial ads and when to show
 			* Do it need consent to preload?
@@ -134,6 +138,7 @@ Jun 2023
 		ISSUES:
 
 		// - BUGS -
+		* Exiting android app wont close the app only minimize it?
 
 		// - Content -
 		* Make Shop Screen
@@ -159,6 +164,7 @@ Jun 2023
 		// - UI stuff -
 		* Change selected color from dark red to something else?
 		* Make level select tabs more fancy?	
+		* Fix aligning of text for level complete screen
 
 		// - LevelCreation Stuff -
 		* Create randomized level creation for Bronze, Silver, Gold versions
