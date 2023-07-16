@@ -12,33 +12,44 @@ public class AdController : MonoBehaviour
     // Android phone A40 ad ID
     // 21b57b1a-1c89-4856-a479-c97512ee9234
 
+    /*
+        // GAME SPECIFIC CODES
+    #if UNITY_ANDROID
+        // Android
+        public static readonly string AdUnitID_Banner           = "ca-app-pub-6702566600406301/9644289520";
+        public static readonly string AdUnitID_Interstitial     = "ca-app-pub-6702566600406301/5705044516";
+        public static readonly string AdUnitID_Rewarded         = "ca-app-pub-6702566600406301/2695737799";
 
-    // REAL VALUES
-    //public static readonly string AdUnitID_Android_Banner           = "ca-app-pub-6702566600406301/9644289520";
-    //public static readonly string AdUnitID_Android_Interstitial     = "ca-app-pub-6702566600406301/5705044516";
-    //public static readonly string AdUnitID_Android_Rewarded         = "ca-app-pub-6702566600406301/2695737799";
-    //iOS
-    //public static readonly string AdUnitID_iOS_Banner         = "ca-app-pub-6702566600406301/7785247095";
-    //public static readonly string AdUnitID_iOS_Interstitial   = "ca-app-pub-6702566600406301/6089022048";
-    //public static readonly string AdUnitID_iOS_Rewarded       = "ca-app-pub-6702566600406301/3526437885";
+    #elif UNITY_IPHONE
+        // iOS
+        public static readonly string AdUnitID_Banner         = "ca-app-pub-6702566600406301/7785247095";
+        public static readonly string AdUnitID_Interstitial   = "ca-app-pub-6702566600406301/6089022048";
+        public static readonly string AdUnitID_Rewarded       = "ca-app-pub-6702566600406301/3526437885";
+    
+    #endif
+
+    */
+
 
     //TEST VALUES
-
+    #region TestValues
 #if UNITY_ANDROID
 
-    //ANDROID
+    // Test
     public static readonly string AdUnitID_Banner           = "ca-app-pub-3940256099942544/6300978111";
     public static readonly string AdUnitID_Interstitial     = "ca-app-pub-3940256099942544/1033173712";
     public static readonly string AdUnitID_Rewarded         = "ca-app-pub-3940256099942544/5224354917";
 
 #elif UNITY_IPHONE
 
-    //iOS
+    //Test
     public static readonly string AdUnitID_Banner       = "ca-app-pub-3940256099942544/2934735716";
     public static readonly string AdUnitID_Interstitial = "ca-app-pub-3940256099942544/4411468910";
     public static readonly string AdUnitID_Rewarded     = "ca-app-pub-3940256099942544/1712485313";
 
 #endif
+    #endregion 
+
     private void Start()
     {
         // Demonstrates how to configure Google Mobile Ads.
@@ -59,6 +70,7 @@ public class AdController : MonoBehaviour
 
         // Set your test devices.
         // https://developers.google.com/admob/unity/test-ads
+
         List<string> deviceIds = new List<string>()
             {
                 AdRequest.TestDeviceSimulator,

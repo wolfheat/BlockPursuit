@@ -17,7 +17,7 @@ namespace MyGameAds
         {
             // Currently just waiting for 3 seconds to show Banner. Later find out how to read that it has loaded
             LoadAd();
-            StartCoroutine(ShowBanner());
+            //StartCoroutine(ShowBanner());
         }
 
         private IEnumerator ShowBanner()
@@ -41,10 +41,6 @@ namespace MyGameAds
 
             Debug.Log("Banner view created.");
         }
-
-        /// <summary>
-        /// Creates the banner view and loads a banner ad.
-        /// </summary>
         public void LoadAd()
         {
             // Create an instance of a banner view first.
@@ -60,10 +56,6 @@ namespace MyGameAds
             Debug.Log("Loading banner ad.");
             _bannerView.LoadAd(adRequest);
         }
-
-        /// <summary>
-        /// Shows the ad.
-        /// </summary>
         public void ShowAd()
         {
             if (AdLoadedStatus && !AdLoadedShown)
@@ -80,9 +72,6 @@ namespace MyGameAds
             }
         }
 
-        /// <summary>
-        /// Hides the ad.
-        /// </summary>
         public void HideAd()
         {
             if (AdLoadedStatus && AdLoadedShown)
@@ -93,11 +82,6 @@ namespace MyGameAds
             }
         }
 
-        /// <summary>
-        /// Destroys the ad.
-        /// When you are finished with a BannerView, make sure to call
-        /// the Destroy() method before dropping your reference to it.
-        /// </summary>
         public void DestroyOldBannerIfPresent()
         {
             if (_bannerView == null)
@@ -115,9 +99,6 @@ namespace MyGameAds
 
         }
 
-        /// <summary>
-        /// Logs the ResponseInfo.
-        /// </summary>
         public void LogResponseInfo()
         {
             if (_bannerView != null)
@@ -130,9 +111,6 @@ namespace MyGameAds
             }
         }
 
-        /// <summary>
-        /// Listen to events the banner may raise.
-        /// </summary>
         private void ListenToAdEvents()
         {
             // Raised when an ad is loaded into the banner view.

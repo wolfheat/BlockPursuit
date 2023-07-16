@@ -85,7 +85,16 @@ Jun 2023
 		* Found issue with first level not shown correctly on info when changing tabs or entering page
 		* Made Inventory a Bar and visible throughout the game
 		* Renamed old inventory to pausescreen
-		* 
+		* Made buttons that were to small larger
+16/7	* Fixed Interstitial ads so they show after each level (currently non video)
+
+		* Interstitial ads wont show on phone why?
+
+		* Need to figure out why the game wont scale to phone correclty
+			* Resolution makes bottom part of game get outside of screen
+
+
+		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
 
 		* Need to know how many tiles player has on unlock screen and on level select. Make one static on the top that is always shown?
 
