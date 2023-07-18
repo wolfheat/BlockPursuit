@@ -90,7 +90,10 @@ Jun 2023
 		* Added count effect for inventory bar coins
 17/7	* Fixed so Ok button on Level complete is selected after returning from interstitial or rewarded ad
 		* Added Boost panel that shows before player starts a level. Player can see active boosts ticking down and request ads for resettin them.
+		* Rewarded ad is now connected and adds the reward
 
+		TODO
+		* Make sure player is rewarded the extra boost
 
 
 		* Boost menu makes only sense to have before player starts a level. Give player choice to start game or get boost.

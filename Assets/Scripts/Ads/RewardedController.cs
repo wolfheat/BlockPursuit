@@ -7,7 +7,7 @@ namespace MyGameAds
 {
     public class RewardedController : MonoBehaviour
     {
-        public GameObject AdLoadedStatus;
+        public GameObject[] AdLoadedStatus;
         private RewardedAd _rewardedAd;
 
         public static Action Closed;
@@ -47,11 +47,20 @@ namespace MyGameAds
                 RegisterEventHandlers(ad);
 
                 // Inform the UI that the ad is ready.
-                AdLoadedStatus?.SetActive(true);
+                ActivateAdReady(true);
 
 
             });
                 //StartCoroutine(SimpleWaitForShowAds());
+        }
+
+        private void ActivateAdReady(bool value)
+        {
+            foreach (var ad in AdLoadedStatus)
+            {
+                ad?.SetActive(value);
+            }
+
         }
 
         private IEnumerator SimpleWaitForShowAds()
@@ -83,7 +92,7 @@ namespace MyGameAds
             }
 
             // Inform the UI that the ad is not ready.
-            AdLoadedStatus?.SetActive(false);
+            ActivateAdReady(false);
         }
 
         public void DestroyAd()
@@ -96,7 +105,7 @@ namespace MyGameAds
             }
 
             // Inform the UI that the ad is not ready.
-            AdLoadedStatus?.SetActive(false);
+            ActivateAdReady(false);
         }
 
         public void LogResponseInfo()

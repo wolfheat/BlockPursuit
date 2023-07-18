@@ -94,7 +94,7 @@ public class UIController : MonoBehaviour
                 levelCreator.LoadSelectedLevel();
                 boostController.ShowPanel();
                 boostController.SetSelected();
-                interstitialController.LoadAd();
+                rewardedController.LoadAd();
 
                 break;
             case GameAction.RestartLevel:
@@ -132,6 +132,7 @@ public class UIController : MonoBehaviour
                 // Game unpaused and all values reset when closing this panel
                 boostController.HidePanel();
                 ingameUIController.ShowPanel();
+                interstitialController.LoadAd();
                 break;
             case GameAction.HideInventory:
                 inventoryUI.HidePanel();
