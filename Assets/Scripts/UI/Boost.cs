@@ -2,36 +2,24 @@
 using TMPro;
 using UnityEngine;
 
-public enum BoostType { X2, X3, X4 }
-
+public enum BoostType { TileBoost, CoinBoost}
 public abstract class Boost : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI boostText;
     //[SerializeField] Image boostImage;
     [SerializeField] GameObject boostImageActive;
     [SerializeField] GameObject boostImageInactive;
-    protected DateTime storedTime;
+    protected BoostData data;
 
-    [Range(1,60)]
-    protected int boostIntervalMinutes = 5;
-
+    internal void SetData(BoostData boostData)
+    {
+        data = boostData;
+    }
 
     protected void SetText(string text)
     {
         boostText.text = text;
     }
-
-    private void OnEnable()
-    {
-        PlayerGameData.BoostTimeUpdated += UpdateBoostData;
-    }
-
-    private void OnDisable()
-    {
-        PlayerGameData.BoostTimeUpdated -= UpdateBoostData;
-    }
-
-    protected abstract void UpdateBoostData();
 
     private void FixedUpdate()
     {
@@ -42,21 +30,17 @@ public abstract class Boost : MonoBehaviour
 
     private void UpdateTimer()
     {
-        int TimeDiff = (int)(DateTime.Now - storedTime).TotalSeconds;
-
-        int timeLeft = boostIntervalMinutes * 60 - TimeDiff;
-
-        if(timeLeft < 0)
+        if(data.timeLeft <= 0)
         {
             SetText("Not Active");
             SetActive(false);
             
         }
-        else if(timeLeft > 0 && timeLeft <= boostIntervalMinutes*60)
+        else if(data.timeLeft > 0 && data.timeLeft <= data.boostIntervalMinutes*60)
         {
             SetActive(true);
             // Update time string counting down
-            SetText(StringConverter.TimeAsString(timeLeft));
+            SetText(StringConverter.TimeAsString(data.timeLeft));
         }
         else
         {

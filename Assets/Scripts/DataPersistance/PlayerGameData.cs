@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class PlayerGameData
 {
@@ -7,7 +6,7 @@ public class PlayerGameData
     public int Tiles { get; set; } = 0;
     public int Coins { get; set; } = 100;
     public DateTime AtypeBoostTime { get; set; }
-    public DateTime BtypeBoostTime { get; set; }
+    public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
     // Player Levels Data
     public PlayerLevelDataList PlayerLevelDataList { get; private set; }
 
@@ -19,6 +18,12 @@ public class PlayerGameData
         Tiles = 0;
         Coins = 100;
         PlayerLevelDataList = new PlayerLevelDataList();
+    }
+
+    public static void InvokeAll()
+    {
+        InventoryUpdate?.Invoke();
+        BoostTimeUpdated?.Invoke();
     }
 
     public void SetABoostTime(DateTime time)

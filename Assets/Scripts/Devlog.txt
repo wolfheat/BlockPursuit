@@ -91,6 +91,13 @@ Jun 2023
 17/7	* Fixed so Ok button on Level complete is selected after returning from interstitial or rewarded ad
 		* Added Boost panel that shows before player starts a level. Player can see active boosts ticking down and request ads for resettin them.
 		* Rewarded ad is now connected and adds the reward
+18/7	* Remade Boosts system so Boosts are now normal classes that the BoostController adn BoostUI visuals references.
+		* Fixed issue where loading level could not write to PlayerData class
+		* Active effects are now shown on Boost panel and on ingameUI. Effect is still not applied though.
+
+		* Make A separate List of icons on the InGameUI that shows active Boosts
+
+		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour?
 
 		TODO
 		* Make sure player is rewarded the extra boost

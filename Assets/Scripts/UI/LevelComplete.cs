@@ -47,7 +47,7 @@ public class LevelComplete : BasePanel
 
     private void RegainFocus()
     {
-        Debug.Log("OnInterstitialClosed = Setselected");
+        Debug.Log("LevelComplete Regain focus = Setselected");
         SetSelected();
     }
 

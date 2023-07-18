@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using static Unity.Collections.AllocatorManager;
+using System.Text;
 
 public class SavingUtility : MonoBehaviour
 {
@@ -14,22 +15,6 @@ public class SavingUtility : MonoBehaviour
 
     public static PlayerGameData playerGameData;
 
-
-    private void OnEnable()
-    {
-        // Unsure if this will run on mobile when exiting
-        PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
-        PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
-        PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
-    }
-    
-    private void OnDisable()
-    {
-        // Unsure if this will run on mobile when exiting
-        PlayerLevelDataList.PlayerLevelDataListUpdate -= OnPlayerSaveDataUpdated;
-        PlayerGameData.InventoryUpdate -= OnPlayerSaveDataUpdated;
-        PlayerGameData.BoostTimeUpdated -= OnPlayerSaveDataUpdated;
-    }
 
 
     private void Start()
@@ -53,7 +38,7 @@ public class SavingUtility : MonoBehaviour
 
     public void SaveToFile()
     {
-        LogWhatsSaved();
+        LogSaveInfo();
         IDataService dataService = new JsonDataService();
         if (dataService.SaveData(SaveFileName, playerGameData, false))
             Debug.Log("Saved in: "+SaveFileName);
@@ -61,14 +46,29 @@ public class SavingUtility : MonoBehaviour
             Debug.LogError("Could not save file.");
     }
 
-    private void LogWhatsSaved()
+    private void LogSaveInfo()
+    {
+
+        Debug.Log(" -- Saving To File -- START");
+        LogInfo();
+        Debug.Log(" -- Saving To File -- END");
+    }
+    private void LogLoadInfo()
+    {
+        Debug.Log(" -- Loaded File INFO -- START");
+        LogInfo();
+        Debug.Log(" -- Loaded File INFO -- END");
+    }
+    private void LogInfo()
     {
         List<PlayerLevelData> data = playerGameData.PlayerLevelDataList.LevelsList;
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Levels (");
         foreach (PlayerLevelData levelData in data)
-        {
-            Debug.Log("Saving level ID: "+levelData.levelID);
-        }
-        Debug.Log("Saving AtypeBoostTime: "+playerGameData.AtypeBoostTime);
+            sb.Append(levelData.levelID);
+        sb.Append(")");
+        Debug.Log(sb);
+        Debug.Log("ATypeBoost: " + playerGameData.AtypeBoostTime);
     }
 
     public IEnumerator LoadFromFile()
@@ -81,13 +81,15 @@ public class SavingUtility : MonoBehaviour
         {
             playerGameData = dataService.LoadData<PlayerGameData>(SaveFileName, false);
 
+            Debug.Log("Setting player game data from loaded file");
+
+            //Data is now set Dispatch update event before adding listeners to the save
+            //PlayerGameData.InvokeAll();
+
             // Add listener to update of data to save
             PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
-
-            Debug.Log(" - Loading items from file! - ");
-
-            Debug.Log("AtypeBoostTime: " + playerGameData.AtypeBoostTime);
+            PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
         }
         catch (Exception e)
         {
@@ -96,7 +98,8 @@ public class SavingUtility : MonoBehaviour
         }
         finally
         {
-            Debug.Log("Items loaded from file: FINALLY");
+            Debug.Log(" -- Loading From File -- FINALLY");
+            LogLoadInfo();
             LoadingComplete.Invoke();
         }
     }

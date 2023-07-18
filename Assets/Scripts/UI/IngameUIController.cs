@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 public class IngameUIController : BasePanel
 {
     [SerializeField] TextMeshProUGUI level;
+    [SerializeField] GameObject activeBoostsIcons;
 
     PauseUI pauseMenu;
     UIController UIController;
     TransitionScreen transitionScreen;
     RestartPanelController restartPanel;
     //RestartPanelController restartPanel;
+
 
     private void OnEnable()
     {

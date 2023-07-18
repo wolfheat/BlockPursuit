@@ -91,6 +91,8 @@ public class AdController : MonoBehaviour
         MobileAds.SetRequestConfiguration(requestConfiguration);
 
         // Initialize the Google Mobile Ads SDK.
+
+        Debug.Log(" -- ----------------------- -- "); 
         Debug.Log("Google Mobile Ads Initializing.");
         MobileAds.Initialize((InitializationStatus initstatus) =>
         {
@@ -112,7 +114,8 @@ public class AdController : MonoBehaviour
                 }
             }
 
-            Debug.Log("Google Mobile Ads initialization complete.");
+            Debug.Log(" -- Google Mobile Ads initialization complete. -- ");
+            Debug.Log(" -- ------------------------------------------ -- ");
             _isInitialized = true;
         });
     }
