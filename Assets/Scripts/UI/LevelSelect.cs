@@ -124,8 +124,7 @@ public class LevelSelect : BasePanel
     {
         if (!Enabled()) return;
         Debug.Log("Request main menu");
-        GameSettings.StoredAction = GameAction.LoadStartMenu;
-        UIController.StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.LoadStartMenu);
     }
     
     public void RequestGoToMainMenu(InputAction.CallbackContext context)
@@ -173,8 +172,7 @@ public class LevelSelect : BasePanel
         GameSettings.CurrentLevelDefinition = level;
         UIController.UpdateIngameLevelShown();
 
-        GameSettings.StoredAction = GameAction.LoadSelectedLevel;
-        UIController.StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.LoadSelectedLevel);
     }
 
     public void ShowUnlockPanel()

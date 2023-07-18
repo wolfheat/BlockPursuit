@@ -10,6 +10,7 @@ public class IngameUIController : BasePanel
     UIController UIController;
     TransitionScreen transitionScreen;
     RestartPanelController restartPanel;
+    //RestartPanelController restartPanel;
 
     private void OnEnable()
     {
@@ -40,6 +41,17 @@ public class IngameUIController : BasePanel
         level.text = "Level "+StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
     }
 
+    public void RequestBoostMenu()
+    {
+        if (GameSettings.InTransition) return;
+
+        // Show Boost Menu
+
+        restartPanel.ShowPanel();
+        restartPanel.SetSelected();
+        GameSettings.IsPaused = true;
+    }
+
     public void RestartLevelRequest()
     {
         if (GameSettings.InTransition) return;
@@ -53,7 +65,7 @@ public class IngameUIController : BasePanel
         if (GameSettings.InTransition) return;
 
         Debug.Log("Main Menu Clicked");
-        GameSettings.StoredAction = GameAction.ShowInventory;
-        UIController.StartTransition();
+        GameSettings.IsPaused = true;
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowInventory);
     }
 }

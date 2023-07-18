@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] TransitionScreen transitionScreen;
     [SerializeField] LevelCreator levelCreator;
     [SerializeField] IngameUIController ingameUIController;
+    [SerializeField] BoostController boostController;
     [SerializeField] InventoryBar inventoryBar;
     [SerializeField] PauseUI inventoryUI;
 
@@ -65,15 +66,23 @@ public class UIController : MonoBehaviour
         levelSelect.HidePanel();
         inventoryUI.HidePanel();
         ingameUIController.HidePanel();
+        boostController.HidePanel();
     }
 
     internal void DarkEventComplete()
     {
-
-        if(GameSettings.StoredAction == GameAction.HideInventory || GameSettings.StoredAction == GameAction.LoadSelectedLevel)
+        // Runs at the very wnd of transition animation
+        if(GameSettings.StoredAction == GameAction.HideBoostPanel)
         {
             GameSettings.IsPaused = false;
+            GameSettings.CurrentGameState = GameState.RunGame;
+            GameSettings.LevelStartTime = Time.time;
+            GameSettings.MoveCounter = 0;
+            GameSettings.StepsCounter = 0;
         }
+        else if(GameSettings.StoredAction == GameAction.HideInventory)
+            GameSettings.IsPaused = false;
+
     }
 
     internal void DoStoredAction()
@@ -82,20 +91,16 @@ public class UIController : MonoBehaviour
         {
             case GameAction.LoadSelectedLevel:
                 HideAllPanels();
-                ingameUIController.ShowPanel();
                 levelCreator.LoadSelectedLevel();
-                GameSettings.LevelStartTime = Time.time;
-                GameSettings.MoveCounter = 0;
-                GameSettings.StepsCounter = 0;
-
+                boostController.ShowPanel();
+                boostController.SetSelected();
                 interstitialController.LoadAd();
 
                 break;
             case GameAction.RestartLevel:
                 levelCreator.RestartLevel();
-                GameSettings.LevelStartTime = Time.time;
-                GameSettings.MoveCounter = 0;
-                GameSettings.StepsCounter = 0;
+                boostController.ShowPanel();
+                boostController.SetSelected();
                 break;
             case GameAction.LoadStartMenu:
                 HideAllPanels();
@@ -112,32 +117,31 @@ public class UIController : MonoBehaviour
                 HideAllPanels();   
                 levelComplete.ShowPanel();
                 // Load Ad here? This is in the middle of the transition To show Level Complete
+                // This is good because it is a delay between player completes level and ad shows
                 interstitialController.ShowAd();
                 rewardedController.LoadAd();
 
                 break;
              case GameAction.ShowInventory:
-                GameSettings.IsPaused = true;
                 inventoryUI.ShowPanel();
                 inventoryUI.UpdateInventoryUI();
                 inventoryUI.SetSelected();
                 ingameUIController.HidePanel();
                 break;
+            case GameAction.HideBoostPanel:
+                // Game unpaused and all values reset when closing this panel
+                boostController.HidePanel();
+                ingameUIController.ShowPanel();
+                break;
             case GameAction.HideInventory:
                 inventoryUI.HidePanel();
                 ingameUIController.ShowPanel();
-                GameSettings.IsPaused = false;
                 break;
             case GameAction.none:
                 break;
             default:
                 break;
         }
-    }
-
-    internal void StartTransition()
-    {
-        transitionScreen.StartTransition();
     }
 
     internal void UpdateStats()

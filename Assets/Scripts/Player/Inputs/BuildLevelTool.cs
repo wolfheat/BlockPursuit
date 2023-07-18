@@ -53,16 +53,6 @@ public class BuildLevelTool : MonoBehaviour
         }
     }
 
-    public void RequestPrevious()
-    {
-        Debug.Log("Request previous level");
-        levelCreator.LoadPrevLevel();
-    }
-    public void RequestNext()
-    {
-        Debug.Log("Request next level");
-        levelCreator.LoadNextLevel();
-    }
     private void RightClick(InputAction.CallbackContext context)
     {
         NextTool();

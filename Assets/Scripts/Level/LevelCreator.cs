@@ -82,21 +82,6 @@ public class LevelCreator : MonoBehaviour
         return (TileLevel[pos.x, pos.y, 1].walkable) ? true : false;
     }
     
-    public void LoadPrevLevel()
-    {
-        /*
-        GameSettings.CurrentLevel--;
-        if (GameSettings.CurrentLevel < 0) GameSettings.CurrentLevel = 0;
-
-        LoadLevelByDefinition(GameSettings.CurrentLevel, GameSettings.CurrentDifficultLevel);
-
-        GameSettings.IsPaused = false;
-        GameSettings.CurrentGameState = GameState.RunGame;
-        FindObjectOfType<PlayerController>().ShowPlayer();
-        UI.UpdateStats();
-        */
-    }
-    
     public void RestartLevel()
     {
         Debug.Log("Restarting level, currently just loading same again");
@@ -106,29 +91,10 @@ public class LevelCreator : MonoBehaviour
     public void LoadSelectedLevel()
     {   
         LoadLevelByDefinition(GameSettings.CurrentLevelDefinition);
-
-        GameSettings.IsPaused = false;
-        GameSettings.CurrentGameState = GameState.RunGame;
         FindObjectOfType<PlayerController>().ShowPlayer();
         UI.UpdateStats();
     }
     
-    public void LoadNextLevel()
-    {
-        /*
-        if (GameSettings.CurrentLevel >= Levels.LevelDefinitions[GameSettings.CurrentDifficultLevel].Count) return;
-
-        GameSettings.CurrentLevel++;
-        
-        LoadLevelByDefinition(GameSettings.CurrentLevel, GameSettings.CurrentDifficultLevel);
-
-        GameSettings.IsPaused = false;
-        GameSettings.CurrentGameState = GameState.RunGame;
-        FindObjectOfType<PlayerController>().ShowPlayer();
-        UI.UpdateStats();
-        */
-    }
-
     public void LoadLevelByDefinition(LevelDefinition level)
     {
         if (!haveWalls) CreateWalls();
@@ -320,8 +286,7 @@ public class LevelCreator : MonoBehaviour
             levelComplete.UpdateStats(coinGain,tileGain);
 
             //Next level
-            GameSettings.StoredAction = GameAction.ShowLevelComplete;
-            FindObjectOfType<TransitionScreen>().StartTransition();
+            FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowLevelComplete);
 
             // Level Complete show interstitial and load rewarded
             // Maybe check time since last ad was shown?

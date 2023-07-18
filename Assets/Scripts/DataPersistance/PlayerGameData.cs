@@ -1,14 +1,18 @@
 using System;
+using UnityEngine;
 
 public class PlayerGameData
 {
     // Players Inventory
     public int Tiles { get; set; } = 0;
     public int Coins { get; set; } = 100;
+    public DateTime AtypeBoostTime { get; set; }
+    public DateTime BtypeBoostTime { get; set; }
     // Player Levels Data
     public PlayerLevelDataList PlayerLevelDataList { get; private set; }
 
     public static Action InventoryUpdate;
+    public static Action BoostTimeUpdated;
 
     public PlayerGameData()
     {
@@ -17,6 +21,16 @@ public class PlayerGameData
         PlayerLevelDataList = new PlayerLevelDataList();
     }
 
+    public void SetABoostTime(DateTime time)
+    {
+        AtypeBoostTime = time;
+        BoostTimeUpdated.Invoke();
+    }
+    public void SetBBoostTime(DateTime time)
+    {
+        BtypeBoostTime = time;
+        BoostTimeUpdated.Invoke();
+    }
     public void AddCoins(int amt)
     {
         Coins += amt;

@@ -23,6 +23,14 @@ public class TransitionScreen : MonoBehaviour
         if(GameSettings.InTransition) return;
         StartCoroutine(TransitionCoroutine());
     }
+    
+    public void StartTransition(GameAction action)
+    {
+        if(GameSettings.InTransition) return; // Double use of this test, remove this?
+
+        GameSettings.StoredAction = action;
+        StartCoroutine(TransitionCoroutine());
+    }
 
 
     private IEnumerator TransitionCoroutine()

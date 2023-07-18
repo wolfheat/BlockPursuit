@@ -1,3 +1,4 @@
+using MyGameAds;
 using System;
 using System.Linq;
 using TMPro;
@@ -17,7 +18,6 @@ public class LevelComplete : BasePanel
     [SerializeField] TextMeshProUGUI tileGainText;
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
-
     [SerializeField] Button mainSelectedButton;
 
     LevelSelect levelSelect;
@@ -25,6 +25,7 @@ public class LevelComplete : BasePanel
 
     private void OnEnable()
     {
+        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
         Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
     }
 
@@ -38,6 +39,15 @@ public class LevelComplete : BasePanel
         //Select first Button
         //buttons[selectedButton].Select();
         levelSelect = FindObjectOfType<LevelSelect>();
+        SetSelected();
+
+        InterstitialController.Closed += RegainFocus;
+        RewardedController.Closed += RegainFocus;
+    }
+
+    private void RegainFocus()
+    {
+        Debug.Log("OnInterstitialClosed = Setselected");
         SetSelected();
     }
 
@@ -57,20 +67,17 @@ public class LevelComplete : BasePanel
     public void NextLevelClicked()
 	{
 		Debug.Log("Next Level Clicked");
-		GameSettings.StoredAction = GameAction.LoadSelectedLevel;
-        UIController.StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.LoadSelectedLevel);
     }
 	public void SelectLevelClicked()
 	{
 		Debug.Log("Select Level Clicked");
-		GameSettings.StoredAction = GameAction.ShowLevelSelect;
-        UIController.StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowLevelSelect);
     }
 	public void MainMenuClicked()
 	{
 		Debug.Log("Main Menu Clicked");
-		GameSettings.StoredAction = GameAction.LoadStartMenu;
-        UIController.StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.LoadStartMenu);
 
     }
 

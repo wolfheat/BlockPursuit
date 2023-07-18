@@ -86,38 +86,44 @@ Jun 2023
 		* Made Inventory a Bar and visible throughout the game
 		* Renamed old inventory to pausescreen
 		* Made buttons that were to small larger
-16/7	* Fixed Interstitial ads so they show after each level (currently non video)
-
-		* Interstitial ads wont show on phone why?
-
-		* Need to figure out why the game wont scale to phone correclty
-			* Resolution makes bottom part of game get outside of screen
+16/7	* Fixed Interstitial ads so they show after each level (currently non video) Also shown in the middle of transition to level complete
+		* Added count effect for inventory bar coins
+17/7	* Fixed so Ok button on Level complete is selected after returning from interstitial or rewarded ad
+		* Added Boost panel that shows before player starts a level. Player can see active boosts ticking down and request ads for resettin them.
 
 
-		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
 
-		* Need to know how many tiles player has on unlock screen and on level select. Make one static on the top that is always shown?
+		* Boost menu makes only sense to have before player starts a level. Give player choice to start game or get boost.
+		* This boost menu can also show active effects and its duration
+		* Have count down timer that player can reset to hour any time by watching ad before starting level.
 
-		* Make new input method wher drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
 
-		* Add effect when gaining gold or tile, animated coins and tile adding up to total 
-			in ingameUI until full before transitioning to result screen?
 
 		* Figure out how to read that game returned from ad and run level complete SetSelected to select default button
 			* Maybe not necessary due to ads only being on mobile and it only use touch
 
+		TODO LATER:
+		* Need to figure out why the game wont scale to phone correclty
+			* Resolution makes bottom part of game get outside of screen
+			* Still cant figure this one out, tried changing build for widescreen native resolution without success
+		
+		CONSIDER CHANGES:
+		* Coins update from level complete is instant, maybe have them come after interstitial ad?
+
+		NEW MECHANICS:
+		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
+		* Make new input method where drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
+
 
 		ADS:
-		* Maybe always have banner on bottom showing?
+		* Maybe always have banner on bottom showing? -YES
 		* Implementation needs more work
-			* Determine when to load the interstitial ads and when to show
-			* Do it need consent to preload?
-			* Implement recieving coins from rewarded ad.
+			* Does it need consent to preload?
 
 
 		* Add Ads screen and Icon. Icon shows every 5 min since last used.
 			* X2  get X2 rewards for next hour by watching video
-			* Take 10coins free or watch ad for +50gold ever 5 minute
+			* Take 10 coins free or watch ad for +50gold ever 5 minute
 			* OR Just watch ad for +50gold ever 5 minute
 			* At reward screen have watch add to double coins button (this will make it optional)
 			* Every 5 or 10 ad watches gives a guaranteed tile? (Maybe special tile for special levels?!?)
@@ -131,6 +137,8 @@ Jun 2023
 		* Paid player get free gold every 5 min without watching ad.
 
 		MAYBE:
+		* Check if IAP is the way to go, better revenue than ads
+		* Have a ads description page that states why ads are in the game and how it works?
 		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)
 		* IDEA -  Maybe have collectables that are tiles that form a collection that can be used to clear a set of special levels,
 			but the player has to decide which tiles to bring into the levels themself. Many levels can be cleared with different set of tiles

@@ -23,8 +23,7 @@ public class StartMenu : BasePanel
     public void StartGameClicked()
 	{
 		Debug.Log("StartGame Clicked");
-		GameSettings.StoredAction = GameAction.ShowLevelSelect;
-		FindObjectOfType<TransitionScreen>().StartTransition();
+		FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowLevelSelect);
 	}
 	public void SettingsClicked()
 	{

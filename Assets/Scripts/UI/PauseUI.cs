@@ -22,15 +22,13 @@ public class PauseUI : BasePanel
     }
     public void CloseInventoryRequest()
     {
-        GameSettings.StoredAction = GameAction.HideInventory;
-        FindObjectOfType<TransitionScreen>().StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.HideInventory);
     }
 
     public void QuitLevelClicked()
     {
         Debug.Log("Quit Level Clicked"); 
-        GameSettings.StoredAction = GameAction.ShowLevelSelect;
-        FindObjectOfType<TransitionScreen>().StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowLevelSelect);
     }
 
 }

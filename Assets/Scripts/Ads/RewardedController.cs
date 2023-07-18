@@ -10,6 +10,7 @@ namespace MyGameAds
         public GameObject AdLoadedStatus;
         private RewardedAd _rewardedAd;
 
+        public static Action Closed;
         public void LoadAd()
         {
             // Clean up the old ad before loading a new one.
@@ -135,6 +136,7 @@ namespace MyGameAds
             ad.OnAdFullScreenContentClosed += () =>
             {
                 Debug.Log("Rewarded ad full screen content closed.");
+                Closed.Invoke();
             };
             // Raised when the ad failed to open full screen content.
             ad.OnAdFullScreenContentFailed += (AdError error) =>

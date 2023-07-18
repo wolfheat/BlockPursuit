@@ -31,7 +31,6 @@ public class RestartPanelController : BasePanel
         HidePanel();
 
         if (GameSettings.InTransition) return;
-        GameSettings.StoredAction = GameAction.RestartLevel;
-        transitionScreen.StartTransition();
+        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.RestartLevel);
     }
 }

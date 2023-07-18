@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TabToggleGameObject : MonoBehaviour
 {
-    [SerializeField] GameObject gameObject;
+    [SerializeField] GameObject go;
 
     private void OnEnable()
     {
@@ -20,6 +18,6 @@ public class TabToggleGameObject : MonoBehaviour
     // Update is called once per frame
     private void Toggle(InputAction.CallbackContext context)
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        go.SetActive(!go.activeSelf);
     }
 }

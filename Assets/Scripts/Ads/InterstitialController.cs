@@ -12,6 +12,8 @@ namespace MyGameAds
         private InterstitialAd _interstitialAd;
         private InfoText info;
 
+        public static Action Closed;
+
         public bool Loaded { get; private set; }
 
         private void Awake()
@@ -37,7 +39,7 @@ namespace MyGameAds
                 if (error != null)
                 {
                     Debug.LogError("Interstitial ad failed to load an ad with error : " + error);
-                    info.DisplayText("Interstitial ad failed to load an ad with error : " + error);
+                    info?.DisplayText("Interstitial ad failed to load an ad with error : " + error);
                     return;
                 }
                 // If the operation failed for unknown reasons.
@@ -45,13 +47,13 @@ namespace MyGameAds
                 if (ad == null)
                 {
                     Debug.LogError("Unexpected error: Interstitial load event fired with null ad and null error.");
-                    info.DisplayText("Unexpected error: Interstitial load event fired with null ad and null error.");
+                    info?.DisplayText("Unexpected error: Interstitial load event fired with null ad and null error.");
                     return;
                 }
 
                 // The operation completed successfully.
                 Debug.Log("Interstitial ad loaded with response : " + ad.GetResponseInfo());
-                info.DisplayText("Interstitial ad loaded with response : " + ad.GetResponseInfo());
+                //info.DisplayText("Interstitial ad loaded with response : " + ad.GetResponseInfo());
                 _interstitialAd = ad;
 
                 // Register to ad events to extend functionality.
@@ -69,13 +71,13 @@ namespace MyGameAds
             if (_interstitialAd != null && _interstitialAd.CanShowAd())
             {
                 Debug.Log("Showing interstitial ad.");
-                info.DisplayText("Showing interstitial ad.");
+                info?.DisplayText("Showing interstitial ad.");
                 _interstitialAd.Show();
             }
             else
             {
                 Debug.LogError("Interstitial ad is not ready yet.");
-                info.DisplayText("Showing interstitial anot ready yet.");
+                info?.DisplayText("Showing interstitial anot ready yet.");
             }
 
             // Inform the UI that the ad is not ready.
@@ -108,6 +110,7 @@ namespace MyGameAds
 
         private void RegisterEventHandlers(InterstitialAd ad)
         {
+
             // Raised when the ad is estimated to have earned money.
             ad.OnAdPaid += (AdValue adValue) =>
             {
@@ -134,6 +137,7 @@ namespace MyGameAds
             ad.OnAdFullScreenContentClosed += () =>
             {
                 Debug.Log("Interstitial ad full screen content closed.");
+                Closed.Invoke();
             };
             // Raised when the ad failed to open full screen content.
             ad.OnAdFullScreenContentFailed += (AdError error) =>

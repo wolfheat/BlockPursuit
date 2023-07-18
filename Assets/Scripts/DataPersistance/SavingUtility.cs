@@ -15,11 +15,20 @@ public class SavingUtility : MonoBehaviour
     public static PlayerGameData playerGameData;
 
 
+    private void OnEnable()
+    {
+        // Unsure if this will run on mobile when exiting
+        PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
+        PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
+        PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
+    }
+    
     private void OnDisable()
     {
         // Unsure if this will run on mobile when exiting
         PlayerLevelDataList.PlayerLevelDataListUpdate -= OnPlayerSaveDataUpdated;
         PlayerGameData.InventoryUpdate -= OnPlayerSaveDataUpdated;
+        PlayerGameData.BoostTimeUpdated -= OnPlayerSaveDataUpdated;
     }
 
 
@@ -59,6 +68,7 @@ public class SavingUtility : MonoBehaviour
         {
             Debug.Log("Saving level ID: "+levelData.levelID);
         }
+        Debug.Log("Saving AtypeBoostTime: "+playerGameData.AtypeBoostTime);
     }
 
     public IEnumerator LoadFromFile()
@@ -75,7 +85,9 @@ public class SavingUtility : MonoBehaviour
             PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
 
-            Debug.Log(" - Loading items from file! - "); 
+            Debug.Log(" - Loading items from file! - ");
+
+            Debug.Log("AtypeBoostTime: " + playerGameData.AtypeBoostTime);
         }
         catch (Exception e)
         {
