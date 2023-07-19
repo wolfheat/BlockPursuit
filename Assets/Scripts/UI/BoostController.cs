@@ -10,8 +10,8 @@ public class BoostController : BasePanel
     [SerializeField] TypeBBoost bBoost;
     [SerializeField] BoostIcon aBoostIcon;
     [SerializeField] BoostIcon bBoostIcon;
-    private BoostData A_BoostData = new BoostData(BoostType.TileBoost, 9);
-    private BoostData B_BoostData = new BoostData(BoostType.CoinBoost, 9);
+    public BoostData A_BoostData = new BoostData(BoostType.TileBoost, 9);
+    public BoostData B_BoostData = new BoostData(BoostType.CoinBoost, 9);
 
     private void OnEnable()
     {
@@ -55,17 +55,24 @@ public class BoostController : BasePanel
 
     private void RegainFocus()
     {
+        if (!Enabled()) return;
         Debug.Log("BoostController Return from ad, Gain focus");
         SetSelected();
 
         //If first reward is allready active activate second reward?
-
         if(!A_BoostData.active)
-        // Set a new Boost Time
-        SavingUtility.playerGameData.SetABoostTime(DateTime.Now);
-
-        else
+            // Set a new Boost Time
+            SavingUtility.playerGameData.SetABoostTime(DateTime.Now);
+        else if (!B_BoostData.active)
             SavingUtility.playerGameData.SetBBoostTime(DateTime.Now);
+        else
+        {
+            //Activate the one with less time left?
+            if(A_BoostData.timeLeft < B_BoostData.timeLeft)
+                SavingUtility.playerGameData.SetABoostTime(DateTime.Now);
+            else
+                SavingUtility.playerGameData.SetBBoostTime(DateTime.Now);
+        }
 
 
     }
@@ -84,6 +91,6 @@ public class BoostController : BasePanel
 
     public void StartRequest()
     {
-        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.HideBoostPanel);
+        TransitionScreen.Instance.StartTransition(GameAction.HideBoostPanel);
     }
 }

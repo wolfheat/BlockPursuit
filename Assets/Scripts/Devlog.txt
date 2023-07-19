@@ -94,36 +94,27 @@ Jun 2023
 18/7	* Remade Boosts system so Boosts are now normal classes that the BoostController adn BoostUI visuals references.
 		* Fixed issue where loading level could not write to PlayerData class
 		* Active effects are now shown on Boost panel and on ingameUI. Effect is still not applied though.
+19/7	* Effects are applied, tiles are now randomly generated. 0.25% base chance and 25% for boost
+		* When requesting boost it resets the bost with lowest time left or in order Tile, Coins
 
-		* Make A separate List of icons on the InGameUI that shows active Boosts
-
-		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour?
 
 		TODO
-		* Make sure player is rewarded the extra boost
-
-
-		* Boost menu makes only sense to have before player starts a level. Give player choice to start game or get boost.
-		* This boost menu can also show active effects and its duration
+		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
 		* Have count down timer that player can reset to hour any time by watching ad before starting level.
-
-
-
-		* Figure out how to read that game returned from ad and run level complete SetSelected to select default button
-			* Maybe not necessary due to ads only being on mobile and it only use touch
 
 		TODO LATER:
 		* Need to figure out why the game wont scale to phone correclty
 			* Resolution makes bottom part of game get outside of screen
 			* Still cant figure this one out, tried changing build for widescreen native resolution without success
+		* Older phone does not grand rewards from ads nor saves game data to file, why
 		
 		CONSIDER CHANGES:
-		* Coins update from level complete is instant, maybe have them come after interstitial ad?
+		* Coins update from level complete is instant, maybe have them come after interstitial ad? Maybe have greater delay before ad so player have time to see this added coins?
 
 		NEW MECHANICS:
 		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
 		* Make new input method where drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
-
+		* Add achievement page that are included in save feature
 
 		ADS:
 		* Maybe always have banner on bottom showing? -YES

@@ -8,6 +8,7 @@ public class BoostData
     public int timeLeft;
     public bool active;
     public int boostIntervalMinutes = 5;
+    public float boostMultiplier = 0.25f;
 
     public BoostData(BoostType t,int intervalMinutes)
     {

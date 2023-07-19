@@ -67,17 +67,17 @@ public class LevelComplete : BasePanel
     public void NextLevelClicked()
 	{
 		Debug.Log("Next Level Clicked");
-        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.LoadSelectedLevel);
+        TransitionScreen.Instance.StartTransition(GameAction.LoadSelectedLevel);
     }
 	public void SelectLevelClicked()
 	{
 		Debug.Log("Select Level Clicked");
-        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowLevelSelect);
+        TransitionScreen.Instance.StartTransition(GameAction.ShowLevelSelect);
     }
 	public void MainMenuClicked()
 	{
 		Debug.Log("Main Menu Clicked");
-        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.LoadStartMenu);
+        TransitionScreen.Instance.StartTransition(GameAction.LoadStartMenu);
 
     }
 

@@ -5,12 +5,11 @@ using UnityEngine.InputSystem;
 public class IngameUIController : BasePanel
 {
     [SerializeField] TextMeshProUGUI level;
-    [SerializeField] GameObject activeBoostsIcons;
+    //[SerializeField] GameObject activeBoostsIcons;
 
-    PauseUI pauseMenu;
-    UIController UIController;
-    TransitionScreen transitionScreen;
-    RestartPanelController restartPanel;
+    private PauseUI pauseMenu;
+    private UIController UIController;
+    private RestartPanelController restartPanel;
     //RestartPanelController restartPanel;
 
 
@@ -28,7 +27,6 @@ public class IngameUIController : BasePanel
     {
         pauseMenu = FindObjectOfType<PauseUI>();
         UIController = FindObjectOfType<UIController>();
-        transitionScreen = FindObjectOfType<TransitionScreen>();
         restartPanel = FindObjectOfType<RestartPanelController>();
     }
 
@@ -42,13 +40,13 @@ public class IngameUIController : BasePanel
     {
         level.text = "Level "+StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
     }
-
+    
     public void RequestBoostMenu()
     {
         if (GameSettings.InTransition) return;
-
+    
         // Show Boost Menu
-
+    
         restartPanel.ShowPanel();
         restartPanel.SetSelected();
         GameSettings.IsPaused = true;
@@ -68,6 +66,6 @@ public class IngameUIController : BasePanel
 
         Debug.Log("Main Menu Clicked");
         GameSettings.IsPaused = true;
-        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowInventory);
+        TransitionScreen.Instance.StartTransition(GameAction.ShowInventory);
     }
 }

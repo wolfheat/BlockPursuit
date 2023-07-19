@@ -29,6 +29,8 @@ public class GameSettings : MonoBehaviour
 	public static bool IsPaused { get; set; } = true;
 	public static int CurrentLevel { get; set; } = 1;
 	public static int CurrentDifficultLevel { get; internal set; } = 0;
+	public static int CoinDefaultGain { get; internal set; } = 55;
+	public static float TileDefaultProbability { get; internal set; } = 0.25f;
 
     [SerializeField] bool useMusicSetting;
 

@@ -6,14 +6,8 @@ using UnityEngine.UI;
 
 public class RestartPanelController : BasePanel
 {
-    TransitionScreen transitionScreen;
 
     [SerializeField] Button mainSelectedButton;
-
-    private void Start()
-    {
-        transitionScreen = FindObjectOfType<TransitionScreen>();
-    }
 
 
     public void SetSelected()
@@ -31,6 +25,6 @@ public class RestartPanelController : BasePanel
         HidePanel();
 
         if (GameSettings.InTransition) return;
-        FindObjectOfType<TransitionScreen>().StartTransition(GameAction.RestartLevel);
+        TransitionScreen.Instance.StartTransition(GameAction.RestartLevel);
     }
 }

@@ -17,6 +17,16 @@ public class TransitionScreen : MonoBehaviour
     public Action GameDarkEvent;
     public Action GameDarkEventComplete;
 
+    public static TransitionScreen Instance;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+        else 
+            Destroy(gameObject);
+    }
+
 
     public void StartTransition()
     {

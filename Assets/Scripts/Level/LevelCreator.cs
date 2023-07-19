@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 public enum TileType{O,L,J,I,S,T,Z, Goal}
 public enum GameTileType {Hole,Walkable,Stone}
 
@@ -38,6 +38,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] List<Section> sectionPrefabs = new List<Section>();
 
     LevelComplete levelComplete;
+    BoostController boostController;
     
 
     public Section paintSection;
@@ -60,6 +61,7 @@ public class LevelCreator : MonoBehaviour
     {
         TileLevel = new GameTile[LevelWidth, LevelHeight,2];
         levelComplete = FindObjectOfType<LevelComplete>();
+        boostController = FindObjectOfType<BoostController>();
         UI = FindObjectOfType<UIController>();
     }
     
@@ -275,17 +277,18 @@ public class LevelCreator : MonoBehaviour
             FindObjectOfType<PlayerController>().HidePlayer();
             GameSettings.IsPaused = true;
 
-            int coinGain = 55;
-            int tileGain = 1;
+            int tileGain = Random.Range(0f, 1f) < (GameSettings.TileDefaultProbability * (1 + boostController.A_BoostData.boostMultiplier)) ? 1 : 0; ;
+            int coinGain = (int)(GameSettings.CoinDefaultGain * (1f + (boostController.B_BoostData.active ? boostController.B_BoostData.boostMultiplier : 0)));
 
             // Determin reward
             SavingUtility.playerGameData.AddCoins(coinGain);
-            SavingUtility.playerGameData.AddTiles(tileGain);
+            if(tileGain>0)
+                SavingUtility.playerGameData.AddTiles(tileGain);
 
             levelComplete.UpdateStats(coinGain,tileGain);
 
             //Next level
-            FindObjectOfType<TransitionScreen>().StartTransition(GameAction.ShowLevelComplete);
+            TransitionScreen.Instance.StartTransition(GameAction.ShowLevelComplete);
 
             // Level Complete show interstitial and load rewarded
             // Maybe check time since last ad was shown?
