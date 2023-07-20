@@ -258,7 +258,14 @@ public class LevelCreator : MonoBehaviour
     
     public void PlaceHeldSectionAt(Vector2Int pos,int rotationIndex)
     {
-        if(!SectionPlacable(heldSection)) return;
+        if (!SectionPlacable(heldSection))
+        {
+            //Play un placable sound
+            SoundController.Instance.PlaySFX(SFX.Unplacable);
+            return;
+        }
+
+        SoundController.Instance.PlaySFX(SFX.PlacedTile);
 
         heldSection.Held(false, false);
 

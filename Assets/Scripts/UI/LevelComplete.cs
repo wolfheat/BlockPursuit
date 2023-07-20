@@ -101,6 +101,8 @@ public class LevelComplete : BasePanel
         tileGainText.text = tiles.ToString();
         LevelDefinition current = GameSettings.CurrentLevelDefinition;
 
+        SoundController.Instance.PlaySFX(SFX.GainCoin);
+
         //FIX
         levelText.text = StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
 
@@ -158,6 +160,7 @@ public class LevelComplete : BasePanel
             // Determin reward
             coinGainText.text = (latestCoins*2).ToString();
             SavingUtility.playerGameData.AddCoins(latestCoins);
+            SoundController.Instance.PlaySFX(SFX.GainCoin);
         }
         else
         {

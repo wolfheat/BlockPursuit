@@ -96,6 +96,16 @@ Jun 2023
 		* Active effects are now shown on Boost panel and on ingameUI. Effect is still not applied though.
 19/7	* Effects are applied, tiles are now randomly generated. 0.25% base chance and 25% for boost
 		* When requesting boost it resets the bost with lowest time left or in order Tile, Coins
+20/7	* Added sound effects for menu, unlocking, gain coin, place tile
+		* Added Credits, Settigns and Achievements panels
+		* Added sounds for getting Boost
+
+		* Make pressing settings from game open settingstab correctly
+		* Should achievements tab be available from in game, prob yes.
+
+		* Have coin sound until coins are filled up to total?
+		* In settings have player able to set SFX OFF, or menu / game versions of SFX
+		* Make SOund clips used OGG files to lower size and maybe compress quality?
 
 
 		TODO
@@ -123,17 +133,12 @@ Jun 2023
 
 
 		* Add Ads screen and Icon. Icon shows every 5 min since last used.
-			* X2  get X2 rewards for next hour by watching video
+			* +25% rewards for next 9 min
 			* Take 10 coins free or watch ad for +50gold ever 5 minute
 			* OR Just watch ad for +50gold ever 5 minute
 			* At reward screen have watch add to double coins button (this will make it optional)
 			* Every 5 or 10 ad watches gives a guaranteed tile? (Maybe special tile for special levels?!?)
 
-
-
-
-
-		* Implement Ads for gaining coins
 		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
 		* Paid player get free gold every 5 min without watching ad.
 
@@ -174,8 +179,8 @@ Jun 2023
 		* Show that sometimes there are more tile parts than goals, just need to fill them
 
 		// - Mechanics Stuff -		
-		
-		// - Data stuff -
+
+				// - Data stuff -
 		* Clean Up tile definition and way levels are stored when created at runtime
 		* Make player gain gold and tiles when completing levels, animation for this?
 		

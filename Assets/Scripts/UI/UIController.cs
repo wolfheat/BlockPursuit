@@ -1,4 +1,5 @@
 using MyGameAds;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,9 @@ public class UIController : MonoBehaviour
     [SerializeField] BoostController boostController;
     [SerializeField] InventoryBar inventoryBar;
     [SerializeField] PauseUI inventoryUI;
+    [SerializeField] SettingsController settings;
+    [SerializeField] CreditsController credits;
+    [SerializeField] AchievementsController achievements;
 
     private Time lastInterstitial;
     private Time lastRewarded;
@@ -156,4 +160,16 @@ public class UIController : MonoBehaviour
         FindObjectOfType<RewardedController>().LoadAd();
     }
 
+    internal void RequestAchievements()
+    {
+        achievements.ShowPanel();
+    }
+    internal void RequestCredits()
+    {
+        credits.ShowPanel();
+    }
+    internal void RequestSettings()
+    {
+        settings.ShowPanel();
+    }
 }

@@ -26,7 +26,7 @@ public class TransitionScreen : MonoBehaviour
         else 
             Destroy(gameObject);
     }
-
+        
 
     public void StartTransition()
     {

@@ -93,27 +93,34 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        bool canMove = true;
 
         if (direction.x > 0)
         {
-            if(WalkableTile(Position + Vector2Int.right))
-                newMovement = new MovementAction(transform.position,transform.rotation,Vector3.right, Vector3.down,0);
-            else return;
+            if (WalkableTile(Position + Vector2Int.right))
+                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.right, Vector3.down, 0);
+            else canMove = false;
         }
         if(direction.y > 0){
             if (WalkableTile(Position + Vector2Int.up))
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right,1);
-            else return;
+            else canMove = false;
         }
         if(direction.x < 0){
             if (WalkableTile(Position + Vector2Int.left))
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.left, Vector3.up,2);
-            else return;
+            else canMove = false;
         }
         if(direction.y < 0){
             if (WalkableTile(Position + Vector2Int.down))
                 newMovement = new MovementAction(transform.position, transform.rotation, Vector3.down, Vector3.left,3);
-            else return;
+            else canMove = false;
+        }
+
+        if (!canMove)
+        {
+            SoundController.Instance.PlaySFX(SFX.NoStep);
+            return;
         }
 
         current = newMovement;
@@ -154,6 +161,7 @@ public class PlayerController : MonoBehaviour
             stepTimer = 0;
             moving = false;
             CheckForStored();
+            SoundController.Instance.PlaySFX(SFX.TakeStep);
         }
     }
 

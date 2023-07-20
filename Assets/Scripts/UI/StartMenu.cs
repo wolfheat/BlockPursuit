@@ -9,10 +9,12 @@ public class StartMenu : BasePanel
 	[SerializeField] private List<Image> images;
 
     [SerializeField] Button mainSelectedButton;
+    private UIController uIController;
     private void Start()
     {
         ShowPanel();
-		SetSelected();		
+		SetSelected();
+        uIController = FindObjectOfType<UIController>();
     }
 
     public void SetSelected()
@@ -28,14 +30,18 @@ public class StartMenu : BasePanel
 	public void SettingsClicked()
 	{
 		Debug.Log("Settings Clicked");
-	}
+        uIController.RequestSettings();
+
+    }
 	public void AchievementsClicked()
 	{
 		Debug.Log("Achievements Clicked");
+		uIController.RequestAchievements();
 	}
 	public void CreditsClicked()
 	{
 		Debug.Log("Credits Clicked");
+		uIController.RequestCredits();
 	}
 	public void QuitGameClicked()
 	{

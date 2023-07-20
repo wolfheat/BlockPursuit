@@ -2,13 +2,16 @@ using UnityEngine;
 
 public enum MusicType{Menu,Normal,Boss}
 
-public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, MenuError, FireRocket, FireBullet, StarPickup}
+public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, MenuError, FireRocket, FireBullet, StarPickup, Unplacable, PlacedTile, NoStep, TakeStep, Unlock, GainCoin, RecieveBoost}
 
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] menu;
     [SerializeField] private AudioClip[] sfx;
-    [SerializeField] private AudioClip[] pickup;
+    [SerializeField] private AudioClip[] moves;
+    [SerializeField] private AudioClip[] unlock;
+    [SerializeField] private AudioClip[] boost;
+    [SerializeField] private AudioClip[] coin;
     [SerializeField] private AudioClip[] music;
 
     private AudioSource musicSource;
@@ -139,13 +142,7 @@ public class SoundController : MonoBehaviour
 
         switch (type)
 		{
-            case SFX.ShipDestroyedA:
-                sfxSource.PlayOneShot(sfx[0]);
-                break;
-			case SFX.FireRocket:
-                sfxSource.PlayOneShot(sfx[1]);
-                break;
-			case SFX.MenuStep:
+            case SFX.MenuStep:
                 sfxSource.PlayOneShot(menu[0]);
                 break;
 			case SFX.MenuSelect:
@@ -154,8 +151,26 @@ public class SoundController : MonoBehaviour
 			case SFX.MenuError:
                 sfxSource.PlayOneShot(menu[2]);
                 break;
-			case SFX.StarPickup:
-                sfxSource.PlayOneShot(pickup[0]);
+			case SFX.TakeStep:
+                //sfxSource.PlayOneShot(moves[0]);
+                break;
+			case SFX.PlacedTile:
+                sfxSource.PlayOneShot(moves[1]);
+                break;
+			case SFX.NoStep:
+                sfxSource.PlayOneShot(moves[2]);
+                break;
+			case SFX.Unplacable:
+                sfxSource.PlayOneShot(moves[3]);
+                break;
+			case SFX.Unlock:
+                sfxSource.PlayOneShot(unlock[0]);
+                break;
+			case SFX.GainCoin:
+                sfxSource.PlayOneShot(coin[0]);
+                break;
+			case SFX.RecieveBoost:
+                sfxSource.PlayOneShot(boost[0]);
                 break;
 			default:
 				break;

@@ -53,6 +53,7 @@ public class UnlockScreen : BasePanel
         if(currentLevel.unlockRequirements.Count == 0)
         {
             Debug.Log("No requirements found");
+            SoundController.Instance.PlaySFX(SFX.Unlock);
         }
         else if(SavingUtility.playerGameData.Tiles < currentLevel.unlockRequirements[0].amount)
         {
@@ -63,6 +64,7 @@ public class UnlockScreen : BasePanel
         {
             //Pay fee and unlock level
             SavingUtility.playerGameData.RemoveTiles(currentLevel.unlockRequirements[0].amount);
+            SoundController.Instance.PlaySFX(SFX.Unlock);
         }
 
         CancelClicked();

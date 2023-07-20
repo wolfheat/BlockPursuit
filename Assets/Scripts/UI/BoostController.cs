@@ -74,6 +74,7 @@ public class BoostController : BasePanel
                 SavingUtility.playerGameData.SetBBoostTime(DateTime.Now);
         }
 
+        SoundController.Instance.PlaySFX(SFX.RecieveBoost);
 
     }
 
