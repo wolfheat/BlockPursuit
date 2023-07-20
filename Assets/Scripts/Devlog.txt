@@ -99,8 +99,16 @@ Jun 2023
 20/7	* Added sound effects for menu, unlocking, gain coin, place tile
 		* Added Credits, Settigns and Achievements panels
 		* Added sounds for getting Boost
+		* Added some base content for Settings, Achievement and Credits screen
 
-		* Make pressing settings from game open settingstab correctly
+
+		* Make settings page complete
+			* Clicking off music or SFX should make basrs inactive (save value for when enabled?)
+			* Change checkboxes 
+
+		* Should boosts be avalable from within a game played? Giving player chance to boost before completing a started level? No?
+
+		* Make pressing settings from game open settings-tab correctly
 		* Should achievements tab be available from in game, prob yes.
 
 		* Have coin sound until coins are filled up to total?
