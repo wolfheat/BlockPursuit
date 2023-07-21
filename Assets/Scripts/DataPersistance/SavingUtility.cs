@@ -2,14 +2,13 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using static Unity.Collections.AllocatorManager;
 using System.Text;
 
 public class SavingUtility : MonoBehaviour
 {
 
     private const string SaveFileName = "/player-data.txt";
-    public static SavingUtility Instance { get; set; }
+    public static SavingUtility Instance { get; private set; }
 
     public static Action LoadingComplete;  
 
@@ -48,7 +47,6 @@ public class SavingUtility : MonoBehaviour
 
     private void LogSaveInfo()
     {
-
         Debug.Log(" -- Saving To File -- START");
         LogInfo();
         Debug.Log(" -- Saving To File -- END");
@@ -69,6 +67,9 @@ public class SavingUtility : MonoBehaviour
         sb.Append(")");
         Debug.Log(sb);
         Debug.Log("ATypeBoost: " + playerGameData.AtypeBoostTime);
+        Debug.Log("Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume));
+        Debug.Log("SFX: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.SFXVolume));
+
     }
 
     public IEnumerator LoadFromFile()
@@ -98,6 +99,14 @@ public class SavingUtility : MonoBehaviour
         }
         finally
         {
+            // Make sure soundSettings is initialized
+            if(playerGameData.soundSettings == null)
+            {
+                Debug.Log("!!  Initialize new sound settings!!! ");
+                playerGameData.soundSettings = new SoundSettings();
+            }
+
+
             Debug.Log(" -- Loading From File -- FINALLY");
             LogLoadInfo();
             LoadingComplete.Invoke();

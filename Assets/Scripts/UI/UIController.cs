@@ -171,5 +171,6 @@ public class UIController : MonoBehaviour
     internal void RequestSettings()
     {
         settings.ShowPanel();
+        settings.UpdatePanelFromStored();
     }
 }

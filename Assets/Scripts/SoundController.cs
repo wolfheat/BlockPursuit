@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum MusicType{Menu,Normal,Boss}
@@ -18,15 +19,16 @@ public class SoundController : MonoBehaviour
     private AudioSource musicSourceIntense;
     private AudioSource sfxSource;
     private bool doPlayMusic = false;
-    private bool doPlaySFX=true;
+    private bool doPlaySFX = true;
     private bool doingFadeout = false;
 
     public MusicType activeMusic = MusicType.Menu;
     public static SoundController Instance { get; set; }
 
-	private float presetVolume = 0.8f;
+	private float presetVolume = 1.0f;
     //private float presetSFXVolume = 0.1f;
     private float presetSFXStepVolume = 0.5f;
+    private float presetSFXVolume = 1.0f;
 
     private float totalFadeOutTime = 3.5f;
     private float fadeOutMargin = 0.01f;
@@ -47,21 +49,32 @@ public class SoundController : MonoBehaviour
         musicSourceIntense = gameObject.AddComponent<AudioSource>();
         musicSource = musicSourceHolder.AddComponent<AudioSource>();
         sfxSource = sfxSourceHolder.AddComponent<AudioSource>();
+
+        SavingUtility.LoadingComplete += SetVolumesFromStoredValues; 
     }
     private void Start()
     {
         musicSourceIntense.loop = true;
         musicSourceIntense.volume = 0.5f;
         musicSource.loop = true;
-        musicSource.volume = 0.2f;
-        sfxSource.volume = presetSFXStepVolume;
-
-        doPlayMusic = GameSettings.UseMusic;
-
-        PlayMusic();
-
-        //Inputs.Instance.Controls.MainActionMap.MusicToggle.performed += _ => MuteToggle();// = _.ReadValue<float>();
 	}
+
+    public void SetVolumesFromStoredValues()
+    {
+        doPlayMusic = SavingUtility.playerGameData.soundSettings.UseMusic;  
+        doPlaySFX = SavingUtility.playerGameData.soundSettings.UseSFX;
+        presetVolume = SavingUtility.playerGameData.soundSettings.MusicVolume;
+        presetSFXVolume = SavingUtility.playerGameData.soundSettings.SFXVolume;
+        UpdateSoundSettings();
+    }
+
+    private void UpdateSoundSettings()
+    {
+        musicSource.volume = presetVolume;
+        sfxSource.volume = presetSFXVolume;
+
+        if (doPlayMusic ) PlayMusic();
+    }
 
     public void SetMusicType(MusicType t)
     {
@@ -121,6 +134,8 @@ public class SoundController : MonoBehaviour
 	{
         if (doPlayMusic)
         {
+            if (musicSource.isPlaying) return;
+
             if ((int)activeMusic >= music.Length) { Debug.LogWarning("To few Music files assigned to SoundController"); return;}
             musicSource.clip = music[(int)activeMusic];
             musicSource.Play();

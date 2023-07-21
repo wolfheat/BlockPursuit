@@ -1,5 +1,14 @@
 using System;
 
+[Serializable]
+public class SoundSettings
+{
+    public bool UseMusic { get; set; } = true;
+    public float MusicVolume { get; set; } = 1;
+    public bool UseSFX { get; set; } = true;
+    public float SFXVolume { get; set; } = 1;
+}
+[Serializable]
 public class PlayerGameData
 {
     // Players Inventory
@@ -7,6 +16,9 @@ public class PlayerGameData
     public int Coins { get; set; } = 100;
     public DateTime AtypeBoostTime { get; set; }
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
+
+    public SoundSettings soundSettings = new SoundSettings();
+
     // Player Levels Data
     public PlayerLevelDataList PlayerLevelDataList { get; private set; }
 

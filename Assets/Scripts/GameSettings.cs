@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum GameState { Menu, RunGame, Transition}
@@ -11,7 +12,11 @@ public class GameSettings : MonoBehaviour
 	public static float GameScale { get; private set; }
 
 	// USED
-	public static bool UseMusic { get; private set; } = true;
+
+	//SOUND - RELATED
+
+
+
 	public static GameAction StoredAction { get; set; } = GameAction.none;	
 	public static LevelDefinition CurrentLevelDefinition { get; set; }	
 	public static float LevelStartTime { get; set; }	
@@ -32,8 +37,6 @@ public class GameSettings : MonoBehaviour
 	public static int CoinDefaultGain { get; internal set; } = 55;
 	public static float TileDefaultProbability { get; internal set; } = 0.25f;
 
-    [SerializeField] bool useMusicSetting;
-
 
 	private void Awake()
 	{
@@ -42,17 +45,7 @@ public class GameSettings : MonoBehaviour
 		ScreenWidth = ScreenHeight * ((float)Screen.width/ (float)Screen.height);
 		AspectRatio = ScreenWidth/ScreenHeight;
 		GameScale = ScreenHeight/ Screen.height;
-		//Inputs.Instance.Controls.MainActionMap.X.performed += _ => CanShoot = !CanShoot;
-	}
+        //Inputs.Instance.Controls.MainActionMap.X.performed += _ => CanShoot = !CanShoot;
 
-	private void Update()
-	{
-		if (UseMusic != useMusicSetting)
-		{
-			UseMusic = useMusicSetting;
-			FindObjectOfType<SoundController>().UseMusic(UseMusic);
-		}
-	}
-
-
+    }
 }

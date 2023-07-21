@@ -100,6 +100,9 @@ Jun 2023
 		* Added Credits, Settigns and Achievements panels
 		* Added sounds for getting Boost
 		* Added some base content for Settings, Achievement and Credits screen
+21/7	* Implemented sound volume settings
+
+		* Have skins that player can buy and use as player?
 
 
 		* Make settings page complete
