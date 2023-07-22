@@ -66,9 +66,9 @@ public class SavingUtility : MonoBehaviour
             sb.Append(levelData.levelID);
         sb.Append(")");
         Debug.Log(sb);
-        Debug.Log("ATypeBoost: " + playerGameData.AtypeBoostTime);
-        Debug.Log("Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume));
-        Debug.Log("SFX: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.SFXVolume));
+        Debug.Log("Boost time saved A: " + playerGameData.AtypeBoostTime+" B: "+ playerGameData.BtypeBoostTime);
+        Debug.Log("Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume+
+                    " SFX: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.SFXVolume)));
 
     }
 

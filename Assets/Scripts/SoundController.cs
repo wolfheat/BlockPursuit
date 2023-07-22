@@ -64,8 +64,15 @@ public class SoundController : MonoBehaviour
         doPlayMusic = SavingUtility.playerGameData.soundSettings.UseMusic;  
         doPlaySFX = SavingUtility.playerGameData.soundSettings.UseSFX;
         presetVolume = SavingUtility.playerGameData.soundSettings.MusicVolume;
+
+        if (presetSFXVolume != SavingUtility.playerGameData.soundSettings.SFXVolume) PlaySFXChangedVolume();
         presetSFXVolume = SavingUtility.playerGameData.soundSettings.SFXVolume;
         UpdateSoundSettings();
+    }
+
+    private void PlaySFXChangedVolume()
+    {
+        PlaySFX(SFX.GainCoin,false);
     }
 
     private void UpdateSoundSettings()

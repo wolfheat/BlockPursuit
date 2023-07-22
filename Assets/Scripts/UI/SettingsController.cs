@@ -11,13 +11,18 @@ public class SettingsController : BasePanel
         //if(SavingUtility.playerGameData.soundSettings==null)
 
         // Opened Settings page place data
-        Debug.Log("Setting music anf SFX from stored values: "+ SavingUtility.playerGameData.soundSettings.MusicVolume+","+ SavingUtility.playerGameData.soundSettings.SFXVolume);
+        Debug.Log("Setting music and SFX from stored values: "+ SavingUtility.playerGameData.soundSettings.MusicVolume+","+ SavingUtility.playerGameData.soundSettings.SFXVolume);
         music.SetVolumeFromStoredValue(SavingUtility.playerGameData.soundSettings.MusicVolume);
         SFX.SetVolumeFromStoredValue(SavingUtility.playerGameData.soundSettings.SFXVolume);
     }
 
     public void SoundSettingsUpdated()
     {
+        if (!Enabled())
+        {
+            Debug.Log("SoundSettingsUpdated, but settings panel is not active");
+            return;
+        }
         Debug.Log("Sound Settings have been updated");
         SavingUtility.playerGameData.soundSettings.UseMusic = (music.SliderValue()==0) ? false : true;
         SavingUtility.playerGameData.soundSettings.UseSFX = (SFX.SliderValue() == 0) ? false : true;
