@@ -60,6 +60,11 @@ public class IngameUIController : BasePanel
         restartPanel.SetSelected();
         GameSettings.IsPaused = true;
     }
+    public void RestartSettigsMenu()
+    {
+        if (GameSettings.InTransition) return;
+        UIController.RequestSettings();
+    }
     public void ShowInventory()
     {
         if (GameSettings.InTransition) return;

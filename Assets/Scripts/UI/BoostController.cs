@@ -90,6 +90,10 @@ public class BoostController : BasePanel
     }
 
 
+    public void BackToLevelSelect()
+    {
+        TransitionScreen.Instance.StartTransition(GameAction.ShowLevelSelect);
+    }
     public void StartRequest()
     {
         TransitionScreen.Instance.StartTransition(GameAction.HideBoostPanel);

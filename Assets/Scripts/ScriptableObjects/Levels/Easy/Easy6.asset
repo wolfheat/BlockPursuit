@@ -13,39 +13,37 @@ MonoBehaviour:
   m_Name: Easy6
   m_EditorClassIdentifier: 
   levelName: Level
-  levelID: -106
+  levelID: -4820262
   unlocked: 0
-  playerStart: {x: 9, y: 9}
+  playerStart: {x: 9, y: 10}
   tiles:
   - type: 0
-    position: {x: 8, y: 7}
-    rotation: 0
-  - type: 3
     position: {x: 7, y: 9}
-    rotation: 0
-  - type: 3
-    position: {x: 7, y: 10}
-    rotation: 0
+    rotation: 1
   - type: 0
-    position: {x: 8, y: 11}
-    rotation: 0
+    position: {x: 11, y: 9}
+    rotation: 1
+  - type: 0
+    position: {x: 9, y: 11}
+    rotation: 1
+  - type: 0
+    position: {x: 9, y: 9}
+    rotation: -3
   goals:
-  - {x: 12, y: 12}
-  - {x: 12, y: 11}
-  - {x: 13, y: 10}
-  - {x: 13, y: 9}
-  - {x: 14, y: 8}
-  - {x: 14, y: 7}
-  - {x: 13, y: 12}
-  - {x: 13, y: 11}
-  - {x: 12, y: 10}
-  - {x: 12, y: 9}
-  - {x: 14, y: 9}
-  - {x: 14, y: 10}
-  - {x: 11, y: 8}
-  - {x: 11, y: 7}
-  - {x: 11, y: 10}
-  - {x: 11, y: 9}
-  unlockRequirements:
-  - tileType: 0
-    amount: 1
+  - {x: 6, y: 12}
+  - {x: 6, y: 11}
+  - {x: 7, y: 11}
+  - {x: 7, y: 12}
+  - {x: 10, y: 12}
+  - {x: 11, y: 11}
+  - {x: 10, y: 11}
+  - {x: 11, y: 12}
+  - {x: 9, y: 8}
+  - {x: 8, y: 8}
+  - {x: 8, y: 7}
+  - {x: 9, y: 7}
+  - {x: 8, y: 10}
+  - {x: 8, y: 9}
+  - {x: 9, y: 9}
+  - {x: 9, y: 10}
+  unlockRequirements: []
