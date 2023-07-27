@@ -107,6 +107,9 @@ Jun 2023
 		* Tested all levels, they are all completable now
 
 
+		* Must have tutorial
+			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.
+
 
 
 
