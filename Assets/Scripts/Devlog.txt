@@ -136,6 +136,8 @@ Jun 2023
 		NEW CONTENT
 		* Have skins that player can buy and use as player?
 
+		* Maybe have gems as currency? Maybe implement later, not now.
+
 		ACHIEVEMENTS IDEAS
 			* Clearing all A,B,C levels
 			* Clearing every level
@@ -164,7 +166,7 @@ Jun 2023
 		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)
 		* IDEA -  Maybe have collectables that are tiles that form a collection that can be used to clear a set of special levels,
 			but the player has to decide which tiles to bring into the levels themself. Many levels can be cleared with different set of tiles
-			, but With right combination all levels can be cleared if tiles are selected in a clever way.
+			but With right combination all levels can be cleared if tiles are selected in a clever way.
 		
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player
