@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject playerHolder;
+    [SerializeField] GameObject body;
+    [SerializeField] GameObject hands;
     [SerializeField] PlayerLevelDataList playerLevelsDefinition;
 
     public void ShowPlayer() => playerHolder.SetActive(true);
@@ -42,8 +44,8 @@ public class PlayerController : MonoBehaviour
         Position = pos;
         target = pos + Vector2Int.up;
         transform.localPosition = new Vector3(Position.x,Position.y,0);
-        //current = new MovementAction(transform.localPosition, Quaternion.LookRotation(Vector3.back, Vector3.up), Vector3.up, Vector3.back,1);
-        current = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right, 1);
+        //current = new MovementAction(body.transform.localPosition, Quaternion.LookRotation(Vector3.back, Vector3.up), Vector3.up, Vector3.back,1);
+        current = new MovementAction(transform.position, body.transform.rotation, Vector3.up, Vector3.right, 1);
     }
     
     public void InitPosition()
@@ -98,22 +100,22 @@ public class PlayerController : MonoBehaviour
         if (direction.x > 0)
         {
             if (WalkableTile(Position + Vector2Int.right))
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.right, Vector3.down, 0);
+                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.right, Vector3.down, 0);
             else canMove = false;
         }
         if(direction.y > 0){
             if (WalkableTile(Position + Vector2Int.up))
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.up, Vector3.right,1);
+                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.up, Vector3.right,1);
             else canMove = false;
         }
         if(direction.x < 0){
             if (WalkableTile(Position + Vector2Int.left))
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.left, Vector3.up,2);
+                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.left, Vector3.up,2);
             else canMove = false;
         }
         if(direction.y < 0){
             if (WalkableTile(Position + Vector2Int.down))
-                newMovement = new MovementAction(transform.position, transform.rotation, Vector3.down, Vector3.left,3);
+                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.down, Vector3.left,3);
             else canMove = false;
         }
 
@@ -150,13 +152,13 @@ public class PlayerController : MonoBehaviour
 
         stepTimer += Time.deltaTime;
         transform.position += current.movement* Time.deltaTime/stepTime;
-        transform.Rotate(current.rotation, 90f * Time.deltaTime / stepTime, Space.World);
+        body.transform.Rotate(current.rotation, 90f * Time.deltaTime / stepTime, Space.World);
         if(stepTimer >= stepTime)
         {
             transform.position = current.TargetPosition;
-            transform.rotation = current.TargetRotation;
-
-            
+            body.transform.rotation = current.TargetRotation;
+            Debug.Log("Hands pointing: "+current.movement+","+Vector3.back);
+            hands.transform.rotation = Quaternion.LookRotation(Vector3.forward, current.movement);
 
             stepTimer = 0;
             moving = false;

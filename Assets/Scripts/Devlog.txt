@@ -138,6 +138,12 @@ Jun 2023
 
 		* Maybe have gems as currency? Maybe implement later, not now.
 
+
+		AFTER PLAYTEST
+		* Need to have arms to show direction, maybe have tile that can be picked up animate into higher position
+		* Need to have tutorial, interactive?
+
+
 		ACHIEVEMENTS IDEAS
 			* Clearing all A,B,C levels
 			* Clearing every level
