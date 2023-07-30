@@ -105,7 +105,10 @@ Jun 2023
 		* Made some icons for achievements panel and updated the visuals
 		* Sound Settings are now available from ingame
 		* Tested all levels, they are all completable now
+30/7	* Added BoxMonster as player and made rotation correct
 
+		* Fix boxmosters position and size to match the tiles.
+		* Add animations to player
 
 		* Must have tutorial
 			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.

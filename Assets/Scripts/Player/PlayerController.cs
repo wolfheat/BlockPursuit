@@ -5,6 +5,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject playerHolder;
     [SerializeField] GameObject body;
+
+    [SerializeField] GameObject character;
+    [SerializeField] Animator animator;
+
     [SerializeField] GameObject hands;
     [SerializeField] PlayerLevelDataList playerLevelsDefinition;
 
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
         target = pos + Vector2Int.up;
         transform.localPosition = new Vector3(Position.x,Position.y,0);
         //current = new MovementAction(body.transform.localPosition, Quaternion.LookRotation(Vector3.back, Vector3.up), Vector3.up, Vector3.back,1);
-        current = new MovementAction(transform.position, body.transform.rotation, Vector3.up, Vector3.right, 1);
+        current = new MovementAction(transform.position, character.transform.forward, Vector3.up, 1);
     }
     
     public void InitPosition()
@@ -100,22 +104,22 @@ public class PlayerController : MonoBehaviour
         if (direction.x > 0)
         {
             if (WalkableTile(Position + Vector2Int.right))
-                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.right, Vector3.down, 0);
+                newMovement = new MovementAction(transform.position, character.transform.forward, Vector3.right, 0);
             else canMove = false;
         }
         if(direction.y > 0){
             if (WalkableTile(Position + Vector2Int.up))
-                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.up, Vector3.right,1);
+                newMovement = new MovementAction(transform.position, character.transform.forward, Vector3.up , 1);
             else canMove = false;
         }
         if(direction.x < 0){
             if (WalkableTile(Position + Vector2Int.left))
-                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.left, Vector3.up,2);
+                newMovement = new MovementAction(transform.position, character.transform.forward, Vector3.left, 2);
             else canMove = false;
         }
         if(direction.y < 0){
             if (WalkableTile(Position + Vector2Int.down))
-                newMovement = new MovementAction(transform.position, body.transform.rotation, Vector3.down, Vector3.left,3);
+                newMovement = new MovementAction(transform.position, character.transform.forward, Vector3.down, 3);
             else canMove = false;
         }
 
@@ -151,14 +155,19 @@ public class PlayerController : MonoBehaviour
         }
 
         stepTimer += Time.deltaTime;
+        
         transform.position += current.movement* Time.deltaTime/stepTime;
-        body.transform.Rotate(current.rotation, 90f * Time.deltaTime / stepTime, Space.World);
+        character.transform.Rotate(Vector3.back, current.angle * Time.deltaTime / stepTime, Space.World); 
+        //body.transform.Rotate(current.rotation, 90f * Time.deltaTime / stepTime, Space.World);
+
+
         if(stepTimer >= stepTime)
         {
             transform.position = current.TargetPosition;
-            body.transform.rotation = current.TargetRotation;
+            //body.transform.rotation = current.TargetRotation;
             Debug.Log("Hands pointing: "+current.movement+","+Vector3.back);
             hands.transform.rotation = Quaternion.LookRotation(Vector3.forward, current.movement);
+            character.transform.rotation = Quaternion.LookRotation(current.movement,Vector3.back);
 
             stepTimer = 0;
             moving = false;
@@ -195,12 +204,33 @@ public class PlayerController : MonoBehaviour
     public class MovementAction
     {
         public Vector3 movement;
+        public float angle;
+        public Vector3 startLookDirection;
+        public Vector3 TargetPosition;
+        public Vector3 TargetLookDirection;
+        public int rotationIndex;
+
+        public MovementAction(Vector3 currentPos, Vector3 startLookDir, Vector3 move, int rotIndex)
+        {
+            movement = move;
+            startLookDirection = startLookDir;
+            //Calulate Target
+            TargetPosition = currentPos + move;
+            TargetLookDirection = move;
+            rotationIndex = rotIndex;
+            angle = Vector3.SignedAngle(startLookDir, TargetLookDirection,Vector3.back);
+        }
+    }
+    
+    public class MovementActionOLD
+    {
+        public Vector3 movement;
         public Vector3 rotation;
         public Vector3 TargetPosition;
         public Quaternion TargetRotation;
         public int rotationIndex;
 
-        public MovementAction(Vector3 currentPos, Quaternion currentRot, Vector3 move, Vector3 rot, int rotIndex)
+        public MovementActionOLD(Vector3 currentPos, Quaternion currentRot, Vector3 move, Vector3 rot, int rotIndex)
         {
             movement = move;
             rotation = rot;
