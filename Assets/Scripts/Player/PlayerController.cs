@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
 
     private float stepTime = 0.15f;
     private float stepTimer = 0;
+    private float idleTimer = 0;
+    private const float IdleRelaxTime = 30f;
+
     private bool moving = false;
     MovementAction newMovement;
 
@@ -142,16 +146,28 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (moving) DoMove();
+        else Idle();
+    }
+
+    private void Idle()
+    {
+        idleTimer += Time.deltaTime;
+        if(idleTimer > IdleRelaxTime)
+        {
+            animator.CrossFade("Idle Relax",0.1f);
+            idleTimer = 0;
+        }
     }
 
     private void DoMove()
     {
-        // PLace actual player at the target position directly so picking up tiles act from this position even during the move animation
+        // Place actual player at the target position directly so picking up tiles act from this position even during the move animation
         if (stepTimer == 0)
         {
             PlacePlayerAtIndex();
             levelCreator.UpdateHeld(target, current.rotationIndex);
             GameSettings.StepsCounter++;
+            animator.CrossFade("Run", 0.1f);
         }
 
         stepTimer += Time.deltaTime;
@@ -173,6 +189,8 @@ public class PlayerController : MonoBehaviour
             moving = false;
             CheckForStored();
             SoundController.Instance.PlaySFX(SFX.TakeStep);
+            animator.CrossFade("Idle", 0.1f);
+            idleTimer = 0;
         }
     }
 

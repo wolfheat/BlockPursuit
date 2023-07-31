@@ -106,15 +106,16 @@ Jun 2023
 		* Sound Settings are now available from ingame
 		* Tested all levels, they are all completable now
 30/7	* Added BoxMonster as player and made rotation correct
+31/7	* Minor adjustment to inventory bar
+		* Fixed animation issue with avatar
+		* Made new animator, only have "Idle", "Idle Relax" and "Run" animation states
 
-		* Fix boxmosters position and size to match the tiles.
-		* Add animations to player
+
+		* Maybe change camera angle to be able to see more. Maybe need to make tiles 3D again?
+		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate?
 
 		* Must have tutorial
 			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.
-
-
-
 
 		TODO
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
