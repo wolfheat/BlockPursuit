@@ -109,6 +109,9 @@ Jun 2023
 31/7	* Minor adjustment to inventory bar
 		* Fixed animation issue with avatar
 		* Made new animator, only have "Idle", "Idle Relax" and "Run" animation states
+1/8		* Tried to model new tile in Blender. Not much success.
+
+		* Need to figure uut lights and tile shaders to look good. Change to UnLit versions and lights?
 
 
 		* Maybe change camera angle to be able to see more. Maybe need to make tiles 3D again?
