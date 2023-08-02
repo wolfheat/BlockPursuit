@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Section : MonoBehaviour
@@ -19,6 +21,69 @@ public class Section : MonoBehaviour
     public GameObject OriginalPivot { get => originalPivot; private set { originalPivot = value;} }
 
     public GameObject TileHolder { get; private set; }
+
+    private Coroutine shake;
+
+    public void ShakeTile()
+    {
+        if (shake != null) return;
+        shake = StartCoroutine(Shake());
+    }
+
+    public void InterruptShakeIfShaking()
+    {
+        if (shake == null) return;
+
+        StopCoroutine(shake);
+        shake = null;
+        transform.position = startPosition;
+    }
+
+
+    private const float ShakeDistance = 0.15f;
+    private const float MinShakeDistance = 0.004f;
+    private const float ShakeDampening = 0.85f;
+    private const float ShakeSpeed = 14f;
+    private const float ShakeTime = 0.25f;
+    private Vector3 startPosition;
+
+    private IEnumerator Shake()
+    {
+        // Need to exit shake if lifting it?
+
+        startPosition = transform.position;
+        // Shake tile Right To left
+        // Make tile move shaking Right to left
+        float timer = 0;
+        float displacement = 0;
+        float CurrentShakeDistance = ShakeDistance;
+        int dir = 1;
+        while(timer < ShakeTime && CurrentShakeDistance > MinShakeDistance)
+        {
+            float moveDistance = ShakeSpeed * Time.deltaTime * dir;
+            timer += Time.deltaTime;
+            displacement += moveDistance;
+
+            transform.position += new Vector3(moveDistance,0,0);    
+
+            if((dir==1 && displacement > CurrentShakeDistance)|| (dir == -1 && displacement < -CurrentShakeDistance))
+            {
+                //Change direction
+                dir *= -1;
+                // DampenDistance
+                CurrentShakeDistance *= ShakeDampening;
+            }
+            yield return null;
+        }
+
+        //reset to start position
+        transform.position = startPosition;
+
+        shake = null;
+
+        if (timer >= ShakeTime) Debug.Log("Shake Timed Out");
+        else if(CurrentShakeDistance <= MinShakeDistance) Debug.Log("Shake Exited due to being small");
+    }
 
     public void SetHolder(GameObject tileHolder)
     {
@@ -46,7 +111,6 @@ public class Section : MonoBehaviour
 
     internal void PickedUpAtRotationIndex(int rotationIndex)
     {
-        Debug.Log("Setting Pickeduprotation to :" + rotationIndex);
         pickedupRotationIndex = rotationIndex;
     }
 
@@ -59,12 +123,13 @@ public class Section : MonoBehaviour
 
     internal void Held(bool held, bool valid)
     {
+
         //Debug.Log("Update Valid: "+valid);
         visualTypes[0].gameObject.SetActive(!held);
         visualTypes[1].gameObject.SetActive(held && valid);
         visualTypes[2].gameObject.SetActive(held && !valid);        
     }
-    
+
     internal void Used(bool used)
     {
         visualTypes[0].gameObject.SetActive(used);

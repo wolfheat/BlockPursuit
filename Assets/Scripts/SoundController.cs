@@ -4,7 +4,6 @@ using UnityEngine;
 public enum MusicType{Menu,Normal,Boss}
 
 public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, MenuError, FireRocket, FireBullet, StarPickup, Unplacable, PlacedTile, NoStep, TakeStep, Unlock, GainCoin, RecieveBoost}
-
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] menu;

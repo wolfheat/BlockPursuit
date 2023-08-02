@@ -1,6 +1,12 @@
 using System;
 
 [Serializable]
+public class LightSettings
+{
+    public float LightIntensity { get; set; } = 1;
+}
+
+[Serializable]
 public class SoundSettings
 {
     public bool UseMusic { get; set; } = true;
@@ -18,6 +24,7 @@ public class PlayerGameData
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
 
     public SoundSettings soundSettings = new SoundSettings();
+    public LightSettings lightSettings = new LightSettings();
 
     // Player Levels Data
     public PlayerLevelDataList PlayerLevelDataList { get; private set; }

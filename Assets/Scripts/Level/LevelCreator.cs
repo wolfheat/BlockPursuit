@@ -210,7 +210,12 @@ public class LevelCreator : MonoBehaviour
         if (TileLevel[from.x,from.y, 1].section != TileLevel[target.x,target.y, 1].section) return true;
         return false;
     }
-    
+
+    public GameTile GetSectionAt(Vector2Int from, Vector2Int target)
+    {
+        if (!PossiblePickup(from, target)) return null;
+        else return TileLevel[target.x, target.y, 1];
+    }
     public void PickupSectionAt(Vector2Int from, Vector2Int target, int rotationIndex)
     {
         //Debug.Log("Request to pick up from " + from + " target:" + target + " Possible = "+ PossiblePickup(from, target)+" in direction: "+rotationIndex);
@@ -218,6 +223,9 @@ public class LevelCreator : MonoBehaviour
 
         GameTile pickedTile = TileLevel[target.x, target.y, 1];
         heldSection = pickedTile.section;
+
+        heldSection.InterruptShakeIfShaking();
+
 
         heldSection.SetPivotPosition(pickedTile);
         //Debug.Log("Set Rotation to "+rotationIndex);

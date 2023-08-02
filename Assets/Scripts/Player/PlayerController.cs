@@ -181,7 +181,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = current.TargetPosition;
             //body.transform.rotation = current.TargetRotation;
-            Debug.Log("Hands pointing: "+current.movement+","+Vector3.back);
             hands.transform.rotation = Quaternion.LookRotation(Vector3.forward, current.movement);
             character.transform.rotation = Quaternion.LookRotation(current.movement,Vector3.back);
 
@@ -191,6 +190,13 @@ public class PlayerController : MonoBehaviour
             SoundController.Instance.PlaySFX(SFX.TakeStep);
             animator.CrossFade("Idle", 0.1f);
             idleTimer = 0;
+
+            //Check here if pickable tile is in front of player and do sheke if so
+            GameTile tile = levelCreator.GetSectionAt(Position, target);
+            if (tile != null && levelCreator.heldSection == null)
+            {
+                tile.section.ShakeTile();
+            }
         }
     }
 

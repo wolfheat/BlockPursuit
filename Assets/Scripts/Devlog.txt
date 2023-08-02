@@ -110,17 +110,18 @@ Jun 2023
 		* Fixed animation issue with avatar
 		* Made new animator, only have "Idle", "Idle Relax" and "Run" animation states
 1/8		* Tried to model new tile in Blender. Not much success.
+2/8		* Managed to fix light issue, origin of wrong URP asset (2D version?)
+		* Added all tiles as Blender tiles. Looks kinda ok.
+		* Added settings for In-game lights intensity
+		* Added shake system for tiles that can be picked up
+			* Need to fix so recently dropped tiles wont shake if dropped on the way to the edge
 
-		* Need to figure uut lights and tile shaders to look good. Change to UnLit versions and lights?
 
+		* Add option to remove shake in settings?
 
-		* Maybe change camera angle to be able to see more. Maybe need to make tiles 3D again?
-		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate?
-
-		* Must have tutorial
-			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.
 
 		TODO
+		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate?
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
 		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
 
@@ -135,6 +136,8 @@ Jun 2023
 		* Coins update from level complete is instant, maybe have them come after interstitial ad? Maybe have greater delay before ad so player have time to see this added coins?
 
 		NEW MECHANICS:
+		* Must have tutorial
+			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.
 		* Have coin sound until coins are filled up to total?
 		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
 		* Make new input method where drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
@@ -142,14 +145,13 @@ Jun 2023
 
 		NEW CONTENT
 		* Have skins that player can buy and use as player?
-
+		* Have tile Variations player can use
+		* Add irregular tiles? And have as separate Level Variant
 		* Maybe have gems as currency? Maybe implement later, not now.
 
-
 		AFTER PLAYTEST
-		* Need to have arms to show direction, maybe have tile that can be picked up animate into higher position
+		* Need to have arms to show direction, maybe have tile that can be picked up animate into higher position - Added boxmonster
 		* Need to have tutorial, interactive?
-
 
 		ACHIEVEMENTS IDEAS
 			* Clearing all A,B,C levels
@@ -157,11 +159,13 @@ Jun 2023
 			* Clearing Every level on par moves?!?
 			* Boosting 10 times, 100 times etc
 			* Playing every day for a week? Streak count?
+			* Showing X rewarded ads
 
 		ADS:
 		* Maybe always have banner on bottom showing? -YES
 		* Implementation needs more work
 			* Does it need consent to preload?
+			* Better way to load the ads than current system?
 
 		* Add Ads screen and Icon. Icon shows every 5 min since last used.
 			* +25% rewards for next 9 min
@@ -172,6 +176,7 @@ Jun 2023
 
 		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
 		* Paid player get free gold every 5 min without watching ad.
+			* Make separate game loop for paying player / Have a payable version on steam?
 
 		MAYBE:
 		* Check if IAP is the way to go, better revenue than ads
@@ -211,9 +216,10 @@ Jun 2023
 
 		// - Mechanics Stuff -		
 
-				// - Data stuff -
+		// - Data stuff -
 		* Clean Up tile definition and way levels are stored when created at runtime
 		* Make player gain gold and tiles when completing levels, animation for this?
+		* Add rewarded ads counter for an achievement
 		
 		// - UI stuff -
 		* Change selected color from dark red to something else?
