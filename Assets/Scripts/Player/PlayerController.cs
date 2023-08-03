@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     Vector2Int target = new Vector2Int(5,5);
 
     public Section holdingSection;
-
+    private bool placedDuringWalkCycle;
 
     public Vector2Int Position { get; private set; }
 
@@ -84,7 +84,11 @@ public class PlayerController : MonoBehaviour
         if (levelCreator.heldSection == null)
             levelCreator.PickupSectionAt(Position, target, current.rotationIndex);
         else
+        {
             levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
+            placedDuringWalkCycle = true;
+
+        }
     }
 
     private void MoveInput(InputAction.CallbackContext context)
@@ -193,10 +197,13 @@ public class PlayerController : MonoBehaviour
 
             //Check here if pickable tile is in front of player and do sheke if so
             GameTile tile = levelCreator.GetSectionAt(Position, target);
-            if (tile != null && levelCreator.heldSection == null)
+
+            if (tile != null && levelCreator.heldSection == null && !placedDuringWalkCycle)
             {
                 tile.section.ShakeTile();
             }
+            if (tile != null && levelCreator.heldSection == null && placedDuringWalkCycle) Debug.Log("Placed Tile During Walk Cycle, Dont Shake");
+            placedDuringWalkCycle = false;
         }
     }
 

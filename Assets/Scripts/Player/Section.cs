@@ -26,7 +26,7 @@ public class Section : MonoBehaviour
 
     public void ShakeTile()
     {
-        if (shake != null) return;
+        if (shake != null || !SavingUtility.playerGameData.gameEffectsSettings.UseShake) return;
         shake = StartCoroutine(Shake());
     }
 
@@ -81,8 +81,8 @@ public class Section : MonoBehaviour
 
         shake = null;
 
-        if (timer >= ShakeTime) Debug.Log("Shake Timed Out");
-        else if(CurrentShakeDistance <= MinShakeDistance) Debug.Log("Shake Exited due to being small");
+        //if (timer >= ShakeTime) Debug.Log("Shake Timed Out");
+        //else if(CurrentShakeDistance <= MinShakeDistance) Debug.Log("Shake Exited due to being small");
     }
 
     public void SetHolder(GameObject tileHolder)

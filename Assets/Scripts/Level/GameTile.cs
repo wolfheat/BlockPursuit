@@ -6,5 +6,6 @@ public class GameTile : MonoBehaviour
     public Section section;
     public GameTileType type;
     public bool walkable;
+    public bool placedRecently;
     public Vector2Int Pos;
 }

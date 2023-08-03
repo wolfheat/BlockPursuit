@@ -264,13 +264,13 @@ public class LevelCreator : MonoBehaviour
         paintSection = null;
     }
     
-    public void PlaceHeldSectionAt(Vector2Int pos,int rotationIndex)
+    public bool PlaceHeldSectionAt(Vector2Int pos,int rotationIndex)
     {
         if (!SectionPlacable(heldSection))
         {
             //Play un placable sound
             SoundController.Instance.PlaySFX(SFX.Unplacable);
-            return;
+            return false;
         }
 
         SoundController.Instance.PlaySFX(SFX.PlacedTile);
@@ -310,6 +310,7 @@ public class LevelCreator : MonoBehaviour
             //interstitialController.ShowAd();
             //rewardedController.LoadAd();
         }
+        return true;
     }
     
 

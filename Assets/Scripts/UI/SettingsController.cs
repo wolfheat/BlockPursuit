@@ -6,6 +6,7 @@ public class SettingsController : BasePanel
     [SerializeField] SoundSliderSettingsController music;
     [SerializeField] SoundSliderSettingsController SFX;
     [SerializeField] SoundSliderSettingsController brightness;
+    [SerializeField] Toggle shakeToggle;
 
     private const float IntensityScale = 4f;
 
@@ -18,8 +19,18 @@ public class SettingsController : BasePanel
         music.SetVolumeFromStoredValue(SavingUtility.playerGameData.soundSettings.MusicVolume);
         SFX.SetVolumeFromStoredValue(SavingUtility.playerGameData.soundSettings.SFXVolume);
         brightness.SetVolumeFromStoredValue(SavingUtility.playerGameData.lightSettings.LightIntensity/ IntensityScale);
+        shakeToggle.isOn = SavingUtility.playerGameData.gameEffectsSettings.UseShake;
     }
 
+    public void ShakeToggle()
+    {
+        if (!Enabled())
+            return;
+
+        Debug.Log("Shake Settings have been changed");
+
+        SavingUtility.playerGameData.gameEffectsSettings.UseShake = shakeToggle.isOn;
+    }
     public void LightSettingsUpdated()
     {
         if (!Enabled())

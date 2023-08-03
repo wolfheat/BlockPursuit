@@ -114,16 +114,15 @@ Jun 2023
 		* Added all tiles as Blender tiles. Looks kinda ok.
 		* Added settings for In-game lights intensity
 		* Added shake system for tiles that can be picked up
-			* Need to fix so recently dropped tiles wont shake if dropped on the way to the edge
+		* Fixed so recently dropped tiles wont shake if dropped on the way to the edge
+		* Added Settings for disabling Shake effect, also saved to file
 
-
-		* Add option to remove shake in settings?
 
 
 		TODO
-		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate?
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
 		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
+		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
 
 		TODO LATER:
 		* Need to figure out why the game wont scale to phone correctly
@@ -132,7 +131,7 @@ Jun 2023
 		* Older phone does not grand rewards from ads nor saves game data to file, why
 		
 		CONSIDER CHANGES:
-		* Should boosts be avalable from within a game played? Giving player chance to boost before completing a started level? No?
+		* Should boosts be available from within a game played? Giving player chance to boost before completing a started level? No?
 		* Coins update from level complete is instant, maybe have them come after interstitial ad? Maybe have greater delay before ad so player have time to see this added coins?
 
 		NEW MECHANICS:
@@ -141,10 +140,13 @@ Jun 2023
 		* Have coin sound until coins are filled up to total?
 		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
 		* Make new input method where drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
-		* Include achievements in save 
+		* Include achievements in save / make internal Achievement system
 
 		NEW CONTENT
 		* Have skins that player can buy and use as player?
+
+		* Make a Customize screen for player and tiles / Implement system for this
+
 		* Have tile Variations player can use
 		* Add irregular tiles? And have as separate Level Variant
 		* Maybe have gems as currency? Maybe implement later, not now.

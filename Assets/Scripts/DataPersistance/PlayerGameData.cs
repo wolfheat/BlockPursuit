@@ -7,6 +7,12 @@ public class LightSettings
 }
 
 [Serializable]
+public class GameEffectsSettings
+{
+    public bool UseShake { get; set; } = true;
+}
+
+[Serializable]
 public class SoundSettings
 {
     public bool UseMusic { get; set; } = true;
@@ -25,6 +31,7 @@ public class PlayerGameData
 
     public SoundSettings soundSettings = new SoundSettings();
     public LightSettings lightSettings = new LightSettings();
+    public GameEffectsSettings gameEffectsSettings = new GameEffectsSettings();
 
     // Player Levels Data
     public PlayerLevelDataList PlayerLevelDataList { get; private set; }
