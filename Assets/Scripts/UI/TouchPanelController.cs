@@ -9,15 +9,19 @@ public class TouchPanelController : MonoBehaviour
 
     private int activeControls = 0;
 
+    // NEW MAIN INPUT METHOD
+    [SerializeField] GameObject swipe;
+
     [SerializeField] GameObject middle;
     [SerializeField] GameObject right;
     [SerializeField] GameObject left;
+    [SerializeField] GameObject none;
     private GameObject[] controls;
 
     // Start is called before the first frame update
     void Start()
     {
-        controls = new GameObject[] {middle,right,left };
+        controls = new GameObject[] { swipe,middle, right,left,none};
 
         playerController = FindObjectOfType<PlayerController>();
 

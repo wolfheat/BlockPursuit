@@ -116,7 +116,7 @@ Jun 2023
 		* Added shake system for tiles that can be picked up
 		* Fixed so recently dropped tiles wont shake if dropped on the way to the edge
 		* Added Settings for disabling Shake effect, also saved to file
-
+3/8		* Made Touch Input work and set as main input method 
 
 
 		TODO

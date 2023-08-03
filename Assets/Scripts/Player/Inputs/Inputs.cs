@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class Inputs : MonoBehaviour
 {
@@ -27,12 +26,10 @@ public class Inputs : MonoBehaviour
     }
     private void OnEnable()
     {
-        //Debug.Log("Enable: "+gameObject.GetInstanceID());
         Controls.Enable();
     }
     private void OnDisable()
     {
-        //Debug.Log("Disable: "+gameObject.GetInstanceID());
         Controls.Disable();
     }
 }
