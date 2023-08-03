@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Medium1
   levelID: -201
-  unlocked: 0
+  unlocked: 1
   playerStart: {x: 7, y: 2}
   tiles:
   - type: 2
@@ -42,4 +42,6 @@ MonoBehaviour:
   - {x: 5, y: 8}
   - {x: 6, y: 8}
   - {x: 8, y: 7}
-  unlockRequirements: []
+  unlockRequirements:
+  - tileType: 0
+    amount: 1

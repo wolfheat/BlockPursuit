@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Level
   levelID: -106
-  unlocked: 0
+  unlocked: 1
   playerStart: {x: 9, y: 9}
   tiles:
   - type: 0

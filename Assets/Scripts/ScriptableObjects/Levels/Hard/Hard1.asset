@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Hard1
   levelID: -301
-  unlocked: 0
+  unlocked: 1
   playerStart: {x: 6, y: 10}
   tiles:
   - type: 5
@@ -32,4 +32,6 @@ MonoBehaviour:
   - {x: 9, y: 6}
   - {x: 5, y: 7}
   - {x: 5, y: 6}
-  unlockRequirements: []
+  unlockRequirements:
+  - tileType: 0
+    amount: 2

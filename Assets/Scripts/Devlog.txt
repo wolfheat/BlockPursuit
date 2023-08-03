@@ -117,9 +117,13 @@ Jun 2023
 		* Fixed so recently dropped tiles wont shake if dropped on the way to the edge
 		* Added Settings for disabling Shake effect, also saved to file
 3/8		* Made Touch Input work and set as main input method 
+		* Build J 39.7MB 
+		* Minor Color Shange for S tile. Moved Touch Input
+
 
 
 		TODO
+		* Fix Button To reset Save ingame
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
 		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
 		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
