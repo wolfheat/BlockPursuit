@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -42,13 +43,13 @@ public class LevelSelect : BasePanel
     private void OnEnable()
     {
         SavingUtility.LoadingComplete += GenerateButtonLevelsWhenLoadingIsComplete; 
-        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
+        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
     }
     
     private void OnDisable()
     {
         SavingUtility.LoadingComplete -= GenerateButtonLevelsWhenLoadingIsComplete;
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
+        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
     }
 
     private void RequestESC(InputAction.CallbackContext context)
@@ -71,6 +72,25 @@ public class LevelSelect : BasePanel
         LevelButton buttonToUpdate = buttonLists[GameSettings.CurrentLevelDefinition.LevelDiff][GameSettings.CurrentLevelDefinition.LevelIndex];
         buttonToUpdate.playerLevelData = data;
         buttonToUpdate.ShowCheckmark();
+    }
+
+    public void ResetLevelSelect()
+    {
+        RemoveAllButtons();
+        GenerateButtonLevels();
+        infoScreen.latestButton = buttonLists[0][0];
+    }
+
+    private void RemoveAllButtons()
+    {
+        for (int i = buttonLists.Length-1; i >= 0; i--)
+        {
+            for (int j = buttonLists[i].Count-1; j >= 0; j--)
+            {
+                Destroy(buttonLists[i][j].gameObject);
+            }
+            buttonLists[i].Clear();
+        }
     }
 
     private void GenerateButtonLevels()
@@ -160,7 +180,10 @@ public class LevelSelect : BasePanel
         if (!infoScreen.latestButton.levelDefinition.unlocked)
             ShowUnlockPanel();
         else
-            EventSystem.current.SetSelectedGameObject(startbutton.gameObject);
+            RequestStartSelectedLevel();
+
+        // USed to jump to Start button when using keyboard for unlocked level, changed to start level directly
+            //EventSystem.current.SetSelectedGameObject(startbutton.gameObject);
     }
 
     public void RequestStartSelectedLevel()
@@ -178,8 +201,7 @@ public class LevelSelect : BasePanel
     public void ShowUnlockPanel()
     {
         unlockScreen.SetInfo(infoScreen.latestButton.levelDefinition);
-        unlockScreen.ShowPanel();
-        HidePanel();
+        TransitionScreen.Instance.StartTransition(GameAction.ShowUnlock);
     }
 
     public void RequestShowTab(TierButton tierButton)
@@ -208,6 +230,12 @@ public class LevelSelect : BasePanel
 
     }
 
+    public void SetSelectedLevelToLastPlayed()
+    {
+        selectedLevel = infoScreen.latestButton.level;
+        SetSelected();
+    }
+    
     public void SetSelectedLevelToDefaultForActiveTab()
     {
         selectedLevel = FindDefaultLevelToSelectForTab(activeTab);

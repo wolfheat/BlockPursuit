@@ -119,6 +119,9 @@ Jun 2023
 3/8		* Made Touch Input work and set as main input method 
 		* Build J 39.7MB 
 		* Minor Color Shange for S tile. Moved Touch Input
+8/8		* Made fast transscreen for all menu changes
+		* Fixed auto selected buttons when opening each menu, Selected level after completion is now the last level
+		* Made it so game data is not saved when initial values are loaded into settings (sliders)
 
 
 

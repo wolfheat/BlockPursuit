@@ -47,14 +47,16 @@ public class TransitionScreen : MonoBehaviour
     {
         GameSettings.InTransition = true;
 
+        /*
         float transitionTime = HalfTransitionTime;
         float darkTime = DarkTime;
-
+        
         if (GameSettings.UseFast)
         {
-            transitionTime = FastTransitionTime;
-            darkTime = FastDarkTime;
-        }
+        */
+        float transitionTime = FastTransitionTime;
+        float darkTime = FastDarkTime;
+        //}
 
         //Darken
         panel.SetActive(true);

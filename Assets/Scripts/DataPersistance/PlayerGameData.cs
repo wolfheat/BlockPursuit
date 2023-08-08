@@ -16,9 +16,9 @@ public class GameEffectsSettings
 public class SoundSettings
 {
     public bool UseMusic { get; set; } = true;
-    public float MusicVolume { get; set; } = 1;
+    public float MusicVolume { get; set; } = 0.4f;
     public bool UseSFX { get; set; } = true;
-    public float SFXVolume { get; set; } = 1;
+    public float SFXVolume { get; set; } = 0.4f;
 }
 [Serializable]
 public class PlayerGameData

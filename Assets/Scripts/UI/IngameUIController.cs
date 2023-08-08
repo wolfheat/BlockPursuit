@@ -15,12 +15,12 @@ public class IngameUIController : BasePanel
 
     private void OnEnable()
     {
-        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
+        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
     }
 
     private void OnDisable()
     {
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
+        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
     }
 
     private void Start()

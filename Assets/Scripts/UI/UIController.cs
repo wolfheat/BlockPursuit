@@ -1,6 +1,7 @@
 using MyGameAds;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class UIController : MonoBehaviour
@@ -12,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] LevelComplete levelComplete;
     [SerializeField] LevelSelect levelSelect;
     [SerializeField] TransitionScreen transitionScreen;
+    [SerializeField] ConfirmResetScreen confirmResetScreen;
     [SerializeField] LevelCreator levelCreator;
     [SerializeField] IngameUIController ingameUIController;
     [SerializeField] BoostController boostController;
@@ -19,10 +21,13 @@ public class UIController : MonoBehaviour
     [SerializeField] PauseUI inventoryUI;
     [SerializeField] SettingsController settings;
     [SerializeField] CreditsController credits;
-    [SerializeField] AchievementsController achievements;
+    [SerializeField] AchievementsController achievements;    
+    [SerializeField] UnlockScreen unlockScreen;
 
     private Time lastInterstitial;
     private Time lastRewarded;
+
+    private GameObject latestSelected;
 
     private void OnEnable()
     {
@@ -38,7 +43,10 @@ public class UIController : MonoBehaviour
         SavingUtility.LoadingComplete -= UpdateInventoryFromStored;        
         Inputs.Instance.Controls.Main.Plus.performed -= AddTiles;        
     }
-
+    public void SetSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(latestSelected.gameObject);
+    }
     private void Start()
     {
         Debug.Log("toggle on Start Menu");
@@ -91,6 +99,7 @@ public class UIController : MonoBehaviour
 
     internal void DoStoredAction()
     {
+        
         switch (GameSettings.StoredAction)
         {
             case GameAction.LoadSelectedLevel:
@@ -114,7 +123,7 @@ public class UIController : MonoBehaviour
             case GameAction.ShowLevelSelect:
                 HideAllPanels();   
                 levelSelect.ShowPanel();
-                levelSelect.SetSelectedLevelToDefaultForActiveTab();
+                levelSelect.SetSelectedLevelToLastPlayed();
                 break;
             case GameAction.ShowLevelComplete:
                 levelCreator.ClearLevel();
@@ -142,6 +151,48 @@ public class UIController : MonoBehaviour
                 inventoryUI.HidePanel();
                 ingameUIController.ShowPanel();
                 break;
+            case GameAction.ShowResetConfirm:
+                settings.HidePanel();
+                confirmResetScreen.ShowPanel();
+                break;
+            case GameAction.HideResetConfirm:
+                confirmResetScreen.HidePanel();
+                settings.ShowPanel();
+                settings.UpdatePanelFromStored();
+                settings.UpdateSavingValues();
+                break;
+            case GameAction.ShowSettings:
+                settings.ShowPanel();
+                settings.SetSelected();
+                break;
+             case GameAction.HideSettings:
+                settings.HidePanel();
+                SetSelected();
+                break;
+            case GameAction.ShowCredits:
+                credits.ShowPanel();
+                credits.SetSelected();
+                break;
+             case GameAction.HideCredits:
+                credits.HidePanel();
+                SetSelected();
+                break;
+            case GameAction.ShowAchievements:
+                achievements.ShowPanel();
+                achievements.SetSelected();
+                break;
+             case GameAction.HideAchievements:
+                achievements.HidePanel();
+                SetSelected();
+                break;
+            case GameAction.ShowUnlock:
+                unlockScreen.ShowPanel();
+                unlockScreen.SetSelected();
+                break;
+             case GameAction.HideUnlock:
+                unlockScreen.HidePanel();
+                levelSelect.SetSelected();
+                break;
             case GameAction.none:
                 break;
             default:
@@ -162,15 +213,18 @@ public class UIController : MonoBehaviour
 
     internal void RequestAchievements()
     {
-        achievements.ShowPanel();
+        latestSelected = EventSystem.current.currentSelectedGameObject;
+        TransitionScreen.Instance.StartTransition(GameAction.ShowAchievements);
     }
     internal void RequestCredits()
     {
-        credits.ShowPanel();
+        latestSelected = EventSystem.current.currentSelectedGameObject;
+        TransitionScreen.Instance.StartTransition(GameAction.ShowCredits);
     }
     internal void RequestSettings()
     {
+        latestSelected = EventSystem.current.currentSelectedGameObject;
         settings.UpdatePanelFromStored();
-        settings.ShowPanel();
+        TransitionScreen.Instance.StartTransition(GameAction.ShowSettings);
     }
 }

@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static Unity.Collections.AllocatorManager;
 
 public class UnlockScreen : BasePanel
 {
@@ -14,15 +11,18 @@ public class UnlockScreen : BasePanel
     [SerializeField] LevelSelect levelSelect;
 
     private LevelDefinition currentLevel;
-
+    public void SetSelected()
+    {
+        EventSystem.current.SetSelectedGameObject(okButton.gameObject);
+    }
     private void OnEnable()
     {
-        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
+        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
     }
 
     private void OnDisable()
     {
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
+        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
     }
 
     private void RequestESC(InputAction.CallbackContext context)
@@ -43,9 +43,7 @@ public class UnlockScreen : BasePanel
 
     public void CancelClicked()
     {
-        HidePanel();
-        levelSelect.ShowPanel();
-        levelSelect.SetSelected();
+        TransitionScreen.Instance.StartTransition(GameAction.HideUnlock);
     }
     
     public void OkClicked()

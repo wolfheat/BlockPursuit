@@ -11,7 +11,7 @@ public class SoundSliderSettingsController : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] TextMeshProUGUI percent;
     private float oldSliderValue = 0;
-
+    public bool listenForChange = true;
 
     public bool IsOn()
     {
@@ -25,8 +25,11 @@ public class SoundSliderSettingsController : MonoBehaviour
 
     public void SliderChange()
     {
-        Debug.Log("Slider changed: "+slider.value);
-        SetVolumeFromStoredValue(slider.value);
+        if (listenForChange)
+        {
+            SetVolumeFromStoredValue(slider.value);
+            Debug.Log("Slider changed: " + slider.value);
+        }
     }
 
     public void SetVolumeFromStoredValue(float v)

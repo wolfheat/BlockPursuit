@@ -35,6 +35,16 @@ public class SavingUtility : MonoBehaviour
         SaveToFile();
     }
 
+    public void ResetSaveFile()
+    {
+        playerGameData = new PlayerGameData();
+        IDataService dataService = new JsonDataService();
+        if (dataService.SaveData(SaveFileName, playerGameData, false))
+            Debug.Log("Player save file was reset: "+SaveFileName);
+        else
+            Debug.LogError("Could not reset file.");
+    }
+    
     public void SaveToFile()
     {
         LogSaveInfo();
