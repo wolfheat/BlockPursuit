@@ -126,8 +126,9 @@ Jun 2023
 9/8		* Added A-Z levels added to tab D (green)
 		* Made tab D scroll-rect to fit all 25 levels
 		* Made shake-effect sinus wave based to make it fixed for different fps. Made it shake perpendicular to players facing direction.
+		* Added camera button to in game menu that toggles between modes.
+		* Added variations in bored animation
 
-		
 		
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles

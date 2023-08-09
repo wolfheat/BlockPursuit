@@ -10,6 +10,7 @@ public class IngameUIController : BasePanel
     private PauseUI pauseMenu;
     private UIController UIController;
     private RestartPanelController restartPanel;
+    private FollowPlayer followPlayer;
     //RestartPanelController restartPanel;
 
 
@@ -28,6 +29,7 @@ public class IngameUIController : BasePanel
         pauseMenu = FindObjectOfType<PauseUI>();
         UIController = FindObjectOfType<UIController>();
         restartPanel = FindObjectOfType<RestartPanelController>();
+        followPlayer = FindObjectOfType<FollowPlayer>();
     }
 
     private void RequestESC(InputAction.CallbackContext context)
@@ -59,6 +61,10 @@ public class IngameUIController : BasePanel
         restartPanel.ShowPanel();
         restartPanel.SetSelected();
         GameSettings.IsPaused = true;
+    }
+    public void ToggleCamera()
+    {
+        followPlayer.ChangeView();
     }
     public void RestartSettigsMenu()
     {

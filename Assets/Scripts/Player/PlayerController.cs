@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private float stepTime = 0.15f;
     private float stepTimer = 0;
     private float idleTimer = 0;
-    private const float IdleRelaxTime = 30f;
+    private const float IdleRelaxTime = 13f;
 
     private bool moving = false;
     MovementAction newMovement;
@@ -158,7 +159,14 @@ public class PlayerController : MonoBehaviour
         idleTimer += Time.deltaTime;
         if(idleTimer > IdleRelaxTime)
         {
-            animator.CrossFade("Idle Relax",0.1f);
+            float random = Random.Range(0,1f);
+            if(random<0.15f)
+                animator.CrossFade("Cast Spell", 0.1f);
+            else if (random < 0.3f)
+                animator.CrossFade("Roar", 0.1f);
+            else
+                animator.CrossFade("Idle Relax",0.1f);
+
             idleTimer = 0;
         }
     }
