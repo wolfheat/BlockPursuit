@@ -8,19 +8,26 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] Vector2 followingOffsetDistance = new Vector2Int(0,-5);
     private Vector2 followingOffset = Vector2.zero;
 
+    private int id = 0;
+    private Vector3[] camPos;
+
+    private void Start()
+    {
+        camPos = new Vector3[4] { new Vector3(0, 0,-14.73f), new Vector3(0,-5f, -14.73f), new Vector3(0,0, -25f), new Vector3(0,0, -35f) };            
+    }
 
     void Update()
     {
-        transform.position = new Vector3(following.transform.position.x+followingOffset.x, following.transform.position.y+followingOffset.y, transform.position.z);
+        Vector3 newCameraPosition = new Vector3(camPos[id].x+following.transform.position.x, camPos[id].y + following.transform.position.y, camPos[id].z + following.transform.position.z);
 
+        transform.position = newCameraPosition;
         // Look at player
         transform.LookAt(following.transform,Vector3.back);
     }
 
     public void ChangeView()
     {
-        if (followingOffset == Vector2.zero) followingOffset = followingOffsetDistance;
-        else followingOffset = Vector2.zero;
+        id = (id + 1)%camPos.Length;
     }
 
 

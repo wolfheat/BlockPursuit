@@ -24,6 +24,8 @@ public class UIController : MonoBehaviour
     [SerializeField] AchievementsController achievements;    
     [SerializeField] UnlockScreen unlockScreen;
 
+    [SerializeField] GameObject initialSelected;
+
     private Time lastInterstitial;
     private Time lastRewarded;
 
@@ -31,6 +33,7 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
+        latestSelected = initialSelected.gameObject;
         transitionScreen.GameDarkEvent += DoStoredAction;
         transitionScreen.GameDarkEventComplete += DarkEventComplete;
         SavingUtility.LoadingComplete += UpdateInventoryFromStored;        
@@ -45,7 +48,8 @@ public class UIController : MonoBehaviour
     }
     public void SetSelected()
     {
-        EventSystem.current.SetSelectedGameObject(latestSelected.gameObject);
+        if(startMenu.Enabled())
+            EventSystem.current.SetSelectedGameObject(latestSelected.gameObject);
     }
     private void Start()
     {

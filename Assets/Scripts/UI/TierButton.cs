@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-enum TierName{Bronze,Silver,Gold}
+enum TierName{Bronze,Silver,Gold,ABC}
 
 public class TierButton : MonoBehaviour
 {

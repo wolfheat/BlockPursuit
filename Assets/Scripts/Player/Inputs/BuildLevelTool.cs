@@ -13,9 +13,6 @@ public class BuildLevelTool : MonoBehaviour
     private int activeTool = 0;
     private int rotation = 0;
 
-    
-
-
     private void Awake()
     {
         levelCreator = FindObjectOfType<LevelCreator>();
@@ -24,11 +21,12 @@ public class BuildLevelTool : MonoBehaviour
 
     private void OnEnable()
     {
-
+        Debug.Log("ONENABLE!!!!");
         Inputs.Instance.Controls.Main.ScrollUp.performed += RotateLeft;
         Inputs.Instance.Controls.Main.ScrollDown.performed += RotateRight;
         Inputs.Instance.Controls.Main.LeftClick.performed += Click;
         Inputs.Instance.Controls.Main.RightClick.performed += RightClick;
+        Inputs.Instance.Controls.Main.Q.performed += QTest;
         UpdateShownTool();
     }
     
@@ -45,6 +43,7 @@ public class BuildLevelTool : MonoBehaviour
     {
         if (Inputs.Instance.Controls.Main.Shift.IsPressed())
         {
+            Debug.Log("Mouse Tile Index is: "+ GetMouseTileIndex());
             levelCreator.UpdatePaint(activeTool, GetMouseTileIndex(),rotation);
         }
         else
@@ -53,14 +52,28 @@ public class BuildLevelTool : MonoBehaviour
         }
     }
 
+    private void QTest(InputAction.CallbackContext context)
+    {
+        Debug.Log("Q TEST");
+        Debug.Log("Cut This Piece and make it the active tool to relocate");
+        // Check what piece the cursor is over
+        TileType removedTileType = levelCreator.RemoveTileAtPosition(GetMouseTileIndex());
+        if(removedTileType != TileType.none){
+            SetTool(removedTileType);
+        }
+
+    }
     private void RightClick(InputAction.CallbackContext context)
     {
+        Debug.Log("Tool Next");
         NextTool();
     }
     private void Click(InputAction.CallbackContext context)
     {
+        Debug.Log("Click");
         if (Inputs.Instance.Controls.Main.Shift.IsPressed())
         {
+            Debug.Log("PlacePaintSection if possible at "+ GetMouseTileIndex());
             levelCreator.PlacePaintSectionIfPossibleAt(GetMouseTileIndex(), rotation);
         }
         else if (Inputs.Instance.Controls.Main.LCtrl.IsPressed())
@@ -89,6 +102,12 @@ public class BuildLevelTool : MonoBehaviour
             levelCreator.DestroyCurrentTool(activeTool);
     }
 
+    private void SetTool(TileType type)
+    {
+        activeTool = (int)type;
+        UpdateShownTool();
+    }
+    
     private void NextTool()
     {
         Debug.Log("Next Tool");
@@ -100,8 +119,10 @@ public class BuildLevelTool : MonoBehaviour
     private Vector2Int GetMouseTileIndex()
     {
         Vector3 clickScreenPosition = Mouse.current.position.ReadValue();
+        Debug.Log("Mouse position: "+clickScreenPosition);
         clickScreenPosition.z = -Camera.main.transform.position.z;
         Vector3 clickPosition = Camera.main.ScreenToWorldPoint(clickScreenPosition);
+        Debug.Log("Click position: "+clickPosition);
 
         return new Vector2Int(Mathf.RoundToInt(clickPosition.x), Mathf.RoundToInt(clickPosition.y));
     }

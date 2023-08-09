@@ -10,6 +10,7 @@ public class LevelSelect : BasePanel
     [SerializeField] GameObject levelEasyButtonHolder;
     [SerializeField] GameObject levelMediumButtonHolder;
     [SerializeField] GameObject levelHardButtonHolder;
+    [SerializeField] GameObject levelABCButtonHolder;
     private GameObject[] levelButtonHolders;
     private List<LevelButton>[] buttonLists;
 
@@ -30,12 +31,13 @@ public class LevelSelect : BasePanel
     private List<LevelButton> easybuttonList = new List<LevelButton>();
     private List<LevelButton> mediumButtonList = new List<LevelButton>();
     private List<LevelButton> HardButtonList = new List<LevelButton>();
+    private List<LevelButton> ABCButtonList = new List<LevelButton>();
 
     // Start is called before the first frame update
     void Start()
     {
-        levelButtonHolders = new GameObject[3] { levelEasyButtonHolder,levelMediumButtonHolder,levelHardButtonHolder};
-        buttonLists = new List<LevelButton>[3] { easybuttonList, mediumButtonList, HardButtonList };
+        levelButtonHolders = new GameObject[4] { levelEasyButtonHolder,levelMediumButtonHolder,levelHardButtonHolder, levelABCButtonHolder };
+        buttonLists = new List<LevelButton>[4] { easybuttonList, mediumButtonList, HardButtonList, ABCButtonList };
         //LevelButtonPrefabs = new LevelButton[3] { levelButtonPrefab, mediumLevelButtonPrefab, hardLevelButtonPrefab };
         //GenerateButtonLevels();
     }

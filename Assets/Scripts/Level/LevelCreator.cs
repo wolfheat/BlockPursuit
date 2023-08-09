@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-public enum TileType{O,L,J,I,S,T,Z, Goal}
+public enum TileType{O,L,J,I,S,T,Z, Goal,none}
 public enum GameTileType {Hole,Walkable,Stone}
 
 [Serializable]
@@ -417,11 +417,13 @@ public class LevelCreator : MonoBehaviour
         }
     }
 
-    internal void RemoveTileAtPosition(Vector2Int pos)
+    internal TileType RemoveTileAtPosition(Vector2Int pos)
     {
-        if (TileLevel[pos.x, pos.y,1] == null) return;
+        TileType type = TileType.none;
+        if (TileLevel[pos.x, pos.y,1] == null) return type;
 
         Section section = TileLevel[pos.x, pos.y, 1].section;
+        type = section.TileType;
         Debug.Log("Remove section: "+section);
 
         foreach (GameTile tile in section.GameTiles)
@@ -431,5 +433,7 @@ public class LevelCreator : MonoBehaviour
         section.DestroyParts();
         sections.Remove(section);   
         Destroy(section.gameObject);
+
+        return type;
     }
 }

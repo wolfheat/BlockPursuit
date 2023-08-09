@@ -1,4 +1,4 @@
-DEVLOG FOR Block Pursuit"
+﻿DEVLOG FOR Block Pursuit"
 Jun 2023
 
 * IDEAS
@@ -122,20 +122,21 @@ Jun 2023
 8/8		* Made fast transscreen for all menu changes
 		* Fixed auto selected buttons when opening each menu, Selected level after completion is now the last level
 		* Made it so game data is not saved when initial values are loaded into settings (sliders)
+		* Added Reset Data confirmation-screen in setting menu and implemented the effects
+9/8		* Added A-Z levels added to tab D (green)
+		* Made tab D scroll-rect to fit all 25 levels
+		* Made shake-effect sinus wave based to make it fixed for different fps. Made it shake perpendicular to players facing direction.
 
-
-
-		TODO
-		* Fix Button To reset Save ingame
-		* Make Sound clips used OGG files to lower size and maybe compress quality?
-		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
+		
+		
+		GAMEPLAY RESPONSE
+		* Need to make animation to character to grab hold of tiles
 		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
 
-		TODO LATER:
-		* Need to figure out why the game wont scale to phone correctly
-			* Resolution makes bottom part of game get outside of screen
-			* Still cant figure this one out, tried changing build for widescreen native resolution without success
-		* Older phone does not grand rewards from ads nor saves game data to file, why
+		SOUND
+		* Make Sound clips used OGG files to lower size and maybe compress quality?
+
+		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
 		
 		CONSIDER CHANGES:
 		* Should boosts be available from within a game played? Giving player chance to boost before completing a started level? No?
@@ -162,7 +163,8 @@ Jun 2023
 		* Need to have arms to show direction, maybe have tile that can be picked up animate into higher position - Added boxmonster
 		* Need to have tutorial, interactive?
 
-		ACHIEVEMENTS IDEAS
+		ACHIEVEMENTS IDEAS (Decide if achievements are good to have in game?)
+			* Add rewarded ads counter for an achievement
 			* Clearing all A,B,C levels
 			* Clearing every level
 			* Clearing Every level on par moves?!?
@@ -171,30 +173,44 @@ Jun 2023
 			* Showing X rewarded ads
 
 		ADS:
+		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
 		* Maybe always have banner on bottom showing? -YES
 		* Implementation needs more work
 			* Does it need consent to preload?
 			* Better way to load the ads than current system?
-
 		* Add Ads screen and Icon. Icon shows every 5 min since last used.
 			* +25% rewards for next 9 min
 			* Take 10 coins free or watch ad for +50gold ever 5 minute
 			* OR Just watch ad for +50gold ever 5 minute
 			* At reward screen have watch add to double coins button (this will make it optional)
 			* Every 5 or 10 ad watches gives a guaranteed tile? (Maybe special tile for special levels?!?)
-
 		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
 		* Paid player get free gold every 5 min without watching ad.
 			* Make separate game loop for paying player / Have a payable version on steam?
 
-		MAYBE:
+		IAP:
+		* Make Shop Screen
+		* Have game features unlocked by gold in shop
 		* Check if IAP is the way to go, better revenue than ads
+		* Have some free coins that spawns now and then in the IAP Store page to draw players there
+
+
+		MAYBE - IDEAS:
 		* Have a ads description page that states why ads are in the game and how it works?
 		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)
-		* IDEA -  Maybe have collectables that are tiles that form a collection that can be used to clear a set of special levels,
+		* Currently not possible to turn on spot, should it be possible? Decide.
+		* Maybe have collectables that are tiles that form a collection that can be used to clear a set of special levels,
 			but the player has to decide which tiles to bring into the levels themself. Many levels can be cleared with different set of tiles
 			but With right combination all levels can be cleared if tiles are selected in a clever way.
 		
+
+		BUGS:
+		* Exiting android app wont close the app only minimize it?
+
+		GRAPHICS:
+		* Figure out theme and color scheme that fits the game
+		* Have different biomes for different difficult levels
+
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player
 		* Issue with ingame menu not scaling correctly when changing res.
@@ -202,42 +218,31 @@ Jun 2023
 		* Strange issue which text on mobile not aligning correctly on resultscreen.
 		* Issue with using landscape, disable or fix?
 		* Make sure game scales correctly for different mobile resolutions
-
-		ISSUES:
-
-		// - BUGS -
-		* Exiting android app wont close the app only minimize it?
-
-		// - Content -
-		* Make Shop Screen
-		* Have some kind of tutorial?
-		* Have game features unlocked by gold in shop
-		* Change player to something else than a cube, character etc?
-		* Show in tutorial the different input modes for touch
-		* Figure out theme and color scheme that fits the game
-		* Currently not possible to turn on spot, should it be possible? Decide.
-		* Change Load Screen between scenes to animation or not?
+		* Need to figure out why the game wont scale to phone correctly
+			* Resolution makes bottom part of game get outside of screen
+			* Still cant figure this one out, tried changing build for widescreen native resolution without success
+		* Older phone does not granе rewards from ads nor saves game data to file, why
 		
-		// - Tutorial - 
+		TUTORIAL: (Fill in stuff that needs to be thaught)
+		* Show in tutorial the different input modes for touch
 		* Show Input from touch
 		* Show shuffling technique like in A.2
 		* Show that sometimes there are more tile parts than goals, just need to fill them
 
-		// - Mechanics Stuff -		
-
-		// - Data stuff -
+		DATA STUFF:
 		* Clean Up tile definition and way levels are stored when created at runtime
 		* Make player gain gold and tiles when completing levels, animation for this?
-		* Add rewarded ads counter for an achievement
-		
-		// - UI stuff -
-		* Change selected color from dark red to something else?
+
+		UI STUFF:
+		* Change Load Screen between scenes to animation or not? Current solution, made it faster blackscreen 0.1 seconds.
+		* Change selected color from dark red to something else? Clean Up selections permanently.
 		* Make level select tabs more fancy?	
 		* Fix aligning of text for level complete screen
 
-		// - LevelCreation Stuff -
+		LEVELCREATION STUFF:
 		* Create randomized level creation for Bronze, Silver, Gold versions
 		* Create all levels for main levels
+		* Make solver to quickly check if solvable and fastest solve
 		
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
 

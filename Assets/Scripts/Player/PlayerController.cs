@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
 
             if (tile != null && levelCreator.heldSection == null && !placedDuringWalkCycle)
             {
-                tile.section.ShakeTile();
+                tile.section.ShakeTile(current.rotationIndex);
             }
             if (tile != null && levelCreator.heldSection == null && placedDuringWalkCycle) Debug.Log("Placed Tile During Walk Cycle, Dont Shake");
             placedDuringWalkCycle = false;

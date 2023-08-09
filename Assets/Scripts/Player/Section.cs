@@ -23,9 +23,13 @@ public class Section : MonoBehaviour
     public GameObject TileHolder { get; private set; }
 
     private Coroutine shake;
+    private bool horizontalShake = false;
 
-    public void ShakeTile()
+    public void ShakeTile(int rotIndex)
     {
+        horizontalShake = true;
+        if (rotIndex%2==0)horizontalShake = false;
+
         if (shake != null || !SavingUtility.playerGameData.gameEffectsSettings.UseShake) return;
         shake = StartCoroutine(Shake());
     }
@@ -49,30 +53,20 @@ public class Section : MonoBehaviour
 
     private IEnumerator Shake()
     {
-        // Need to exit shake if lifting it?
-
         startPosition = transform.position;
-        // Shake tile Right To left
-        // Make tile move shaking Right to left
         float timer = 0;
-        float displacement = 0;
-        float CurrentShakeDistance = ShakeDistance;
-        int dir = 1;
-        while(timer < ShakeTime && CurrentShakeDistance > MinShakeDistance)
+        float displacement;
+        float AngleSpeedDegree = 3000f;
+        float AngleSpeedRads = AngleSpeedDegree*Mathf.PI/180;
+        float MaxDisplacement = 0.08f;
+        float dampening = 1;
+        while (timer <= ShakeTime)
         {
-            float moveDistance = ShakeSpeed * Time.deltaTime * dir;
             timer += Time.deltaTime;
-            displacement += moveDistance;
-
-            transform.position += new Vector3(moveDistance,0,0);    
-
-            if((dir==1 && displacement > CurrentShakeDistance)|| (dir == -1 && displacement < -CurrentShakeDistance))
-            {
-                //Change direction
-                dir *= -1;
-                // DampenDistance
-                CurrentShakeDistance *= ShakeDampening;
-            }
+            //dampening = (1 - 0.5f*timer / ShakeTime);
+            displacement = MaxDisplacement*dampening*Mathf.Sin(AngleSpeedRads*timer);
+            transform.position = startPosition + new Vector3(horizontalShake?displacement:0, horizontalShake ? 0 : displacement, 0);
+            //Debug.Log("Displacement: "+displacement);
             yield return null;
         }
 
@@ -80,9 +74,6 @@ public class Section : MonoBehaviour
         transform.position = startPosition;
 
         shake = null;
-
-        //if (timer >= ShakeTime) Debug.Log("Shake Timed Out");
-        //else if(CurrentShakeDistance <= MinShakeDistance) Debug.Log("Shake Exited due to being small");
     }
 
     public void SetHolder(GameObject tileHolder)
