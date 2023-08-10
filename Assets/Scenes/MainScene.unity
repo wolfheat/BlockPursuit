@@ -14949,7 +14949,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &830358175
@@ -16017,6 +16017,7 @@ GameObject:
   - component: {fileID: 888490961}
   - component: {fileID: 888490963}
   - component: {fileID: 888490962}
+  - component: {fileID: 888490964}
   m_Layer: 5
   m_Name: Improvement
   m_TagString: Untagged
@@ -16042,7 +16043,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 47.33, y: -0.5}
-  m_SizeDelta: {x: 135.591, y: 30}
+  m_SizeDelta: {x: 43.27, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &888490962
 MonoBehaviour:
@@ -16079,9 +16080,9 @@ MonoBehaviour:
   m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 0.99215686, g: 1, b: 0, a: 1}
-    topRight: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+    topRight: {r: 0.99215686, g: 1, b: 0, a: 1}
     bottomLeft: {r: 1, g: 0.5764706, b: 0, a: 1}
-    bottomRight: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    bottomRight: {r: 1, g: 0.5764706, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -16141,6 +16142,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888490960}
   m_CullTransparentMesh: 1
+--- !u!114 &888490964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888490960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!114 &896163467 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1334059487965778430, guid: a237133168feace418b5cc56868ee3e4, type: 3}
@@ -24281,7 +24296,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1001 &1397324054
@@ -25099,7 +25114,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!224 &1423089697 stripped
@@ -26910,9 +26925,9 @@ MonoBehaviour:
   m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
-    topRight: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+    topRight: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
     bottomLeft: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
-    bottomRight: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    bottomRight: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -28258,6 +28273,7 @@ GameObject:
   - component: {fileID: 1608702460}
   - component: {fileID: 1608702462}
   - component: {fileID: 1608702461}
+  - component: {fileID: 1608702463}
   m_Layer: 5
   m_Name: Improvement
   m_TagString: Untagged
@@ -28283,7 +28299,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 147.83, y: -0.5}
-  m_SizeDelta: {x: 184.834, y: 30}
+  m_SizeDelta: {x: 43.27, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1608702461
 MonoBehaviour:
@@ -28382,6 +28398,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608702459}
   m_CullTransparentMesh: 1
+--- !u!114 &1608702463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608702459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &1609462176
 GameObject:
   m_ObjectHideFlags: 0
@@ -28894,9 +28924,9 @@ MonoBehaviour:
   m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
-    topRight: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+    topRight: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
     bottomLeft: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
-    bottomRight: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    bottomRight: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -33629,6 +33659,7 @@ GameObject:
   - component: {fileID: 1876904736}
   - component: {fileID: 1876904738}
   - component: {fileID: 1876904737}
+  - component: {fileID: 1876904739}
   m_Layer: 5
   m_Name: Improvement
   m_TagString: Untagged
@@ -33654,7 +33685,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 182.73, y: -0.5}
-  m_SizeDelta: {x: 239.517, y: 30}
+  m_SizeDelta: {x: 50.25, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1876904737
 MonoBehaviour:
@@ -33691,9 +33722,9 @@ MonoBehaviour:
   m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 0.99215686, g: 1, b: 0, a: 1}
-    topRight: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+    topRight: {r: 0.99215686, g: 1, b: 0, a: 1}
     bottomLeft: {r: 1, g: 0.5764706, b: 0, a: 1}
-    bottomRight: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    bottomRight: {r: 1, g: 0.5764706, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -33739,7 +33770,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 6.9755473, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -33753,6 +33784,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876904735}
   m_CullTransparentMesh: 1
+--- !u!114 &1876904739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876904735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &1880929970
 GameObject:
   m_ObjectHideFlags: 0
@@ -35993,9 +36038,9 @@ MonoBehaviour:
   m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
-    topRight: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+    topRight: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
     bottomLeft: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
-    bottomRight: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    bottomRight: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -46314,6 +46359,10 @@ MonoBehaviour:
   - {fileID: 1608702461}
   - {fileID: 1876904737}
   mainSelectedButton: {fileID: 1334059486894085477}
+  layoutgroups:
+  - {fileID: 1419601351}
+  - {fileID: 830344200}
+  - {fileID: 1396276861}
 --- !u!225 &5049355597211543570
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using MyGameAds;
 using System;
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class LevelComplete : BasePanel
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
     [SerializeField] Button mainSelectedButton;
+    [SerializeField] HorizontalLayoutGroup[] layoutgroups;
 
     LevelSelect levelSelect;
     private int latestCoins;
@@ -118,10 +120,25 @@ public class LevelComplete : BasePanel
         levelSelect.UpdateButtonPlayerLevelData(bestLevelData);
 
         SetSelected();
+        //LayoutRebuilder.MarkLayoutForRebuild(completeInformationRect);
 
-        // Delete intertitial here?
+        StartCoroutine(ForceUpdate());
 
+    }
 
+    private IEnumerator ForceUpdate()
+    {
+        EnableLayoutGroups(false);
+        yield return null;
+        EnableLayoutGroups(true);
+    }
+
+    private void EnableLayoutGroups(bool set)
+    {
+        foreach (var group in layoutgroups)
+        {
+            group.enabled = set;
+        }
     }
 
     private void ShowPersonalBestIfRecord(PlayerLevelData oldLevelData, PlayerLevelData bestLevelData)

@@ -128,17 +128,17 @@ Jun 2023
 		* Made shake-effect sinus wave based to make it fixed for different fps. Made it shake perpendicular to players facing direction.
 		* Added camera button to in game menu that toggles between modes.
 		* Added variations in bored animation
+		* Fixed complete screen text alignement error (Horizontal layout groups did not update correctly, added coroutine that disables and re-enables them)
 
 		
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles
 		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
+		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
 
 		SOUND
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
-
-		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
-		
+				
 		CONSIDER CHANGES:
 		* Should boosts be available from within a game played? Giving player chance to boost before completing a started level? No?
 		* Coins update from level complete is instant, maybe have them come after interstitial ad? Maybe have greater delay before ad so player have time to see this added coins?
@@ -159,10 +159,6 @@ Jun 2023
 		* Have tile Variations player can use
 		* Add irregular tiles? And have as separate Level Variant
 		* Maybe have gems as currency? Maybe implement later, not now.
-
-		AFTER PLAYTEST
-		* Need to have arms to show direction, maybe have tile that can be picked up animate into higher position - Added boxmonster
-		* Need to have tutorial, interactive?
 
 		ACHIEVEMENTS IDEAS (Decide if achievements are good to have in game?)
 			* Add rewarded ads counter for an achievement
@@ -233,6 +229,7 @@ Jun 2023
 		DATA STUFF:
 		* Clean Up tile definition and way levels are stored when created at runtime
 		* Make player gain gold and tiles when completing levels, animation for this?
+		* Have stored data Encrypyted?
 
 		UI STUFF:
 		* Change Load Screen between scenes to animation or not? Current solution, made it faster blackscreen 0.1 seconds.
