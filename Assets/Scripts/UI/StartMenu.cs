@@ -43,6 +43,11 @@ public class StartMenu : BasePanel
 		Debug.Log("Credits Clicked");
 		uIController.RequestCredits();
 	}
+	public void CustomizeClicked()
+	{
+		Debug.Log("Customize Clicked");
+		uIController.RequestCustomize();
+	}
 	public void QuitGameClicked()
 	{
 		Debug.Log("QuitGame Clicked");

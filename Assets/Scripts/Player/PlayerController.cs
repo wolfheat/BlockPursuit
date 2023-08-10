@@ -41,6 +41,12 @@ public class PlayerController : MonoBehaviour
 
     public Vector2Int Position { get; private set; }
 
+    public void SetNewCharacter(GameObject newCharacter)
+    {
+        character = newCharacter;
+        animator = newCharacter.GetComponent<Animator>();
+    }
+    
     private void Awake()
     {
         levelCreator = FindObjectOfType<LevelCreator>();

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class Inputs : MonoBehaviour
 {
@@ -29,14 +28,8 @@ public class Inputs : MonoBehaviour
     private void OnEnable()
     {
         Controls.Enable();
-        Controls.Main.LeftClickB.performed += PrintPosition;
-
     }
 
-    private void PrintPosition(InputAction.CallbackContext obj)
-    {
-        Debug.Log("Mouse: " + Mouse.current.position.ReadValue());
-    }
     private void OnDisable()
     {
         Controls.Disable();

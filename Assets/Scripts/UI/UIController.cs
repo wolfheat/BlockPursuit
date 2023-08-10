@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] StartMenu startMenu;
     [SerializeField] LevelComplete levelComplete;
     [SerializeField] LevelSelect levelSelect;
+    [SerializeField] CustomizationController customize;
     [SerializeField] TransitionScreen transitionScreen;
     [SerializeField] ConfirmResetScreen confirmResetScreen;
     [SerializeField] LevelCreator levelCreator;
@@ -197,6 +198,13 @@ public class UIController : MonoBehaviour
                 unlockScreen.HidePanel();
                 levelSelect.SetSelected();
                 break;
+            case GameAction.ShowCustomize:
+                customize.ShowPanel();
+                break;
+             case GameAction.HideCustomize:
+                customize.HidePanel();
+                startMenu.SetSelected();
+                break;
             case GameAction.none:
                 break;
             default:
@@ -219,6 +227,11 @@ public class UIController : MonoBehaviour
     {
         latestSelected = EventSystem.current.currentSelectedGameObject;
         TransitionScreen.Instance.StartTransition(GameAction.ShowAchievements);
+    }
+    internal void RequestCustomize()
+    {
+        latestSelected = EventSystem.current.currentSelectedGameObject;
+        TransitionScreen.Instance.StartTransition(GameAction.ShowCustomize);
     }
     internal void RequestCredits()
     {

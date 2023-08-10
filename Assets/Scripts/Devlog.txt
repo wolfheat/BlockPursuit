@@ -129,7 +129,8 @@ Jun 2023
 		* Added camera button to in game menu that toggles between modes.
 		* Added variations in bored animation
 		* Fixed complete screen text alignement error (Horizontal layout groups did not update correctly, added coroutine that disables and re-enables them)
-
+10/8	* Added customization screen, player can choose between 5 characters
+		
 		
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles
@@ -153,12 +154,9 @@ Jun 2023
 
 		NEW CONTENT
 		* Have skins that player can buy and use as player?
-
 		* Make a Customize screen for player and tiles / Implement system for this
-
 		* Have tile Variations player can use
 		* Add irregular tiles? And have as separate Level Variant
-		* Maybe have gems as currency? Maybe implement later, not now.
 
 		ACHIEVEMENTS IDEAS (Decide if achievements are good to have in game?)
 			* Add rewarded ads counter for an achievement
@@ -170,37 +168,33 @@ Jun 2023
 			* Showing X rewarded ads
 
 		ADS:
-		* Maybe have each ad shown add the timer by 5 minutes up to a maximum of an hour? Figure this out.
+		* Maybe have ad-boosts stack up to a maximum.
 		* Maybe always have banner on bottom showing? -YES
+		* Maybe have Icon pop-up during play for ad-reward?
 		* Implementation needs more work
 			* Does it need consent to preload?
 			* Better way to load the ads than current system?
-		* Add Ads screen and Icon. Icon shows every 5 min since last used.
-			* +25% rewards for next 9 min
-			* Take 10 coins free or watch ad for +50gold ever 5 minute
-			* OR Just watch ad for +50gold ever 5 minute
-			* At reward screen have watch add to double coins button (this will make it optional)
-			* Every 5 or 10 ad watches gives a guaranteed tile? (Maybe special tile for special levels?!?)
-		* Player can watch add ever 5 min to gain gold, but also whenever play the random levels to gain as well.
+			* +25% rewards for next 9 min (stackable?)
+			* Maybe have watch ad available without playing?
+			* Every 5 or 10 ad watches gives a guaranteed tile? (Maybe special tile for special Ad-related levels?!?)
 		* Paid player get free gold every 5 min without watching ad.
-			* Make separate game loop for paying player / Have a payable version on steam?
+		* Make separate game loop for paying player / Have a payable version on steam?
 
 		IAP:
+		* Maybe have gems as currency? Maybe implement later, not now.
 		* Make Shop Screen
 		* Have game features unlocked by gold in shop
-		* Check if IAP is the way to go, better revenue than ads
+		* Check if IAP is the way to go, better revenue than ads Prob a good solution to have as well
 		* Have some free coins that spawns now and then in the IAP Store page to draw players there
 
-
 		MAYBE - IDEAS:
-		* Have a ads description page that states why ads are in the game and how it works?
+		* Have a ads description page that states why ads are in the game and how it works? (part of credits/rename to About?)
 		* Have timer show on HUD? prob not, to stressy.(maybe have as option to turn on in settings/ unlockable in shop?)
-		* Currently not possible to turn on spot, should it be possible? Decide.
+		* Currently not possible to turn on spot, should it be possible? Decide. No...
 		* Maybe have collectables that are tiles that form a collection that can be used to clear a set of special levels,
 			but the player has to decide which tiles to bring into the levels themself. Many levels can be cleared with different set of tiles
 			but With right combination all levels can be cleared if tiles are selected in a clever way.
 		
-
 		BUGS:
 		* Exiting android app wont close the app only minimize it?
 

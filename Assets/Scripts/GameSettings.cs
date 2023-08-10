@@ -9,7 +9,9 @@ public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowInventory, HideIn
     ShowAchievements,
     HideAchievements,
 	ShowUnlock,
-	HideUnlock
+	HideUnlock,
+    ShowCustomize,
+    HideCustomize
 }
 
 public class GameSettings : MonoBehaviour
