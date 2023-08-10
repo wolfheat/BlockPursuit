@@ -130,8 +130,9 @@ Jun 2023
 		* Added variations in bored animation
 		* Fixed complete screen text alignement error (Horizontal layout groups did not update correctly, added coroutine that disables and re-enables them)
 10/8	* Added customization screen, player can choose between 5 characters
+		* Implemented save and load of selected character
 		
-		
+
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles
 		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
@@ -153,8 +154,6 @@ Jun 2023
 		* Include achievements in save / make internal Achievement system
 
 		NEW CONTENT
-		* Have skins that player can buy and use as player?
-		* Make a Customize screen for player and tiles / Implement system for this
 		* Have tile Variations player can use
 		* Add irregular tiles? And have as separate Level Variant
 
@@ -182,6 +181,7 @@ Jun 2023
 
 		IAP:
 		* Maybe have gems as currency? Maybe implement later, not now.
+		* Have skins that player can buy and use as player?
 		* Make Shop Screen
 		* Have game features unlocked by gold in shop
 		* Check if IAP is the way to go, better revenue than ads Prob a good solution to have as well
@@ -212,7 +212,7 @@ Jun 2023
 		* Need to figure out why the game wont scale to phone correctly
 			* Resolution makes bottom part of game get outside of screen
 			* Still cant figure this one out, tried changing build for widescreen native resolution without success
-		* Older phone does not granе rewards from ads nor saves game data to file, why
+		* Older phone does not grant rewards from ads nor save/load game data on file, why?
 		
 		TUTORIAL: (Fill in stuff that needs to be thaught)
 		* Show in tutorial the different input modes for touch
@@ -221,8 +221,8 @@ Jun 2023
 		* Show that sometimes there are more tile parts than goals, just need to fill them
 
 		DATA STUFF:
+		* Calibrate tile cost for level unlock as well as rewarded tiles.
 		* Clean Up tile definition and way levels are stored when created at runtime
-		* Make player gain gold and tiles when completing levels, animation for this?
 		* Have stored data Encrypyted?
 
 		UI STUFF:

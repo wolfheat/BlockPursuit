@@ -14,8 +14,9 @@ public class CustomizationController : BasePanel
 
     private void Start()
     {
-        CreateToonButtonsFromDefinitions();
-    }
+        // Make listener for loading complete
+        SavingUtility.LoadingComplete += CreateToonButtonsFromDefinitions;
+    }   
 
     private void CreateToonButtonsFromDefinitions()
     {
@@ -31,8 +32,14 @@ public class CustomizationController : BasePanel
             newButton.SetToonDefinition(def);
         }
 
+        // Read saved type
+        AvatarType storedType = SavingUtility.playerGameData.Avatar;
+
         // Load from stored value here
-        activeToonButton.SetToonDefinition(toonDefinitions[0]);
+        activeToonButton.SetToonDefinition(toonDefinitions[(int)storedType]);
+
+        // Update player to loaded avatar
+        ChangePlayerAvatar(storedType); 
     }
 
     private void OnEnable()
@@ -48,8 +55,17 @@ public class CustomizationController : BasePanel
     public void RequestChangeAvatar(ToonDefinition definition)
     {
         activeToonButton.SetToonDefinition(definition);
+
+        ChangePlayerAvatar(definition.type);
+
+        SavingUtility.playerGameData.SetCharacter(definition.type);
+    }
+
+    private void ChangePlayerAvatar(AvatarType type)
+    {
         // Change Player to this character
-        FindObjectOfType<PlayerAvatarController>().ChangeActiveAvatar(definition.type);
+        FindObjectOfType<PlayerAvatarController>().ChangeActiveAvatar(type);
+
     }
 
     private void RequestESC(InputAction.CallbackContext context)

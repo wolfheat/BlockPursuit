@@ -101,6 +101,7 @@ public class SavingUtility : MonoBehaviour
             PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
+            PlayerGameData.AvatarChange += OnPlayerSaveDataUpdated;
         }
         catch (Exception e)
         {

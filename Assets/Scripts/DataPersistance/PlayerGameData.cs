@@ -29,6 +29,8 @@ public class PlayerGameData
     public DateTime AtypeBoostTime { get; set; }
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
 
+    public AvatarType Avatar { get; set; } = AvatarType.Dino;
+
     public SoundSettings soundSettings = new SoundSettings();
     public LightSettings lightSettings = new LightSettings();
     public GameEffectsSettings gameEffectsSettings = new GameEffectsSettings();
@@ -38,6 +40,7 @@ public class PlayerGameData
 
     public static Action InventoryUpdate;
     public static Action BoostTimeUpdated;
+    public static Action AvatarChange;
 
     public PlayerGameData()
     {
@@ -92,5 +95,11 @@ public class PlayerGameData
     internal void DefineSavingUtility(SavingUtility savingUtility)
     {
         PlayerLevelDataList.DefineSavingUtility(savingUtility);
+    }
+
+    internal void SetCharacter(AvatarType type)
+    {
+        Avatar = type;
+        AvatarChange?.Invoke();
     }
 }
