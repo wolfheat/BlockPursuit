@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 public enum GameState { Menu, RunGame, Transition}
-public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowInventory, HideInventory, ShowLevelSelect ,ShowLevelComplete, RestartLevel, 
-	HideBoostPanel, ShowResetConfirm, HideResetConfirm, ShowSettings, HideSettings, none,
+public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowPauseScreen, HidePauseScreen, ShowLevelSelect ,ShowLevelComplete, RestartLevel, 
+	HideBoostPanel, ShowResetConfirm, HideResetConfirm, ShowSettings, ShowSettingsIngame, HideSettings, HideSettingsInGame, none,
     ShowCredits,
     HideCredits,
     ShowAchievements,
@@ -34,7 +34,7 @@ public class GameSettings : MonoBehaviour
 	public static int MoveCounter { get; set; }	
 	public static bool InTransition { get; set; }	
 
-	public static bool UseFast => StoredAction == GameAction.ShowInventory || StoredAction == GameAction.HideInventory;
+	public static bool UseFast => StoredAction == GameAction.ShowPauseScreen || StoredAction == GameAction.HidePauseScreen;
     //OLD
 
     public static bool AtMenu { get; set; } = true;

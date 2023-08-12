@@ -7,7 +7,7 @@ public enum DifficultLevel{Easy,Medium,Hard}
 
 public class LevelButton : MonoBehaviour, ISelectHandler
 {
-    public int level;
+    public int level = 0;
     public DifficultLevel difficulty;
     public TextMeshProUGUI levelIDText;
     public GameObject selectedBorder;

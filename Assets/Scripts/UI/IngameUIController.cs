@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
-public class IngameUIController : BasePanel
+public class IngameUIController : EscapableBasePanel
 {
     [SerializeField] TextMeshProUGUI level;
     //[SerializeField] GameObject activeBoostsIcons;
@@ -13,17 +13,6 @@ public class IngameUIController : BasePanel
     private FollowPlayer followPlayer;
     //RestartPanelController restartPanel;
 
-
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
-    }
-
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
-    }
-
     private void Start()
     {
         pauseMenu = FindObjectOfType<PauseUI>();
@@ -32,11 +21,11 @@ public class IngameUIController : BasePanel
         followPlayer = FindObjectOfType<FollowPlayer>();
     }
 
-    private void RequestESC(InputAction.CallbackContext context)
+     public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("ESC from in game");
-        ShowInventory();
+        ShowPauseScreen();
     }
     public void UpdateLevel()
     {
@@ -69,14 +58,14 @@ public class IngameUIController : BasePanel
     public void RestartSettigsMenu()
     {
         if (GameSettings.InTransition) return;
-        UIController.RequestSettings();
+        UIController.RequestSettings(ReturnMenuType.InGame);
     }
-    public void ShowInventory()
+    public void ShowPauseScreen()
     {
         if (GameSettings.InTransition) return;
 
         Debug.Log("Main Menu Clicked");
         GameSettings.IsPaused = true;
-        TransitionScreen.Instance.StartTransition(GameAction.ShowInventory);
+        TransitionScreen.Instance.StartTransition(GameAction.ShowPauseScreen);
     }
 }

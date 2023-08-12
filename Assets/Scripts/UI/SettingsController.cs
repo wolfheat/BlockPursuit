@@ -1,10 +1,7 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class SettingsController : BasePanel
+public class SettingsController : EscapableBasePanel
 {
     [SerializeField] SoundSliderSettingsController music;
     [SerializeField] SoundSliderSettingsController SFX;
@@ -15,26 +12,12 @@ public class SettingsController : BasePanel
     private bool listenForSoundSliders = true;
 
     private const float IntensityScale = 4f;
-    [SerializeField] GameObject mainSelected;
-    public void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(mainSelected.gameObject);
-    }
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
-    }
 
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
-    }
-
-    private void RequestESC(InputAction.CallbackContext context)
+    public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("SettingsController ESC");
-        TransitionScreen.Instance.StartTransition(GameAction.HideSettings);
+        CloseAndStoreSettings();
     }
 
     public void UpdatePanelFromStored()
@@ -106,7 +89,9 @@ public class SettingsController : BasePanel
     {
         TransitionScreen.Instance.StartTransition(GameAction.ShowResetConfirm);
     }
-    
+
+    public ReturnMenuType ReturnMenu { get; set; } = ReturnMenuType.Main;
+
     public void CloseAndStoreSettings()
     {
         SavingUtility.Instance.SaveToFile();
@@ -114,3 +99,5 @@ public class SettingsController : BasePanel
     }
 
 }
+public enum ReturnMenuType {Main,InGame}
+

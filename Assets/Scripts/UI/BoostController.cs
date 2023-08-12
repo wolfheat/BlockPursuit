@@ -1,17 +1,21 @@
 using MyGameAds;
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-public class BoostController : BasePanel
+public class BoostController : EscapableBasePanel
 {
-    [SerializeField] Button mainSelectedButton;
     [SerializeField] TypeABoost aBoost;
     [SerializeField] TypeBBoost bBoost;
     [SerializeField] BoostIcon aBoostIcon;
     [SerializeField] BoostIcon bBoostIcon;
     public BoostData A_BoostData = new BoostData(BoostType.TileBoost, 9);
     public BoostData B_BoostData = new BoostData(BoostType.CoinBoost, 9);
+
+     public override void RequestESC()
+    {
+        if (!Enabled()) return;
+        Debug.Log("ESC from boost");
+        BackToLevelSelect();
+    }
 
     private void OnEnable()
     {
@@ -76,11 +80,6 @@ public class BoostController : BasePanel
 
         SoundController.Instance.PlaySFX(SFX.RecieveBoost);
 
-    }
-
-    public void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);
     }
 
     public void BoostRequest()

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StartMenu : BasePanel
@@ -8,18 +7,10 @@ public class StartMenu : BasePanel
 	[SerializeField] private GameObject buttonHolder;
 	[SerializeField] private List<Image> images;
 
-    [SerializeField] Button mainSelectedButton;
     private UIController uIController;
     private void Start()
     {
-        ShowPanel();
-		SetSelected();
         uIController = FindObjectOfType<UIController>();
-    }
-
-    public void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);	
     }
 
     public void StartGameClicked()
@@ -30,7 +21,7 @@ public class StartMenu : BasePanel
 	public void SettingsClicked()
 	{
 		Debug.Log("Settings Clicked");
-        uIController.RequestSettings();
+        uIController.RequestSettings(ReturnMenuType.Main);
 
     }
 	public void AchievementsClicked()

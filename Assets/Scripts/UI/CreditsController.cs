@@ -1,25 +1,9 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
-public class CreditsController : BasePanel
+public class CreditsController : EscapableBasePanel
 {
-    [SerializeField] GameObject mainSelected;
-    public void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(mainSelected.gameObject);
-    }
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
-    }
 
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
-    }
-
-    private void RequestESC(InputAction.CallbackContext context)
+     public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("Credits ESC");

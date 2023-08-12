@@ -1,14 +1,10 @@
 using MyGameAds;
-using System;
 using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class LevelComplete : BasePanel
+public class LevelComplete : EscapableBasePanel
 {
     [SerializeField] UIController UIController;
     [SerializeField] TextMeshProUGUI levelText;
@@ -19,20 +15,18 @@ public class LevelComplete : BasePanel
     [SerializeField] TextMeshProUGUI tileGainText;
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
-    [SerializeField] Button mainSelectedButton;
     [SerializeField] HorizontalLayoutGroup[] layoutgroups;
 
     LevelSelect levelSelect;
     private int latestCoins;
 
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
-    }
 
-    private void OnDisable()
+
+    public override void RequestESC()
     {
-        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
+        if (!Enabled()) return;
+        Debug.Log("ESC from menu");
+        SelectLevelClicked();
     }
 
     private void Awake()
@@ -51,20 +45,6 @@ public class LevelComplete : BasePanel
         Debug.Log("LevelComplete Regain focus = Setselected");
         SetSelected();
     }
-
-    private void RequestESC(InputAction.CallbackContext context)
-    {
-        if (!Enabled()) return;
-        Debug.Log("ESC from menu");
-        SelectLevelClicked();
-    }
-
-    public void SetSelected()
-    {
-        Debug.Log("Selecting LEvelComplete First OK Button");
-        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);
-    }
-
     public void NextLevelClicked()
 	{
 		Debug.Log("Next Level Clicked");

@@ -1,28 +1,19 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class PauseUI : BasePanel
+public class PauseUI : EscapableBasePanel
 {
-    [SerializeField] TextMeshProUGUI inventoryTilesText;
-    [SerializeField] TextMeshProUGUI inventoryCoinsText;
 
-    [SerializeField] Button mainSelectedButton;
-
-    public void SetSelected()
+    public override void RequestESC()
     {
-        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);
+        if (!Enabled()) return;
+        Debug.Log("ESC from menu");
+        ClosePauseUIRequest();
     }
 
-    public void UpdateInventoryUI()
+    public void ClosePauseUIRequest()
     {
-        inventoryTilesText.text = SavingUtility.playerGameData.Tiles.ToString();
-        inventoryCoinsText.text = SavingUtility.playerGameData.Coins.ToString();
-    }
-    public void CloseInventoryRequest()
-    {
-        TransitionScreen.Instance.StartTransition(GameAction.HideInventory);
+        TransitionScreen.Instance.StartTransition(GameAction.HidePauseScreen);
     }
 
     public void QuitLevelClicked()

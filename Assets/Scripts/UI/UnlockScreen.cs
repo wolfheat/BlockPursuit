@@ -1,9 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
-public class UnlockScreen : BasePanel
+public class UnlockScreen : EscapableBasePanel
 {
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI costText;
@@ -11,27 +10,13 @@ public class UnlockScreen : BasePanel
     [SerializeField] LevelSelect levelSelect;
 
     private LevelDefinition currentLevel;
-    public void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(okButton.gameObject);
-    }
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
-    }
 
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
-    }
-
-    private void RequestESC(InputAction.CallbackContext context)
+    public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("ESC from menu");
         CancelClicked();
     }
-
 
     public void SetInfo(LevelDefinition level)
     {

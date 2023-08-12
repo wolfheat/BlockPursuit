@@ -1,20 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class RestartPanelController : BasePanel
+public class RestartPanelController : EscapableBasePanel
 {
-
-    [SerializeField] Button mainSelectedButton;
-
-
-    public void SetSelected()
+    public override void RequestESC()
     {
-        EventSystem.current.SetSelectedGameObject(mainSelectedButton.gameObject);
+        if (!Enabled()) return;
+        Debug.Log("ESC from menu");
+        ClosePanel();
     }
-
     public void ClosePanel()
     {
         HidePanel();

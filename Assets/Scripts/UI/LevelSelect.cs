@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class LevelSelect : BasePanel
+public class LevelSelect : EscapableBasePanel
 {
     [SerializeField] GameObject levelEasyButtonHolder;
     [SerializeField] GameObject levelMediumButtonHolder;
@@ -33,7 +31,12 @@ public class LevelSelect : BasePanel
     private List<LevelButton> HardButtonList = new List<LevelButton>();
     private List<LevelButton> ABCButtonList = new List<LevelButton>();
 
-    // Start is called before the first frame update
+    public override void RequestESC()
+    {
+        if (!Enabled()) return;
+        Debug.Log("ESC from menu");
+        RequestGoToMainMenu();
+    }
     void Start()
     {
         levelButtonHolders = new GameObject[4] { levelEasyButtonHolder,levelMediumButtonHolder,levelHardButtonHolder, levelABCButtonHolder };
@@ -45,20 +48,11 @@ public class LevelSelect : BasePanel
     private void OnEnable()
     {
         SavingUtility.LoadingComplete += GenerateButtonLevelsWhenLoadingIsComplete; 
-        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
     }
     
     private void OnDisable()
     {
         SavingUtility.LoadingComplete -= GenerateButtonLevelsWhenLoadingIsComplete;
-        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
-    }
-
-    private void RequestESC(InputAction.CallbackContext context)
-    {
-        if (!Enabled()) return;
-        Debug.Log("ESC from menu");
-        RequestGoToMainMenu();
     }
 
     public void GenerateButtonLevelsWhenLoadingIsComplete()
@@ -133,15 +127,6 @@ public class LevelSelect : BasePanel
         infoScreen.UpdateInfo(button);
     }
 
-    public void SetSelected()   
-    {
-        EventSystem.current.SetSelectedGameObject(infoScreen.latestButton.gameObject);
-
-        // Update Level Info
-        //infoScreen.UpdateInfo(selectedButton);
-    }
-
-
     public void RequestGoToMainMenu()
     {
         if (!Enabled()) return;
@@ -210,7 +195,7 @@ public class LevelSelect : BasePanel
     {
         SwitchToTab(tierButton);
 
-        SetSelected();
+        base.SetSelected();
     }
 
     private void SwitchToTab(TierButton tierButton)
@@ -232,20 +217,18 @@ public class LevelSelect : BasePanel
 
     }
 
-    public void SetSelectedLevelToLastPlayed()
+    public override void SetSelected()
     {
         selectedLevel = infoScreen.latestButton.level;
-        SetSelected();
+        infoScreen.latestButton = buttonLists[activeTab][selectedLevel];
+        EventSystem.current.SetSelectedGameObject(buttonLists[activeTab][selectedLevel].gameObject);
     }
     
     public void SetSelectedLevelToDefaultForActiveTab()
     {
         selectedLevel = FindDefaultLevelToSelectForTab(activeTab);
-
         infoScreen.latestButton = buttonLists[activeTab][selectedLevel];
-
         SetSelected();
-
     }
 
     private void HighLightCorrectTierButtons(TierButton tierButton)

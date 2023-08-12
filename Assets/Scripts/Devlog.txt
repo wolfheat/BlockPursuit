@@ -131,7 +131,11 @@ Jun 2023
 		* Fixed complete screen text alignement error (Horizontal layout groups did not update correctly, added coroutine that disables and re-enables them)
 10/8	* Added customization screen, player can choose between 5 characters
 		* Implemented save and load of selected character
-		
+11/8	* Added SubCanvases and have base panel disable them when not used		
+		* Fixed most UI navigation
+		* Remade system for UI navigation
+
+		* Latest Active Input system is not stored to file, add this?
 
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles

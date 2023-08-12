@@ -1,32 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
-public class AchievementsController : BasePanel
+public class AchievementsController : EscapableBasePanel
 {
-
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed += RequestESC;
-    }
-
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.performed -= RequestESC;
-    }
-
-    private void RequestESC(InputAction.CallbackContext context)
+    public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("Achievements ESC");
         CloseAchievements();
-    }
-    [SerializeField] GameObject mainSelected;
-    public void SetSelected()
-    {
-        EventSystem.current.SetSelectedGameObject(mainSelected.gameObject);
     }
     public void CloseAchievements()
     {

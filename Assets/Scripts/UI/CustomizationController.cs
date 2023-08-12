@@ -1,9 +1,6 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
-public class CustomizationController : BasePanel
+public class CustomizationController : EscapableBasePanel
 {
     [SerializeField] GameObject toonParent;
     [SerializeField] ToonButton toonButtonPrefab;
@@ -11,6 +8,13 @@ public class CustomizationController : BasePanel
     [SerializeField] ToonDefinition[] toonDefinitions;
 
     private ToonButton[] availableToonButtons;
+
+    public override void RequestESC()
+    {
+        if (!Enabled()) return;
+        Debug.Log("ESC from Customization menu");
+        CloseMenu();
+    }
 
     private void Start()
     {
@@ -42,16 +46,6 @@ public class CustomizationController : BasePanel
         ChangePlayerAvatar(storedType); 
     }
 
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
-    }
-
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
-    }
-
     public void RequestChangeAvatar(ToonDefinition definition)
     {
         activeToonButton.SetToonDefinition(definition);
@@ -68,9 +62,9 @@ public class CustomizationController : BasePanel
 
     }
 
-    private void RequestESC(InputAction.CallbackContext context)
+    public void CloseMenu()
     {
-        if (!Enabled()) return;
-        Debug.Log("ESC from Customization menu");
+        TransitionScreen.Instance.StartTransition(GameAction.HideCustomize);
     }
+
 }

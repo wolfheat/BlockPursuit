@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
     [SerializeField] IngameUIController ingameUIController;
     [SerializeField] BoostController boostController;
     [SerializeField] InventoryBar inventoryBar;
-    [SerializeField] PauseUI inventoryUI;
+    [SerializeField] PauseUI pauseScreen;
     [SerializeField] SettingsController settings;
     [SerializeField] CreditsController credits;
     [SerializeField] AchievementsController achievements;    
@@ -47,16 +47,6 @@ public class UIController : MonoBehaviour
         SavingUtility.LoadingComplete -= UpdateInventoryFromStored;        
         Inputs.Instance.Controls.Main.Plus.performed -= AddTiles;        
     }
-    public void SetSelected()
-    {
-        if(startMenu.Enabled())
-            EventSystem.current.SetSelectedGameObject(latestSelected.gameObject);
-    }
-    private void Start()
-    {
-        Debug.Log("toggle on Start Menu");
-        startMenu.ShowPanel();
-    }
 
     internal void UpdateIngameLevelShown()
     {
@@ -71,17 +61,18 @@ public class UIController : MonoBehaviour
     }
     internal void UpdateInventoryFromStored()
     {
-        Debug.Log("Update Inventory from stored");        
+        Debug.Log("Update Inventory from stored");
+        startMenu.ShowPanel();
+        startMenu.SetSelected();
         inventoryBar.UpdateInventory();
-
     }
 
     private void HideAllPanels()
     {
-        levelComplete.HidePanel();
         startMenu.HidePanel();
         levelSelect.HidePanel();
-        inventoryUI.HidePanel();
+        levelComplete.HidePanel();
+        pauseScreen.HidePanel();
         ingameUIController.HidePanel();
         boostController.HidePanel();
     }
@@ -97,7 +88,7 @@ public class UIController : MonoBehaviour
             GameSettings.MoveCounter = 0;
             GameSettings.StepsCounter = 0;
         }
-        else if(GameSettings.StoredAction == GameAction.HideInventory)
+        else if(GameSettings.StoredAction == GameAction.HidePauseScreen)
             GameSettings.IsPaused = false;
 
     }
@@ -108,31 +99,31 @@ public class UIController : MonoBehaviour
         switch (GameSettings.StoredAction)
         {
             case GameAction.LoadSelectedLevel:
-                HideAllPanels();
-                levelCreator.LoadSelectedLevel();
+                levelSelect.HidePanel();
+                ingameUIController.HidePanel();
                 boostController.ShowPanel();
-                boostController.SetSelected();
                 rewardedController.LoadAd();
 
                 break;
             case GameAction.RestartLevel:
-                levelCreator.RestartLevel();
+                // Do I need to unload current game here?
+                ingameUIController.HidePanel();
                 boostController.ShowPanel();
-                boostController.SetSelected();
                 break;
             case GameAction.LoadStartMenu:
-                HideAllPanels();
                 startMenu.ShowPanel();
-                startMenu.SetSelected();
                 break;
             case GameAction.ShowLevelSelect:
-                HideAllPanels();   
+                startMenu.HidePanel();
+                pauseScreen.HidePanel();
+                levelComplete.HidePanel();
+                boostController.HidePanel();
                 levelSelect.ShowPanel();
-                levelSelect.SetSelectedLevelToLastPlayed();
+                //levelSelect.SetSelected();
                 break;
             case GameAction.ShowLevelComplete:
+                ingameUIController.HidePanel();
                 levelCreator.ClearLevel();
-                HideAllPanels();   
                 levelComplete.ShowPanel();
                 // Load Ad here? This is in the middle of the transition To show Level Complete
                 // This is good because it is a delay between player completes level and ad shows
@@ -140,21 +131,24 @@ public class UIController : MonoBehaviour
                 rewardedController.LoadAd();
 
                 break;
-             case GameAction.ShowInventory:
-                inventoryUI.ShowPanel();
-                inventoryUI.UpdateInventoryUI();
-                inventoryUI.SetSelected();
+             case GameAction.ShowPauseScreen:
                 ingameUIController.HidePanel();
+                pauseScreen.ShowPanel();
+                break;
+            case GameAction.HidePauseScreen:
+                GameSettings.IsPaused = false;
+                pauseScreen.HidePanel();
+                ingameUIController.ShowPanel();
                 break;
             case GameAction.HideBoostPanel:
                 // Game unpaused and all values reset when closing this panel
+                // Have level load when player press start level instead of when showing boost panel?
+                levelCreator.LoadSelectedLevel();
+
                 boostController.HidePanel();
                 ingameUIController.ShowPanel();
-                interstitialController.LoadAd();
-                break;
-            case GameAction.HideInventory:
-                inventoryUI.HidePanel();
-                ingameUIController.ShowPanel();
+
+                interstitialController.LoadAd(); // Loaded async now but showed after player complete level
                 break;
             case GameAction.ShowResetConfirm:
                 settings.HidePanel();
@@ -167,43 +161,51 @@ public class UIController : MonoBehaviour
                 settings.UpdateSavingValues();
                 break;
             case GameAction.ShowSettings:
+                startMenu.HidePanel();
+                ingameUIController.HidePanel();
                 settings.ShowPanel();
-                settings.SetSelected();
                 break;
-             case GameAction.HideSettings:
+            case GameAction.HideSettings:
                 settings.HidePanel();
-                SetSelected();
+                if(settings.ReturnMenu == ReturnMenuType.Main)
+                    startMenu.ShowPanel();
+                else
+                    ingameUIController.ShowPanel();
+                break;
+             case GameAction.HideSettingsInGame:
+                settings.HidePanel();
                 break;
             case GameAction.ShowCredits:
+                startMenu.HidePanel();
                 credits.ShowPanel();
-                credits.SetSelected();
                 break;
              case GameAction.HideCredits:
                 credits.HidePanel();
-                SetSelected();
+                startMenu.ShowPanel();
                 break;
             case GameAction.ShowAchievements:
+                startMenu.HidePanel();
                 achievements.ShowPanel();
-                achievements.SetSelected();
                 break;
              case GameAction.HideAchievements:
                 achievements.HidePanel();
-                SetSelected();
+                startMenu.ShowPanel();
                 break;
             case GameAction.ShowUnlock:
+                levelSelect.HidePanel();
                 unlockScreen.ShowPanel();
-                unlockScreen.SetSelected();
                 break;
              case GameAction.HideUnlock:
                 unlockScreen.HidePanel();
-                levelSelect.SetSelected();
+                levelSelect.ShowPanel();
                 break;
             case GameAction.ShowCustomize:
+                startMenu.HidePanel();
                 customize.ShowPanel();
                 break;
              case GameAction.HideCustomize:
                 customize.HidePanel();
-                startMenu.SetSelected();
+                startMenu.ShowPanel();
                 break;
             case GameAction.none:
                 break;
@@ -238,10 +240,10 @@ public class UIController : MonoBehaviour
         latestSelected = EventSystem.current.currentSelectedGameObject;
         TransitionScreen.Instance.StartTransition(GameAction.ShowCredits);
     }
-    internal void RequestSettings()
+    internal void RequestSettings(ReturnMenuType origin)
     {
-        latestSelected = EventSystem.current.currentSelectedGameObject;
         settings.UpdatePanelFromStored();
-        TransitionScreen.Instance.StartTransition(GameAction.ShowSettings);
+        settings.ReturnMenu = origin;
+        TransitionScreen.Instance.StartTransition(GameAction.ShowSettings);        
     }
 }

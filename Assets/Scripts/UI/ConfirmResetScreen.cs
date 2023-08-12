@@ -1,44 +1,23 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class ConfirmResetScreen : BasePanel
+public class ConfirmResetScreen : EscapableBasePanel
 {
     [SerializeField] SettingsController settings;
 
-    private void OnEnable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started += RequestESC;
-    }
-
-    private void OnDisable()
-    {
-        Inputs.Instance.Controls.Main.ESC.started -= RequestESC;
-    }
-
-    private void RequestESC(InputAction.CallbackContext context)
+     public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("ESC from confirm reset screen");
-        CancelClicked();
+        CloseMenu();
     }
 
-    public void CancelClicked(bool updateSave = false)
-    {
-        /*
-        HidePanel();
-        settings.ShowPanel();
-        settings.UpdatePanelFromStored();
-        if (updateSave) settings.UpdateSavingValues();
-        */
-        StartRequest();
-    }
-    public void StartRequest()
+    public void CloseMenu()
     {
         TransitionScreen.Instance.StartTransition(GameAction.HideResetConfirm);
     }
-    public void OkClicked()
+    public void ConfirmResetClicked()
     {
         // Reset Save
         SavingUtility.Instance.ResetSaveFile();
@@ -49,9 +28,6 @@ public class ConfirmResetScreen : BasePanel
         // Music Settings
         // Reset Achievements
 
-
-
-
-        CancelClicked(true);
+        CloseMenu();
     }
 }
