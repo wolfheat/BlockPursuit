@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +7,6 @@ public class SoundSliderSettingsController : MonoBehaviour
     [SerializeField] Toggle toggle;
     [SerializeField] Slider slider;
     [SerializeField] TextMeshProUGUI percent;
-    private float oldSliderValue = 0;
     public bool listenForChange = true;
 
     public bool IsOn()

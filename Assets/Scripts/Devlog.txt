@@ -136,6 +136,10 @@ Jun 2023
 		* Remade system for UI navigation
 		* ESC listeners are now hidden in the panel so they are only active when the panel is active.
 12/8	* Mixtered with water shaders
+		* Changed Water shader, 
+
+		* Issue with goal targets clipping, not always showing
+
 
 		* Latest Active Input system and camera position is not stored to file, add this?
 

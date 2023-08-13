@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class LightController : MonoBehaviour
 {
-    [SerializeField] Light light;
+    [SerializeField] Light lightObject;
     public static LightController Instance { get; set; }
 
     internal void SetFromStoredValues()
     {
-        light.intensity = SavingUtility.playerGameData.lightSettings.LightIntensity;
+        lightObject.intensity = SavingUtility.playerGameData.lightSettings.LightIntensity;
     }
 
     private void Awake()

@@ -118,8 +118,9 @@ public class UIController : MonoBehaviour
                 pauseScreen.HidePanel();
                 levelComplete.HidePanel();
                 boostController.HidePanel();
+                // Clearing level if present
+                levelCreator.ClearLevel();
                 levelSelect.ShowPanel();
-                //levelSelect.SetSelected();
                 break;
             case GameAction.ShowLevelComplete:
                 ingameUIController.HidePanel();

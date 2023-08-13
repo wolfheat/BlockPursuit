@@ -55,6 +55,7 @@ public class LevelCreator : MonoBehaviour
     public static int LevelHeight = 20;
 
     bool haveWalls = false;
+    [SerializeField] private GameObject stageObjects;
 
     // Start is called before the first frame update
     void Start()
@@ -98,15 +99,21 @@ public class LevelCreator : MonoBehaviour
     
     public void LoadLevelByDefinition(LevelDefinition level)
     {
+        // Currently running this method to se if walls need to be created and if last stage is unloaded
+        // It have to similar name to the next method, need to fix this somehow
+        if (sections.Count != 0)
+        {
+            Debug.LogWarning("Loading new level but tiles are already present...");
+            ClearLevel();
+        }
+
         if (!haveWalls) CreateWalls();
-
-        ClearLevel();
         LoadLevelDefinition(level);
-
     }
 
     private void LoadLevelDefinition(LevelDefinition level)
     {
+        stageObjects.SetActive(true);
         Debug.Log("Loading Level: "+level.name);
         foreach (Vector2Int pos in level.goals)
             CreateGoalTile(new Vector2Int(pos.x, pos.y));
@@ -181,7 +188,7 @@ public class LevelCreator : MonoBehaviour
         if (GoalExistsAtPos(pos)) return;
 
         GameObject newFillAreaTile = Instantiate(fillAreaPrefab, goalHolder.transform,false);
-        newFillAreaTile.transform.position = new Vector3(pos.x,pos.y,0.5f);
+        newFillAreaTile.transform.localPosition = new Vector3(pos.x,pos.y,0f);
         fillAreas.Add(newFillAreaTile);
         fillAreasPositions.Add(pos);
     }
@@ -328,8 +335,7 @@ public class LevelCreator : MonoBehaviour
         }
         fillAreas.Clear();
         fillAreasPositions.Clear();
-
-
+        stageObjects.SetActive(false);
     }
 
     private bool CheckIfComplete()
@@ -436,4 +442,5 @@ public class LevelCreator : MonoBehaviour
 
         return type;
     }
+
 }
