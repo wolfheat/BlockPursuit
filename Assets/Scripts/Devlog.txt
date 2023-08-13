@@ -134,8 +134,14 @@ Jun 2023
 11/8	* Added SubCanvases and have base panel disable them when not used		
 		* Fixed most UI navigation
 		* Remade system for UI navigation
+		* ESC listeners are now hidden in the panel so they are only active when the panel is active.
+12/8	* Mixtered with water shaders
 
-		* Latest Active Input system is not stored to file, add this?
+		* Latest Active Input system and camera position is not stored to file, add this?
+
+		BEFORE RELEASE
+		* Add Statistics / retention / dashboard / Unitys ?
+		* Polish
 
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles
