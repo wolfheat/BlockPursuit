@@ -136,16 +136,20 @@ Jun 2023
 		* Remade system for UI navigation
 		* ESC listeners are now hidden in the panel so they are only active when the panel is active.
 12/8	* Mixtered with water shaders
-		* Changed Water shader, 
+		* Changed Water shader
+		* Costumization screen now only saves if character was changed to new.
+
 
 		* Issue with goal targets clipping, not always showing
-
+		* In tier D the scrollrect dont react to keyboard stepping, not that important but fix?
 
 		* Latest Active Input system and camera position is not stored to file, add this?
 
 		BEFORE RELEASE
 		* Add Statistics / retention / dashboard / Unitys ?
 		* Polish
+			* UI response improvements
+			* AssetKits UI particle Image asset might be useful for effects
 
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles
@@ -215,6 +219,8 @@ Jun 2023
 		GRAPHICS:
 		* Figure out theme and color scheme that fits the game
 		* Have different biomes for different difficult levels
+			* Water added for "normal" biom
+			* Add Ice, Lava, Clouds, Space?
 
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player

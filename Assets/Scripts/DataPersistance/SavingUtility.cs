@@ -57,27 +57,27 @@ public class SavingUtility : MonoBehaviour
 
     private void LogSaveInfo()
     {
-        Debug.Log(" -- Saving To File -- START");
+        Debug.Log(" - SAVE INFO - START");
         LogInfo();
-        Debug.Log(" -- Saving To File -- END");
+        Debug.Log(" - SAVE INFO - END");
     }
     private void LogLoadInfo()
     {
-        Debug.Log(" -- Loaded File INFO -- START");
+        Debug.Log(" - LOAD INFO - START");
         LogInfo();
-        Debug.Log(" -- Loaded File INFO -- END");
+        Debug.Log(" - LOAD INFO - END");
     }
     private void LogInfo()
     {
         List<PlayerLevelData> data = playerGameData.PlayerLevelDataList.LevelsList;
         StringBuilder sb = new StringBuilder();
-        sb.Append("Levels (");
+        sb.Append(" -- Levels (");
         foreach (PlayerLevelData levelData in data)
             sb.Append(levelData.levelID);
         sb.Append(")");
         Debug.Log(sb);
-        Debug.Log("Boost time saved A: " + playerGameData.AtypeBoostTime+" B: "+ playerGameData.BtypeBoostTime);
-        Debug.Log("Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume+
+        Debug.Log(" -- Boost time saved A: " + playerGameData.AtypeBoostTime+" B: "+ playerGameData.BtypeBoostTime);
+        Debug.Log(" -- Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume+
                     " SFX: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.SFXVolume)));
 
     }

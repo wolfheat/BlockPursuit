@@ -55,7 +55,7 @@ public class LevelCreator : MonoBehaviour
     public static int LevelHeight = 20;
 
     bool haveWalls = false;
-    [SerializeField] private GameObject stageObjects;
+    [SerializeField] private GameObject levelObjects;
 
     // Start is called before the first frame update
     void Start()
@@ -86,8 +86,8 @@ public class LevelCreator : MonoBehaviour
     
     public void RestartLevel()
     {
-        Debug.Log("Restarting level, currently just loading same again");
-        LoadSelectedLevel();
+        Debug.Log("Restarting level, unload level and show boost panel");
+        ClearLevel();
     }
     
     public void LoadSelectedLevel()
@@ -113,7 +113,7 @@ public class LevelCreator : MonoBehaviour
 
     private void LoadLevelDefinition(LevelDefinition level)
     {
-        stageObjects.SetActive(true);
+        levelObjects.SetActive(true);
         Debug.Log("Loading Level: "+level.name);
         foreach (Vector2Int pos in level.goals)
             CreateGoalTile(new Vector2Int(pos.x, pos.y));
@@ -335,7 +335,7 @@ public class LevelCreator : MonoBehaviour
         }
         fillAreas.Clear();
         fillAreasPositions.Clear();
-        stageObjects.SetActive(false);
+        levelObjects.SetActive(false);
     }
 
     private bool CheckIfComplete()

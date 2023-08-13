@@ -8,7 +8,10 @@ public class CustomizationController : EscapableBasePanel
     [SerializeField] ToonDefinition[] toonDefinitions;
 
     private ToonButton[] availableToonButtons;
-
+    private PlayerAvatarController controller;
+    private bool didChange = false;
+    private AvatarType oldType;
+    private AvatarType newType;
     public override void RequestESC()
     {
         if (!Enabled()) return;
@@ -20,6 +23,7 @@ public class CustomizationController : EscapableBasePanel
     {
         // Make listener for loading complete
         SavingUtility.LoadingComplete += CreateToonButtonsFromDefinitions;
+        controller = FindObjectOfType<PlayerAvatarController>();
     }   
 
     private void CreateToonButtonsFromDefinitions()
@@ -37,33 +41,53 @@ public class CustomizationController : EscapableBasePanel
         }
 
         // Read saved type
-        AvatarType storedType = SavingUtility.playerGameData.Avatar;
+        oldType = SavingUtility.playerGameData.Avatar;
 
         // Load from stored value here
-        activeToonButton.SetToonDefinition(toonDefinitions[(int)storedType]);
+        activeToonButton.SetToonDefinition(toonDefinitions[(int)oldType]);
 
         // Update player to loaded avatar
-        ChangePlayerAvatar(storedType); 
+        ChangePlayerAvatar(oldType); 
     }
 
     public void RequestChangeAvatar(ToonDefinition definition)
     {
         activeToonButton.SetToonDefinition(definition);
 
-        ChangePlayerAvatar(definition.type);
+        if (definition.type == oldType)
+        {
+            Debug.Log("Changing to already active avatar, dont save");
+            didChange = false;
+            return;
+        }
 
-        SavingUtility.playerGameData.SetCharacter(definition.type);
+        didChange = true;
+        newType = definition.type;
     }
 
     private void ChangePlayerAvatar(AvatarType type)
     {
+        if (controller == null)
+        {
+            Debug.LogWarning("Could Not find PlayerAvatarController");
+            controller = FindObjectOfType<PlayerAvatarController>();
+        }
         // Change Player to this character
-        FindObjectOfType<PlayerAvatarController>().ChangeActiveAvatar(type);
+        controller.ChangeActiveAvatar(type);
 
     }
 
     public void CloseMenu()
     {
+        if (didChange)
+        {
+            ChangePlayerAvatar(newType);
+            SavingUtility.playerGameData.SetCharacter(newType);
+            oldType = newType;
+        }
+
+        didChange = false;
+
         TransitionScreen.Instance.StartTransition(GameAction.HideCustomize);
     }
 

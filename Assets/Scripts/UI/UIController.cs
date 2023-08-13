@@ -107,6 +107,7 @@ public class UIController : MonoBehaviour
                 break;
             case GameAction.RestartLevel:
                 // Do I need to unload current game here?
+                levelCreator.RestartLevel();
                 ingameUIController.HidePanel();
                 boostController.ShowPanel();
                 break;
