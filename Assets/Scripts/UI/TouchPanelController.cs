@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -18,6 +19,27 @@ public class TouchPanelController : MonoBehaviour
     [SerializeField] GameObject none;
     private GameObject[] controls;
 
+
+    private void OnEnable()
+    {
+        SavingUtility.LoadingComplete += SetActiveControlFromSave;
+
+    }
+    private void OnDisable()
+    {
+        SavingUtility.LoadingComplete -= SetActiveControlFromSave;
+    }
+
+    private void SetActiveControlFromSave()
+    {
+        Debug.Log("Setting Control from save before: " + activeControls);
+        controls[activeControls].SetActive(false);
+        activeControls = SavingUtility.playerGameData.ActiveTouchControl;
+        Debug.Log("Setting Control from save to " + activeControls);
+        controls[activeControls].SetActive(true);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +54,9 @@ public class TouchPanelController : MonoBehaviour
         controls[activeControls].SetActive(false);
         activeControls = (activeControls+1)%controls.Length;
         controls[activeControls].SetActive(true);
+        Debug.Log(" * Changed Control to " + activeControls);
+        SavingUtility.playerGameData.ChangeActiveTouchControl(activeControls);
+        
     }
 
     public void DirectionTouch(int dir)

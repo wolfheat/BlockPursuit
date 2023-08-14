@@ -138,7 +138,10 @@ Jun 2023
 12/8	* Mixtered with water shaders
 		* Changed Water shader
 		* Costumization screen now only saves if character was changed to new.
+13/8	* Camera position and input method is now saved
 
+
+		* Separate player data and general settings to different save files
 
 		* Issue with goal targets clipping, not always showing
 		* In tier D the scrollrect dont react to keyboard stepping, not that important but fix?
@@ -174,6 +177,7 @@ Jun 2023
 		NEW CONTENT
 		* Have tile Variations player can use
 		* Add irregular tiles? And have as separate Level Variant
+		* In water add fishes jumping etc
 
 		ACHIEVEMENTS IDEAS (Decide if achievements are good to have in game?)
 			* Add rewarded ads counter for an achievement
@@ -220,7 +224,7 @@ Jun 2023
 		* Figure out theme and color scheme that fits the game
 		* Have different biomes for different difficult levels
 			* Water added for "normal" biom
-			* Add Ice, Lava, Clouds, Space?
+			* Add Ice, Lava, Clouds, Space, Aztec, Underground?
 
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player

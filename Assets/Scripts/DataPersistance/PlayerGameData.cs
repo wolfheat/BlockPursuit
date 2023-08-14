@@ -28,19 +28,28 @@ public class PlayerGameData
     public int Coins { get; set; } = 100;
     public DateTime AtypeBoostTime { get; set; }
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
+        
+    // Player Levels Data
+    public PlayerLevelDataList PlayerLevelDataList { get; private set; }
 
+    // Player Settings
     public AvatarType Avatar { get; set; } = AvatarType.Dino;
+
+
+    // General Game Settings
+    public int ActiveTouchControl { get; set; } // Having these private set wont let the load method write these values
+    public int CameraPos { get; set; } // Having these private set wont let the load method write these values
 
     public SoundSettings soundSettings = new SoundSettings();
     public LightSettings lightSettings = new LightSettings();
     public GameEffectsSettings gameEffectsSettings = new GameEffectsSettings();
 
-    // Player Levels Data
-    public PlayerLevelDataList PlayerLevelDataList { get; private set; }
 
+    // Action Events
     public static Action InventoryUpdate;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
+    public static Action InputSettingUpdate;
 
     public PlayerGameData()
     {
@@ -101,5 +110,17 @@ public class PlayerGameData
     {
         Avatar = type;
         AvatarChange?.Invoke();
+    }
+
+    // General Settings - methods
+    internal void ChangeActiveTouchControl(int id)
+    {
+        ActiveTouchControl = id;
+        InputSettingUpdate?.Invoke();
+    }
+    internal void ChangeCameraPos(int id)
+    {
+        CameraPos = id;
+        InputSettingUpdate?.Invoke();
     }
 }

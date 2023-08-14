@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,21 @@ public class FollowPlayer : MonoBehaviour
 
     private int id = 0;
     private Vector3[] camPos;
+
+    private void OnEnable()
+    {
+        SavingUtility.LoadingComplete += SetActiveControlFromSave;
+
+    }
+    private void OnDisable()
+    {
+        SavingUtility.LoadingComplete -= SetActiveControlFromSave;
+    }
+
+    private void SetActiveControlFromSave()
+    {
+        id = SavingUtility.playerGameData.CameraPos;
+    }
 
     private void Start()
     {
@@ -28,6 +44,7 @@ public class FollowPlayer : MonoBehaviour
     public void ChangeView()
     {
         id = (id + 1)%camPos.Length;
+        SavingUtility.playerGameData.ChangeCameraPos(id);
     }
 
 

@@ -7,13 +7,14 @@ using System.Text;
 public class SavingUtility : MonoBehaviour
 {
 
-    private const string SaveFileName = "/player-data.txt";
+    private const string PlayerDataSaveFile = "/player-data.txt";
+    private const string GameSettingsDataSaveFile = "/player-settings.txt";
     public static SavingUtility Instance { get; private set; }
 
     public static Action LoadingComplete;  
 
     public static PlayerGameData playerGameData;
-
+    //public static GameSettingsData gameSettingsData;
 
 
     private void Start()
@@ -39,8 +40,8 @@ public class SavingUtility : MonoBehaviour
     {
         playerGameData = new PlayerGameData();
         IDataService dataService = new JsonDataService();
-        if (dataService.SaveData(SaveFileName, playerGameData, false))
-            Debug.Log("Player save file was reset: "+SaveFileName);
+        if (dataService.SaveData(PlayerDataSaveFile, playerGameData, false))
+            Debug.Log("Player save file was reset: "+PlayerDataSaveFile);
         else
             Debug.LogError("Could not reset file.");
     }
@@ -49,8 +50,8 @@ public class SavingUtility : MonoBehaviour
     {
         LogSaveInfo();
         IDataService dataService = new JsonDataService();
-        if (dataService.SaveData(SaveFileName, playerGameData, false))
-            Debug.Log("Saved in: "+SaveFileName);
+        if (dataService.SaveData(PlayerDataSaveFile, playerGameData, false))
+            Debug.Log("Saved in: "+PlayerDataSaveFile);
         else
             Debug.LogError("Could not save file.");
     }
@@ -76,6 +77,7 @@ public class SavingUtility : MonoBehaviour
             sb.Append(levelData.levelID);
         sb.Append(")");
         Debug.Log(sb);
+        Debug.Log(" -- Input Touch Setting: " + playerGameData.ActiveTouchControl+" Camera position: "+playerGameData.CameraPos);
         Debug.Log(" -- Boost time saved A: " + playerGameData.AtypeBoostTime+" B: "+ playerGameData.BtypeBoostTime);
         Debug.Log(" -- Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume+
                     " SFX: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.SFXVolume)));
@@ -90,7 +92,7 @@ public class SavingUtility : MonoBehaviour
         IDataService dataService = new JsonDataService();
         try
         {
-            playerGameData = dataService.LoadData<PlayerGameData>(SaveFileName, false);
+            playerGameData = dataService.LoadData<PlayerGameData>(PlayerDataSaveFile, false);
 
             Debug.Log("Setting player game data from loaded file");
 
@@ -102,6 +104,7 @@ public class SavingUtility : MonoBehaviour
             PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
             PlayerGameData.AvatarChange += OnPlayerSaveDataUpdated;
+            PlayerGameData.InputSettingUpdate += OnPlayerSaveDataUpdated;
         }
         catch (Exception e)
         {
