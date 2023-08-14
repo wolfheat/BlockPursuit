@@ -24,7 +24,7 @@ public class FollowPlayer : MonoBehaviour
 
     private void SetActiveControlFromSave()
     {
-        id = SavingUtility.playerGameData.CameraPos;
+        id = SavingUtility.gameSettingsData.CameraPos;
     }
 
     private void Start()
@@ -44,7 +44,7 @@ public class FollowPlayer : MonoBehaviour
     public void ChangeView()
     {
         id = (id + 1)%camPos.Length;
-        SavingUtility.playerGameData.ChangeCameraPos(id);
+        SavingUtility.gameSettingsData.ChangeCameraPos(id);
     }
 
 

@@ -60,12 +60,12 @@ public class SoundController : MonoBehaviour
 
     public void SetVolumesFromStoredValues()
     {
-        doPlayMusic = SavingUtility.playerGameData.soundSettings.UseMusic;  
-        doPlaySFX = SavingUtility.playerGameData.soundSettings.UseSFX;
-        presetVolume = SavingUtility.playerGameData.soundSettings.MusicVolume;
+        doPlayMusic = SavingUtility.gameSettingsData.soundSettings.UseMusic;  
+        doPlaySFX = SavingUtility.gameSettingsData.soundSettings.UseSFX;
+        presetVolume = SavingUtility.gameSettingsData.soundSettings.MusicVolume;
 
-        if (presetSFXVolume != SavingUtility.playerGameData.soundSettings.SFXVolume) PlaySFXChangedVolume();
-        presetSFXVolume = SavingUtility.playerGameData.soundSettings.SFXVolume;
+        if (presetSFXVolume != SavingUtility.gameSettingsData.soundSettings.SFXVolume) PlaySFXChangedVolume();
+        presetSFXVolume = SavingUtility.gameSettingsData.soundSettings.SFXVolume;
         UpdateSoundSettings();
     }
 

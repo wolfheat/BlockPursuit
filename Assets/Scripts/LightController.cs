@@ -8,7 +8,7 @@ public class LightController : MonoBehaviour
 
     internal void SetFromStoredValues()
     {
-        lightObject.intensity = SavingUtility.playerGameData.lightSettings.LightIntensity;
+        lightObject.intensity = SavingUtility.gameSettingsData.lightSettings.LightIntensity;
     }
 
     private void Awake()

@@ -26,11 +26,11 @@ public class SettingsController : EscapableBasePanel
         Listen(false);
 
         // Opened Settings page place data
-        Debug.Log("Setting music and SFX from stored values: "+ SavingUtility.playerGameData.soundSettings.MusicVolume+","+ SavingUtility.playerGameData.soundSettings.SFXVolume);
-        music.SetVolumeFromStoredValue(SavingUtility.playerGameData.soundSettings.MusicVolume);
-        SFX.SetVolumeFromStoredValue(SavingUtility.playerGameData.soundSettings.SFXVolume);
-        brightness.SetVolumeFromStoredValue(SavingUtility.playerGameData.lightSettings.LightIntensity/ IntensityScale);
-        shakeToggle.isOn = SavingUtility.playerGameData.gameEffectsSettings.UseShake;
+        Debug.Log("Setting music and SFX from stored values: "+ SavingUtility.gameSettingsData.soundSettings.MusicVolume+","+ SavingUtility.gameSettingsData.soundSettings.SFXVolume);
+        music.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.soundSettings.MusicVolume);
+        SFX.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.soundSettings.SFXVolume);
+        brightness.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.lightSettings.LightIntensity/ IntensityScale);
+        shakeToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.UseShake;
 
         Listen();
     }
@@ -50,7 +50,7 @@ public class SettingsController : EscapableBasePanel
 
         Debug.Log("Shake Settings have been changed");
 
-        SavingUtility.playerGameData.gameEffectsSettings.UseShake = shakeToggle.isOn;
+        SavingUtility.gameSettingsData.gameEffectsSettings.UseShake = shakeToggle.isOn;
     }
     public void LightSettingsUpdated()
     {
@@ -60,7 +60,7 @@ public class SettingsController : EscapableBasePanel
             return;
         }
         Debug.Log("Light Settings have been updated");
-        SavingUtility.playerGameData.lightSettings.LightIntensity = brightness.SliderValue()* IntensityScale;
+        SavingUtility.gameSettingsData.lightSettings.LightIntensity = brightness.SliderValue()* IntensityScale;
         LightController.Instance.SetFromStoredValues();
     }
     public void SoundSettingsUpdated()
@@ -78,10 +78,10 @@ public class SettingsController : EscapableBasePanel
     public void UpdateSavingValues()
     {
         Debug.Log("Sound Settings have been updated");
-        SavingUtility.playerGameData.soundSettings.UseMusic = (music.SliderValue() == 0) ? false : true;
-        SavingUtility.playerGameData.soundSettings.UseSFX = (SFX.SliderValue() == 0) ? false : true;
-        SavingUtility.playerGameData.soundSettings.MusicVolume = music.SliderValue();
-        SavingUtility.playerGameData.soundSettings.SFXVolume = SFX.SliderValue();
+        SavingUtility.gameSettingsData.soundSettings.UseMusic = (music.SliderValue() == 0) ? false : true;
+        SavingUtility.gameSettingsData.soundSettings.UseSFX = (SFX.SliderValue() == 0) ? false : true;
+        SavingUtility.gameSettingsData.soundSettings.MusicVolume = music.SliderValue();
+        SavingUtility.gameSettingsData.soundSettings.SFXVolume = SFX.SliderValue();
         SoundController.Instance.SetVolumesFromStoredValues();
     }
 

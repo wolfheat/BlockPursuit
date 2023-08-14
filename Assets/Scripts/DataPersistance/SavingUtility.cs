@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 public class SavingUtility : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class SavingUtility : MonoBehaviour
     public static Action LoadingComplete;  
 
     public static PlayerGameData playerGameData;
-    //public static GameSettingsData gameSettingsData;
+    public static GameSettingsData gameSettingsData;
 
 
     private void Start()
@@ -38,12 +39,15 @@ public class SavingUtility : MonoBehaviour
 
     public void ResetSaveFile()
     {
+        Debug.Log("Resetting save data, keeps the game settings data");
         playerGameData = new PlayerGameData();
         IDataService dataService = new JsonDataService();
         if (dataService.SaveData(PlayerDataSaveFile, playerGameData, false))
             Debug.Log("Player save file was reset: "+PlayerDataSaveFile);
         else
             Debug.LogError("Could not reset file.");
+            
+        LoadingComplete?.Invoke(); // Call this to update all ingame values
     }
     
     public void SaveToFile()
@@ -51,9 +55,14 @@ public class SavingUtility : MonoBehaviour
         LogSaveInfo();
         IDataService dataService = new JsonDataService();
         if (dataService.SaveData(PlayerDataSaveFile, playerGameData, false))
-            Debug.Log("Saved in: "+PlayerDataSaveFile);
+            Debug.Log("Saved player data in: "+PlayerDataSaveFile);
         else
-            Debug.LogError("Could not save file.");
+            Debug.LogError("Could not save file: PlayerData");
+
+        if (dataService.SaveData(GameSettingsDataSaveFile, gameSettingsData, false))
+            Debug.Log("Saved settings data in: "+GameSettingsDataSaveFile);
+        else
+            Debug.LogError("Could not save file: GameSettingsData");
     }
 
     private void LogSaveInfo()
@@ -77,10 +86,10 @@ public class SavingUtility : MonoBehaviour
             sb.Append(levelData.levelID);
         sb.Append(")");
         Debug.Log(sb);
-        Debug.Log(" -- Input Touch Setting: " + playerGameData.ActiveTouchControl+" Camera position: "+playerGameData.CameraPos);
+        Debug.Log(" -- Input Touch Setting: " + gameSettingsData.ActiveTouchControl+" Camera position: "+ gameSettingsData.CameraPos);
         Debug.Log(" -- Boost time saved A: " + playerGameData.AtypeBoostTime+" B: "+ playerGameData.BtypeBoostTime);
-        Debug.Log(" -- Volume: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.MusicVolume+
-                    " SFX: " + ((playerGameData.soundSettings==null)?"UNDEFINED": playerGameData.soundSettings.SFXVolume)));
+        Debug.Log(" -- Volume: " + ((gameSettingsData.soundSettings==null)?"UNDEFINED": gameSettingsData.soundSettings.MusicVolume+
+                    " SFX: " + ((gameSettingsData.soundSettings==null)?"UNDEFINED": gameSettingsData.soundSettings.SFXVolume)));
 
     }
 
@@ -92,34 +101,28 @@ public class SavingUtility : MonoBehaviour
         IDataService dataService = new JsonDataService();
         try
         {
-            playerGameData = dataService.LoadData<PlayerGameData>(PlayerDataSaveFile, false);
-
-            Debug.Log("Setting player game data from loaded file");
-
-            //Data is now set Dispatch update event before adding listeners to the save
-            //PlayerGameData.InvokeAll();
-
+            playerGameData = dataService.LoadData<PlayerGameData>(PlayerDataSaveFile, false);            
+        }
+        catch   
+        {
+            playerGameData = new PlayerGameData();                        
+        }
+        try
+        {
+            gameSettingsData = dataService.LoadData<GameSettingsData>(GameSettingsDataSaveFile, false);
+        }
+        catch
+        {
+            gameSettingsData = new GameSettingsData();
+        }
+        finally
+        {
             // Add listener to update of data to save
             PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
             PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
             PlayerGameData.AvatarChange += OnPlayerSaveDataUpdated;
-            PlayerGameData.InputSettingUpdate += OnPlayerSaveDataUpdated;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Exception: " + e.Message);
-            playerGameData = new PlayerGameData();
-        }
-        finally
-        {
-            // Make sure soundSettings is initialized
-            if(playerGameData.soundSettings == null)
-            {
-                Debug.Log("!!  Initialize new sound settings!!! ");
-                playerGameData.soundSettings = new SoundSettings();
-            }
-
+            GameSettingsData.InputSettingUpdate += OnPlayerSaveDataUpdated;
 
             Debug.Log(" -- Loading From File -- FINALLY");
             LogLoadInfo();

@@ -29,6 +29,7 @@ public class PlayerLevelDataList
 {
     public List<PlayerLevelData> LevelsList { get; private set; }
 
+    // Can this be removed?
     private SavingUtility savingUtility;
 
     public static Action PlayerLevelDataListUpdate;

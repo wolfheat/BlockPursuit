@@ -139,7 +139,7 @@ Jun 2023
 		* Changed Water shader
 		* Costumization screen now only saves if character was changed to new.
 13/8	* Camera position and input method is now saved
-
+		* Separated player data save and game settings data save
 
 		* Separate player data and general settings to different save files
 

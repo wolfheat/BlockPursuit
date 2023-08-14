@@ -35,21 +35,10 @@ public class PlayerGameData
     // Player Settings
     public AvatarType Avatar { get; set; } = AvatarType.Dino;
 
-
-    // General Game Settings
-    public int ActiveTouchControl { get; set; } // Having these private set wont let the load method write these values
-    public int CameraPos { get; set; } // Having these private set wont let the load method write these values
-
-    public SoundSettings soundSettings = new SoundSettings();
-    public LightSettings lightSettings = new LightSettings();
-    public GameEffectsSettings gameEffectsSettings = new GameEffectsSettings();
-
-
     // Action Events
     public static Action InventoryUpdate;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
-    public static Action InputSettingUpdate;
 
     public PlayerGameData()
     {
@@ -111,6 +100,21 @@ public class PlayerGameData
         Avatar = type;
         AvatarChange?.Invoke();
     }
+}
+
+[Serializable]
+public class GameSettingsData
+{
+    // General Game Settings
+    public int ActiveTouchControl { get; set; } // Having these private set wont let the load method write these values
+    public int CameraPos { get; set; } // Having these private set wont let the load method write these values
+
+    public SoundSettings soundSettings = new SoundSettings();
+    public LightSettings lightSettings = new LightSettings();
+    public GameEffectsSettings gameEffectsSettings = new GameEffectsSettings(); // Use shake etc
+
+    // Action Events
+    public static Action InputSettingUpdate;
 
     // General Settings - methods
     internal void ChangeActiveTouchControl(int id)

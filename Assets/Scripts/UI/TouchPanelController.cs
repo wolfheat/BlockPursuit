@@ -34,7 +34,7 @@ public class TouchPanelController : MonoBehaviour
     {
         Debug.Log("Setting Control from save before: " + activeControls);
         controls[activeControls].SetActive(false);
-        activeControls = SavingUtility.playerGameData.ActiveTouchControl;
+        activeControls = SavingUtility.gameSettingsData.ActiveTouchControl;
         Debug.Log("Setting Control from save to " + activeControls);
         controls[activeControls].SetActive(true);
     }
@@ -55,7 +55,7 @@ public class TouchPanelController : MonoBehaviour
         activeControls = (activeControls+1)%controls.Length;
         controls[activeControls].SetActive(true);
         Debug.Log(" * Changed Control to " + activeControls);
-        SavingUtility.playerGameData.ChangeActiveTouchControl(activeControls);
+        SavingUtility.gameSettingsData.ChangeActiveTouchControl(activeControls);
         
     }
 

@@ -30,7 +30,7 @@ public class Section : MonoBehaviour
         horizontalShake = true;
         if (rotIndex%2==0)horizontalShake = false;
 
-        if (shake != null || !SavingUtility.playerGameData.gameEffectsSettings.UseShake) return;
+        if (shake != null || !SavingUtility.gameSettingsData.gameEffectsSettings.UseShake) return;
         shake = StartCoroutine(Shake());
     }
 
