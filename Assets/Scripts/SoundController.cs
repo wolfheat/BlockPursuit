@@ -215,8 +215,9 @@ public class SoundController : MonoBehaviour
                 sfxSource.PlayOneShot(boost[0]);
                 break;
 			case SFX.FootStep:
+
                 int randomSound = Random.Range(0,footsteps.Length);
-                sfxSource.PlayOneShot(footsteps[randomSound]);
+                //sfxSource.PlayOneShot(footsteps[randomSound]);
                 break;
 			default:
 				break;

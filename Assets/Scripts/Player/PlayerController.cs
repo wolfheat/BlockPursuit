@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     public Section holdingSection;
     private bool placedDuringWalkCycle;
+    [SerializeField] private PlayerAvatarController playerAvatarController;
 
     public Vector2Int Position { get; private set; }
 
@@ -182,6 +183,11 @@ public class PlayerController : MonoBehaviour
         // Place actual player at the target position directly so picking up tiles act from this position even during the move animation
         if (stepTimer == 0)
         {
+            if(levelCreator.heldSection == null && playerAvatarController.Grabbing)
+            {
+                Debug.Log("Not holding section but moving, stop grab");
+                playerAvatarController.Grab(false);
+            }
             PlacePlayerAtIndex();
             levelCreator.UpdateHeld(target, current.rotationIndex);
             GameSettings.StepsCounter++;
@@ -212,11 +218,12 @@ public class PlayerController : MonoBehaviour
             //Check here if pickable tile is in front of player and do sheke if so
             GameTile tile = levelCreator.GetSectionAt(Position, target);
 
-            if (tile != null && levelCreator.heldSection == null && !placedDuringWalkCycle)
+            if (tile != null && levelCreator.heldSection == null)
             {
-                tile.section.ShakeTile(current.rotationIndex);
+                if(!placedDuringWalkCycle)
+                    tile.section.ShakeTile(current.rotationIndex);
+                playerAvatarController.Grab(true);
             }
-            if (tile != null && levelCreator.heldSection == null && placedDuringWalkCycle) Debug.Log("Placed Tile During Walk Cycle, Dont Shake");
             placedDuringWalkCycle = false;
         }
     }

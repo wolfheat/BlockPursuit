@@ -138,12 +138,18 @@ Jun 2023
 12/8	* Mixtered with water shaders
 		* Changed Water shader
 		* Costumization screen now only saves if character was changed to new.
-13/8	* Camera position and input method is now saved
+14/8	* Camera position and input method is now saved
 		* Separated player data save and game settings data save
 		* Fixed issue with player moving out of position due to faulty animation
 		* Mixterd with sound effects
 		* Added delay after completing level so level complete sound has time to play. Add more effects?
+15/8	* Player now grabs the tile using animation rigging
 
+		
+
+		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
+
+		* Footsteps does not sound good, fix or remove?
 
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
 			Shallows in water show up in scene but not in game view (not possible to show shallows in mobile build?)
