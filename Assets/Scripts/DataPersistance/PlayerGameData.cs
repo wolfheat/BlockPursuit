@@ -10,6 +10,7 @@ public class LightSettings
 public class GameEffectsSettings
 {
     public bool UseShake { get; set; } = true;
+    public bool AnimatedWater { get; set; } = true;
 }
 
 [Serializable]

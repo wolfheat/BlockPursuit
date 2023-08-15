@@ -152,17 +152,15 @@ Jun 2023
 		* Fixed Brightness Settings, light source was not set in controller
 		* Added Tween between camera positions when changing
 		* Add sound for changing input method or camera position, reset, settings, and pause
+		* Setting music volume to 0 now correctly stops the player
+		* Animated Water setting added to settings
 
-
-		* Make sure turning off music stops the player as well
-		* Make option to use simple water instead of shaderwater for improved performans
 		* player sometimes on mobile keeps running after moving to a tile, why?
 		* Adjust tiles reward and cost before playtest
 		* Fix achievements before playtest
 
 
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
-
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
 			Shallows in water show up in scene but not in game view (not possible to show shallows in mobile build?)
 

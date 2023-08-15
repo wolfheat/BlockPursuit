@@ -77,6 +77,7 @@ public class SoundController : MonoBehaviour
         presetVolume = SavingUtility.gameSettingsData.soundSettings.MusicVolume;
 
         if (presetSFXVolume != SavingUtility.gameSettingsData.soundSettings.SFXVolume) PlaySFXChangedVolume();
+
         presetSFXVolume = SavingUtility.gameSettingsData.soundSettings.SFXVolume;
         UpdateSoundSettings();
     }
@@ -91,7 +92,12 @@ public class SoundController : MonoBehaviour
         musicSource.volume = presetVolume;
         sfxSource.volume = presetSFXVolume;
 
-        if (doPlayMusic ) PlayMusic();
+        if (doPlayMusic) PlayMusic();
+        else if(musicSource.isPlaying)
+        {
+            Debug.Log("Stopping music from playing");
+            musicSource.Stop();
+        }
     }
 
     public void SetMusicType(MusicType t)

@@ -1,12 +1,17 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsController : EscapableBasePanel
 {
+    [SerializeField] WaterController waterController;
     [SerializeField] SoundSliderSettingsController music;
     [SerializeField] SoundSliderSettingsController SFX;
     [SerializeField] SoundSliderSettingsController brightness;
     [SerializeField] Toggle shakeToggle;
+    [SerializeField] Toggle waterToggle;
+    [SerializeField] TextMeshProUGUI waterText;
     [SerializeField] ConfirmResetScreen confirmResetScreen;
 
     private bool listenForSoundSliders = true;
@@ -31,8 +36,15 @@ public class SettingsController : EscapableBasePanel
         SFX.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.soundSettings.SFXVolume);
         brightness.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.lightSettings.LightIntensity/ IntensityScale);
         shakeToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.UseShake;
-
+        waterToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.AnimatedWater;
+        SetWaterText();
+        waterController.SetAnimatedWater(waterToggle.isOn);
         Listen();
+    }
+
+    private void SetWaterText()
+    {
+        waterText.text = waterToggle.isOn ? "Animated Water" : "Simple Water";
     }
 
     private void Listen(bool listen = true)
@@ -51,6 +63,18 @@ public class SettingsController : EscapableBasePanel
         Debug.Log("Shake Settings have been changed");
 
         SavingUtility.gameSettingsData.gameEffectsSettings.UseShake = shakeToggle.isOn;
+    }
+    public void WaterToggle()
+    {
+        if (!Enabled())
+            return;
+
+        Debug.Log("Water Settings have been changed");
+
+        SavingUtility.gameSettingsData.gameEffectsSettings.AnimatedWater = waterToggle.isOn;
+        SetWaterText();
+        waterController.SetAnimatedWater(waterToggle.isOn);
+
     }
     public void LightSettingsUpdated()
     {
