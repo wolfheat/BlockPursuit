@@ -1,5 +1,6 @@
 using MyGameAds;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -56,6 +57,7 @@ public class LevelCreator : MonoBehaviour
 
     bool haveWalls = false;
     [SerializeField] private GameObject levelObjects;
+    private const float LevelCompleteDelayTime = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -238,6 +240,8 @@ public class LevelCreator : MonoBehaviour
         //Debug.Log("Set Rotation to "+rotationIndex);
         heldSection.PickedUpAtRotationIndex(rotationIndex);
 
+        SoundController.Instance.PlaySFX(SFX.PickupTile);
+
         foreach (GameTile tile in heldSection.GameTiles)
         {
             TileLevel[tile.Pos.x, tile.Pos.y, 1] = null;
@@ -296,9 +300,24 @@ public class LevelCreator : MonoBehaviour
         bool isComplete = CheckIfComplete();
         if (isComplete)
         {
-            FindObjectOfType<PlayerController>().HidePlayer();
             GameSettings.IsPaused = true;
+            StartCoroutine(LevelCompleteDelayCoroutine());
 
+            // Level Complete show interstitial and load rewarded
+            // Maybe check time since last ad was shown?
+            //interstitialController.ShowAd();
+            //rewardedController.LoadAd();
+        }
+        return true;
+    }
+
+    private IEnumerator LevelCompleteDelayCoroutine()
+    {
+            yield return new WaitForSeconds(0.2f);
+            SoundController.Instance.PlaySFX(SFX.LevelComplete);
+            yield return new WaitForSeconds(LevelCompleteDelayTime);
+
+            FindObjectOfType<PlayerController>().HidePlayer();
             int tileGain = Random.Range(0f, 1f) < (GameSettings.TileDefaultProbability * (1 + boostController.A_BoostData.boostMultiplier)) ? 1 : 0; ;
             int coinGain = (int)(GameSettings.CoinDefaultGain * (1f + (boostController.B_BoostData.active ? boostController.B_BoostData.boostMultiplier : 0)));
 
@@ -311,15 +330,7 @@ public class LevelCreator : MonoBehaviour
 
             //Next level
             TransitionScreen.Instance.StartTransition(GameAction.ShowLevelComplete);
-
-            // Level Complete show interstitial and load rewarded
-            // Maybe check time since last ad was shown?
-            //interstitialController.ShowAd();
-            //rewardedController.LoadAd();
-        }
-        return true;
     }
-    
 
     public void ClearLevel()
     {

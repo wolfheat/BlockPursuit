@@ -1,17 +1,29 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum MusicType{Menu,Normal,Boss}
 
-public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, MenuError, FireRocket, FireBullet, StarPickup, Unplacable, PlacedTile, NoStep, TakeStep, Unlock, GainCoin, RecieveBoost}
+public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, MenuError, FireRocket, FireBullet, StarPickup, Unplacable, PlacedTile, NoStep, TakeStep, Unlock, GainCoin, RecieveBoost,
+    FootStep,
+    LevelComplete,
+    MenuCancel,
+    PickupTile
+}
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] menu;
     [SerializeField] private AudioClip[] sfx;
+    [SerializeField] private AudioClip[] levelComplete;
+    [SerializeField] private AudioClip[] placeTile;
+    [SerializeField] private AudioClip[] unPlaceableTile;
+    [SerializeField] private AudioClip[] pickTile;
     [SerializeField] private AudioClip[] moves;
+    [SerializeField] private AudioClip[] cantMove;
     [SerializeField] private AudioClip[] unlock;
     [SerializeField] private AudioClip[] boost;
     [SerializeField] private AudioClip[] coin;
+    [SerializeField] private AudioClip[] footsteps;
     [SerializeField] private AudioClip[] music;
 
     private AudioSource musicSource;
@@ -172,26 +184,39 @@ public class SoundController : MonoBehaviour
 			case SFX.MenuError:
                 sfxSource.PlayOneShot(menu[2]);
                 break;
-			case SFX.TakeStep:
-                //sfxSource.PlayOneShot(moves[0]);
+			case SFX.MenuCancel:
+                sfxSource.PlayOneShot(menu[3]);
                 break;
 			case SFX.PlacedTile:
-                sfxSource.PlayOneShot(moves[1]);
+                sfxSource.PlayOneShot(placeTile[0]);
                 break;
-			case SFX.NoStep:
-                sfxSource.PlayOneShot(moves[2]);
+			case SFX.PickupTile:
+                sfxSource.PlayOneShot(pickTile[0]);
                 break;
 			case SFX.Unplacable:
-                sfxSource.PlayOneShot(moves[3]);
+                sfxSource.PlayOneShot(unPlaceableTile[0]);
+                break;
+			case SFX.TakeStep:
+                sfxSource.PlayOneShot(moves[0]);
+                break;
+			case SFX.NoStep:
+                sfxSource.PlayOneShot(cantMove[0]);
                 break;
 			case SFX.Unlock:
                 sfxSource.PlayOneShot(unlock[0]);
+                break;
+			case SFX.LevelComplete:
+                sfxSource.PlayOneShot(levelComplete[0]);
                 break;
 			case SFX.GainCoin:
                 sfxSource.PlayOneShot(coin[0]);
                 break;
 			case SFX.RecieveBoost:
                 sfxSource.PlayOneShot(boost[0]);
+                break;
+			case SFX.FootStep:
+                int randomSound = Random.Range(0,footsteps.Length);
+                sfxSource.PlayOneShot(footsteps[randomSound]);
                 break;
 			default:
 				break;

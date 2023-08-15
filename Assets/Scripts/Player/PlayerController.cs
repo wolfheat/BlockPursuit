@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
             stepTimer = 0;
             moving = false;
             CheckForStored();
-            SoundController.Instance.PlaySFX(SFX.TakeStep);
+            SoundController.Instance.PlaySFX(SFX.FootStep);
             animator.CrossFade("Idle", 0.1f);
             idleTimer = 0;
 

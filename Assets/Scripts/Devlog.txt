@@ -140,20 +140,23 @@ Jun 2023
 		* Costumization screen now only saves if character was changed to new.
 13/8	* Camera position and input method is now saved
 		* Separated player data save and game settings data save
+		* Fixed issue with player moving out of position due to faulty animation
+		* Mixterd with sound effects
+		* Added delay after completing level so level complete sound has time to play. Add more effects?
 
-		* Separate player data and general settings to different save files
 
-		* Issue with goal targets clipping, not always showing
+		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
+			Shallows in water show up in scene but not in game view (not possible to show shallows in mobile build?)
+
 		* In tier D the scrollrect dont react to keyboard stepping, not that important but fix?
-
-		* Latest Active Input system and camera position is not stored to file, add this?
 
 		BEFORE RELEASE
 		* Add Statistics / retention / dashboard / Unitys ?
+		* Handle errors in data saving so players dont lose progress.
 		* Polish
 			* UI response improvements
 			* AssetKits UI particle Image asset might be useful for effects
-
+		
 		GAMEPLAY RESPONSE
 		* Need to make animation to character to grab hold of tiles
 		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
@@ -171,7 +174,6 @@ Jun 2023
 			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.
 		* Have coin sound until coins are filled up to total?
 		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
-		* Make new input method where drags are recorded on gameplay and acts as a click if short and movement if long, determine this limit
 		* Include achievements in save / make internal Achievement system
 
 		NEW CONTENT
@@ -224,7 +226,7 @@ Jun 2023
 		* Figure out theme and color scheme that fits the game
 		* Have different biomes for different difficult levels
 			* Water added for "normal" biom
-			* Add Ice, Lava, Clouds, Space, Aztec, Underground?
+			* Add Ice, Lava, Clouds, Space, Aztec, Underground? Use separate Music/Sounds?
 
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player
