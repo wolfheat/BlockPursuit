@@ -102,7 +102,8 @@ public class UIController : MonoBehaviour
                 levelSelect.HidePanel();
                 ingameUIController.HidePanel();
                 boostController.ShowPanel();
-                rewardedController.LoadAd();
+                boostController.ShowLoadBoostButton();
+                //rewardedController.LoadAd();
 
                 break;
             case GameAction.RestartLevel:
@@ -224,7 +225,7 @@ public class UIController : MonoBehaviour
     public void RequestDoubleAds()
     { 
         Debug.Log("Requested Show Double Reward Ads");
-        FindObjectOfType<RewardedController>().LoadAd();
+        rewardedController.LoadAd();
     }
 
     internal void RequestAchievements()

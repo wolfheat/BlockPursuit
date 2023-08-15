@@ -56,7 +56,7 @@ public class TouchPanelController : MonoBehaviour
         controls[activeControls].SetActive(true);
         Debug.Log(" * Changed Control to " + activeControls);
         SavingUtility.gameSettingsData.ChangeActiveTouchControl(activeControls);
-        
+        SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
 
     public void DirectionTouch(int dir)

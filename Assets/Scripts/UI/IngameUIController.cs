@@ -41,6 +41,7 @@ public class IngameUIController : EscapableBasePanel
         restartPanel.ShowPanel();
         restartPanel.SetSelected();
         GameSettings.IsPaused = true;
+        SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
 
     public void RestartLevelRequest()
@@ -50,15 +51,18 @@ public class IngameUIController : EscapableBasePanel
         restartPanel.ShowPanel();
         restartPanel.SetSelected();
         GameSettings.IsPaused = true;
+        SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
     public void ToggleCamera()
     {
         followPlayer.ChangeView();
+        SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
     public void RestartSettigsMenu()
     {
         if (GameSettings.InTransition) return;
         UIController.RequestSettings(ReturnMenuType.InGame);
+        SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
     public void ShowPauseScreen()
     {
@@ -67,5 +71,6 @@ public class IngameUIController : EscapableBasePanel
         Debug.Log("Main Menu Clicked");
         GameSettings.IsPaused = true;
         TransitionScreen.Instance.StartTransition(GameAction.ShowPauseScreen);
+        SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
 }

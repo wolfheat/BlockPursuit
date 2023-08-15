@@ -145,12 +145,23 @@ Jun 2023
 		* Added delay after completing level so level complete sound has time to play. Add more effects?
 15/8	* Player now grabs the tile using animation rigging
 		* All characters now grab the tile
-		
-		* Have it lift up higher and use lift animation? 
+		* Player lift up tiles slightly higher than pretendGrab animation? Player has bow-animation when lifting.
+		* Reverted audio to old files removed footsteps and not able to move sounds.
+		* 2305 lines code, 81s Android build, 42.6Mb
+		* Added loading request button for boost ad and a loading tile animation that rotates
+		* Fixed Brightness Settings, light source was not set in controller
+		* Added Tween between camera positions when changing
+		* Add sound for changing input method or camera position, reset, settings, and pause
+
+
+		* Make sure turning off music stops the player as well
+		* Make option to use simple water instead of shaderwater for improved performans
+		* player sometimes on mobile keeps running after moving to a tile, why?
+		* Adjust tiles reward and cost before playtest
+		* Fix achievements before playtest
+
 
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
-
-		* Footsteps does not sound good, fix or remove?
 
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
 			Shallows in water show up in scene but not in game view (not possible to show shallows in mobile build?)
@@ -270,6 +281,18 @@ Jun 2023
 		* Make solver to quickly check if solvable and fastest solve
 		
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
+		* USED IN PROJECT
+		* Animation Rigging
+		* Shader
+		* Newtonsoft.Json serializer, Scriptable Objects, TMPro
+		* New Input System, Touchinput
+		* Android / IoS port
+		* Google AdMob
+		* Boxmon, Android Dependency Manager
+
+
+
+
 
 		CHECKLIST FOR BETTER PLAYER EXPERIENCE
 

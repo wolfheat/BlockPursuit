@@ -1,16 +1,22 @@
 using MyGameAds;
 using System;
 using UnityEngine;
+
 public class BoostController : EscapableBasePanel
 {
+    [SerializeField] RewardedController rewardedController;
     [SerializeField] TypeABoost aBoost;
     [SerializeField] TypeBBoost bBoost;
     [SerializeField] BoostIcon aBoostIcon;
     [SerializeField] BoostIcon bBoostIcon;
+    [SerializeField] GameObject loadBoostButton;
+    [SerializeField] GameObject loadingBoost;
     public BoostData A_BoostData = new BoostData(BoostType.TileBoost, 9);
     public BoostData B_BoostData = new BoostData(BoostType.CoinBoost, 9);
+    private bool checkForLoadedAd;
+    [SerializeField] GameObject loadedAdCheck;
 
-     public override void RequestESC()
+    public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("ESC from boost");
@@ -45,7 +51,16 @@ public class BoostController : EscapableBasePanel
         // Manually Update the Boosts
         A_BoostData.UpdateIfActive();
         B_BoostData.UpdateIfActive();
-
+        if (checkForLoadedAd)
+        {
+            if (loadedAdCheck.activeSelf)
+            {
+                loadBoostButton.SetActive(false);
+                loadingBoost.SetActive(false);
+                checkForLoadedAd = false;
+                BoostRequest();
+            }
+        }
     }
 
     private void Start()
@@ -82,12 +97,27 @@ public class BoostController : EscapableBasePanel
 
     }
 
+    public void ShowLoadBoostButton()
+    {
+        loadBoostButton.SetActive(true);
+        loadingBoost.SetActive(false);
+        checkForLoadedAd = false;
+    }
+    
+    public void LoadBoostClicked()
+    {
+        Debug.Log("LoadBoostClicked");
+        loadBoostButton.SetActive(false);
+        loadingBoost.SetActive(true);
+        checkForLoadedAd = true;
+        rewardedController.LoadAd();
+    }
+    
     public void BoostRequest()
     {
         Debug.Log("Request Boost Ad, show ad and return here");
-        FindObjectOfType<RewardedController>().ShowAd();
+        rewardedController.ShowAd();
     }
-
 
     public void BackToLevelSelect()
     {

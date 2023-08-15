@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -19,7 +20,7 @@ public class PlayerAvatarController : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
     }
 
-    public void Grab(bool grab)
+    public void PretendToGrab(bool grab)
     {
         rigController.SetActive(grab);
     }
@@ -42,5 +43,10 @@ public class PlayerAvatarController : MonoBehaviour
             avatar.gameObject.SetActive(false);
         }
         avatars[(int)activeAvatar].gameObject.SetActive(true);
+    }
+
+    internal void Hold(bool v)
+    {
+        rigController.Hold(v);
     }
 }

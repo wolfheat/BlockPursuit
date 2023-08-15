@@ -90,11 +90,23 @@ public class PlayerController : MonoBehaviour
         if (GameSettings.IsPaused) return;
 
         if (levelCreator.heldSection == null)
-            levelCreator.PickupSectionAt(Position, target, current.rotationIndex);
+        {
+            bool didPickup = levelCreator.PickupSectionAt(Position, target, current.rotationIndex);
+            if (didPickup)
+            {
+                animator.CrossFade("LiftAnimation", 0.1f);
+                playerAvatarController.Hold(true);
+            }
+        }
         else
         {
-            levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
-            placedDuringWalkCycle = true;
+            bool didPlace = levelCreator.PlaceHeldSectionAt(target, current.rotationIndex);
+            if (didPlace)
+            {
+                placedDuringWalkCycle = true;
+                animator.CrossFade("LiftAnimation", 0.1f);
+                playerAvatarController.Hold(false);
+            }
 
         }
     }
@@ -185,8 +197,7 @@ public class PlayerController : MonoBehaviour
         {
             if(levelCreator.heldSection == null && playerAvatarController.Grabbing)
             {
-                Debug.Log("Not holding section but moving, stop grab");
-                playerAvatarController.Grab(false);
+                playerAvatarController.PretendToGrab(false);
             }
             PlacePlayerAtIndex();
             levelCreator.UpdateHeld(target, current.rotationIndex);
@@ -222,8 +233,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(!placedDuringWalkCycle)
                     tile.section.ShakeTile(current.rotationIndex);
-                playerAvatarController.Grab(true);
-                Debug.Log("Grab");
+                playerAvatarController.PretendToGrab(true);
             }
             placedDuringWalkCycle = false;
         }

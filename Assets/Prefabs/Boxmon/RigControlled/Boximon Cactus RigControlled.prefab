@@ -202,6 +202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigBuilder: {fileID: 7000334122072873353}
+  targets:
+  - {fileID: 6131296044468086981}
+  - {fileID: 4279150443854597751}
 --- !u!114 &7000334122072873353
 MonoBehaviour:
   m_ObjectHideFlags: 0

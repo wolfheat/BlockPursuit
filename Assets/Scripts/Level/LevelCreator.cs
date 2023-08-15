@@ -225,10 +225,10 @@ public class LevelCreator : MonoBehaviour
         if (!PossiblePickup(from, target)) return null;
         else return TileLevel[target.x, target.y, 1];
     }
-    public void PickupSectionAt(Vector2Int from, Vector2Int target, int rotationIndex)
+    public bool PickupSectionAt(Vector2Int from, Vector2Int target, int rotationIndex)
     {
         //Debug.Log("Request to pick up from " + from + " target:" + target + " Possible = "+ PossiblePickup(from, target)+" in direction: "+rotationIndex);
-        if(!PossiblePickup(from,target)) return;
+        if(!PossiblePickup(from,target)) return false;
 
         GameTile pickedTile = TileLevel[target.x, target.y, 1];
         heldSection = pickedTile.section;
@@ -248,6 +248,7 @@ public class LevelCreator : MonoBehaviour
         }
 
         heldSection.Held(true, true);
+        return true;
     }
     
     public void PlacePaintSectionIfPossibleAt(Vector2Int pos,int rotationIndex)

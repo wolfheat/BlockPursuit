@@ -8,9 +8,13 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] GameObject following;
     [SerializeField] Vector2 followingOffsetDistance = new Vector2Int(0,-5);
     private Vector2 followingOffset = Vector2.zero;
-
+    private bool tweening;
     private int id = 0;
     private Vector3[] camPos;
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+
+    private const float TweenTime = 0.6f;
 
     private void OnEnable()
     {
@@ -34,6 +38,8 @@ public class FollowPlayer : MonoBehaviour
 
     void Update()
     {
+        if (tweening) return;
+
         Vector3 newCameraPosition = new Vector3(camPos[id].x+following.transform.position.x, camPos[id].y + following.transform.position.y, camPos[id].z + following.transform.position.z);
 
         transform.position = newCameraPosition;
@@ -43,9 +49,26 @@ public class FollowPlayer : MonoBehaviour
 
     public void ChangeView()
     {
+        tweening = true;
+        startPosition = camPos[id]+following.transform.position;
+        
         id = (id + 1)%camPos.Length;
         SavingUtility.gameSettingsData.ChangeCameraPos(id);
+        targetPosition = camPos[id] + following.transform.position; 
+        StartCoroutine(TweenToPosition());
     }
 
 
+    private IEnumerator TweenToPosition()
+    {
+        float timer = 0;
+        while (Vector3.Distance(transform.position, targetPosition) > 0.1f)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, targetPosition, timer/TweenTime);
+            transform.LookAt(following.transform, Vector3.back);
+            yield return null;
+        }
+        tweening = false;
+    }
 }

@@ -200,7 +200,7 @@ public class SoundController : MonoBehaviour
                 sfxSource.PlayOneShot(moves[0]);
                 break;
 			case SFX.NoStep:
-                sfxSource.PlayOneShot(cantMove[0]);
+                //sfxSource.PlayOneShot(cantMove[0]);
                 break;
 			case SFX.Unlock:
                 sfxSource.PlayOneShot(unlock[0]);
