@@ -223,6 +223,7 @@ public class PlayerController : MonoBehaviour
                 if(!placedDuringWalkCycle)
                     tile.section.ShakeTile(current.rotationIndex);
                 playerAvatarController.Grab(true);
+                Debug.Log("Grab");
             }
             placedDuringWalkCycle = false;
         }

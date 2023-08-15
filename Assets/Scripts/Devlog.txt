@@ -144,8 +144,9 @@ Jun 2023
 		* Mixterd with sound effects
 		* Added delay after completing level so level complete sound has time to play. Add more effects?
 15/8	* Player now grabs the tile using animation rigging
-
+		* All characters now grab the tile
 		
+		* Have it lift up higher and use lift animation? 
 
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
 

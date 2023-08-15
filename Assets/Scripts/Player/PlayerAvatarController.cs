@@ -8,12 +8,15 @@ public class PlayerAvatarController : MonoBehaviour
     [SerializeField] GameObject[] avatars;
     [SerializeField] AnimationRigController rigController;
     private AvatarType activeAvatar = AvatarType.Dino;
+    private PlayerController playerController;
 
     public bool Grabbing => rigController.gameObject.activeSelf;
 
     void Start()
     {
         ActivateAvatarType(activeAvatar);
+        rigController = avatars[(int)activeAvatar].GetComponent<AnimationRigController>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     public void Grab(bool grab)
@@ -25,7 +28,11 @@ public class PlayerAvatarController : MonoBehaviour
         Debug.Log("Activating Avatar: "+newType);
         activeAvatar = newType;
         ActivateAvatarType(activeAvatar);
-        FindObjectOfType<PlayerController>().SetNewCharacter(avatars[(int)activeAvatar]);
+        GameObject avatar = avatars[(int)activeAvatar];
+        playerController.SetNewCharacter(avatar);
+        // Change RigController here
+        rigController = avatar.GetComponent<AnimationRigController>();
+
     }
 
     private void ActivateAvatarType(AvatarType activeAvatar)
