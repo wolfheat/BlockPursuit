@@ -158,7 +158,10 @@ Jun 2023
 		* player sometimes on mobile keeps running after moving to a tile, why?
 		* Adjust tiles reward and cost before playtest
 		* Fix achievements before playtest
-
+		* Make a loading screen for the game
+		* Still an issue where boost button is visible when returning to boost panel after using it once
+		// Check that ingame menu is positined correctly
+		* Make changing camera use currect position as old not the ative one, if player switches to fast it looks wierd
 
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
@@ -171,6 +174,8 @@ Jun 2023
 		* Handle errors in data saving so players dont lose progress.
 		* Polish
 			* UI response improvements
+				* Touch on menu make sparkles etc?
+				* Selecting level in level select, buff the touched button and make fancier load of info into infoscreen
 			* AssetKits UI particle Image asset might be useful for effects
 		
 		GAMEPLAY RESPONSE
@@ -180,6 +185,7 @@ Jun 2023
 
 		SOUND
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
+		* Rework of sounds, decide what to use rework needed
 				
 		CONSIDER CHANGES:
 		* Should boosts be available from within a game played? Giving player chance to boost before completing a started level? No?
