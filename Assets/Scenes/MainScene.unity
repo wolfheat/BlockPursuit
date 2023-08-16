@@ -21752,26 +21752,21 @@ MonoBehaviour:
   menu:
   - {fileID: 8300000, guid: 8de1f7cb0023e154f92d59bcc8729831, type: 3}
   - {fileID: 8300000, guid: 93f87a954353ba944828cf8468c3b40f, type: 3}
-  - {fileID: 8300000, guid: 2a067307e93283e4da60e57f2934dabe, type: 3}
-  - {fileID: 8300000, guid: 7825f71f313f8e6428ed66e9a4c201f6, type: 3}
-  sfx:
-  - {fileID: 8300000, guid: 8de1f7cb0023e154f92d59bcc8729831, type: 3}
-  - {fileID: 8300000, guid: 93f87a954353ba944828cf8468c3b40f, type: 3}
+  - {fileID: 8300000, guid: df7d6c7359af7f24dbaa6b2ac2a08794, type: 3}
+  - {fileID: 8300000, guid: df7d6c7359af7f24dbaa6b2ac2a08794, type: 3}
   levelComplete:
-  - {fileID: 8300000, guid: f6fc00163dc6155459d0ce576bf8f3af, type: 3}
+  - {fileID: 8300000, guid: 8c6ff51522869c74d8e69cfe46e50360, type: 3}
   placeTile:
-  - {fileID: 8300000, guid: b749d26701ca61f4e85ed70e69d6b3c0, type: 3}
-  - {fileID: 8300000, guid: 18e5c4bb601bcd9438e63a6019df42db, type: 3}
-  - {fileID: 8300000, guid: a7e97aecfa7809f47a401cfc42b7d949, type: 3}
-  - {fileID: 8300000, guid: 285f6820c35811c49ba80d9bd7b36e78, type: 3}
-  - {fileID: 8300000, guid: 5d80e069447b2374fb4669c26ac55ac2, type: 3}
-  - {fileID: 8300000, guid: 11dbb75ab4d54cb448fc5a97c6ebc1cc, type: 3}
+  - {fileID: 8300000, guid: 57e77ec507766ae4abbbb29615478657, type: 3}
+  - {fileID: 8300000, guid: fafc19c5bf1aa2842a2d63f74a51f4e0, type: 3}
+  - {fileID: 8300000, guid: 956390e02a3214e468a65df0858d1084, type: 3}
+  - {fileID: 8300000, guid: 86beaac9d25e20f46acb01261325b165, type: 3}
+  - {fileID: 8300000, guid: 3fecaf29e7d13ee44989771e94259aa7, type: 3}
   unPlaceableTile:
-  - {fileID: 8300000, guid: fda31714b9c6b0d49b74ba0fba300aa1, type: 3}
-  - {fileID: 8300000, guid: 954ce523c6ccbb64cb993ff1241f03df, type: 3}
-  - {fileID: 8300000, guid: 7aa0560b55ae4a44095f7bf998f50dbd, type: 3}
-  - {fileID: 8300000, guid: 2a45d0cb41675664abb6637a68f8c3ec, type: 3}
+  - {fileID: 8300000, guid: 8cdeb59603f3805419f2eefbe608dee4, type: 3}
   pickTile:
+  - {fileID: 8300000, guid: 625e55dae5039eb4e971c3fd6972b966, type: 3}
+  - {fileID: 8300000, guid: 3344d803b45ad1149bdda07e27d5f3c5, type: 3}
   - {fileID: 8300000, guid: b749d26701ca61f4e85ed70e69d6b3c0, type: 3}
   moves:
   - {fileID: 8300000, guid: 3074f0b7ffc5eee4a99b3b0893210d18, type: 3}
@@ -21779,20 +21774,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 125b39dff1a87fa44bda19f2db095109, type: 3}
   - {fileID: 8300000, guid: 125b39dff1a87fa44bda19f2db095109, type: 3}
   cantMove:
-  - {fileID: 8300000, guid: 1459280578211194cac68e0b59c091cf, type: 3}
+  - {fileID: 8300000, guid: 4721d752ae873ed44bbcba1695e5a1aa, type: 3}
   unlock:
   - {fileID: 8300000, guid: 8407756761713e147a3a2dfd9bfe8639, type: 3}
   boost:
   - {fileID: 8300000, guid: 3f3f94edb2e246840b3b908392b1f59c, type: 3}
   coin:
+  - {fileID: 8300000, guid: 25cbb1197dd499649b56a7b5565505fa, type: 3}
   - {fileID: 8300000, guid: a3b4c3b708425ea4b932c4dd2faf6d23, type: 3}
   - {fileID: 8300000, guid: 5c2192a29e440ca4d8a27cbb2d7a7f8c, type: 3}
+  - {fileID: 8300000, guid: 1c5515f57f99b824bb8c58a451941bd9, type: 3}
   footsteps:
-  - {fileID: 8300000, guid: a179cd291d32a3349802f42e604b3894, type: 3}
-  - {fileID: 8300000, guid: 4097944ac2c67d240830e994bba34f46, type: 3}
-  - {fileID: 8300000, guid: 2f578c47d1e909f4cb7e7a0b5c0aae69, type: 3}
-  - {fileID: 8300000, guid: f5a9b6d0d139b5e4584cab68b0ccf2c7, type: 3}
-  - {fileID: 8300000, guid: 78ead5aa4291e6842ad7b07d50d71d82, type: 3}
+  - {fileID: 8300000, guid: 19f3e0077059c074bb3002f209d0c1f2, type: 3}
+  - {fileID: 8300000, guid: 7c1636059179ffe439d3e5f6bc9dd4dc, type: 3}
+  - {fileID: 8300000, guid: 4fd0299deed5f7d4d88cf344bcf4af76, type: 3}
+  - {fileID: 8300000, guid: f9c444b684e4cf3489be99510d60a931, type: 3}
   music:
   - {fileID: 8300000, guid: a18872ebcf7a2e44c9df2ae9a5759e48, type: 3}
   activeMusic: 0

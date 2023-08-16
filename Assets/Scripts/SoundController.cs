@@ -13,7 +13,6 @@ public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, Men
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] menu;
-    [SerializeField] private AudioClip[] sfx;
     [SerializeField] private AudioClip[] levelComplete;
     [SerializeField] private AudioClip[] placeTile;
     [SerializeField] private AudioClip[] unPlaceableTile;
@@ -223,7 +222,7 @@ public class SoundController : MonoBehaviour
 			case SFX.FootStep:
 
                 int randomSound = Random.Range(0,footsteps.Length);
-                //sfxSource.PlayOneShot(footsteps[randomSound]);
+                sfxSource.PlayOneShot(footsteps[randomSound]);
                 break;
 			default:
 				break;

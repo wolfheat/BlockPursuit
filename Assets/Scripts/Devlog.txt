@@ -159,16 +159,15 @@ Jun 2023
 		* Rewarded ads on Level complete now also has requestbutton instead of automatically loading it
 		* Added a Loading screen while data is recieved on startig the game
 		* Made changing camera use current position as old
-
+		* Tried to fix audio again not much luck, bought - Humble Bundle (Spectacular Sounds & Marvellous Music Collection)
+			
 		* player sometimes on mobile keeps running after moving to a tile, why?
-
-		* Adjust tiles reward and cost before playtest
-			* Normal maps only give tiles on first playthrough
-			* Normal maps give back the cost of unlocking them + 1?
-
 		* Fix achievements before playtest
 		
-		// Check that ingame menu is positined correctly on build
+		* Need better pick up and place sound combo. Remove or change step sound its terrible.
+		* Sound Effects are lagging after for some reason
+
+		// Check that ingame menu is positioned correctly on build
 
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
