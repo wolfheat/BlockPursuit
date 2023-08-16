@@ -102,7 +102,7 @@ public class PlayerLevelDataList
         }
     }
 
-    private bool LevelExists(int levelID, out int index)
+    public bool LevelExists(int levelID, out int index)
     {
         //Find data with this ID
         for (int i = 0; i<LevelsList.Count; i++)

@@ -54,7 +54,7 @@ public class InfoScreen : MonoBehaviour
 
             levelNameText.text = "Level " + StringConverter.LevelAsStringWithParantheses(button.levelDefinition.LevelDiff, button.levelDefinition.LevelIndex);
 
-            unlockCostText.text = "x" + (button.levelDefinition.unlockRequirements.Count > 0 ? button.levelDefinition.unlockRequirements[0].amount:0);
+            unlockCostText.text = "x" + button.levelDefinition.unlockRequirements;
 
         }
 
@@ -65,17 +65,10 @@ public class InfoScreen : MonoBehaviour
         Debug.Log("Infoscreen unlock button "+latestButton.levelDefinition.LevelIndex);
 
         latestButton.Unlock();
-        latestButton.levelDefinition.unlocked = true;
-
-        //Add Data into SaveFile
-        PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddNewLevel(latestButton.levelDefinition.levelID);
-
-        latestButton.playerLevelData = bestLevelData;
 
         UpdateInfo(latestButton);
         
         levelSelect.SetSelected();
-        //EventSystem.current.SetSelectedGameObject(latestButton.gameObject);
     }
 
 }

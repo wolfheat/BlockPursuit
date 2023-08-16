@@ -53,6 +53,5 @@ MonoBehaviour:
   - {x: 12, y: 11}
   - {x: 12, y: 10}
   - {x: 12, y: 9}
-  unlockRequirements:
-  - tileType: 0
-    amount: 2
+  unlockRequirements: 2
+  completeReward: 3

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Easy8 Maybe
   m_EditorClassIdentifier: 
   levelName: Level
+  levelID: 0
+  unlocked: 0
   playerStart: {x: 5, y: 8}
   tiles:
   - type: 5
@@ -44,4 +46,5 @@ MonoBehaviour:
   - {x: 7, y: 6}
   - {x: 7, y: 7}
   - {x: 8, y: 7}
-  unlockRequirements: []
+  unlockRequirements: 1
+  completeReward: 2

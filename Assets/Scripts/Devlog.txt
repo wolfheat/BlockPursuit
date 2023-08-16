@@ -153,15 +153,22 @@ Jun 2023
 		* Added Tween between camera positions when changing
 		* Add sound for changing input method or camera position, reset, settings, and pause
 		* Setting music volume to 0 now correctly stops the player
-		* Animated Water setting added to settings
+		* Animated Water enabling setting added to settings
+16/8	* Set Tile rewards and costs for all levels to reasonable values
+		* Limited tile rewards to set values
+		* Rewarded ads on Level complete now also has requestbutton instead of automatically loading it
+		* Added a Loading screen while data is recieved on startig the game
+		* Made changing camera use current position as old
 
 		* player sometimes on mobile keeps running after moving to a tile, why?
+
 		* Adjust tiles reward and cost before playtest
+			* Normal maps only give tiles on first playthrough
+			* Normal maps give back the cost of unlocking them + 1?
+
 		* Fix achievements before playtest
-		* Make a loading screen for the game
-		* Still an issue where boost button is visible when returning to boost panel after using it once
-		// Check that ingame menu is positined correctly
-		* Make changing camera use currect position as old not the ative one, if player switches to fast it looks wierd
+		
+		// Check that ingame menu is positined correctly on build
 
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 

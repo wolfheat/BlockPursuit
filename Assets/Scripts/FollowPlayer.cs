@@ -50,7 +50,7 @@ public class FollowPlayer : MonoBehaviour
     public void ChangeView()
     {
         tweening = true;
-        startPosition = camPos[id]+following.transform.position;
+        startPosition = transform.position;
         
         id = (id + 1)%camPos.Length;
         SavingUtility.gameSettingsData.ChangeCameraPos(id);

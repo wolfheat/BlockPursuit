@@ -106,7 +106,7 @@ public class LevelSelect : EscapableBasePanel
                 newButton.levelDefinition = Levels.LevelDefinitions[i][j];
 
                 PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
-                if (levelDef.levelID != -1)
+                if (levelDef.levelID != -1 || Levels.LevelDefinitions[i][j].unlockRequirements == 0)
                 {
                     newButton.playerLevelData = levelDef;
                     Levels.LevelDefinitions[i][j].unlocked = true;

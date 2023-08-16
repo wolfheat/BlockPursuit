@@ -314,23 +314,37 @@ public class LevelCreator : MonoBehaviour
 
     private IEnumerator LevelCompleteDelayCoroutine()
     {
-            yield return new WaitForSeconds(0.2f);
-            SoundController.Instance.PlaySFX(SFX.LevelComplete);
-            yield return new WaitForSeconds(LevelCompleteDelayTime);
+        yield return new WaitForSeconds(0.2f);
+        SoundController.Instance.PlaySFX(SFX.LevelComplete);
+        yield return new WaitForSeconds(LevelCompleteDelayTime);
+            
+        FindObjectOfType<PlayerController>().HidePlayer();
 
-            FindObjectOfType<PlayerController>().HidePlayer();
-            int tileGain = Random.Range(0f, 1f) < (GameSettings.TileDefaultProbability * (1 + boostController.A_BoostData.boostMultiplier)) ? 1 : 0; ;
-            int coinGain = (int)(GameSettings.CoinDefaultGain * (1f + (boostController.B_BoostData.active ? boostController.B_BoostData.boostMultiplier : 0)));
+        // Have reward tile only aply first comlpleted run
+        // Boost does not work anymore for tiles...
 
-            // Determin reward
-            SavingUtility.playerGameData.AddCoins(coinGain);
-            if(tileGain>0)
-                SavingUtility.playerGameData.AddTiles(tileGain);
+        //Only if not recieved before = No Stored best time
+            LevelDefinition current = GameSettings.CurrentLevelDefinition;
+        int tileGain = 0;
+        if (SavingUtility.playerGameData.PlayerLevelDataList.GetByID(GameSettings.CurrentLevelDefinition.levelID).bestTime == -1)
+        {
+            Debug.Log("Level does not exist in save, Give Reward");
+            tileGain = GameSettings.CurrentLevelDefinition.completeReward;
 
-            levelComplete.UpdateStats(coinGain,tileGain);
+        }else
+            Debug.Log("Level in save, Do Not Give Reward");
 
-            //Next level
-            TransitionScreen.Instance.StartTransition(GameAction.ShowLevelComplete);
+        int coinGain = (int)(GameSettings.CoinDefaultGain * (1f + (boostController.B_BoostData.active ? boostController.B_BoostData.boostMultiplier : 0)));
+
+        // Determin reward
+        SavingUtility.playerGameData.AddCoins(coinGain);
+        if(tileGain>0)
+            SavingUtility.playerGameData.AddTiles(tileGain);
+
+        levelComplete.UpdateStats(coinGain,tileGain);
+
+        //Next level
+        TransitionScreen.Instance.StartTransition(GameAction.ShowLevelComplete);
     }
 
     public void ClearLevel()

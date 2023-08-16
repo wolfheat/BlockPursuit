@@ -28,4 +28,5 @@ MonoBehaviour:
   - {x: 4, y: 10}
   - {x: 5, y: 10}
   - {x: 6, y: 10}
-  unlockRequirements: []
+  unlockRequirements: 0
+  completeReward: 2

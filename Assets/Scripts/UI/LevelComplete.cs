@@ -1,4 +1,6 @@
+using GoogleMobileAds.Sample;
 using MyGameAds;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,6 +15,7 @@ public class LevelComplete : EscapableBasePanel
     [SerializeField] TextMeshProUGUI stepsText;
     [SerializeField] TextMeshProUGUI coinGainText;
     [SerializeField] TextMeshProUGUI tileGainText;
+    [SerializeField] GameObject tileGain;
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
     [SerializeField] HorizontalLayoutGroup[] layoutgroups;
@@ -62,6 +65,51 @@ public class LevelComplete : EscapableBasePanel
 
     }
 
+    [SerializeField] GameObject loadBoostButton;
+    [SerializeField] GameObject loading;
+    [SerializeField] RewardedController rewardedController;
+    private bool checkForLoadedAd;
+    [SerializeField] GameObject loadedAdCheck;
+    public void LoadBoostClicked()
+    {
+        Debug.Log("LoadBoostClicked");
+        loadBoostButton.SetActive(false);
+        loading.SetActive(true);
+        checkForLoadedAd = true;
+        rewardedController.LoadAd();
+    }
+
+    public void UpdateLoadBoostButton()
+    {
+        Debug.Log("Update Load Boost Button, when opening level complete");
+        if (loadedAdCheck.activeSelf)
+            loadBoostButton.SetActive(false);
+        else
+            loadBoostButton.SetActive(true);
+
+        loading.SetActive(false);
+        checkForLoadedAd = false;
+    }
+
+    private void Update()
+    {
+        if (checkForLoadedAd)
+        {
+            if (loadedAdCheck.activeSelf)
+            {
+                loadBoostButton.SetActive(false);
+                loading.SetActive(false);
+                checkForLoadedAd = false;
+                BoostRequest();
+            }
+        }
+    }
+    public void BoostRequest()
+    {
+        Debug.Log("Request Boost Ad, show ad and return here");
+        rewardedController.ShowAd();
+    }
+
     internal void UpdateStats(int coins, int tiles)
     {
         int timeTaken = Mathf.RoundToInt(Time.time - GameSettings.LevelStartTime);
@@ -79,7 +127,13 @@ public class LevelComplete : EscapableBasePanel
         latestCoins = coins;
 
         coinGainText.text = coins.ToString();
-        tileGainText.text = tiles.ToString();
+        if(tiles==0)
+            tileGain.gameObject.SetActive(false);
+        else
+        {
+            tileGain.gameObject.SetActive(true);
+            tileGainText.text = tiles.ToString();
+        }
         LevelDefinition current = GameSettings.CurrentLevelDefinition;
 
         SoundController.Instance.PlaySFX(SFX.GainCoin);
@@ -149,18 +203,13 @@ public class LevelComplete : EscapableBasePanel
 
     internal void GetReward()
     {
-        if (Enabled())
-        {
-            Debug.Log("Level complete is active reward Player with double coins");
-
-            // Determin reward
-            coinGainText.text = (latestCoins*2).ToString();
-            SavingUtility.playerGameData.AddCoins(latestCoins);
-            SoundController.Instance.PlaySFX(SFX.GainCoin);
-        }
-        else
-        {
-            Debug.Log("Level complete is not active.");
-        }
+        if (!Enabled()) return;
+        
+        Debug.Log("Level complete is active reward Player with double coins");
+        // Determin reward
+        coinGainText.text = (latestCoins*2).ToString();
+        SavingUtility.playerGameData.AddCoins(latestCoins);
+        SoundController.Instance.PlaySFX(SFX.GainCoin);
+        
     }
 }

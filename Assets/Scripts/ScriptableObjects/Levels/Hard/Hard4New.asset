@@ -39,6 +39,5 @@ MonoBehaviour:
   - {x: 9, y: 9}
   - {x: 8, y: 9}
   - {x: 10, y: 10}
-  unlockRequirements:
-  - tileType: 0
-    amount: 2
+  unlockRequirements: 3
+  completeReward: 4

@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelDefinition", menuName = "New Level")]
@@ -18,7 +15,8 @@ public class LevelDefinition : ScriptableObject
     public List<TilePlacementDefinition> tiles;
     public List<Vector2Int> goals;
 
-    public List<TileTypeRequirement> unlockRequirements;
+    public int unlockRequirements;
+    public int completeReward;
 
 
     public void SetLevelDefinition(string v, List<TilePlacementDefinition> s, List<Vector2Int> g, Vector2Int startPos)

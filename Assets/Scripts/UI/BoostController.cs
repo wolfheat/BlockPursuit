@@ -10,7 +10,7 @@ public class BoostController : EscapableBasePanel
     [SerializeField] BoostIcon aBoostIcon;
     [SerializeField] BoostIcon bBoostIcon;
     [SerializeField] GameObject loadBoostButton;
-    [SerializeField] GameObject loadingBoost;
+    [SerializeField] GameObject loading;
     public BoostData A_BoostData = new BoostData(BoostType.TileBoost, 9);
     public BoostData B_BoostData = new BoostData(BoostType.CoinBoost, 9);
     private bool checkForLoadedAd;
@@ -56,7 +56,7 @@ public class BoostController : EscapableBasePanel
             if (loadedAdCheck.activeSelf)
             {
                 loadBoostButton.SetActive(false);
-                loadingBoost.SetActive(false);
+                loading.SetActive(false);
                 checkForLoadedAd = false;
                 BoostRequest();
             }
@@ -97,10 +97,14 @@ public class BoostController : EscapableBasePanel
 
     }
 
-    public void ShowLoadBoostButton()
+    public void UpdateLoadBoostButton()
     {
-        loadBoostButton.SetActive(true);
-        loadingBoost.SetActive(false);
+        
+        if (loadedAdCheck.activeSelf)
+            loadBoostButton.SetActive(false);
+        else
+            loadBoostButton.SetActive(true);
+        loading.SetActive(false);
         checkForLoadedAd = false;
     }
     
@@ -108,7 +112,7 @@ public class BoostController : EscapableBasePanel
     {
         Debug.Log("LoadBoostClicked");
         loadBoostButton.SetActive(false);
-        loadingBoost.SetActive(true);
+        loading.SetActive(true);
         checkForLoadedAd = true;
         rewardedController.LoadAd();
     }

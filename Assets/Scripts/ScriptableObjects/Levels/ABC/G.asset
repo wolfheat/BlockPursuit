@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Level
   levelID: -5556670
-  unlocked: 0
+  unlocked: 1
   playerStart: {x: 7, y: 10}
   tiles:
   - type: 2
@@ -44,4 +44,5 @@ MonoBehaviour:
   - {x: 14, y: 9}
   - {x: 14, y: 10}
   - {x: 14, y: 11}
-  unlockRequirements: []
+  unlockRequirements: 4
+  completeReward: 4

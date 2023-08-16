@@ -6,17 +6,13 @@ using Random = UnityEngine.Random;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject playerHolder;
-    [SerializeField] GameObject body;
-
     [SerializeField] GameObject character;
     [SerializeField] Animator animator;
 
-    [SerializeField] GameObject hands;
     [SerializeField] PlayerLevelDataList playerLevelsDefinition;
 
     public void ShowPlayer() => playerHolder.SetActive(true);
     public void HidePlayer() => playerHolder.SetActive(false);
-
 
     [HideInInspector] public PlayerControls playerControls;
     [HideInInspector] public LevelCreator levelCreator;
@@ -60,7 +56,6 @@ public class PlayerController : MonoBehaviour
         Position = pos;
         target = pos + Vector2Int.up;
         transform.localPosition = new Vector3(Position.x,Position.y,0);
-        //current = new MovementAction(body.transform.localPosition, Quaternion.LookRotation(Vector3.back, Vector3.up), Vector3.up, Vector3.back,1);
         current = new MovementAction(transform.position, character.transform.forward, Vector3.up, 1);
     }
     
@@ -209,14 +204,11 @@ public class PlayerController : MonoBehaviour
         
         transform.position += current.movement* Time.deltaTime/stepTime;
         character.transform.Rotate(Vector3.back, current.angle * Time.deltaTime / stepTime, Space.World); 
-        //body.transform.Rotate(current.rotation, 90f * Time.deltaTime / stepTime, Space.World);
 
 
         if(stepTimer >= stepTime)
         {
             transform.position = current.TargetPosition;
-            //body.transform.rotation = current.TargetRotation;
-            hands.transform.rotation = Quaternion.LookRotation(Vector3.forward, current.movement);
             character.transform.rotation = Quaternion.LookRotation(current.movement,Vector3.back);
 
             stepTimer = 0;
@@ -242,7 +234,6 @@ public class PlayerController : MonoBehaviour
     private void PlacePlayerAtIndex()
     {
         Position = new Vector2Int(Mathf.RoundToInt(current.TargetPosition.x), Mathf.RoundToInt(current.TargetPosition.y));
-        //Debug.Log("Player placed at: "+position);
         Vector2Int forwardVector = new Vector2Int(Mathf.RoundToInt(current.movement.x), Mathf.RoundToInt(current.movement.y));
         target = Position + forwardVector;
 
