@@ -161,7 +161,7 @@ public class LevelComplete : EscapableBasePanel
     private IEnumerator ForceUpdate()
     {
         EnableLayoutGroups(false);
-        yield return null;
+        yield return new WaitForSeconds(0.1f);
         EnableLayoutGroups(true);
     }
 

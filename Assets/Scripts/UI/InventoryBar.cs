@@ -54,7 +54,7 @@ public class InventoryBar : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //Tiles Count
-        while (countingTiles < newTiles) // 0 < 0 if no new tiles
+        while (countingTiles != newTiles) // 0 < 0 if no new tiles
         {
             // Play sound?
             // Animate tile stack? Effect?
@@ -69,7 +69,7 @@ public class InventoryBar : MonoBehaviour
         dir = newCoins > countingCoins ? 1 : -1;
 
         //Coins Count
-        while (countingCoins < newCoins)
+        while (countingCoins != newCoins)
         {
             // Play sound?
             // Animate coin stack?

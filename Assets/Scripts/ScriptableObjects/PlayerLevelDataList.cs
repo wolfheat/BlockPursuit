@@ -51,7 +51,7 @@ public class PlayerLevelDataList
 
         if (LevelExists(ID,out int index))
         {
-            Debug.LogWarning("Should not exist allready");
+            Debug.LogWarning("Should not exist already");
             return LevelsList[index];
         }
         else

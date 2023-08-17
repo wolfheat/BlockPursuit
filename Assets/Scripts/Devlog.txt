@@ -161,13 +161,15 @@ Jun 2023
 		* Made changing camera use current position as old
 		* Tried to fix audio again not much luck, bought - Humble Bundle (Spectacular Sounds & Marvellous Music Collection)
 17/8	* Made tile count up better
-		* Fixed navigation issues
+		* Fixed navigation issues generally. 
+		* Fixed navigating Level Select with keyboard. Was a scaling issue that made manipulating scrollrect by code correclty.
+		
 
+		* Write align methods for improvements text to align after level clear text is written
 
 		* player sometimes on mobile keeps running after moving to a tile, why?
 		* Fix achievements before playtest
 		
-		* InGame menu is not usable with only keyboard atm fix?
 		* Need better pick up and place sound combo. Remove or change step sound its terrible.
 		* Sound Effects are lagging after for some reason
 
@@ -180,6 +182,7 @@ Jun 2023
 		* In tier D the scrollrect dont react to keyboard stepping, not that important but fix?
 
 		BEFORE RELEASE
+		* Need Asset Bundle or Adressables??
 		* Add Statistics / retention / dashboard / Unitys ?
 		* Handle errors in data saving so players dont lose progress.
 		* Polish
