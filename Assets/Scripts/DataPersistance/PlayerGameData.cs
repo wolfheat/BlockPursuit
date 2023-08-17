@@ -69,6 +69,12 @@ public class PlayerGameData
         Coins += amt;
         InventoryUpdate.Invoke();
     }
+    public void AddCoinsAndTiles(int coins, int tiles)
+    {
+        Coins += coins;
+        Tiles += tiles;
+        InventoryUpdate.Invoke();
+    }
 
     public bool RemoveCoins(int amt)
     {

@@ -1,6 +1,4 @@
-using GoogleMobileAds.Sample;
 using MyGameAds;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -112,11 +110,9 @@ public class LevelComplete : EscapableBasePanel
 
     internal void UpdateStats(int coins, int tiles)
     {
+        // Set all text for Level Complete
         int timeTaken = Mathf.RoundToInt(Time.time - GameSettings.LevelStartTime);
-        int minutes = (timeTaken / 60);
-        int sec = (timeTaken % 60);
-        string timeString = (minutes>0?(minutes+"m"):"")+sec+"s";
-        timeText.text = timeString;
+        timeText.text = StringConverter.TimeAsString(timeTaken);        
 
         int moves = GameSettings.MoveCounter;
         movesText.text = moves.ToString();
@@ -141,9 +137,10 @@ public class LevelComplete : EscapableBasePanel
         //FIX
         levelText.text = StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
 
+        // Create a level Data file from this completion
         PlayerLevelData levelData = new PlayerLevelData(current.levelID, steps, moves, timeTaken);
 
-        //Add Data into SaveFile
+        //Add Data into SaveFile (Compare to old one and update)
         PlayerLevelData oldLevelData = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(levelData.levelID);
         PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddOrUpdateLevel(levelData);
 
@@ -154,8 +151,9 @@ public class LevelComplete : EscapableBasePanel
         levelSelect.UpdateButtonPlayerLevelData(bestLevelData);
 
         SetSelected();
-        //LayoutRebuilder.MarkLayoutForRebuild(completeInformationRect);
 
+        //LayoutRebuilder.MarkLayoutForRebuild(completeInformationRect);
+        // Needed to display the text align correctly?
         StartCoroutine(ForceUpdate());
 
     }

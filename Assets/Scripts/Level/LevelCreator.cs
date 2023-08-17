@@ -336,10 +336,7 @@ public class LevelCreator : MonoBehaviour
 
         int coinGain = (int)(GameSettings.CoinDefaultGain * (1f + (boostController.B_BoostData.active ? boostController.B_BoostData.boostMultiplier : 0)));
 
-        // Determin reward
-        SavingUtility.playerGameData.AddCoins(coinGain);
-        if(tileGain>0)
-            SavingUtility.playerGameData.AddTiles(tileGain);
+        SavingUtility.playerGameData.AddCoinsAndTiles(coinGain,tileGain);
 
         levelComplete.UpdateStats(coinGain,tileGain);
 

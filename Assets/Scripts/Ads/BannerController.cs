@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace MyGameAds
 {
@@ -40,6 +41,7 @@ namespace MyGameAds
             ListenToAdEvents();
 
             Debug.Log("Banner view created.");
+
         }
         public void LoadAd()
         {

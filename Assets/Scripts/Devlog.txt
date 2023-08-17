@@ -160,10 +160,14 @@ Jun 2023
 		* Added a Loading screen while data is recieved on startig the game
 		* Made changing camera use current position as old
 		* Tried to fix audio again not much luck, bought - Humble Bundle (Spectacular Sounds & Marvellous Music Collection)
-			
+17/8	* Made tile count up better
+		* Fixed navigation issues
+
+
 		* player sometimes on mobile keeps running after moving to a tile, why?
 		* Fix achievements before playtest
 		
+		* InGame menu is not usable with only keyboard atm fix?
 		* Need better pick up and place sound combo. Remove or change step sound its terrible.
 		* Sound Effects are lagging after for some reason
 

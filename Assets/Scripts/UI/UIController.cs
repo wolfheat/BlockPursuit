@@ -113,6 +113,7 @@ public class UIController : MonoBehaviour
                 boostController.ShowPanel();
                 break;
             case GameAction.LoadStartMenu:
+                levelSelect.HidePanel();
                 startMenu.ShowPanel();
                 break;
             case GameAction.ShowLevelSelect:

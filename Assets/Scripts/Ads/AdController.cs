@@ -1,5 +1,5 @@
 using GoogleMobileAds.Api;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,8 @@ public class AdController : MonoBehaviour
     private static bool _isInitialized;
     public static Time LastInterstitial { get; set; }
     public static Time LastRewarded { get; set; }
+    public static Action InitializedComplete { get; set; }
+
 
     // Android phone A40 ad ID
     // 21b57b1a-1c89-4856-a479-c97512ee9234
@@ -117,6 +119,7 @@ public class AdController : MonoBehaviour
             Debug.Log(" -- Google Mobile Ads initialization complete. -- ");
             Debug.Log(" -- ------------------------------------------ -- ");
             _isInitialized = true;
+            InitializedComplete.Invoke();
         });
     }
 
