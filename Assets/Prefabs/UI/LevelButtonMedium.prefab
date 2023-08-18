@@ -8,21 +8,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 325240859844980377, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: difficulty
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510600758898145868, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510600758898145868, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510600758898145868, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
     - target: {fileID: 8015948148086565186, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_Name
       value: LevelButtonMedium
       objectReference: {fileID: 0}
     - target: {fileID: 8347410773594214238, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_Color.b
-      value: 0.75686276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8347410773594214238, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_Color.g
-      value: 0.75686276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8347410773594214238, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_Color.r
-      value: 0.75686276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9109045632856741807, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_Pivot.x

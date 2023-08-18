@@ -28,7 +28,7 @@ public class LevelComplete : EscapableBasePanel
     {
         if (!Enabled()) return;
         Debug.Log("ESC from menu");
-        SelectLevelClicked();
+        OkClicked();
     }
 
     private void Awake()
@@ -52,7 +52,7 @@ public class LevelComplete : EscapableBasePanel
 		Debug.Log("Next Level Clicked");
         TransitionScreen.Instance.StartTransition(GameAction.LoadSelectedLevel);
     }
-	public void SelectLevelClicked()
+	public void OkClicked()
 	{
 		Debug.Log("Select Level Clicked");
         TransitionScreen.Instance.StartTransition(GameAction.ShowLevelSelect);

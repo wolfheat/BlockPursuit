@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InfoScreen : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI tileReward;
     [SerializeField] TextMeshProUGUI levelNameText;
     [SerializeField] TextMeshProUGUI levelNameTextB;
     [SerializeField] TextMeshProUGUI unlockCostText;
@@ -53,6 +54,7 @@ public class InfoScreen : MonoBehaviour
             locked.gameObject.SetActive(true);
 
             levelNameText.text = "Level " + StringConverter.LevelAsStringWithParantheses(button.levelDefinition.LevelDiff, button.levelDefinition.LevelIndex);
+            tileReward.text = button.levelDefinition.completeReward.ToString();
 
             unlockCostText.text = "x" + button.levelDefinition.unlockRequirements;
 

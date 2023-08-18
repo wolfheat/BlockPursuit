@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public enum DifficultLevel{Easy,Medium,Hard}
+public enum DifficultLevel{Easy,Medium,Hard,ABC}
 
 public class LevelButton : MonoBehaviour, ISelectHandler
 {
