@@ -163,7 +163,7 @@ Jun 2023
 17/8	* Made tile count up better
 		* Fixed navigation issues generally. 
 		* Fixed navigating Level Select with keyboard. Was a scaling issue that made manipulating scrollrect by code correclty.
-		
+18/8	* Fixed issue with aligning text in level complete. Now fixed by rectrtransform positions after panel is loaded.		
 
 		* Write align methods for improvements text to align after level clear text is written
 

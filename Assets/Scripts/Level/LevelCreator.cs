@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 public enum TileType{O,L,J,I,S,T,Z, Goal,none}
 public enum GameTileType {Hole,Walkable,Stone}
@@ -66,6 +67,7 @@ public class LevelCreator : MonoBehaviour
         levelComplete = FindObjectOfType<LevelComplete>();
         boostController = FindObjectOfType<BoostController>();
         UI = FindObjectOfType<UIController>();
+        Inputs.Instance.Controls.Main.Q.performed += LevelCompleteCheatButton;
     }
     
     public static bool IsEmptyAndCanTakeObject(Vector2Int pos)
@@ -312,6 +314,10 @@ public class LevelCreator : MonoBehaviour
         return true;
     }
 
+    private void LevelCompleteCheatButton(InputAction.CallbackContext context)
+    {
+        StartCoroutine(LevelCompleteDelayCoroutine());
+    }
     private IEnumerator LevelCompleteDelayCoroutine()
     {
         yield return new WaitForSeconds(0.2f);

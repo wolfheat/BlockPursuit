@@ -129,6 +129,7 @@ public class UIController : MonoBehaviour
                 ingameUIController.HidePanel();
                 levelCreator.ClearLevel();
                 levelComplete.ShowPanel();
+                levelComplete.FixTextFields();
                 // Load Ad here? This is in the middle of the transition To show Level Complete
                 // This is good because it is a delay between player completes level and ad shows
                 interstitialController.ShowAd();

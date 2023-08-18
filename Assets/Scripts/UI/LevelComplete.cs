@@ -1,4 +1,5 @@
 using MyGameAds;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -120,6 +121,8 @@ public class LevelComplete : EscapableBasePanel
         int steps = GameSettings.StepsCounter;
         stepsText.text = steps.ToString();
 
+
+
         latestCoins = coins;
 
         coinGainText.text = coins.ToString();
@@ -154,15 +157,24 @@ public class LevelComplete : EscapableBasePanel
 
         //LayoutRebuilder.MarkLayoutForRebuild(completeInformationRect);
         // Needed to display the text align correctly?
-        StartCoroutine(ForceUpdate());
 
     }
 
-    private IEnumerator ForceUpdate()
+    private IEnumerator ForceTransformsPositionUpdate()
     {
-        EnableLayoutGroups(false);
+        Debug.Log("ForceTransformsPositionUpdate: ");
         yield return new WaitForSeconds(0.1f);
-        EnableLayoutGroups(true);
+        improvements[0].GetComponent<RectTransform>().localPosition = GetNewRectPosition(movesText);
+        improvements[1].GetComponent<RectTransform>().localPosition = GetNewRectPosition(stepsText);
+        improvements[2].GetComponent<RectTransform>().localPosition = GetNewRectPosition(timeText);   
+        
+    }
+
+    private Vector3 GetNewRectPosition(TextMeshProUGUI parentTextField)
+    {
+        float padding = 10f;
+        RectTransform rect = parentTextField.gameObject.GetComponent<RectTransform>();
+        return new Vector3(rect.localPosition.x + rect.sizeDelta.x + padding, rect.localPosition.y, 0);
     }
 
     private void EnableLayoutGroups(bool set)
@@ -209,5 +221,10 @@ public class LevelComplete : EscapableBasePanel
         SavingUtility.playerGameData.AddCoins(latestCoins);
         SoundController.Instance.PlaySFX(SFX.GainCoin);
         
+    }
+
+    internal void FixTextFields()
+    {
+        StartCoroutine(ForceTransformsPositionUpdate());
     }
 }
