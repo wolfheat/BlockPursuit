@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
+using System.Threading;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum MusicType{Menu,Normal,Boss}
+public enum MusicType{Normal, Foresty, Dungeony, Spacy}
+public enum AmbientType{Ocean, Forest, Dungeon, Space}
 
 public enum SFX { ShipDestroyedA, GetHit, PlayerDeath, MenuStep, MenuSelect, MenuError, FireRocket, FireBullet, StarPickup, Unplacable, PlacedTile, NoStep, TakeStep, Unlock, GainCoin, RecieveBoost,
     FootStep,
@@ -23,16 +26,17 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioClip[] boost;
     [SerializeField] private AudioClip[] coin;
     [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip[] ambient;
     [SerializeField] private AudioClip[] music;
 
     private AudioSource musicSource;
-    private AudioSource musicSourceIntense;
+    private AudioSource ambientSource;
     private AudioSource sfxSource;
     private bool doPlayMusic = false;
     private bool doPlaySFX = true;
     private bool doingFadeout = false;
 
-    public MusicType activeMusic = MusicType.Menu;
+    public MusicType activeMusic = MusicType.Normal;
     public static SoundController Instance { get; set; }
 
 	private float presetVolume = 1.0f;
@@ -43,6 +47,7 @@ public class SoundController : MonoBehaviour
     private float totalFadeOutTime = 3.5f;
     private float fadeOutMargin = 0.01f;
     private float currentFadeOutTime;
+    private const float FadeTime = 1f;
 
     private void Awake()
     {
@@ -50,23 +55,22 @@ public class SoundController : MonoBehaviour
         else Instance = this;
 
         GameObject musicSourceHolder = new GameObject("Music");
+        GameObject ambientSourceHolder = new GameObject("Ambient");
         GameObject sfxSourceHolder = new GameObject("SFX");
         musicSourceHolder.transform.SetParent(this.transform);
-		//musicSourceHolder.name = "Music";
+        ambientSourceHolder.transform.SetParent(this.transform);
         sfxSourceHolder.transform.SetParent(this.transform);
-        //sfxSourceHolder.name = "SFX";
 
-        musicSourceIntense = gameObject.AddComponent<AudioSource>();
         musicSource = musicSourceHolder.AddComponent<AudioSource>();
+        ambientSource = ambientSourceHolder.AddComponent<AudioSource>();
         sfxSource = sfxSourceHolder.AddComponent<AudioSource>();
 
         SavingUtility.LoadingComplete += SetVolumesFromStoredValues; 
     }
     private void Start()
     {
-        musicSourceIntense.loop = true;
-        musicSourceIntense.volume = 0.5f;
         musicSource.loop = true;
+        ambientSource.loop = true;
 	}
 
     public void SetVolumesFromStoredValues()
@@ -91,17 +95,13 @@ public class SoundController : MonoBehaviour
         musicSource.volume = presetVolume;
         sfxSource.volume = presetSFXVolume;
 
-        if (doPlayMusic) PlayMusic();
-        else if(musicSource.isPlaying)
-        {
-            Debug.Log("Stopping music from playing");
-            musicSource.Stop();
-        }
+        DoMusicSetting();
     }
 
     public void SetMusicType(MusicType t)
     {
         activeMusic = t;
+
         DoMusicSetting();
     }
     public void UseMusic(bool use)
@@ -114,61 +114,111 @@ public class SoundController : MonoBehaviour
 		doPlayMusic = !doPlayMusic;
         DoMusicSetting();
 	}
+
     private void DoMusicSetting()
     {
-		if (doPlayMusic) PlayMusic();
-		else
-		{
-			musicSource.Stop();
-		}
-    }
-
-	private void Update()
-    {
-        if(doingFadeout) DoFadeout();
-    }
-
-	private void DoFadeout()
-	{
-        currentFadeOutTime += Time.deltaTime;
-
-        float newVolume = presetVolume*(1 - currentFadeOutTime / totalFadeOutTime);
-        musicSourceIntense.volume = newVolume;    
-        if (currentFadeOutTime + fadeOutMargin >= totalFadeOutTime)
-        {
-            //Fadeout complete
-            musicSourceIntense.volume = presetVolume;
-            musicSourceIntense.Stop();
-            doingFadeout = false;
+        if ((int)activeMusic >= music.Length) { 
+            Debug.LogWarning("To few Music files assigned to SoundController"); 
+            return; 
         }
+
+        if (!doPlayMusic)
+        {
+            Debug.Log("Do not play music.");
+            musicSource.Stop();
+            return;
+        }
+
+        if (musicSource.isPlaying)
+        {
+            Debug.Log("music is playing already");
+            if (musicSource.clip == music[(int)activeMusic])
+            {
+                Debug.Log("asked to play music but requested music is already playing");
+                return;
+            }
+            Debug.Log("music is playing but request for new type, do fade");
+            StartCoroutine(FadeMusic());
+            return;
+        }
+        // Assign the clip
+        musicSource.clip = music[(int)activeMusic];
+
+        Debug.Log("music is not playing, play");    
+        musicSource.Play();
     }
 
 	public void SetVolume(float vol)
 	{
         musicSource.volume = vol;
-        musicSourceIntense.volume = vol;
 	}
 	public void SetSFXVolume(float vol)
 	{
         sfxSource.volume = vol;
         sfxSource.volume = presetSFXStepVolume;
 	}
-	private void PlayMusic()
-	{
-        if (doPlayMusic)
-        {
-            if (musicSource.isPlaying) return;
 
-            if ((int)activeMusic >= music.Length) { Debug.LogWarning("To few Music files assigned to SoundController"); return;}
-            musicSource.clip = music[(int)activeMusic];
-            musicSource.Play();
+    private IEnumerator FadeMusic()
+    {
+        // fade out into new clip
+        float startVolume = musicSource.volume;
+        float timer = 0;
+
+        while (musicSource.volume > 0.05f)
+        {
+            timer += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume,0,timer/FadeTime);
+            yield return null;
         }
-        else musicSource.Stop(); 
-	}
+
+        // Assign the clip
+        //musicSource.Stop();
+        musicSource.clip = music[(int)activeMusic];
+        musicSource.Play(); 
+
+        while (musicSource.volume < startVolume)
+        {
+            timer -= Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVolume,0,timer/FadeTime);
+            yield return null;
+        }
+
+        musicSource.volume = startVolume;
+    }
 
     public void StopSFX()
     {
         sfxSource.Stop();
+    }
+    public void StopAmbient()
+    {
+        ambientSource.Stop();
+    }
+    public void PlayAmbient(AmbientType type)
+    {
+        if (!doPlaySFX || ambient.Length==0) return;
+
+        switch (type)
+        {
+            case AmbientType.Ocean:
+                ambientSource.clip = ambient[0];
+                break;
+            case AmbientType.Forest:
+                ambientSource.clip = ambient[1];
+                break;
+            case AmbientType.Dungeon:
+                ambientSource.clip = ambient[2];
+                break;
+            case AmbientType.Space:
+                ambientSource.clip = ambient[3];
+                break;
+            default:
+                Debug.LogWarning("ambient Sound effect not found, playing default");
+                ambientSource.clip = ambient[0];
+                break;
+        }
+        ambientSource.Play();
+
     }
     public void PlaySFX(SFX type, bool playMulti=true)
 	{
@@ -220,7 +270,6 @@ public class SoundController : MonoBehaviour
                 sfxSource.PlayOneShot(boost[0]);
                 break;
 			case SFX.FootStep:
-
                 int randomSound = Random.Range(0,footsteps.Length);
                 sfxSource.PlayOneShot(footsteps[randomSound]);
                 break;
@@ -228,6 +277,4 @@ public class SoundController : MonoBehaviour
 				break;
 		}
 	}
-
-
 }

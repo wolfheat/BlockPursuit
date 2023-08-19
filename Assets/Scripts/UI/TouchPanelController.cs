@@ -32,10 +32,8 @@ public class TouchPanelController : MonoBehaviour
 
     private void SetActiveControlFromSave()
     {
-        Debug.Log("Setting Control from save before: " + activeControls);
         controls[activeControls].SetActive(false);
         activeControls = SavingUtility.gameSettingsData.ActiveTouchControl;
-        Debug.Log("Setting Control from save to " + activeControls);
         controls[activeControls].SetActive(true);
     }
 

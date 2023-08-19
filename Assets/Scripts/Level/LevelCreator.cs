@@ -99,6 +99,16 @@ public class LevelCreator : MonoBehaviour
         LoadLevelByDefinition(GameSettings.CurrentLevelDefinition);
         FindObjectOfType<PlayerController>().ShowPlayer();
         UI.UpdateStats();
+
+        int tier = GameSettings.CurrentLevelDefinition.LevelDiff;
+
+        // Load ambient sound here?
+        SoundController.Instance.PlayAmbient((AmbientType)tier);
+
+        // Changing tier changes music?
+        SoundController.Instance.SetMusicType((MusicType)tier);
+
+
     }
     
     public void LoadLevelByDefinition(LevelDefinition level)
@@ -365,6 +375,9 @@ public class LevelCreator : MonoBehaviour
         fillAreas.Clear();
         fillAreasPositions.Clear();
         levelObjects.SetActive(false);
+
+        // Stop any Ambient sound when clearing level?
+        SoundController.Instance.StopAmbient();
     }
 
     private bool CheckIfComplete()

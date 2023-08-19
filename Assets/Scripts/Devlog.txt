@@ -167,6 +167,9 @@ Jun 2023
 		* Made Level Select buttons more soft bordered
 		* Fixed issue with boost loading button not removed after playing ad
 		* Tried to start Unification of buttons
+19/8	* Fixed issue with not selecting button by default in level complete.
+		* Made different music and ambient music start playing if entering new tier, main music plays in menu system and on tier A.
+
 
 
 		* Able to claim free gold button spawn ever hour/day(22h)?
@@ -174,11 +177,19 @@ Jun 2023
 		* Get 100gold free every X hour
 		* Get 0-5 ads watched to get reward
 
+
+		return to level clear wont set button correctyöy
+
 		(remove achievements?)
 
 		* Maybe buy
+			Asset Store
 			Ultimate Game Music Collection - John Leonard French - €22.45
 			Pro Sound Collection - Gamemaster Audio - €24.45
+
+			 
+			Game Makers Sound Effects Kit 3 - Epic Stock Media - €163.67
+			Mobile Game 3 - App & Phone Sound Effects Library - Epic Stock Media - €58.88
 
 
 		* Add more interfaces where needed

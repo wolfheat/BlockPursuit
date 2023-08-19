@@ -150,7 +150,6 @@ public class UIController : MonoBehaviour
                 // Game unpaused and all values reset when closing this panel
                 // Have level load when player press start level instead of when showing boost panel?
                 levelCreator.LoadSelectedLevel();
-
                 boostController.HidePanel();
                 ingameUIController.ShowPanel();
 
