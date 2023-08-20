@@ -169,18 +169,32 @@ Jun 2023
 		* Tried to start Unification of buttons
 19/8	* Fixed issue with not selecting button by default in level complete.
 		* Made different music and ambient music start playing if entering new tier, main music plays in menu system and on tier A.
+		* Made Missions Page with missions that occupy a list.
+		* Made MissionsData and RewardData scriptable objects to define the missions
+
+		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
+
+		* Fix issue why ESC wont work on MissionsScreen
+		* Fix images so they scale correctly on Mission Icon and Reward
 
 
+		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.
+		MISSIONS PAGE (better name for it?)
+		* Creater Mission page
+		* Fill with list of goals to reach. Top goal is granted gold every X hours no timer only visible when available.
+		* Acheivements requirements show here with reward as well, and recieved achievements are updated on achievements page, or remove this page?
+		* Keep track of active playtime? Have reward for this?
 
-		* Able to claim free gold button spawn ever hour/day(22h)?
+
 		MISSIONS
 		* Get 100gold free every X hour
 		* Get 0-5 ads watched to get reward
 
+		* Have space background for space level tier
+		* Tiers have different
+			- Backgrounds, Tiletypes?, Ambient Sound, Music
 
-		return to level clear wont set button correctyöy
-
-		(remove achievements?)
+		(remove or implement achievements?) Maybe as addon to missions with rewards for completion?
 
 		* Maybe buy
 			Asset Store
@@ -288,14 +302,11 @@ Jun 2023
 		* Figure out theme and color scheme that fits the game
 		* Have different biomes for different difficult levels
 			* Water added for "normal" biom
-			* Add Ice, Lava, Clouds, Space, Aztec, Underground? Use separate Music/Sounds?
+			* Add Snow, Lava, Clouds, Space, Aztec, Underground? Use separate Music/Sounds?
 
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player
 		* Issue with ingame menu not scaling correctly when changing res.
-		* Change game to Landscape mode??
-		* Strange issue which text on mobile not aligning correctly on resultscreen.
-		* Issue with using landscape, disable or fix?
 		* Make sure game scales correctly for different mobile resolutions
 		* Need to figure out why the game wont scale to phone correctly
 			* Resolution makes bottom part of game get outside of screen
@@ -307,6 +318,7 @@ Jun 2023
 		* Show Input from touch
 		* Show shuffling technique like in A.2
 		* Show that sometimes there are more tile parts than goals, just need to fill them
+		* Show that sometimes the order is important A.13?
 
 		DATA STUFF:
 		* Calibrate tile cost for level unlock as well as rewarded tiles.

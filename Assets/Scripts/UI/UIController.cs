@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
     [SerializeField] BoostController boostController;
     [SerializeField] InventoryBar inventoryBar;
     [SerializeField] PauseUI pauseScreen;
+    [SerializeField] MissionsController missions;
     [SerializeField] SettingsController settings;
     [SerializeField] CreditsController credits;
     [SerializeField] AchievementsController achievements;    
@@ -194,6 +195,14 @@ public class UIController : MonoBehaviour
                 break;
              case GameAction.HideAchievements:
                 achievements.HidePanel();
+                startMenu.ShowPanel();
+                break;
+            case GameAction.ShowMissions:
+                startMenu.HidePanel();
+                missions.ShowPanel();
+                break;
+             case GameAction.HideMissions:
+                missions.HidePanel();
                 startMenu.ShowPanel();
                 break;
             case GameAction.ShowUnlock:
