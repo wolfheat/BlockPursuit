@@ -174,9 +174,11 @@ Jun 2023
 
 		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
 
+		* Have ? mark on boost panel explaining how boosts work.
+			* Have the rewards at boost panel be what player actually earns. Boosts active when starting level determines the reward level.
 		* Fix issue why ESC wont work on MissionsScreen
 		* Fix images so they scale correctly on Mission Icon and Reward
-
+		* Redo UI menu change system
 
 		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.
 		MISSIONS PAGE (better name for it?)
