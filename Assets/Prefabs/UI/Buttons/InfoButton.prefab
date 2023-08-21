@@ -92,16 +92,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1296642214247339482}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InfoButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4404959805024358235, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 421af2389170f34489d607684a225c1a, type: 3}
     - target: {fileID: 7877195872566029387, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
       propertyPath: m_Name
-      value: QuestionMarkSquare Variant
+      value: InfoButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+--- !u!114 &1296642214247339482 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1745710486908877397, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+  m_PrefabInstance: {fileID: 703858180016156559}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c219319a0c561a428679c243fa7f121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

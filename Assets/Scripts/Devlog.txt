@@ -171,6 +171,10 @@ Jun 2023
 		* Made different music and ambient music start playing if entering new tier, main music plays in menu system and on tier A.
 		* Made Missions Page with missions that occupy a list.
 		* Made MissionsData and RewardData scriptable objects to define the missions
+		
+21/8	* Added InfoText panel that show popup information on some menu pages.
+		* Info Page not set auto size depending on text size
+
 
 		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
 
@@ -317,10 +321,12 @@ Jun 2023
 		
 		TUTORIAL: (Fill in stuff that needs to be thaught)
 		* Show in tutorial the different input modes for touch
-		* Show Input from touch
-		* Show shuffling technique like in A.2
-		* Show that sometimes there are more tile parts than goals, just need to fill them
-		* Show that sometimes the order is important A.13?
+		* Show how touch is used to move player
+		* Show that player need to stand towards tile to pick it up. Clarify that there has to be two spots before that tile to be facing correctly.
+			TECHNIQUES	
+			* Show shuffling technique like in A.2
+			* Show that sometimes there are more tile parts than goals, just need to fill them
+			* Show that sometimes the order is important A.13?
 
 		DATA STUFF:
 		* Calibrate tile cost for level unlock as well as rewarded tiles.

@@ -147,8 +147,9 @@ GameObject:
   - component: {fileID: 4064869279351984901}
   - component: {fileID: 4404959805024358235}
   - component: {fileID: 2000310997892864616}
+  - component: {fileID: 1745710486908877397}
   m_Layer: 5
-  m_Name: QuestionMarkSquare
+  m_Name: InfoButtonSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,4 +257,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4404959805024358235}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1745710486908877397}
+        m_TargetAssemblyTypeName: InfoButton, Assembly-CSharp
+        m_MethodName: ShowInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1745710486908877397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7877195872566029387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c219319a0c561a428679c243fa7f121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoData: {fileID: 0}

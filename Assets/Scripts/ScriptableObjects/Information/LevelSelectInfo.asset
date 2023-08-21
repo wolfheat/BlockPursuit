@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2174a07116d034691e9c5ea13a419c, type: 3}
+  m_Name: LevelSelectInfo
+  m_EditorClassIdentifier: 
+  informationText: 'TABS - In the top you can change type of levels shown in the
+    grid.
+
+    GRID - The available levels for the active tab. Locked levels need
+    to be unlocket to be played. Unlocked levels show a check-mark if completed.
+
+    INFO
+    - The Info-screen shows you best completion time, steps and moves.
+
+'

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf2174a07116d034691e9c5ea13a419c, type: 3}
+  m_Name: SettingsInfo
+  m_EditorClassIdentifier: 
+  informationText: "SETTINGS: \n\nMUSIC -  Set Volume of background music.\n\nSFX
+    - Set Volume of sound effects.\n\nSHAKE - Tiles shake when you face them and
+    they can be lifted.\n\nWATER - Change between simple water and animated. Use
+    simple to improve performance.\n\nBRIGHTNESS - General ingame light brightness\n\nRESET
+    - Reset all saved data = restart the game completely. Settings are saved.\n"
