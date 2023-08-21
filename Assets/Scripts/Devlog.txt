@@ -171,10 +171,23 @@ Jun 2023
 		* Made different music and ambient music start playing if entering new tier, main music plays in menu system and on tier A.
 		* Made Missions Page with missions that occupy a list.
 		* Made MissionsData and RewardData scriptable objects to define the missions
-		
 21/8	* Added InfoText panel that show popup information on some menu pages.
-		* Info Page not set auto size depending on text size
+		* Info Page now set auto size depending on text size
+		* Made all menus full screen
+		* Fixed various issues as settings screen not pausing game and Restart menu issues
+		* Added palettes Data, not used yet
 
+		* Maybe have One pause screen where restart/continue/settings/Abandon buttons are located. How about Camera/input?
+		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?
+		* Decide where to place missions button, level select? 
+		* Steps and Moves is bad names, it does not make it clear what it means change?
+
+		* Work on getting one predictable color scheme for UI
+		* Recieving Tile Reward whould show more glimmering animation. Maybee also coins gain?
+		* Maybe have unclaimed rewards animate in info panel?
+		* Have Selected button bump?
+
+		* Create the IAP page?
 
 		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
 

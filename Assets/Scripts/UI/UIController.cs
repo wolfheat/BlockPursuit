@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
     [SerializeField] BoostController boostController;
     [SerializeField] InventoryBar inventoryBar;
     [SerializeField] PauseUI pauseScreen;
+    [SerializeField] RestartPanelController restartMenu;
     [SerializeField] MissionsController missions;
     [SerializeField] SettingsController settings;
     [SerializeField] CreditsController credits;
@@ -138,7 +139,17 @@ public class UIController : MonoBehaviour
                 //rewardedController.LoadAd();
 
                 break;
-             case GameAction.ShowPauseScreen:
+             case GameAction.ShowRestartMenu:
+                restartMenu.ShowPanel();
+                restartMenu.SetSelected();
+                ingameUIController.HidePanel();
+                break;
+            case GameAction.HideRestartMenu:
+                GameSettings.IsPaused = false;
+                restartMenu.HidePanel();
+                ingameUIController.ShowPanel();
+                break;
+            case GameAction.ShowPauseScreen:
                 ingameUIController.HidePanel();
                 pauseScreen.ShowPanel();
                 break;
@@ -167,9 +178,10 @@ public class UIController : MonoBehaviour
                 settings.UpdateSavingValues();
                 break;
             case GameAction.ShowSettings:
+                GameSettings.IsPaused = true;
                 startMenu.HidePanel();
                 ingameUIController.HidePanel();
-                settings.ShowPanel();
+                settings.ShowPanel(); 
                 break;
             case GameAction.HideSettings:
                 settings.HidePanel();
@@ -177,6 +189,7 @@ public class UIController : MonoBehaviour
                     startMenu.ShowPanel();
                 else
                     ingameUIController.ShowPanel();
+                    GameSettings.IsPaused = false;
                 break;
              case GameAction.HideSettingsInGame:
                 settings.HidePanel();

@@ -15,8 +15,10 @@ MonoBehaviour:
   informationText: 'TABS - In the top you can change type of levels shown in the
     grid.
 
+
     GRID - The available levels for the active tab. Locked levels need
     to be unlocket to be played. Unlocked levels show a check-mark if completed.
+
 
     INFO
     - The Info-screen shows you best completion time, steps and moves.

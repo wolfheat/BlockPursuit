@@ -22,8 +22,6 @@ public class LevelComplete : EscapableBasePanel
     LevelSelect levelSelect;
     private int latestCoins;
 
-
-
     public override void RequestESC()
     {
         if (!Enabled()) return;
@@ -33,8 +31,6 @@ public class LevelComplete : EscapableBasePanel
 
     private void Awake()
     {
-        //Select first Button
-        //buttons[selectedButton].Select();
         levelSelect = FindObjectOfType<LevelSelect>();
         SetSelected();
 
@@ -46,11 +42,6 @@ public class LevelComplete : EscapableBasePanel
     {
         Debug.Log("LevelComplete Regain focus = Setselected");
         SetSelected();
-    }
-    public void NextLevelClicked()
-	{
-		Debug.Log("Next Level Clicked");
-        TransitionScreen.Instance.StartTransition(GameAction.LoadSelectedLevel);
     }
 	public void OkClicked()
 	{
@@ -69,6 +60,8 @@ public class LevelComplete : EscapableBasePanel
     [SerializeField] RewardedController rewardedController;
     private bool checkForLoadedAd;
     [SerializeField] GameObject loadedAdCheck;
+    private LevelDefinition current;
+
     public void LoadBoostClicked()
     {
         Debug.Log("LoadBoostClicked");
@@ -121,8 +114,6 @@ public class LevelComplete : EscapableBasePanel
         int steps = GameSettings.StepsCounter;
         stepsText.text = steps.ToString();
 
-
-
         latestCoins = coins;
 
         coinGainText.text = coins.ToString();
@@ -133,12 +124,12 @@ public class LevelComplete : EscapableBasePanel
             tileGain.gameObject.SetActive(true);
             tileGainText.text = tiles.ToString();
         }
-        LevelDefinition current = GameSettings.CurrentLevelDefinition;
+        current = GameSettings.CurrentLevelDefinition;
 
         SoundController.Instance.PlaySFX(SFX.GainCoin);
 
         //FIX
-        levelText.text = StringConverter.LevelAsString(GameSettings.CurrentLevelDefinition.LevelDiff, GameSettings.CurrentLevelDefinition.LevelIndex);
+        levelText.text = StringConverter.LevelAsString(current.LevelDiff, current.LevelIndex);
 
         // Create a level Data file from this completion
         PlayerLevelData levelData = new PlayerLevelData(current.levelID, steps, moves, timeTaken);
@@ -151,17 +142,14 @@ public class LevelComplete : EscapableBasePanel
         ShowPersonalBestIfRecord(oldLevelData, bestLevelData);
 
         // Update Button info as well
-        levelSelect.UpdateButtonPlayerLevelData(bestLevelData);
+        levelSelect.UpdateButtonPlayerLevelData(bestLevelData,current.LevelDiff,current.LevelIndex);
 
         SetSelected();
-
-        //LayoutRebuilder.MarkLayoutForRebuild(completeInformationRect);
-        // Needed to display the text align correctly?
-
     }
 
     private IEnumerator ForceTransformsPositionUpdate()
     {
+        //TODO Change this to same method used in setting Information screen size
         Debug.Log("ForceTransformsPositionUpdate: ");
         yield return new WaitForSeconds(0.1f);
         improvements[0].GetComponent<RectTransform>().localPosition = GetNewRectPosition(movesText);
@@ -175,14 +163,6 @@ public class LevelComplete : EscapableBasePanel
         float padding = 10f;
         RectTransform rect = parentTextField.gameObject.GetComponent<RectTransform>();
         return new Vector3(rect.localPosition.x + rect.sizeDelta.x + padding, rect.localPosition.y, 0);
-    }
-
-    private void EnableLayoutGroups(bool set)
-    {
-        foreach (var group in layoutgroups)
-        {
-            group.enabled = set;
-        }
     }
 
     private void ShowPersonalBestIfRecord(PlayerLevelData oldLevelData, PlayerLevelData bestLevelData)

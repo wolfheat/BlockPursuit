@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class IngameUIController : EscapableBasePanel
 {
@@ -35,7 +34,6 @@ public class IngameUIController : EscapableBasePanel
     public void RequestBoostMenu()
     {
         if (GameSettings.InTransition) return;
-    
         // Show Boost Menu
     
         restartPanel.ShowPanel();
@@ -44,13 +42,11 @@ public class IngameUIController : EscapableBasePanel
         SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
 
-    public void RestartLevelRequest()
+    public void ShowRestartMenu()
     {
         if (GameSettings.InTransition) return;
-
-        restartPanel.ShowPanel();
-        restartPanel.SetSelected();
         GameSettings.IsPaused = true;
+        TransitionScreen.Instance.StartTransition(GameAction.ShowRestartMenu);
         SoundController.Instance.PlaySFX(SFX.MenuStep);
     }
     public void ToggleCamera()

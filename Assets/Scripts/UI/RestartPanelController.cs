@@ -11,8 +11,7 @@ public class RestartPanelController : EscapableBasePanel
     }
     public void ClosePanel()
     {
-        HidePanel();
-        GameSettings.IsPaused = false;
+        TransitionScreen.Instance.StartTransition(GameAction.HideRestartMenu);
     }
     public void RestartLevel()
     {

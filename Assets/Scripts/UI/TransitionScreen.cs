@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class TransitionScreen : MonoBehaviour
 {
-    [SerializeField] GameObject panel;
+    [SerializeField] GameObject darkPanel;
+    [SerializeField] Canvas canvas;
     [SerializeField] Image image;
     private const float HalfTransitionTime = 0.5f;
-    private const float FastTransitionTime = 0.1f;
+    private const float TransitionTime = 0.1f;
     private const float DarkTime = 0.5f;
     private const float FastDarkTime = 0.05f;
-    private Color StartColor = new Color(0,0,0,0.2f);
+    private Color StartColor = new Color(0,0,0,0.2f); // Color Can't be a constant
     private Color EndColor = new Color(0,0,0,1);
 
     public Action GameDarkEvent;
@@ -47,19 +48,12 @@ public class TransitionScreen : MonoBehaviour
     {
         GameSettings.InTransition = true;
 
-        /*
-        float transitionTime = HalfTransitionTime;
-        float darkTime = DarkTime;
-        
-        if (GameSettings.UseFast)
-        {
-        */
-        float transitionTime = FastTransitionTime;
+        float transitionTime = TransitionTime;
         float darkTime = FastDarkTime;
-        //}
-
+        
         //Darken
-        panel.SetActive(true);
+        darkPanel.SetActive(true);
+        canvas.enabled = true;
         float timer = 0;
         while (timer < transitionTime)
         {
@@ -68,6 +62,7 @@ public class TransitionScreen : MonoBehaviour
             yield return null;
         }
         image.color = EndColor;
+        
         // Dispatch GameDarkEvent
         GameDarkEvent.Invoke();
 
@@ -88,7 +83,8 @@ public class TransitionScreen : MonoBehaviour
             yield return null;
         }
         image.color = StartColor;
-        panel.SetActive(false);
+        darkPanel.SetActive(false);
+        canvas.enabled = false;
         GameSettings.InTransition = false;
         GameDarkEventComplete.Invoke();
     }

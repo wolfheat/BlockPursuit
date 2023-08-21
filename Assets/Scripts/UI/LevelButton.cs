@@ -36,9 +36,10 @@ public class LevelButton : MonoBehaviour, ISelectHandler
     public void Unlock()
     {
         lockObject.SetActive(false);
+        
         levelDefinition.unlocked = true;
-        //Add Data into SaveFile
-        PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddNewLevel(levelDefinition.levelID);
+        
+        PlayerLevelData bestLevelData = SavingUtility.playerGameData.PlayerLevelDataList.AddNewOrRetrieveLevel(levelDefinition.levelID);
 
         playerLevelData = bestLevelData;
 

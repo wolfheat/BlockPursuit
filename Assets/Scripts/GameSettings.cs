@@ -13,7 +13,9 @@ public enum GameAction { LoadSelectedLevel, LoadStartMenu, ShowPauseScreen, Hide
     ShowCustomize,
     HideCustomize,
     HideMissions,
-    ShowMissions
+    ShowMissions,
+    ShowRestartMenu,
+    HideRestartMenu
 }
 
 public class GameSettings : MonoBehaviour
@@ -35,19 +37,9 @@ public class GameSettings : MonoBehaviour
 	public static int StepsCounter { get; set; }	
 	public static int MoveCounter { get; set; }	
 	public static bool InTransition { get; set; }	
-
-	public static bool UseFast => StoredAction == GameAction.ShowPauseScreen || StoredAction == GameAction.HidePauseScreen;
-    //OLD
-
-    public static bool AtMenu { get; set; } = true;
-	public static bool CanShoot { get; set; } = true;
-	public static GameState CurrentGameState { get; set; } = GameState.Menu;
-	
+	public static GameState CurrentGameState { get; set; } = GameState.Menu;	
 	public static bool IsPaused { get; set; } = true;
-	public static int CurrentLevel { get; set; } = 1;
-	public static int CurrentDifficultLevel { get; internal set; } = 0;
 	public static int CoinDefaultGain { get; internal set; } = 55;
-	public static float TileDefaultProbability { get; internal set; } = 0.25f;
 
 
 	private void Awake()

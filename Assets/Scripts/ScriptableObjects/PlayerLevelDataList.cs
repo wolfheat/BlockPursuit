@@ -45,20 +45,19 @@ public class PlayerLevelDataList
         savingUtility = s;
     }
 
-    public PlayerLevelData AddNewLevel(int ID)
+    public PlayerLevelData AddNewOrRetrieveLevel(int ID)
     {
         Debug.Log("Adding new Level data to save file");
 
         if (LevelExists(ID,out int index))
         {
-            Debug.LogWarning("Should not exist already");
             return LevelsList[index];
         }
         else
         {
             PlayerLevelData data = new PlayerLevelData(ID);
             LevelsList.Add(data);
-            PlayerLevelDataListUpdate?.Invoke();
+            PlayerLevelDataListUpdate?.Invoke(); // Dispatch Event and save data to file if level is added to the level-list of data
             return data;
         }
     }

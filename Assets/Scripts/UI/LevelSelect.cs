@@ -65,10 +65,10 @@ public class LevelSelect : EscapableBasePanel
         infoScreen.latestButton = buttonLists[0][0];
     }
 
-    public void UpdateButtonPlayerLevelData(PlayerLevelData data)
+    public void UpdateButtonPlayerLevelData(PlayerLevelData data,int tier, int lev)
     {
         //Find button
-        LevelButton buttonToUpdate = buttonLists[GameSettings.CurrentLevelDefinition.LevelDiff][GameSettings.CurrentLevelDefinition.LevelIndex];
+        LevelButton buttonToUpdate = buttonLists[tier][lev];
         buttonToUpdate.playerLevelData = data;
         buttonToUpdate.ShowCheckmark();
     }

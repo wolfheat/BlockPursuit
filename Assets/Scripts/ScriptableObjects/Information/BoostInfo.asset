@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2174a07116d034691e9c5ea13a419c, type: 3}
   m_Name: BoostInfo
   m_EditorClassIdentifier: 
-  informationText: This is the Boost page. You will se this before starting a level.
-    You will recieve the boosts that are active when you start the level. No matter
-    if the timer runs out during your game or not.
+  informationText: "This is the Boost page. You will always see this page before
+    starting a level. \n\nBOOSTS - You will recieve the boosts that are active when
+    you start the level. No matter if the timer runs out during your game or not."
