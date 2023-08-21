@@ -182,6 +182,10 @@ Jun 2023
 		* Decide where to place missions button, level select? 
 		* Steps and Moves is bad names, it does not make it clear what it means change?
 
+		* Loading text under loading animation for ads in level complete is not visible.
+		* Loading animation for boost is not showing fix
+		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
+
 		* Work on getting one predictable color scheme for UI
 		* Recieving Tile Reward whould show more glimmering animation. Maybee also coins gain?
 		* Maybe have unclaimed rewards animate in info panel?
@@ -190,10 +194,6 @@ Jun 2023
 		* Create the IAP page?
 
 		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
-
-		* Have ? mark on boost panel explaining how boosts work.
-			* Have the rewards at boost panel be what player actually earns. Boosts active when starting level determines the reward level.
-		* Fix issue why ESC wont work on MissionsScreen
 		* Fix images so they scale correctly on Mission Icon and Reward
 		* Redo UI menu change system
 
