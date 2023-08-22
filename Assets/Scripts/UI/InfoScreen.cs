@@ -57,7 +57,7 @@ public class InfoScreen : MonoBehaviour
             levelNameText.text = "Level " + StringConverter.LevelAsStringWithParantheses(button.levelDefinition.LevelDiff, button.levelDefinition.LevelIndex);
             tileReward.text = button.levelDefinition.completeReward.ToString();
 
-            unlockCostText.text = "x" + button.levelDefinition.unlockRequirements;
+            unlockCostText.text = button.levelDefinition.unlockRequirements.ToString();
 
         }
 

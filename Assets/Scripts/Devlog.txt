@@ -176,6 +176,10 @@ Jun 2023
 		* Made all menus full screen
 		* Fixed various issues as settings screen not pausing game and Restart menu issues
 		* Added palettes Data, not used yet
+22/8	* Made a ColorPalette Changer that can change color scheme at runtime for all UI
+		* Increasted size of Level Selevt Menu to take up more space
+
+
 
 		* Maybe have One pause screen where restart/continue/settings/Abandon buttons are located. How about Camera/input?
 		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?

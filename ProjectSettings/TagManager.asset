@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MenuBackgroundBacks
+  - MenuBackgroundFronts
+  - SubMenuBackgrounds
+  - SubMenuBackgroundDarks
+  - MissionBackgrounds
+  - LockedPanels
+  - LockedPanelRewards
+  - LockedButtons
+  - RewardButtons
+  - MissionPanelRewards
+  - InventoryBar
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,30 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.57254905
       objectReference: {fileID: 0}
+    - target: {fileID: 7046779976300583544, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046779976300583544, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046779976300583544, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046779976300583544, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046779976300583544, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046779976300583544, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8015948148086565186, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_Name
       value: LevelButtonABC
@@ -70,11 +94,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9109045632856741807, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 142
+      value: 172
       objectReference: {fileID: 0}
     - target: {fileID: 9109045632856741807, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 142
+      value: 172
       objectReference: {fileID: 0}
     - target: {fileID: 9109045632856741807, guid: 9fa35f35ccfdee24dbf119fd8c61423f, type: 3}
       propertyPath: m_LocalPosition.x

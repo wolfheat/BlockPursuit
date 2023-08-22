@@ -17,7 +17,6 @@ public class LevelComplete : EscapableBasePanel
     [SerializeField] GameObject tileGain;
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
-    [SerializeField] HorizontalLayoutGroup[] layoutgroups;
 
     LevelSelect levelSelect;
     private int latestCoins;
