@@ -10,6 +10,7 @@ namespace MyGameAds
         public GameObject[] AdLoadedStatus;
         private RewardedAd _rewardedAd;
 
+        public static Action Loaded;
         public static Action Closed;
         public void LoadAd()
         {
@@ -56,11 +57,12 @@ namespace MyGameAds
 
         private void ActivateAdReady(bool value)
         {
-            foreach (var ad in AdLoadedStatus)
+            if (!value)
             {
-                ad?.SetActive(value);
+                Debug.Log("Ad was not ready");
+                return;
             }
-
+            Loaded?.Invoke();
         }
 
         private IEnumerator SimpleWaitForShowAds()

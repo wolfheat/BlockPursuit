@@ -192,6 +192,11 @@ public class LevelSelect : EscapableBasePanel
         TransitionScreen.Instance.StartTransition(GameAction.LoadSelectedLevel);
     }
 
+    public void ShowMissions()
+    {
+        TransitionScreen.Instance.StartTransition(GameAction.ShowMissions);
+    }
+    
     public void ShowUnlockPanel()
     {
         unlockScreen.SetInfo(infoScreen.latestButton.levelDefinition);

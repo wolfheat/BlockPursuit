@@ -104,9 +104,6 @@ public class UIController : MonoBehaviour
                 levelSelect.HidePanel();
                 ingameUIController.HidePanel();
                 boostController.ShowPanel();
-                boostController.UpdateLoadBoostButton();
-                //rewardedController.LoadAd();
-
                 break;
             case GameAction.RestartLevel:
                 // Do I need to unload current game here?
@@ -216,7 +213,7 @@ public class UIController : MonoBehaviour
                 break;
              case GameAction.HideMissions:
                 missions.HidePanel();
-                startMenu.ShowPanel();
+                levelSelect.ShowPanel();
                 break;
             case GameAction.ShowUnlock:
                 levelSelect.HidePanel();

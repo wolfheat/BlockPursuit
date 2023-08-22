@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoostController : EscapableBasePanel
 {
     [SerializeField] RewardedController rewardedController;
+    [SerializeField] LoadingAdsController loadingAdsController;
     [SerializeField] TypeABoost aBoost;
     [SerializeField] TypeBBoost bBoost;
     [SerializeField] BoostIcon aBoostIcon;
@@ -13,8 +14,6 @@ public class BoostController : EscapableBasePanel
     [SerializeField] GameObject loading;
     public BoostData A_BoostData = new BoostData(BoostType.TileBoost, 9);
     public BoostData B_BoostData = new BoostData(BoostType.CoinBoost, 9);
-    private bool checkForLoadedAd;
-    [SerializeField] GameObject loadedAdCheck;
 
     public override void RequestESC()
     {
@@ -26,15 +25,28 @@ public class BoostController : EscapableBasePanel
     private void OnEnable()
     {
         PlayerGameData.BoostTimeUpdated += UpdateBoostData;
+        RewardedController.Loaded += AdFullyLoaded;
         SavingUtility.LoadingComplete += UpdateBoostDataLoading;
     }
 
     private void OnDisable()
     {
         PlayerGameData.BoostTimeUpdated -= UpdateBoostData;
+        RewardedController.Loaded -= AdFullyLoaded;
         SavingUtility.LoadingComplete -= UpdateBoostDataLoading;
     }
 
+    private void AdFullyLoaded()
+    {
+        if (!Enabled())
+        {
+            Debug.Log("Ad Fully loaded but Boost panel is not active, do not show ad"); 
+            return;
+        }
+
+        Debug.Log("Ad Fully Loaded Show Ad");
+        ShowLoadedAd();
+    }
     protected void UpdateBoostDataLoading()
     {
         Debug.Log("UpdateBoostData from Loading Complete");
@@ -51,16 +63,6 @@ public class BoostController : EscapableBasePanel
         // Manually Update the Boosts
         A_BoostData.UpdateIfActive();
         B_BoostData.UpdateIfActive();
-        if (checkForLoadedAd)
-        {
-            if (loadedAdCheck.activeSelf)
-            {
-                loadBoostButton.SetActive(false);
-                loading.SetActive(false);
-                checkForLoadedAd = false;
-                BoostRequest();
-            }
-        }
     }
 
     private void Start()
@@ -97,27 +99,19 @@ public class BoostController : EscapableBasePanel
 
     }
 
-    public void UpdateLoadBoostButton()
-    {
-        
-        if (loadedAdCheck.activeSelf)
-            loadBoostButton.SetActive(false);
-        else
-            loadBoostButton.SetActive(true);
-        loading.SetActive(false);
-        checkForLoadedAd = false;
-    }
-    
     public void LoadBoostClicked()
     {
+        loadingAdsController.ShowPanel();
         Debug.Log("LoadBoostClicked");
-        loadBoostButton.SetActive(false);
-        loading.SetActive(true);
-        checkForLoadedAd = true;
+
+        //loadBoostButton.SetActive(false);
         rewardedController.LoadAd();
+
+        //TODO Handle ads not loading somehow
+
     }
     
-    public void BoostRequest()
+    public void ShowLoadedAd()
     {
         Debug.Log("Request Boost Ad, show ad and return here");
         rewardedController.ShowAd();

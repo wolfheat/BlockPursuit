@@ -177,17 +177,24 @@ Jun 2023
 		* Fixed various issues as settings screen not pausing game and Restart menu issues
 		* Added palettes Data, not used yet
 22/8	* Made a ColorPalette Changer that can change color scheme at runtime for all UI
-		* Increasted size of Level Selevt Menu to take up more space
+		* Increasted size of Level Select Menu to take up more space
+		* Added Missions button to Level Select Screen 
+		* Added PopupScreen for Loading Ads
 
 
+		* Student Hat is good icon for missions page, but mission might be bad wording, find better name?
 
 		* Maybe have One pause screen where restart/continue/settings/Abandon buttons are located. How about Camera/input?
 		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?
 		* Decide where to place missions button, level select? 
 		* Steps and Moves is bad names, it does not make it clear what it means change?
 
-		* Loading text under loading animation for ads in level complete is not visible.
-		* Loading animation for boost is not showing fix
+		* M;ake an option is settings to preload ads, implement this
+
+		* Change loading animation to be on a separate popup Screen instead
+
+		* Loading animation for boost is not showing fix.
+
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
 
 		* Work on getting one predictable color scheme for UI
