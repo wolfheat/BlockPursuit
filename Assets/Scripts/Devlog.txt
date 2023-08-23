@@ -180,47 +180,31 @@ Jun 2023
 		* Increasted size of Level Select Menu to take up more space
 		* Added Missions button to Level Select Screen 
 		* Added PopupScreen for Loading Ads
+23/8	* Made Pause screen and Restart Screen smaller and like info popup panel
+		* Added system for Achievements store, update
 
 
-		* Student Hat is good icon for missions page, but mission might be bad wording, find better name?
 
-		* Maybe have One pause screen where restart/continue/settings/Abandon buttons are located. How about Camera/input?
-		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?
-		* Decide where to place missions button, level select? 
-		* Steps and Moves is bad names, it does not make it clear what it means change?
-
-		* M;ake an option is settings to preload ads, implement this
-
-		* Change loading animation to be on a separate popup Screen instead
-
-		* Loading animation for boost is not showing fix.
-
+		* Make some system to store recieved achievements and queue them as fancy popups to player.
+		
+				
+		TEXT FIELDS
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
-
-		* Work on getting one predictable color scheme for UI
-		* Recieving Tile Reward whould show more glimmering animation. Maybee also coins gain?
-		* Maybe have unclaimed rewards animate in info panel?
-		* Have Selected button bump?
-
+		
+		IAP
 		* Create the IAP page?
-
-		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
-		* Fix images so they scale correctly on Mission Icon and Reward
-		* Redo UI menu change system
-
-		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.
+		
 		MISSIONS PAGE (better name for it?)
-		* Creater Mission page
 		* Fill with list of goals to reach. Top goal is granted gold every X hours no timer only visible when available.
 		* Acheivements requirements show here with reward as well, and recieved achievements are updated on achievements page, or remove this page?
 		* Keep track of active playtime? Have reward for this?
-
-
+		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
+		* Fix images so they scale correctly on Mission Icon and Reward
+		
 		MISSIONS
 		* Get 100gold free every X hour
 		* Get 0-5 ads watched to get reward
 
-		* Have space background for space level tier
 		* Tiers have different
 			- Backgrounds, Tiletypes?, Ambient Sound, Music
 
@@ -230,14 +214,11 @@ Jun 2023
 			Asset Store
 			Ultimate Game Music Collection - John Leonard French - €22.45
 			Pro Sound Collection - Gamemaster Audio - €24.45
-
-			 
 			Game Makers Sound Effects Kit 3 - Epic Stock Media - €163.67
 			Mobile Game 3 - App & Phone Sound Effects Library - Epic Stock Media - €58.88
 
 
 		* Add more interfaces where needed
-		* Change saveLoad data to scriptable objects?
 		
 
 		BUGS
@@ -251,6 +232,7 @@ Jun 2023
 		* Fix achievements 
 
 		BEFORE RELEASE
+		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?
 		* Need Asset Bundle or Adressables??
 		* Add Statistics / retention / dashboard / Unitys ?
 		* Handle errors in data saving so players dont lose progress.
@@ -274,13 +256,18 @@ Jun 2023
 		CONSIDER CHANGES:
 		* Should boosts be available from within a game played? Giving player chance to boost before completing a started level? No?
 		* Coins update from level complete is instant, maybe have them come after interstitial ad? Maybe have greater delay before ad so player have time to see this added coins?
-
+		* Steps and Moves is bad names, it does not make it clear what it means change?
+		* Student Hat is a good icon for missions page, but mission might be bad wording, find better name?
+		* Have load ad button always available on boost panel so player can keep boosting even after a boost, maybe have a cap of 24h as boost?
+		* Maybe have One pause screen where restart/continue/settings/Abandon buttons are located. How about Camera/input? Maybe not makes it strange when returning from settings?
+		
 		NEW MECHANICS:
 		* Must have tutorial
 			* Thinking of having tutorial levels with popup test/picktures/videos to show what to do.
 		* Have coin sound until coins are filled up to total?
 		* Maybe have honor system points that players can gather and compare to a highscore. When players have done all normal levels they can do the random into infinity
 		* Include achievements in save / make internal Achievement system
+		* Make an option is settings to preload ads, implement this
 
 		NEW CONTENT
 		* Have tile Variations player can use
@@ -333,7 +320,8 @@ Jun 2023
 		* Have different biomes for different difficult levels
 			* Water added for "normal" biom
 			* Add Snow, Lava, Clouds, Space, Aztec, Underground? Use separate Music/Sounds?
-
+			* Have space background for space level tier
+		
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player
 		* Issue with ingame menu not scaling correctly when changing res.
@@ -356,13 +344,18 @@ Jun 2023
 		* Calibrate tile cost for level unlock as well as rewarded tiles.
 		* Clean Up tile definition and way levels are stored when created at runtime
 		* Have stored data Encrypyted?
-
+		* Change saveLoad data to scriptable objects?
+		
 		UI STUFF:
 		* Change Load Screen between scenes to animation or not? Current solution, made it faster blackscreen 0.1 seconds.
 		* Change selected color from dark red to something else? Clean Up selections permanently.
 		* Make level select tabs more fancy?	
 		* Fix aligning of text for level complete screen
-
+		* Work on getting one predictable color scheme for UI
+		* Have Selected button bump?
+		* Recieving Tile Reward whould show more glimmering animation. Maybee also show coin gain?
+		* Maybe have unclaimed rewards animate in info panel? Maybe not have rewards show here at all but show in the boost panel?
+		
 		LEVELCREATION STUFF:
 		* Create randomized level creation for Bronze, Silver, Gold versions
 		* Create all levels for main levels

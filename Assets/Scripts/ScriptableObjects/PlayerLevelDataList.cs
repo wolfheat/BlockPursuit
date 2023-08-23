@@ -40,11 +40,6 @@ public class PlayerLevelDataList
         
     }
     
-    public void DefineSavingUtility(SavingUtility s)
-    {
-        savingUtility = s;
-    }
-
     public PlayerLevelData AddNewOrRetrieveLevel(int ID)
     {
         Debug.Log("Adding new Level data to save file");
@@ -115,6 +110,19 @@ public class PlayerLevelDataList
         index = -1;
         return false;
     }
+    
+    public bool LevelCompleted(int levelID)
+    {
+        //Find data with this ID
+        foreach (var level in LevelsList)
+        {
+            if (levelID == level.levelID)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void SetLevels(List<PlayerLevelData> levels)
     {
@@ -132,5 +140,12 @@ public class PlayerLevelDataList
         }
         //Debug.Log("Did not find Level definition for "+id);
         return new PlayerLevelData() { levelID = -1};
+    }
+
+    public bool CheckTierCompleted(int v)
+    {
+        foreach(LevelDefinition lvl in Levels.LevelDefinitions[v])
+            if (!LevelCompleted(lvl.levelID)) return false;
+        return true;
     }
 }

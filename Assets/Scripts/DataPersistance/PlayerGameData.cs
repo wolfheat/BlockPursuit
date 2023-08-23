@@ -1,5 +1,10 @@
 using System;
 
+public class AchievementData
+{
+    public bool[] Data { get; set; } = new bool[0];
+}
+
 [Serializable]
 public class LightSettings
 {
@@ -29,7 +34,15 @@ public class PlayerGameData
     public int Coins { get; set; } = 100;
     public DateTime AtypeBoostTime { get; set; }
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
-        
+
+    // Totals
+    public int TotalGoldCollected { get; set; } = 0;
+    public int TotalTilesCollected { get; set; } = 0;
+
+
+    // Player Achievement Data
+    public AchievementData AchievementData { get; set; }
+    
     // Player Levels Data
     public PlayerLevelDataList PlayerLevelDataList { get; private set; }
 
@@ -38,6 +51,7 @@ public class PlayerGameData
 
     // Action Events
     public static Action InventoryUpdate;
+    public static Action AchievementUnlocked;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
 
@@ -46,6 +60,7 @@ public class PlayerGameData
         Tiles = 0;
         Coins = 100;
         PlayerLevelDataList = new PlayerLevelDataList();
+        AchievementData = new AchievementData();
     }
 
     public static void InvokeAll()
@@ -54,6 +69,11 @@ public class PlayerGameData
         BoostTimeUpdated?.Invoke();
     }
 
+    public void UnlockAchievement(int index)
+    {
+        AchievementData.Data[index] = true;
+        AchievementUnlocked?.Invoke();
+    }
     public void SetABoostTime(DateTime time)
     {
         AtypeBoostTime = time;
@@ -67,12 +87,15 @@ public class PlayerGameData
     public void AddCoins(int amt)
     {
         Coins += amt;
+        TotalGoldCollected += amt;
         InventoryUpdate.Invoke();
     }
     public void AddCoinsAndTiles(int coins, int tiles)
     {
         Coins += coins;
         Tiles += tiles;
+        TotalGoldCollected += coins;
+        TotalTilesCollected += tiles;
         InventoryUpdate.Invoke();
     }
 
@@ -86,6 +109,7 @@ public class PlayerGameData
     public void AddTiles(int amt)
     {
         Tiles += amt;
+        TotalTilesCollected += amt;
         InventoryUpdate.Invoke();
     }
 
@@ -97,10 +121,6 @@ public class PlayerGameData
         return true;
     }
 
-    internal void DefineSavingUtility(SavingUtility savingUtility)
-    {
-        PlayerLevelDataList.DefineSavingUtility(savingUtility);
-    }
 
     internal void SetCharacter(AvatarType type)
     {
