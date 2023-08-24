@@ -132,7 +132,7 @@ public class UIController : MonoBehaviour
                 // Load Ad here? This is in the middle of the transition To show Level Complete
                 // This is good because it is a delay between player completes level and ad shows
                 interstitialController.ShowAd();
-                levelComplete.UpdateLoadBoostButton();
+                //levelComplete.UpdateLoadBoostButton();
                 //rewardedController.LoadAd();
 
                 break;
@@ -183,10 +183,13 @@ public class UIController : MonoBehaviour
             case GameAction.HideSettings:
                 settings.HidePanel();
                 if(settings.ReturnMenu == ReturnMenuType.Main)
+                {
                     startMenu.ShowPanel();
-                else
-                    ingameUIController.ShowPanel();
-                    GameSettings.IsPaused = false;
+                    return;
+                }
+                ingameUIController.ShowPanel();
+                GameSettings.IsPaused = false;
+                
                 break;
              case GameAction.HideSettingsInGame:
                 settings.HidePanel();

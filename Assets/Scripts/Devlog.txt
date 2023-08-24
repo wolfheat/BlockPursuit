@@ -182,11 +182,8 @@ Jun 2023
 		* Added PopupScreen for Loading Ads
 23/8	* Made Pause screen and Restart Screen smaller and like info popup panel
 		* Added system for Achievements store, update
-
-
-
-		* Make some system to store recieved achievements and queue them as fancy popups to player.
-		
+24/8	* Implemented Achievements popup when completing an achievement. Also Queuing them up.
+		* Started implementing recieving mission rewards.
 				
 		TEXT FIELDS
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
@@ -200,6 +197,7 @@ Jun 2023
 		* Keep track of active playtime? Have reward for this?
 		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
 		* Fix images so they scale correctly on Mission Icon and Reward
+			* Have completed items in missions notify player by flashing button showing in level select?
 		
 		MISSIONS
 		* Get 100gold free every X hour

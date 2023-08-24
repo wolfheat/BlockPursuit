@@ -1,8 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class AchievementsController : EscapableBasePanel
 {
-    [SerializeField] private AchievementGraphics[] achieventGraphics;
+    [SerializeField] private AchievementGraphics achieventGraphicsPrefab;
+    [SerializeField] private AchievementsDefinitions achievementsDefinitions;
+    [SerializeField] private GameObject achievementsHolder;
+    private List<AchievementGraphics> achieventGraphics = new List<AchievementGraphics>();
+
     private AchievementData achievements;
+
+    public AchievementDefinition GetAchievementDefinition(int index)
+    {
+        return achievementsDefinitions.definitions[index];
+    } 
 
     public override void RequestESC()
     {
@@ -18,15 +28,31 @@ public class AchievementsController : EscapableBasePanel
     private void OnEnable()
     {
         SavingUtility.LoadingComplete += SetAchievementsFromData;
-        PlayerGameData.AchievementUnlocked += SetAchievementsFromData;
+        PlayerGameData.AchievementUnlocked += UnlockAchievement;
     }
     
     private void OnDisable()
     {
         SavingUtility.LoadingComplete -= SetAchievementsFromData;
-        PlayerGameData.AchievementUnlocked -= SetAchievementsFromData;
+        PlayerGameData.AchievementUnlocked -= UnlockAchievement;
     }
-
+    private void Start()
+    {
+        // Generate achieventGraphicss
+        foreach (var achievement in achievementsDefinitions.definitions)
+        {
+            AchievementGraphics newGraphics = Instantiate(achieventGraphicsPrefab, achievementsHolder.transform);
+            newGraphics.descriptionText.text = achievement.description;
+            newGraphics.completedImage.sprite = achievement.completedSprite;
+            achieventGraphics.Add(newGraphics);
+        }
+    }
+    private void UnlockAchievement(int index)
+    {
+        Debug.Log("UNLOCKING INDEX "+index);
+        achievements.Data[index] = true;
+        UpdateGraphic(achieventGraphics[index], achievements.Data[index]);
+    }
     private void SetAchievementsFromData()
     {
         Debug.Log(" -- Load Achievements values from file -- ");
@@ -37,7 +63,7 @@ public class AchievementsController : EscapableBasePanel
             Debug.Log("Achievements null");
             // This handles initiation of the array
             // (This should never happen for players since if there is no save file yet the entire save is initialized in saveutility catch)
-            achievements = new AchievementData() { Data = new bool[achieventGraphics.Length] };
+            achievements = new AchievementData() { Data = new bool[achieventGraphics.Count] };
             SavingUtility.playerGameData.AchievementData = achievements;
         }
         else
@@ -50,10 +76,12 @@ public class AchievementsController : EscapableBasePanel
 
     private void UpdateGraphics()
     {
-        for (int i = 0; i < achieventGraphics.Length; i++)
+        for (int i = 0; i < achieventGraphics.Count; i++)
         {
-            if (i > achievements.Data.Length) break;
-            achieventGraphics[i].SetCompleted(achievements.Data[i]);
+            if (i >= achievements.Data.Length) break;
+            UpdateGraphic(achieventGraphics[i], achievements.Data[i]);
         }
     }
+    private void UpdateGraphic(AchievementGraphics graphics, bool set) => graphics.SetCompleted(set);        
+
 }

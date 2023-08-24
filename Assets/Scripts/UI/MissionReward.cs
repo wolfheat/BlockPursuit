@@ -14,7 +14,7 @@ public class MissionReward : MonoBehaviour
     internal void SetData(MissionRewardData data)
     {
         missionRewardData = data;
-        rewardText.text = missionRewardData.rewardText;
+        rewardText.text = missionRewardData.amount.ToString();
         image.sprite = missionRewardData.sprite;
     }
 }

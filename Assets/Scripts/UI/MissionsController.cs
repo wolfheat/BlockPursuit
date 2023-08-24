@@ -7,7 +7,12 @@ public class MissionsController : EscapableBasePanel
     [SerializeField] Mission missionPrefab;
     [SerializeField] MissionData[] missionDatas;
     private List<Mission> missions = new List<Mission>();
-    
+
+    private void OnEnable()
+    {
+        Mission.OnMissionComplete += mission => GetMissionReward(mission);
+    }
+
     public override void RequestESC()
     {   
         if (!Enabled()) return;
@@ -22,6 +27,14 @@ public class MissionsController : EscapableBasePanel
     private void Start()
     {
         CreateMissions();
+    }
+
+    private void GetMissionReward(Mission mission)
+    {
+        Debug.Log("Get mission reward for: "+mission.Name);
+        missions.Remove(mission);
+        MissionRewardData missionRewardData = mission.GetMissionRewardData();
+        SavingUtility.playerGameData.HandleMissionReward(missionRewardData);
     }
 
     private void CreateMissions()

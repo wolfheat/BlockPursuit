@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,18 @@ public class Mission : MonoBehaviour
     [SerializeField] TextMeshProUGUI missionDescription;
     [SerializeField] MissionReward missionReward;
     [SerializeField] MissionData missionData;
+
+    public static Action<Mission> OnMissionComplete;
+
+    public string Name => missionName.text;
+
+    public MissionRewardData GetMissionRewardData() => missionData.missionRewardData;
+
+    public void CompleteMission()
+    {
+
+        OnMissionComplete?.Invoke(this);
+    }
 
     internal void SetData(MissionData data)
     {

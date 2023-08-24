@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -82,6 +81,7 @@ public class PlayerController : MonoBehaviour
     }
     public void PickUpOrPlace()
     {
+        Debug.Log("Pick Up or PLace: Paused: "+GameSettings.IsPaused);
         if (GameSettings.IsPaused) return;
 
         if (levelCreator.heldSection == null)

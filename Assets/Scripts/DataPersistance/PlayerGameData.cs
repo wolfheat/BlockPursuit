@@ -51,7 +51,7 @@ public class PlayerGameData
 
     // Action Events
     public static Action InventoryUpdate;
-    public static Action AchievementUnlocked;
+    public static Action<int> AchievementUnlocked;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
 
@@ -72,7 +72,7 @@ public class PlayerGameData
     public void UnlockAchievement(int index)
     {
         AchievementData.Data[index] = true;
-        AchievementUnlocked?.Invoke();
+        AchievementUnlocked?.Invoke(index);
     }
     public void SetABoostTime(DateTime time)
     {
@@ -126,6 +126,22 @@ public class PlayerGameData
     {
         Avatar = type;
         AvatarChange?.Invoke();
+    }
+
+    internal void HandleMissionReward(MissionRewardData missionRewardData)
+    {
+        switch (missionRewardData.rewardType)
+        {
+            case RewardType.Gold:
+                AddCoins(missionRewardData.amount);
+                break;
+            case RewardType.Tiles:
+                AddTiles(missionRewardData.amount);
+                break;
+            case RewardType.Unlock:
+                // Unlock Tier HERE
+                break;
+        }
     }
 }
 

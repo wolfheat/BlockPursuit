@@ -1,13 +1,14 @@
 using MyGameAds;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelComplete : EscapableBasePanel
 {
     [SerializeField] UIController UIController;
+    [SerializeField] LoadingAdsController loadingAdsController;
+    [SerializeField] AchievementsPopupController achievementsPopupController;
+
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI movesText;
@@ -54,51 +55,17 @@ public class LevelComplete : EscapableBasePanel
 
     }
 
-    [SerializeField] GameObject loadBoostButton;
-    [SerializeField] GameObject loading;
+    //[SerializeField] GameObject loadBoostButton;
+    //[SerializeField] GameObject loading;
     [SerializeField] RewardedController rewardedController;
-    private bool checkForLoadedAd;
-    [SerializeField] GameObject loadedAdCheck;
     private LevelDefinition current;
+
 
     public void LoadBoostClicked()
     {
+        loadingAdsController.ShowPanel();
         Debug.Log("LoadBoostClicked");
-        loadBoostButton.SetActive(false);
-        loading.SetActive(true);
-        checkForLoadedAd = true;
         rewardedController.LoadAd();
-    }
-
-    public void UpdateLoadBoostButton()
-    {
-        Debug.Log("Update Load Boost Button, when opening level complete");
-        if (loadedAdCheck.activeSelf)
-            loadBoostButton.SetActive(false);
-        else
-            loadBoostButton.SetActive(true);
-
-        loading.SetActive(false);
-        checkForLoadedAd = false;
-    }
-
-    private void Update()
-    {
-        if (checkForLoadedAd)
-        {
-            if (loadedAdCheck.activeSelf)
-            {
-                loadBoostButton.SetActive(false);
-                loading.SetActive(false);
-                checkForLoadedAd = false;
-                BoostRequest();
-            }
-        }
-    }
-    public void BoostRequest()
-    {
-        Debug.Log("Request Boost Ad, show ad and return here");
-        rewardedController.ShowAd();
     }
 
     internal void UpdateStats(int coins, int tiles)
@@ -144,6 +111,16 @@ public class LevelComplete : EscapableBasePanel
         levelSelect.UpdateButtonPlayerLevelData(bestLevelData,current.LevelDiff,current.LevelIndex);
 
         SetSelected();
+
+        CheckForAchievementsGained();
+    }
+
+    private void CheckForAchievementsGained()
+    {
+        if (achievementsPopupController.HasUnviewedAchievements())
+        {
+            achievementsPopupController.ShowPopup();
+        }
     }
 
     private IEnumerator ForceTransformsPositionUpdate()
