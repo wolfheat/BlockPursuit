@@ -184,7 +184,14 @@ Jun 2023
 		* Added system for Achievements store, update
 24/8	* Implemented Achievements popup when completing an achievement. Also Queuing them up.
 		* Started implementing recieving mission rewards.
-				
+25/8	* Achievements now popup anywere when achieved.
+		* Missions process stored to file
+		
+		//TODO Seems like dateTime is not set correctly for the hourly mission check these values
+		* Make missions that is completed not show up in the list.
+
+		* Maybe have a list of recurring missions, incomplete missions and completed
+		
 		TEXT FIELDS
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
 		

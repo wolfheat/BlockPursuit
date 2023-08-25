@@ -5,6 +5,18 @@ public class AchievementData
     public bool[] Data { get; set; } = new bool[0];
 }
 
+public class MissionsSaveData
+{
+    public MissionSaveData[] Data { get; set; }
+}
+
+public class MissionSaveData
+{
+    public int ID;
+    public int amount;
+    public string latest;
+}
+
 [Serializable]
 public class LightSettings
 {
@@ -40,6 +52,9 @@ public class PlayerGameData
     public int TotalTilesCollected { get; set; } = 0;
 
 
+    // Player Mission Saved Data
+    public MissionsSaveData MissionsSaveData { get; set; }
+    
     // Player Achievement Data
     public AchievementData AchievementData { get; set; }
     
@@ -61,12 +76,6 @@ public class PlayerGameData
         Coins = 100;
         PlayerLevelDataList = new PlayerLevelDataList();
         AchievementData = new AchievementData();
-    }
-
-    public static void InvokeAll()
-    {
-        InventoryUpdate?.Invoke();
-        BoostTimeUpdated?.Invoke();
     }
 
     public void UnlockAchievement(int index)
@@ -122,13 +131,13 @@ public class PlayerGameData
     }
 
 
-    internal void SetCharacter(AvatarType type)
+    public void SetCharacter(AvatarType type)
     {
         Avatar = type;
         AvatarChange?.Invoke();
     }
 
-    internal void HandleMissionReward(MissionRewardData missionRewardData)
+    public void HandleMissionReward(MissionRewardData missionRewardData)
     {
         switch (missionRewardData.rewardType)
         {

@@ -10,6 +10,11 @@ public class BasePanel : MonoBehaviour
     [SerializeField] protected Button mainSelectedButton;
 
     private Canvas canvas;
+
+    private void Start()
+    {
+        canvas = GetComponent<Canvas>();
+    }
     public void ShowPanel()
     {
         if(canvas == null) canvas = GetComponent<Canvas>();

@@ -11,7 +11,12 @@ public class AchievementsPopupController : BasePanel
     [SerializeField] private TextMeshProUGUI desctriptionText;
     private Queue queue = new Queue();
     public bool HasUnviewedAchievements() => queue.Count > 0;
-    public void AddAchivementToQueue(AchievementDefinition newItem) => queue.Enqueue(newItem);
+    public void AddAchivementToQueue(AchievementDefinition newItem)
+    {
+        queue.Enqueue(newItem);
+        if(!Enabled())
+            ShowPopup();
+    }
 
     private void OnEnable()
     {

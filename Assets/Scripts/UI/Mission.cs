@@ -15,7 +15,8 @@ public class Mission : MonoBehaviour
 
     public string Name => missionName.text;
 
-    public MissionRewardData GetMissionRewardData() => missionData.missionRewardData;
+    public MissionRewardData GetMissionRewardData() => missionReward.MissionRewardData;
+    public MissionData GetMissionData() => missionData;
 
     public void CompleteMission()
     {

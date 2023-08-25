@@ -68,3 +68,28 @@ MonoBehaviour:
     description: Gain 1602 Gold
     type: 1
     value: 1602
+  - completedSprite: {fileID: 21300000, guid: 13ea444f00b5ae8429b08fce13b67f55, type: 3}
+    achievementName: Max Gold Gainer
+    description: Gain 3000 Gold
+    type: 1
+    value: 3000
+  - completedSprite: {fileID: 21300000, guid: 13ea444f00b5ae8429b08fce13b67f55, type: 3}
+    achievementName: Max Gold Gainer
+    description: Gain 3500 Gold
+    type: 1
+    value: 3500
+  - completedSprite: {fileID: 21300000, guid: 13ea444f00b5ae8429b08fce13b67f55, type: 3}
+    achievementName: Max Gold Gainer
+    description: Gain 3800 Gold
+    type: 1
+    value: 3800
+  - completedSprite: {fileID: 21300000, guid: 13ea444f00b5ae8429b08fce13b67f55, type: 3}
+    achievementName: Max Gold Gainer
+    description: Gain 4400 Gold
+    type: 1
+    value: 4400
+  - completedSprite: {fileID: 21300000, guid: 13ea444f00b5ae8429b08fce13b67f55, type: 3}
+    achievementName: Max Gold Gainer
+    description: Gain 4500 Gold
+    type: 1
+    value: 4500
