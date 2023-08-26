@@ -193,6 +193,7 @@ Jun 2023
 
 		* Implement pooled mission, have one pooled mission always active?
 		* Implement steps in missions
+		* Remake saving loading system?
 
 		* Maybe have a list of recurring missions, incomplete missions and completed
 		

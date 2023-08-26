@@ -83,16 +83,16 @@ public class BoostController : EscapableBasePanel
         //If first reward is allready active activate second reward?
         if(!A_BoostData.active)
             // Set a new Boost Time
-            SavingUtility.playerGameData.SetABoostTime(DateTime.Now);
+            SavingUtility.playerGameData.SetABoostTime(DateTime.UtcNow);
         else if (!B_BoostData.active)
-            SavingUtility.playerGameData.SetBBoostTime(DateTime.Now);
+            SavingUtility.playerGameData.SetBBoostTime(DateTime.UtcNow);
         else
         {
             //Activate the one with less time left?
             if(A_BoostData.timeLeft < B_BoostData.timeLeft)
-                SavingUtility.playerGameData.SetABoostTime(DateTime.Now);
+                SavingUtility.playerGameData.SetABoostTime(DateTime.UtcNow);
             else
-                SavingUtility.playerGameData.SetBBoostTime(DateTime.Now);
+                SavingUtility.playerGameData.SetBBoostTime(DateTime.UtcNow);
         }
 
         SoundController.Instance.PlaySFX(SFX.RecieveBoost);

@@ -179,10 +179,10 @@ public class MissionsController : EscapableBasePanel
     private void UpdateMissions()
     {
         //TODO Seems like dateTime is not set correctly for the hourly mission check these values
-        Debug.Log("Checking to set missions active!");
+        //Debug.Log("Checking to set missions active!");
         foreach(var mission in missions)
         {
-            Debug.Log("Checking to set mission active: "+mission.Name+" = "+ mission.GetMissionData().TimerUnlocked + " hours since last update: "+ mission.GetMissionData().TimePassed);
+            //Debug.Log("Checking to set mission active: "+mission.Name+" = "+ mission.GetMissionData().TimerUnlocked + " hours since last update: "+ mission.GetMissionData().TimePassed);
             mission.gameObject.SetActive(mission.GetMissionData().TimerUnlocked);
         }
     }

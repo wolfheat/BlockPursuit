@@ -26,12 +26,12 @@ public class BoostData
     public DateTime GetDefaultTime()
     {
         Debug.Log("Runs if no value is set for last datetime");
-        return DateTime.Now.Add(-TimeSpan.FromMinutes(boostIntervalMinutes));
+        return DateTime.UtcNow.Add(-TimeSpan.FromMinutes(boostIntervalMinutes));
     }
 
     private void Update()
     {
-        int TimeDiff = (int)(DateTime.Now - lastUsed).TotalSeconds;
+        int TimeDiff = (int)(DateTime.UtcNow - lastUsed).TotalSeconds;
 
         timeLeft = boostIntervalMinutes * 60 - TimeDiff;
 
@@ -46,7 +46,7 @@ public class BoostData
         else
         {
             Debug.Log("Something is wrong, last stored time is in the future?");
-            Debug.Log("Stored Date: "+lastUsed+"Current Date: "+DateTime.Now+" time left ="+timeLeft);
+            Debug.Log("Stored Date: "+lastUsed+"Current Date: "+DateTime.UtcNow+" time left ="+timeLeft);
         }
     }
 
