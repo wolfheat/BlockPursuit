@@ -69,6 +69,7 @@ public class PlayerGameData
     public static Action<int> AchievementUnlocked;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
+    public static Action<int> UnlockTier; 
 
     public PlayerGameData()
     {
@@ -148,7 +149,8 @@ public class PlayerGameData
                 AddTiles(missionRewardData.amount);
                 break;
             case RewardType.Unlock:
-                // Unlock Tier HERE
+                //UnlockTier
+                UnlockTier?.Invoke(missionRewardData.amount);
                 break;
         }
     }

@@ -20,4 +20,4 @@ MonoBehaviour:
   missionDescription: Collect you daily tile
   missionRewardData: {fileID: 11400000, guid: ea809b5f17ad3bf45a7009d4f41ee7fe, type: 2}
   lastCompletion:
-    timeString: 2000 - 01 - 01 00:00:00
+    timeString: 

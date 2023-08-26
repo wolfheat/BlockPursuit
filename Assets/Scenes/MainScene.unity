@@ -1973,7 +1973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1807706346779464090, guid: a868ef3f72f2e554ca77aaf7448a6440, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2158429158881311209, guid: a868ef3f72f2e554ca77aaf7448a6440, type: 3}
       propertyPath: ID
@@ -23283,6 +23283,8 @@ MonoBehaviour:
   missionDatas:
   - {fileID: 11400000, guid: 3e8cd062eef7a3547a72d513c892c275, type: 2}
   - {fileID: 11400000, guid: f49b48ad43559994a9222ba1ef83e36a, type: 2}
+  - {fileID: 11400000, guid: cecc52869d2cf52479dd19c31fadfa15, type: 2}
+  - {fileID: 11400000, guid: e33c2ff5b4d51dc4280db74ad7ac82b2, type: 2}
 --- !u!1 &1214416513
 GameObject:
   m_ObjectHideFlags: 0

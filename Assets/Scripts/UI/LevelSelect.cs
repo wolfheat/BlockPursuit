@@ -51,11 +51,13 @@ public class LevelSelect : EscapableBasePanel
     private void OnEnable()
     {
         SavingUtility.LoadingComplete += GenerateButtonLevelsWhenLoadingIsComplete; 
+        PlayerGameData.UnlockTier += UnlockTier; 
     }
     
     private void OnDisable()
     {
         SavingUtility.LoadingComplete -= GenerateButtonLevelsWhenLoadingIsComplete;
+        PlayerGameData.UnlockTier -= UnlockTier;
     }
 
     public void GenerateButtonLevelsWhenLoadingIsComplete()
@@ -277,6 +279,12 @@ public class LevelSelect : EscapableBasePanel
     internal void Unlock()
     {
        infoScreen.UnLock();
+    }
+    
+    public void UnlockTier(int tierID)
+    {
+        Debug.Log("Unlocking tier button "+tierID);
+        tierButtons[tierID].gameObject.SetActive(true);
     }
 
 }

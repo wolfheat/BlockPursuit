@@ -6,6 +6,7 @@ public class MissionData : ScriptableObject
 {
     public int ID;
     public int amount;
+    //public OccuranceType occurance;
     public MissionType type;        
     public Sprite missionLogoSprite;
     public string missionName;
@@ -14,25 +15,31 @@ public class MissionData : ScriptableObject
     public DateInfo lastCompletion;
 
     public bool TimerUnlocked => DateInfo.TimeHasPassed(lastCompletion, type);
+    public bool Completed => lastCompletion.Completed;
+    public float TimePassed => (float)DateTime.UtcNow.Subtract(lastCompletion.GetDateTime()).TotalHours;
 }
 [Serializable]
 public class DateInfo
 {
+    public const string DefaultString = "2000-01-01 00:00:00";
     public string timeString;
-
+    public bool Completed => timeString != DefaultString;
     public static bool TimeHasPassed(DateInfo lastCompletion, MissionType type)
     {
         switch (type)
         {
             case MissionType.Single:
-                return lastCompletion.timeString != "2000 - 01 - 01 00: 00: 00"; // Not set yet make better?
+                return lastCompletion.timeString != DefaultString; // Not set yet make better?
             case MissionType.Hourly:
-                return DateTime.Now.Subtract(lastCompletion.GetDateTime()).TotalHours >= 1;
+                return DateTime.UtcNow.Subtract(lastCompletion.GetDateTime()).TotalHours >= 1;
             case MissionType.Daily:
-                return DateTime.Now.Subtract(lastCompletion.GetDateTime()).TotalHours >= 22;
+                return DateTime.UtcNow.Subtract(lastCompletion.GetDateTime()).TotalHours >= 22;
             case MissionType.Weekly:
-                return DateTime.Now.Subtract(lastCompletion.GetDateTime()).TotalDays >= 7;
-            default: 
+                return DateTime.UtcNow.Subtract(lastCompletion.GetDateTime()).TotalDays >= 7;
+            case MissionType.Pool:
+                return DateTime.UtcNow.Subtract(lastCompletion.GetDateTime()).TotalDays >= 7;
+                break;
+            default:
                 return false;
         }
     }
@@ -55,4 +62,5 @@ public class DateInfo
         timeString = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
     }
 }
-public enum MissionType{Single, Hourly, Daily, Weekly}
+public enum MissionType{Single, Hourly, Daily, Weekly, Pool}
+public enum OccuranceType { Single, Recurring}

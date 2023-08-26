@@ -186,9 +186,13 @@ Jun 2023
 		* Started implementing recieving mission rewards.
 25/8	* Achievements now popup anywere when achieved.
 		* Missions process stored to file
-		
-		//TODO Seems like dateTime is not set correctly for the hourly mission check these values
-		* Make missions that is completed not show up in the list.
+26/8	* Fixed dateTime issue for deactivating missions correctly
+		* Inactive missions does not show up in list but are there and updates to check if they should be reactivated due to timer		
+		* No longer adding completed one-time missions to missionlist
+		* Added Poolmissions to a list
+
+		* Implement pooled mission, have one pooled mission always active?
+		* Implement steps in missions
 
 		* Maybe have a list of recurring missions, incomplete missions and completed
 		
