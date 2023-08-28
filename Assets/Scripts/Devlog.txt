@@ -190,6 +190,12 @@ Jun 2023
 		* Inactive missions does not show up in list but are there and updates to check if they should be reactivated due to timer		
 		* No longer adding completed one-time missions to missionlist
 		* Added Poolmissions to a list
+27/8	* Cleaned up Settings menu code, now only saves if changes are made and when leaving the menu
+		* Rewamp of mission saving code
+
+
+		* Issue with gameobject of mission deactivated, how to fix?
+
 
 		* Implement pooled mission, have one pooled mission always active?
 		* Implement steps in missions

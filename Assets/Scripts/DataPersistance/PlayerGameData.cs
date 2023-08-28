@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public class AchievementData
 {
@@ -7,14 +8,29 @@ public class AchievementData
 
 public class MissionsSaveData
 {
-    public MissionSaveData[] Data { get; set; }
+    public Dictionary<int,MissionSaveData> Data { get; set; } = new Dictionary<int, MissionSaveData>();
 }
 
 public class MissionSaveData
 {
-    public int ID;
-    public int amount;
-    public string latest;
+    public bool everCompleted = false;
+    public bool active = true;
+    public int amount = 0;
+    public DateTime lastCompletion = DateTime.MinValue;
+    public bool LockTimeHasPassed(MissionType type)
+    {
+        switch (type)
+        {
+            case MissionType.Hourly:
+                return DateTime.UtcNow.Subtract(lastCompletion).TotalHours >= 1;
+            case MissionType.Daily:
+                return DateTime.UtcNow.Subtract(lastCompletion).TotalHours >= 22;
+            case MissionType.Weekly:
+                return DateTime.UtcNow.Subtract(lastCompletion).TotalDays >= 7;
+            default:
+                return false;// Does not care about time
+        }
+    }
 }
 
 [Serializable]
@@ -50,7 +66,6 @@ public class PlayerGameData
     // Totals
     public int TotalGoldCollected { get; set; } = 0;
     public int TotalTilesCollected { get; set; } = 0;
-
 
     // Player Mission Saved Data
     public MissionsSaveData MissionsSaveData { get; set; }
@@ -168,17 +183,17 @@ public class GameSettingsData
     public GameEffectsSettings gameEffectsSettings = new GameEffectsSettings(); // Use shake etc
 
     // Action Events
-    public static Action InputSettingUpdate;
+    public static Action GameSettingsUpdated;
 
     // General Settings - methods
     internal void ChangeActiveTouchControl(int id)
     {
         ActiveTouchControl = id;
-        InputSettingUpdate?.Invoke();
+        GameSettingsUpdated?.Invoke();
     }
     internal void ChangeCameraPos(int id)
     {
         CameraPos = id;
-        InputSettingUpdate?.Invoke();
+        GameSettingsUpdated?.Invoke();
     }
 }

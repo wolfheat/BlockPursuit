@@ -1,20 +1,22 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsController : EscapableBasePanel
+public class SettingsController : EscapableBasePanel, IReturnMenuType
 {
     [SerializeField] WaterController waterController;
-    [SerializeField] SoundSliderSettingsController music;
-    [SerializeField] SoundSliderSettingsController SFX;
-    [SerializeField] SoundSliderSettingsController brightness;
+    [SerializeField] SliderSettingsController music;
+    [SerializeField] SliderSettingsController SFX;
+    [SerializeField] SliderSettingsController brightness;
     [SerializeField] Toggle shakeToggle;
     [SerializeField] Toggle waterToggle;
     [SerializeField] TextMeshProUGUI waterText;
     [SerializeField] ConfirmResetScreen confirmResetScreen;
 
-    private bool listenForSoundSliders = true;
+    public ReturnMenuType ReturnMenu { get; set; } = ReturnMenuType.Main;
+
+    private bool allowedToListenForChanges = true;
+    private bool settingsChangedByPlayer = false;
 
     private const float IntensityScale = 4f;
 
@@ -22,24 +24,25 @@ public class SettingsController : EscapableBasePanel
     {
         if (!Enabled()) return;
         Debug.Log("SettingsController ESC");
-        CloseAndStoreSettings();
+        ReturnToMainMenu();
     }
 
     public void UpdatePanelFromStored()
     {
-        // When artificially setting the sliders, make sure it is not registrated as a change by the player wich would trigger an update of the save file.
+        // When artificially setting the sliders, make sure it is not registrated as a change by the player which would trigger an update of the save file.
         Listen(false);
 
         // Opened Settings page place data
         Debug.Log("Setting music and SFX from stored values: "+ SavingUtility.gameSettingsData.soundSettings.MusicVolume+","+ SavingUtility.gameSettingsData.soundSettings.SFXVolume);
-        music.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.soundSettings.MusicVolume);
-        SFX.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.soundSettings.SFXVolume);
-        brightness.SetVolumeFromStoredValue(SavingUtility.gameSettingsData.lightSettings.LightIntensity/ IntensityScale);
+        music.SetSlider(SavingUtility.gameSettingsData.soundSettings.MusicVolume);
+        SFX.SetSlider(SavingUtility.gameSettingsData.soundSettings.SFXVolume);
+        brightness.SetSlider(SavingUtility.gameSettingsData.lightSettings.LightIntensity/ IntensityScale);
         shakeToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.UseShake;
         waterToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.AnimatedWater;
         SetWaterText();
         waterController.SetAnimatedWater(waterToggle.isOn);
         Listen();
+        settingsChangedByPlayer = false; 
     }
 
     private void SetWaterText()
@@ -49,28 +52,17 @@ public class SettingsController : EscapableBasePanel
 
     private void Listen(bool listen = true)
     {
-        listenForSoundSliders = listen;
-        music.listenForChange = listen;
-        SFX.listenForChange = listen;
-        brightness.listenForChange = listen;
+        allowedToListenForChanges = listen;
     }
 
     public void ShakeToggle()
     {
-        if (!Enabled())
-            return;
-
-        Debug.Log("Shake Settings have been changed");
-
+        HandleChangedValues();
         SavingUtility.gameSettingsData.gameEffectsSettings.UseShake = shakeToggle.isOn;
     }
     public void WaterToggle()
     {
-        if (!Enabled())
-            return;
-
-        Debug.Log("Water Settings have been changed");
-
+        HandleChangedValues();
         SavingUtility.gameSettingsData.gameEffectsSettings.AnimatedWater = waterToggle.isOn;
         SetWaterText();
         waterController.SetAnimatedWater(waterToggle.isOn);
@@ -78,23 +70,20 @@ public class SettingsController : EscapableBasePanel
     }
     public void LightSettingsUpdated()
     {
-        if (!Enabled())
-        {
-            Debug.Log("LightSettingsUpdated, but settings panel is not active");
-            return;
-        }
-        Debug.Log("Light Settings have been updated");
+        HandleChangedValues();
         SavingUtility.gameSettingsData.lightSettings.LightIntensity = brightness.SliderValue()* IntensityScale;
         LightController.Instance.SetFromStoredValues();
     }
+
+    private void HandleChangedValues()
+    {
+        if (!allowedToListenForChanges || !Enabled()) return;
+        settingsChangedByPlayer = true;
+    }
+
     public void SoundSettingsUpdated()
     {
-        if (!Enabled())
-        {
-            Debug.Log("SoundSettingsUpdated, but settings panel is not active");
-            return;
-        }
-        if (!listenForSoundSliders) return;
+        HandleChangedValues();
 
         UpdateSavingValues();
     }
@@ -111,17 +100,28 @@ public class SettingsController : EscapableBasePanel
 
     public void OpenResetScreen()
     {
+        SaveSettings();
         TransitionScreen.Instance.StartTransition(GameAction.ShowResetConfirm);
     }
 
-    public ReturnMenuType ReturnMenu { get; set; } = ReturnMenuType.Main;
 
-    public void CloseAndStoreSettings()
+    public void ReturnToMainMenu()
     {
-        SavingUtility.Instance.SaveToFile();
+        SaveSettings();
         TransitionScreen.Instance.StartTransition(GameAction.HideSettings);
+    }
+    public void SaveSettings()
+    {
+        if(settingsChangedByPlayer) 
+            SavingUtility.Instance.SaveSettingsDataToFile();
     }
 
 }
-public enum ReturnMenuType {Main,InGame}
+
+public enum ReturnMenuType { Main, InGame }
+public interface IReturnMenuType
+{    public ReturnMenuType ReturnMenu { get; set; }
+
+}
+
 

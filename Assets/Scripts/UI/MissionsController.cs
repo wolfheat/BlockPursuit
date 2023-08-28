@@ -7,10 +7,13 @@ public class MissionsController : EscapableBasePanel
 {
     [SerializeField] GameObject missionHolder;
     [SerializeField] Mission missionPrefab;
-    [SerializeField] MissionData[] missionDatas;
-    private List<MissionData> pooledMissionDatas = new List<MissionData>();
+    [SerializeField] MissionDefinition[] missionDefinitions;
+
+    //private List<MissionDefinition> pooledMissionDatas = new List<MissionDefinition>();
     private List<Mission> missions = new List<Mission>();
-    private MissionSaveData[] missionSaveData;
+    private List<Mission> timedMissions = new List<Mission>();
+    private List<Mission> pooledMissions = new List<Mission>();
+    private Dictionary<int, MissionSaveData> missionSaveDatas = new Dictionary<int, MissionSaveData>();
     private float updateTimer = 0;
     private const float UpdateTime = 2f;
 
@@ -30,21 +33,10 @@ public class MissionsController : EscapableBasePanel
     private void WriteMissionDataToFile()
     {
         Debug.Log("Writing Mission data to file.");
-        MissionsSaveData missionsDaveData = GenerateMissionSaveData();
-        SavingUtility.playerGameData.MissionsSaveData = missionsDaveData;
-        SavingUtility.Instance.SaveToFile();
+        SavingUtility.playerGameData.MissionsSaveData.Data = missionSaveDatas;
+        SavingUtility.Instance.SavePlayerDataToFile();
     }
 
-    private MissionsSaveData GenerateMissionSaveData()
-    {
-        // Create MissionsSaveData from ingame data
-        MissionsSaveData missionsDaveData = new MissionsSaveData();
-        missionsDaveData.Data = new MissionSaveData[missionDatas.Length];
-
-        for (int i = 0; i < missionDatas.Length; i++)
-            missionsDaveData.Data[i] = new MissionSaveData() { ID = missionDatas[i].ID, amount = missionDatas[i].amount, latest = missionDatas[i].lastCompletion.timeString };
-        return missionsDaveData;
-    }
 
     public override void RequestESC()
     {   
@@ -78,11 +70,17 @@ public class MissionsController : EscapableBasePanel
         Debug.Log("MissionrewardData: "+missionRewardData);
         SavingUtility.playerGameData.HandleMissionReward(missionRewardData);
 
-        int index = missions.IndexOf(mission);
-        missionDatas[index].lastCompletion.SetDateTime(DateTime.UtcNow);
+        // Set new last completiontime
+        missionSaveDatas[mission.GetMissionData().ID].lastCompletion = DateTime.UtcNow;
+        missionSaveDatas[mission.GetMissionData().ID].everCompleted = true;
 
+        mission.SetActive(false);
 
         WriteMissionDataToFile();
+
+        // Handle Mission Deactivation?
+        // just disable should work for all Timed Missions and Single Time missions
+        // How about Pooled missions
 
     }
 
@@ -106,60 +104,82 @@ public class MissionsController : EscapableBasePanel
     private void ForgetAllMissions(InputAction.CallbackContext context)
     {
         Debug.Log(" *** Forgetting Mission Data ***");
-        
-        foreach (var data in missionDatas)
-        {
-            data.lastCompletion.timeString = DateInfo.DefaultString;
-        }
-
+    
         SavingUtility.playerGameData.MissionsSaveData = new MissionsSaveData();
-        SavingUtility.Instance.SaveToFile();
+        SavingUtility.Instance.SavePlayerDataToFile();
     }
 
     private void SetMissionDataFromFile()
     {
-        //Overwrite base data with data from stored values
-        if (SavingUtility.playerGameData.MissionsSaveData == null) return; // If no data object exist skip writing it
-        
-        missionSaveData = SavingUtility.playerGameData.MissionsSaveData.Data;
-        if (missionSaveData is null || missionSaveData.Length == 0) return;
-        foreach (var missionSaveData in missionSaveData)
+        // Overwrite base data with data from stored values if they exists
+        if (SavingUtility.playerGameData.MissionsSaveData != null)
+            missionSaveDatas = SavingUtility.playerGameData.MissionsSaveData.Data;
+
+        // Generate the data that is missing in the file
+        GenerateMissingMissionData();
+    }
+
+    private void GenerateMissingMissionData()
+    {
+        Debug.Log("Generating missing data: MIssion Definitions: "+ missionDefinitions.Length + " Save Data: "+missionSaveDatas.Count);
+        foreach (var missionDefinition in missionDefinitions)
         {
-            foreach (var missionData in missionDatas)
+            // For each defined mission in game
+            // Create a corresponding save data entrance in the dictionary
+            if (!missionSaveDatas.ContainsKey(missionDefinition.ID))
             {
-                if (missionData.ID == missionSaveData.ID)
-                {
-                    missionData.lastCompletion.timeString = missionSaveData.latest;
-                    missionData.amount = missionSaveData.amount;
-                    break;
-                }
+                Debug.Log("Save does not contain key "+ missionDefinition.ID+" Adding it to save");
+                missionSaveDatas.Add(missionDefinition.ID, new MissionSaveData());
+                // If Pool Definition start inactive
+                if (missionDefinition.type == MissionType.Pool) missionSaveDatas[missionDefinition.ID].active = false;
+                continue;
             }
+                Debug.Log("Save contain key "+ missionDefinition.ID+" Value is (time) "+ missionSaveDatas[missionDefinition.ID].lastCompletion.ToString());
         }
     }
+
     private void CreateMissions()
     {
         Debug.Log("Creating missions");
 
-        foreach (var data in missionDatas)
+        foreach (var missionDefinition in missionDefinitions)
         {
-            if (data.type == MissionType.Pool)
-                pooledMissionDatas.Add(data);
-
-            // Check for missions that are one time only and dont add them to the list
-            if (data.type == MissionType.Single && data.lastCompletion.Completed)
-            {
-                // This mission is one time only and already completed do not add to list (keep the data though to keep it savede to file)
-                Debug.Log("Mission Data says it is already completed do not make a mission instance. ");
-                Debug.Log("Completed on "+data.lastCompletion.timeString);
-                Debug.Log("Comnpared to "+DateInfo.DefaultString);
+            if (!missionSaveDatas.ContainsKey(missionDefinition.ID)) {
+                Debug.LogError("Trying to create a mission but save data file for it is missing!");
                 continue;
             }
 
+            MissionSaveData correspondingSave = missionSaveDatas[missionDefinition.ID];
+
+            // Check for missions that are one time only and dont add them to the list
+            if (missionDefinition.type == MissionType.Single && correspondingSave.everCompleted)
+            {
+                // This mission is one time only and already completed do not add to list (keep the data though to keep it savede to file)
+                Debug.Log("Mission Data says it is already completed do not make a mission instance. ");
+                continue;
+            }
+
+            // Generate The mission
             Mission newMission = Instantiate(missionPrefab, missionHolder.transform);
-            newMission.SetData(data);
+            newMission.SetData(missionDefinition, correspondingSave);
             missions.Add(newMission);
+
+            // Add to correct List
+            switch (missionDefinition.type)
+            {
+                case MissionType.Single:
+                case MissionType.Hourly:
+                case MissionType.Daily:
+                case MissionType.Weekly:
+                    timedMissions.Add(newMission);
+                    newMission.CheckForTimedDeactivation();
+                    break;
+                case MissionType.Pool:
+                    pooledMissions.Add(newMission);
+                    break;
+            }
         }
-        UpdateMissions();
+        UpdateTimedMissions();
     }
 
     private void Update()
@@ -172,18 +192,18 @@ public class MissionsController : EscapableBasePanel
         if (missions.Count > 0 && updateTimer <= 0)
         {
             updateTimer = UpdateTime;
-            UpdateMissions();
+            UpdateTimedMissions();
         }
     }
 
-    private void UpdateMissions()
+    private void UpdateTimedMissions()
     {
         //TODO Seems like dateTime is not set correctly for the hourly mission check these values
         //Debug.Log("Checking to set missions active!");
-        foreach(var mission in missions)
+        foreach(var mission in timedMissions)
         {
-            //Debug.Log("Checking to set mission active: "+mission.Name+" = "+ mission.GetMissionData().TimerUnlocked + " hours since last update: "+ mission.GetMissionData().TimePassed);
-            mission.gameObject.SetActive(mission.GetMissionData().TimerUnlocked);
+            mission.Tick();
+        
         }
     }
 }

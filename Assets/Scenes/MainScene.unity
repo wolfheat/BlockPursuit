@@ -1067,7 +1067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 355}
   m_SizeDelta: {x: 0, y: 65.7171}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &62408765
@@ -23280,7 +23280,7 @@ MonoBehaviour:
   mainSelectedButton: {fileID: 1334059487439691432}
   missionHolder: {fileID: 1907312662}
   missionPrefab: {fileID: 113883237605278287, guid: d0127f94cafa6304eaefd73e888261d2, type: 3}
-  missionDatas:
+  missionDefinitions:
   - {fileID: 11400000, guid: 3e8cd062eef7a3547a72d513c892c275, type: 2}
   - {fileID: 11400000, guid: f49b48ad43559994a9222ba1ef83e36a, type: 2}
   - {fileID: 11400000, guid: cecc52869d2cf52479dd19c31fadfa15, type: 2}
@@ -28235,7 +28235,7 @@ PrefabInstance:
       objectReference: {fileID: 859531056}
     - target: {fileID: 1334059487965778430, guid: a237133168feace418b5cc56868ee3e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseAndStoreSettings
+      value: ReturnToMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 1334059487965778430, guid: a237133168feace418b5cc56868ee3e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -37764,7 +37764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1907312664

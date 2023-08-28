@@ -172,7 +172,6 @@ public class UIController : MonoBehaviour
                 confirmResetScreen.HidePanel();
                 settings.ShowPanel();
                 settings.UpdatePanelFromStored();
-                settings.UpdateSavingValues();
                 break;
             case GameAction.ShowSettings:
                 GameSettings.IsPaused = true;

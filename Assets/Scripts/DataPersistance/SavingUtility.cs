@@ -34,7 +34,7 @@ public class SavingUtility : MonoBehaviour
 
     private void OnPlayerSaveDataUpdated()
     {
-        SaveToFile();
+        SavePlayerDataToFile();
     }
 
     public void ResetSaveFile()
@@ -50,17 +50,21 @@ public class SavingUtility : MonoBehaviour
         LoadingComplete?.Invoke(); // Call this to update all ingame values
     }
     
-    public void SaveToFile()
+    public void SavePlayerDataToFile()
     {
         LogSaveInfo();
         IDataService dataService = new JsonDataService();
         if (dataService.SaveData(PlayerDataSaveFile, playerGameData, false))
             Debug.Log("Saved player data in: "+PlayerDataSaveFile);
         else
-            Debug.LogError("Could not save file: PlayerData");
-
+            Debug.LogError("Could not save file: PlayerData");        
+    }
+    
+    public void SaveSettingsDataToFile()
+    {
+        IDataService dataService = new JsonDataService();
         if (dataService.SaveData(GameSettingsDataSaveFile, gameSettingsData, false))
-            Debug.Log("Saved settings data in: "+GameSettingsDataSaveFile);
+            Debug.Log("Saved settings data in: " + GameSettingsDataSaveFile);
         else
             Debug.LogError("Could not save file: GameSettingsData");
     }
@@ -79,18 +83,23 @@ public class SavingUtility : MonoBehaviour
     }
     private void LogInfo()
     {
+        Debug.Log(PlayerLevelDataList_As_ReadableString());
+        Debug.Log(" -- Input Touch Setting: " + gameSettingsData.ActiveTouchControl + " Camera position: " + gameSettingsData.CameraPos);
+        Debug.Log(" -- Boost time saved A: " + playerGameData.AtypeBoostTime + " B: " + playerGameData.BtypeBoostTime);
+        Debug.Log(" -- Volume: " + ((gameSettingsData.soundSettings == null) ? "UNDEFINED" : gameSettingsData.soundSettings.MusicVolume +
+                    " SFX: " + ((gameSettingsData.soundSettings == null) ? "UNDEFINED" : gameSettingsData.soundSettings.SFXVolume)));
+
+    }
+
+    private static string PlayerLevelDataList_As_ReadableString()
+    {
         List<PlayerLevelData> data = playerGameData.PlayerLevelDataList.LevelsList;
         StringBuilder sb = new StringBuilder();
         sb.Append(" -- Levels (");
         foreach (PlayerLevelData levelData in data)
             sb.Append(levelData.levelID);
         sb.Append(")");
-        Debug.Log(sb);
-        Debug.Log(" -- Input Touch Setting: " + gameSettingsData.ActiveTouchControl+" Camera position: "+ gameSettingsData.CameraPos);
-        Debug.Log(" -- Boost time saved A: " + playerGameData.AtypeBoostTime+" B: "+ playerGameData.BtypeBoostTime);
-        Debug.Log(" -- Volume: " + ((gameSettingsData.soundSettings==null)?"UNDEFINED": gameSettingsData.soundSettings.MusicVolume+
-                    " SFX: " + ((gameSettingsData.soundSettings==null)?"UNDEFINED": gameSettingsData.soundSettings.SFXVolume)));
-
+        return sb.ToString();
     }
 
     public IEnumerator LoadFromFile()
@@ -118,11 +127,12 @@ public class SavingUtility : MonoBehaviour
         finally
         {
             // Add listener to update of data to save
-            PlayerLevelDataList.PlayerLevelDataListUpdate += OnPlayerSaveDataUpdated;
-            PlayerGameData.InventoryUpdate += OnPlayerSaveDataUpdated;
-            PlayerGameData.BoostTimeUpdated += OnPlayerSaveDataUpdated;
-            PlayerGameData.AvatarChange += OnPlayerSaveDataUpdated;
-            GameSettingsData.InputSettingUpdate += OnPlayerSaveDataUpdated;
+            PlayerLevelDataList.PlayerLevelDataListUpdate += SavePlayerDataToFile;
+            PlayerGameData.InventoryUpdate += SavePlayerDataToFile;
+            PlayerGameData.BoostTimeUpdated += SavePlayerDataToFile;
+            PlayerGameData.AvatarChange += SavePlayerDataToFile;
+
+            GameSettingsData.GameSettingsUpdated += SaveSettingsDataToFile;
 
             Debug.Log(" -- Loading From File -- FINALLY");
             LogLoadInfo();
