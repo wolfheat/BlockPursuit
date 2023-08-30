@@ -192,8 +192,10 @@ Jun 2023
 		* Added Poolmissions to a list
 27/8	* Cleaned up Settings menu code, now only saves if changes are made and when leaving the menu
 		* Rewamp of mission saving code
+30/8	* New working Mission system
+		* Changed so Timed and Pooled missions have other background
 
-
+		* Have keyboard navigation work for mission screen
 		* Issue with gameobject of mission deactivated, how to fix?
 
 

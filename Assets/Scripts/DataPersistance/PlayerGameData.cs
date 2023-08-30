@@ -81,6 +81,7 @@ public class PlayerGameData
 
     // Action Events
     public static Action InventoryUpdate;
+    public static Action MissionUpdate;
     public static Action<int> AchievementUnlocked;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
@@ -168,6 +169,24 @@ public class PlayerGameData
                 UnlockTier?.Invoke(missionRewardData.amount);
                 break;
         }
+    }
+
+    public void UpdateMissionCompletion(MissionSaveData missionSaveData)
+    {
+        // Set new last completiontime
+        missionSaveData.lastCompletion = DateTime.UtcNow;
+        missionSaveData.everCompleted = true;
+        MissionUpdate?.Invoke();
+    }
+
+    public bool CompleteStepForMission(MissionSaveData missionSaveData,int completeAmount)
+    {
+        missionSaveData.amount++;
+
+        // Invoke if not completed (if completed UpdateMissionCompletion will be called which invokes the save)
+        MissionUpdate?.Invoke();
+
+        return missionSaveData.amount >= completeAmount;
     }
 }
 

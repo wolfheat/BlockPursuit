@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MissionsController : EscapableBasePanel
 {
-    [SerializeField] GameObject missionHolder;
-    [SerializeField] Mission missionPrefab;
+    [SerializeField] private GameObject missionHolder;
+    [SerializeField] Mission[] missionPrefabs;
     [SerializeField] MissionDefinition[] missionDefinitions;
 
     //private List<MissionDefinition> pooledMissionDatas = new List<MissionDefinition>();
@@ -19,6 +18,7 @@ public class MissionsController : EscapableBasePanel
 
     private void OnEnable()
     {
+        //missionHolder = gameObject;
         Mission.OnMissionComplete += GiveMissionReward;
         SavingUtility.LoadingComplete += MissionDataLoaded;
         Inputs.Instance.Controls.UI.C.performed += ForgetAllMissions;
@@ -29,14 +29,6 @@ public class MissionsController : EscapableBasePanel
         Mission.OnMissionComplete -= GiveMissionReward;
         SavingUtility.LoadingComplete -= MissionDataLoaded;
     }
-
-    private void WriteMissionDataToFile()
-    {
-        Debug.Log("Writing Mission data to file.");
-        SavingUtility.playerGameData.MissionsSaveData.Data = missionSaveDatas;
-        SavingUtility.Instance.SavePlayerDataToFile();
-    }
-
 
     public override void RequestESC()
     {   
@@ -49,39 +41,49 @@ public class MissionsController : EscapableBasePanel
         TransitionScreen.Instance.StartTransition(GameAction.HideMissions);
     }
 
-    private void UpdateMission(Mission mission)
+    public void HandleComletedLevel(LevelDefinition level)
     {
-        // Did something that evolved the mission progress 
-        // Update it
-    }
+        Debug.Log("Player completed a level:  Tier: "+level.LevelDiff+" ID: "+level.LevelIndex);
+        Debug.Log("Update Missions from this information");
 
+
+        foreach (var mission in missions)
+        {
+            MissionSaveData saveData = mission.GetMissionSaveData();
+            if (!saveData.active) continue;
+
+            MissionDefinition missionDefinition = mission.GetMissionData();
+
+            if (missionDefinition.completeType == CompleteType.CompleteTier)
+            {
+                if (level.LevelDiff != missionDefinition.tier) continue;
+
+                int completeLevelsOfTier = SavingUtility.playerGameData.PlayerLevelDataList.AmountCompletedOfTier(missionDefinition.tier);
+                
+                // Mission complete type is complete tier, correct tier
+                mission.UpdateSetProgress(completeLevelsOfTier);
+
+            }
+            else if(mission.GetMissionData().completeType == CompleteType.CompleteAnyLevels)
+                mission.UpdateAddProgress(1);
+            
+        }
+
+        //mission.UpdateProgress();
+
+    }
+    
     private void GiveMissionReward(Mission mission)
     {
         Debug.Log("Get mission reward for: "+mission.Name);
-        /* // If want to remove single item and not update entire stack
-        if(mission.GetMissionData().type == MissionType.Single)
-            missions.Remove(mission);
-        else
-            mission.gameObject.SetActive(false);
-        */
-
-        // Mission reward data is not an instance?
-        MissionRewardData missionRewardData = mission.GetMissionRewardData();
-        Debug.Log("MissionrewardData: "+missionRewardData);
-        SavingUtility.playerGameData.HandleMissionReward(missionRewardData);
-
-        // Set new last completiontime
-        missionSaveDatas[mission.GetMissionData().ID].lastCompletion = DateTime.UtcNow;
-        missionSaveDatas[mission.GetMissionData().ID].everCompleted = true;
-
+        
+        // Give the reward
+        SavingUtility.playerGameData.HandleMissionReward(mission.GetMissionRewardData());
+        
+        // Update completionTime (invokes save)
+        SavingUtility.playerGameData.UpdateMissionCompletion(missionSaveDatas[mission.GetMissionData().ID]);
+                
         mission.SetActive(false);
-
-        WriteMissionDataToFile();
-
-        // Handle Mission Deactivation?
-        // just disable should work for all Timed Missions and Single Time missions
-        // How about Pooled missions
-
     }
 
     private void ClearMissions()
@@ -91,16 +93,31 @@ public class MissionsController : EscapableBasePanel
             Destroy(mission.gameObject);
         }
         missions.Clear();
+        timedMissions.Clear();
+        pooledMissions.Clear();
     }
 
     // INITIALIZING MISSIONS
     private void MissionDataLoaded()
     {
+        UpdateTierMissionsGoalAmount();
         SetMissionDataFromFile();
         ClearMissions();
         CreateMissions();
     }
-    
+
+    private void UpdateTierMissionsGoalAmount()
+    {
+        foreach(var missionDefinition in missionDefinitions)
+        {
+            if(missionDefinition.completeType == CompleteType.CompleteTier)
+            {
+                int amountForTier = Levels.LevelDefinitions[missionDefinition.tier].Count;
+                missionDefinition.completeAmount = amountForTier;
+            }
+        }
+    }
+
     private void ForgetAllMissions(InputAction.CallbackContext context)
     {
         Debug.Log(" *** Forgetting Mission Data ***");
@@ -135,6 +152,10 @@ public class MissionsController : EscapableBasePanel
                 continue;
             }
                 Debug.Log("Save contain key "+ missionDefinition.ID+" Value is (time) "+ missionSaveDatas[missionDefinition.ID].lastCompletion.ToString());
+
+
+
+
         }
     }
 
@@ -151,18 +172,35 @@ public class MissionsController : EscapableBasePanel
 
             MissionSaveData correspondingSave = missionSaveDatas[missionDefinition.ID];
 
-            // Check for missions that are one time only and dont add them to the list
+            if(missionDefinition.completeType == CompleteType.CompleteTier)
+                correspondingSave.amount = SavingUtility.playerGameData.PlayerLevelDataList.AmountCompletedOfTier(missionDefinition.tier);
+
+            // Check for missions that are one time only (and completed) and dont add them to the list
             if (missionDefinition.type == MissionType.Single && correspondingSave.everCompleted)
             {
-                // This mission is one time only and already completed do not add to list (keep the data though to keep it savede to file)
+                // This mission is one time only and already completed do not add to list (keep the data though to keep that info saved to file)
                 Debug.Log("Mission Data says it is already completed do not make a mission instance. ");
                 continue;
             }
 
+
+            int prefabVariant = 0;
+            switch (missionDefinition.type)
+            {
+                case MissionType.Single:
+                    prefabVariant = 1;
+                    break;
+                case MissionType.Pool:
+                    prefabVariant = 2;
+                    break;
+            }
+
+            Mission missionPrefab = missionPrefabs[prefabVariant];
+
             // Generate The mission
             Mission newMission = Instantiate(missionPrefab, missionHolder.transform);
             newMission.SetData(missionDefinition, correspondingSave);
-            missions.Add(newMission);
+            missions.Add(newMission); Debug.Log("Generated Mission " + missionDefinition.missionName + ", active:"+correspondingSave.active);
 
             // Add to correct List
             switch (missionDefinition.type)
@@ -172,7 +210,6 @@ public class MissionsController : EscapableBasePanel
                 case MissionType.Daily:
                 case MissionType.Weekly:
                     timedMissions.Add(newMission);
-                    newMission.CheckForTimedDeactivation();
                     break;
                 case MissionType.Pool:
                     pooledMissions.Add(newMission);
@@ -185,11 +222,13 @@ public class MissionsController : EscapableBasePanel
     private void Update()
     {
         // This hinders mission to be updated and notifying player with flashing icon on level select screen that reward is available
-        if (!Enabled()) return;
+        //if (!Enabled()) return;
 
+
+        // Always check this, missions can be unlocked even if panel is inactive
         updateTimer -= Time.deltaTime;
         // Only update every Second?
-        if (missions.Count > 0 && updateTimer <= 0)
+        if (timedMissions.Count > 0 && updateTimer <= 0)
         {
             updateTimer = UpdateTime;
             UpdateTimedMissions();
@@ -198,13 +237,8 @@ public class MissionsController : EscapableBasePanel
 
     private void UpdateTimedMissions()
     {
-        //TODO Seems like dateTime is not set correctly for the hourly mission check these values
-        //Debug.Log("Checking to set missions active!");
         foreach(var mission in timedMissions)
-        {
-            mission.Tick();
-        
-        }
+            mission.CheckForTimedReactivation();
     }
 }
 

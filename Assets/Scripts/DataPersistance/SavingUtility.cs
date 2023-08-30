@@ -32,11 +32,6 @@ public class SavingUtility : MonoBehaviour
         StartCoroutine(LoadFromFile());
     }
 
-    private void OnPlayerSaveDataUpdated()
-    {
-        SavePlayerDataToFile();
-    }
-
     public void ResetSaveFile()
     {
         Debug.Log("Resetting save data, keeps the game settings data");
@@ -129,6 +124,7 @@ public class SavingUtility : MonoBehaviour
             // Add listener to update of data to save
             PlayerLevelDataList.PlayerLevelDataListUpdate += SavePlayerDataToFile;
             PlayerGameData.InventoryUpdate += SavePlayerDataToFile;
+            PlayerGameData.MissionUpdate += SavePlayerDataToFile;
             PlayerGameData.BoostTimeUpdated += SavePlayerDataToFile;
             PlayerGameData.AvatarChange += SavePlayerDataToFile;
 

@@ -34,6 +34,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] GameObject lockPrefab;
     [SerializeField] GameObject bucketPrefab;
 
+    [SerializeField] MissionsController missionsController;
     [SerializeField] RewardedController rewardedController;
     [SerializeField] InterstitialController interstitialController;
 
@@ -67,7 +68,8 @@ public class LevelCreator : MonoBehaviour
         levelComplete = FindObjectOfType<LevelComplete>();
         boostController = FindObjectOfType<BoostController>();
         UI = FindObjectOfType<UIController>();
-        Inputs.Instance.Controls.Main.Q.performed += LevelCompleteCheatButton;
+        Inputs.Instance.Controls.Main.Q.performed += LevelCompleteCheatButton; //TODO: DO  not leave this in game at release
+
     }
     
     public static bool IsEmptyAndCanTakeObject(Vector2Int pos)
@@ -340,12 +342,12 @@ public class LevelCreator : MonoBehaviour
         // Boost does not work anymore for tiles...
 
         //Only if not recieved before = No Stored best time
-            LevelDefinition current = GameSettings.CurrentLevelDefinition;
+        LevelDefinition current = GameSettings.CurrentLevelDefinition;
         int tileGain = 0;
-        if (SavingUtility.playerGameData.PlayerLevelDataList.GetByID(GameSettings.CurrentLevelDefinition.levelID).bestTime == -1)
+        if (SavingUtility.playerGameData.PlayerLevelDataList.GetByID(current.levelID).bestTime == -1)
         {
             Debug.Log("Level does not exist in save, Give Reward");
-            tileGain = GameSettings.CurrentLevelDefinition.completeReward;
+            tileGain = current.completeReward;
 
         }else
             Debug.Log("Level in save, Do Not Give Reward");
@@ -355,6 +357,9 @@ public class LevelCreator : MonoBehaviour
         SavingUtility.playerGameData.AddCoinsAndTiles(coinGain,tileGain);
 
         levelComplete.UpdateStats(coinGain,tileGain);
+
+        // Notify MissionController
+        missionsController.HandleComletedLevel(current);
 
         //Next level
         TransitionScreen.Instance.StartTransition(GameAction.ShowLevelComplete);

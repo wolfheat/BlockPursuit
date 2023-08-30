@@ -29,9 +29,6 @@ public class PlayerLevelDataList
 {
     public List<PlayerLevelData> LevelsList { get; private set; }
 
-    // Can this be removed?
-    private SavingUtility savingUtility;
-
     public static Action PlayerLevelDataListUpdate;
 
     public PlayerLevelDataList()
@@ -118,6 +115,19 @@ public class PlayerLevelDataList
         {
             if (levelID == level.levelID)
             {
+                return level.bestSteps != -1;
+            }
+        }
+        return false;
+    }
+    
+    public bool LevelUnlocked(int levelID)
+    {
+        //Find data with this ID
+        foreach (var level in LevelsList)
+        {
+            if (levelID == level.levelID)
+            {
                 return true;
             }
         }
@@ -142,6 +152,13 @@ public class PlayerLevelDataList
         return new PlayerLevelData() { levelID = -1};
     }
 
+    public int AmountCompletedOfTier(int v)
+    {
+        int amount = 0;
+        foreach(LevelDefinition lvl in Levels.LevelDefinitions[v])
+            if (LevelCompleted(lvl.levelID)) amount++;
+        return amount;
+    }
     public bool CheckTierCompleted(int v)
     {
         foreach(LevelDefinition lvl in Levels.LevelDefinitions[v])

@@ -5,34 +5,29 @@ using UnityEngine.UI;
 
 public class Mission : MonoBehaviour
 {
-    [SerializeField] GameObject missionObject;
     [SerializeField] TextMeshProUGUI missionName;
     [SerializeField] Image missionLogo;
     [SerializeField] TextMeshProUGUI missionDescription;
-    [SerializeField] MissionReward missionReward;
+
+    [SerializeField] GameObject CompleteObject;
+    [SerializeField] GameObject IncompleteObject;
+
+    [SerializeField] MissionReward[] missionRewards;
+
     [SerializeField] MissionDefinition missionData;
+
+    [SerializeField] TextMeshProUGUI progressText;
+    [SerializeField] Slider progressSlider;
+
     private MissionSaveData missionSaveData;
 
     public static Action<Mission> OnMissionComplete;
 
     public string Name => missionName.text;
 
-    public MissionRewardData GetMissionRewardData() => missionReward.MissionRewardData;
+    public MissionRewardData GetMissionRewardData() => missionData.missionRewardData;
     public MissionDefinition GetMissionData() => missionData;
-
-
-    public void Tick()
-    {
-        if (missionSaveData.active) return;
-
-        // Handle unlocking of timed mission
-        bool doUnlock = missionSaveData.LockTimeHasPassed(missionData.type);
-        if (doUnlock)
-        {
-            missionObject.SetActive(true);
-        }
-
-    }
+    public MissionSaveData GetMissionSaveData() => missionSaveData;
 
     public void CompleteMission() => OnMissionComplete?.Invoke(this);
 
@@ -40,26 +35,80 @@ public class Mission : MonoBehaviour
     {
         missionData = data;
         missionSaveData = correspondingSave;
-        missionObject.SetActive(missionSaveData.active);
-        SetText();
+
+        Debug.Log("Mission "+ data.missionName +" is active: "+ missionSaveData.active+" and progressComplete: " + (missionSaveData.amount >= missionData.completeAmount));
+        Initiate();
     }
 
-    private void SetText()
+    private void Initiate()
+    {
+        gameObject.SetActive(missionSaveData.active);
+        //Also set completed or not
+        SetAsProgressOrComplete(missionSaveData.amount >= missionData.completeAmount); // Should make timed free missions completed directly when activated    
+        SetVisualsInfo();
+    }
+
+    private void SetVisualsInfo()
     {
         missionName.text = missionData.missionName;
         missionDescription.text = missionData.missionDescription;
-        missionReward.SetData(missionData.missionRewardData);
         missionLogo.sprite = missionData.missionLogoSprite;
+
+        foreach (var missionReward in missionRewards)
+            missionReward.SetData(missionData.missionRewardData);
+
+        // Define Slider start and max values
+        progressSlider.maxValue = missionData.completeAmount;
+        progressSlider.value = missionSaveData.amount;
+
+        // Update Slider and text
+        UpdateProgressVisuals();
+    }
+
+    public bool UpdateAddProgress(int amount)
+    {
+        return UpdateSetProgress(missionSaveData.amount + amount);
+    }
+
+    public bool UpdateSetProgress(int amount)
+    {
+        missionSaveData.amount = amount;
+
+        if (missionSaveData.amount >= missionData.completeAmount)
+        {
+            SetAsProgressOrComplete();
+            return true;
+        }
+        UpdateProgressVisuals();
+        return false;
+    }
+
+    private void SetAsProgressOrComplete(bool set = true)
+    {
+        IncompleteObject.SetActive(!set);
+        CompleteObject.SetActive(set);
+    }
+
+    private void UpdateProgressVisuals()
+    {
+        progressSlider.value = missionSaveData.amount;
+        progressText.text = progressSlider.value + " / " + progressSlider.maxValue;
     }
 
     public void SetActive(bool activate = true)
     {
-        missionObject.SetActive(activate);
+        gameObject.SetActive(activate);
         missionSaveData.active = activate;
     }
 
-    public void CheckForTimedDeactivation()
+    public void CheckForTimedReactivation()
     {
-        SetActive(missionSaveData.LockTimeHasPassed(missionData.type));        
+        // If already active or time has not yet passed to unlock it
+        if (missionSaveData.active || !missionSaveData.LockTimeHasPassed(missionData.type)) return;
+
+        // Reactivate Mission
+        missionSaveData.active = true;
+        Initiate();
     }
+
 }
