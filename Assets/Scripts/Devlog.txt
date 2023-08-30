@@ -198,14 +198,17 @@ Jun 2023
 		* Keyboard navigation work for mission screen
 		* Fixed scaling for sprites in mission screen
 
-		* Have debug state why save was made
+		* Have debug state why save was made, try to limits saves if possible
 
+		* Make a checkbox on tab when fully completed
 
 		* Make sure unlimited tiers can be added without issues
 
 		* Have completed items in missions notify player by flashing button showing in level select?
 			* Maybe have small numbered circle with amount of completed missions?
 		
+		* Figure out what makes the ad errors in beginning of game when run in unity.
+
 		TEXT FIELDS
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
 		
@@ -216,18 +219,15 @@ Jun 2023
 		* Maybe have completed missions animate/fade away and new missions animate/fade into view?
 		* Acheivements requirements show here with reward as well? or remove achievements?
 		* Keep track of active playtime? Have reward for this?
-			YES - IMPLEMENTED
-			* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
-			* Pooled missions have one pooled mission always active.
+		 - YES - IMPLEMENTED
+		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
+		* Pooled missions have one pooled mission always active.
 		
-		MISSIONS
-		* Get 100gold free every X hour
+		MISSIONS IDEAS
 		* Get 0-5 ads watched to get reward
 
-		* Tiers have different
-			- Backgrounds, Tiletypes?, Ambient Sound, Music
-
-		(remove or implement achievements?) Maybe as addon to missions with rewards for completion?
+		LEVELS
+		* Tiers have different - Backgrounds, Tiletypes?, Ambient Sound, Music
 
 		* Maybe buy
 			Asset Store
@@ -237,8 +237,6 @@ Jun 2023
 			Mobile Game 3 - App & Phone Sound Effects Library - Epic Stock Media - €58.88
 
 
-		* Add more interfaces where needed
-		
 
 		BUGS
 		* player sometimes on mobile keeps running after moving to a tile, why?
@@ -251,6 +249,7 @@ Jun 2023
 		* Fix achievements 
 
 		BEFORE RELEASE
+		* Add more interfaces where needed
 		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?
 		* Need Asset Bundle or Adressables??
 		* Add Statistics / retention / dashboard / Unitys ?
