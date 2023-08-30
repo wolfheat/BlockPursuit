@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "MissionReward", menuName = "New Mission Reward")]
 public class MissionRewardData : ScriptableObject
 {
-    public int amount;
+    public int value;
     public RewardType rewardType;
     public Sprite sprite;
 }

@@ -82,6 +82,7 @@ public class PlayerGameData
     // Action Events
     public static Action InventoryUpdate;
     public static Action MissionUpdate;
+    public static Action<int> MissionCompleted;
     public static Action<int> AchievementUnlocked;
     public static Action BoostTimeUpdated;
     public static Action AvatarChange;
@@ -159,14 +160,14 @@ public class PlayerGameData
         switch (missionRewardData.rewardType)
         {
             case RewardType.Gold:
-                AddCoins(missionRewardData.amount);
+                AddCoins(missionRewardData.value);
                 break;
             case RewardType.Tiles:
-                AddTiles(missionRewardData.amount);
+                AddTiles(missionRewardData.value);
                 break;
             case RewardType.Unlock:
                 //UnlockTier
-                UnlockTier?.Invoke(missionRewardData.amount);
+                UnlockTier?.Invoke(missionRewardData.value);
                 break;
         }
     }
@@ -176,6 +177,8 @@ public class PlayerGameData
         // Set new last completiontime
         missionSaveData.lastCompletion = DateTime.UtcNow;
         missionSaveData.everCompleted = true;
+        missionSaveData.amount = 0;
+        
         MissionUpdate?.Invoke();
     }
 

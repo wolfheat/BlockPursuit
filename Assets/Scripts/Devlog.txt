@@ -194,30 +194,31 @@ Jun 2023
 		* Rewamp of mission saving code
 30/8	* New working Mission system
 		* Changed so Timed and Pooled missions have other background
+		* Fixed some issues with missions, pooling seems to work
+		* Keyboard navigation work for mission screen
+		* Fixed scaling for sprites in mission screen
 
-		* Have keyboard navigation work for mission screen
-		* Issue with gameobject of mission deactivated, how to fix?
+		* Have debug state why save was made
 
 
-		* Implement pooled mission, have one pooled mission always active?
-		* Implement steps in missions
-		* Remake saving loading system?
+		* Make sure unlimited tiers can be added without issues
 
-		* Maybe have a list of recurring missions, incomplete missions and completed
+		* Have completed items in missions notify player by flashing button showing in level select?
+			* Maybe have small numbered circle with amount of completed missions?
 		
 		TEXT FIELDS
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
 		
 		IAP
-		* Create the IAP page?
+		* Create the IAP page? Maybe not to much work?
 		
 		MISSIONS PAGE (better name for it?)
-		* Fill with list of goals to reach. Top goal is granted gold every X hours no timer only visible when available.
-		* Acheivements requirements show here with reward as well, and recieved achievements are updated on achievements page, or remove this page?
+		* Maybe have completed missions animate/fade away and new missions animate/fade into view?
+		* Acheivements requirements show here with reward as well? or remove achievements?
 		* Keep track of active playtime? Have reward for this?
-		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
-		* Fix images so they scale correctly on Mission Icon and Reward
-			* Have completed items in missions notify player by flashing button showing in level select?
+			YES - IMPLEMENTED
+			* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
+			* Pooled missions have one pooled mission always active.
 		
 		MISSIONS
 		* Get 100gold free every X hour
@@ -266,6 +267,7 @@ Jun 2023
 		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
 
 		SOUND
+		* Check if want to change to use audio mixer
 		* Rework of sounds, decide what to use rework needed
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
 		* Need better pick up and place sound combo. Remove or change step sound its terrible.

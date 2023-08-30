@@ -126,7 +126,7 @@ public class LevelComplete : EscapableBasePanel
     private IEnumerator ForceTransformsPositionUpdate()
     {
         //TODO Change this to same method used in setting Information screen size
-        Debug.Log("ForceTransformsPositionUpdate: ");
+        //Debug.Log("ForceTransformsPositionUpdate: ");
         yield return new WaitForSeconds(0.1f);
         improvements[0].GetComponent<RectTransform>().localPosition = GetNewRectPosition(movesText);
         improvements[1].GetComponent<RectTransform>().localPosition = GetNewRectPosition(stepsText);

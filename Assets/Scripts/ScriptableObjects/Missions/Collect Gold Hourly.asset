@@ -15,7 +15,9 @@ MonoBehaviour:
   ID: 1000
   completeAmount: 0
   type: 1
+  completeType: 0
+  tier: 0
   missionLogoSprite: {fileID: 21300000, guid: 13ea444f00b5ae8429b08fce13b67f55, type: 3}
   missionName: Collect Gold
   missionDescription: Collect gold every hour
-  missionRewardData: {fileID: 11400000, guid: 0fdb1b796b8927349a9660c42f308b87, type: 2}
+  missionRewardData: {fileID: 11400000, guid: 89b7a26d4d72d434ab88394aa91f9295, type: 2}

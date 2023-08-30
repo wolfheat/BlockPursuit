@@ -210,7 +210,7 @@ public class UIController : MonoBehaviour
                 startMenu.ShowPanel();
                 break;
             case GameAction.ShowMissions:
-                startMenu.HidePanel();
+                levelSelect.HidePanel();
                 missions.ShowPanel();
                 break;
              case GameAction.HideMissions:

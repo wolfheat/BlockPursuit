@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -27,6 +28,10 @@ public class LevelSelect : EscapableBasePanel
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private TierButton[] tierButtons;
 
+    [SerializeField] private GameObject completedMissionsObject;
+    [SerializeField] private TextMeshProUGUI completedMissionsText;
+
+
     private SavingUtility savingUtility;
 
     private List<LevelButton> easybuttonList = new List<LevelButton>();
@@ -51,15 +56,23 @@ public class LevelSelect : EscapableBasePanel
     private void OnEnable()
     {
         SavingUtility.LoadingComplete += GenerateButtonLevelsWhenLoadingIsComplete; 
+        PlayerGameData.MissionCompleted += UpdateCompletedMissionsTo; 
         PlayerGameData.UnlockTier += UnlockTier; 
     }
     
     private void OnDisable()
     {
         SavingUtility.LoadingComplete -= GenerateButtonLevelsWhenLoadingIsComplete;
+        PlayerGameData.MissionCompleted -= UpdateCompletedMissionsTo; 
         PlayerGameData.UnlockTier -= UnlockTier;
     }
 
+    public void UpdateCompletedMissionsTo(int amt)
+    {
+        completedMissionsObject.SetActive(amt > 0);
+        completedMissionsText.text = amt.ToString();        
+    }
+    
     public void GenerateButtonLevelsWhenLoadingIsComplete()
     {
         Debug.Log("Loaded transmitted");
@@ -129,7 +142,7 @@ public class LevelSelect : EscapableBasePanel
 
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
-        Debug.Log("Updating ScrollRect/Info screen");
+        //Debug.Log("Updating ScrollRect/Info screen");
         // New selected button
         scrollRect.content.localPosition = scrollRect.GetSnapToVerticalPositionToBringChildIntoViewB(button.GetComponent<RectTransform>());
 
@@ -310,14 +323,10 @@ public static class ScrollRectExtensions
         float childBottomPos = -child.localPosition.y + child.rect.height;
         float childTopPos = -child.localPosition.y;
 
-
-        Debug.Log("Child position in content: ("+childTopPos+","+childBottomPos+")"+" parent position/size: ("+parentTopPos+","+parentBottomPos+")");
-        Debug.Log("Contents Y position: "+ contentPosition);
-        // Childs position when taking contents position into account
+       // Childs position when taking contents position into account
         float childBottomPosAdjusted = childBottomPos - contentPosition;
         float childTopPosAdjusted = childTopPos - contentPosition;
-        Debug.Log("Child position in viewPort: ("+ childTopPosAdjusted + ","+ childBottomPosAdjusted + ")");
-
+        
         // If child is outside of viewport scroll it inside
         bool isBelow = childBottomPosAdjusted > instance.viewport.rect.height;
         bool isAbove = childTopPosAdjusted < parentTopPos;

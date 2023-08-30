@@ -1,5 +1,6 @@
 ﻿using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class Mission : MonoBehaviour
 
     public MissionRewardData GetMissionRewardData() => missionData.missionRewardData;
     public MissionDefinition GetMissionData() => missionData;
+    public bool Completed => gameObject.activeSelf && (missionSaveData.amount >= missionData.completeAmount);
     public MissionSaveData GetMissionSaveData() => missionSaveData;
 
     public void CompleteMission() => OnMissionComplete?.Invoke(this);
@@ -40,7 +42,7 @@ public class Mission : MonoBehaviour
         Initiate();
     }
 
-    private void Initiate()
+    public void Initiate()
     {
         gameObject.SetActive(missionSaveData.active);
         //Also set completed or not
@@ -52,8 +54,11 @@ public class Mission : MonoBehaviour
     {
         missionName.text = missionData.missionName;
         missionDescription.text = missionData.missionDescription;
-        missionLogo.sprite = missionData.missionLogoSprite;
 
+        missionLogo.sprite = missionData.missionLogoSprite;
+        //Scale sprite to fit square
+        Sprite sprite = missionData.missionLogoSprite;
+        
         foreach (var missionReward in missionRewards)
             missionReward.SetData(missionData.missionRewardData);
 
@@ -77,6 +82,7 @@ public class Mission : MonoBehaviour
         if (missionSaveData.amount >= missionData.completeAmount)
         {
             SetAsProgressOrComplete();
+            Debug.Log("Mission Returns as Completed");
             return true;
         }
         UpdateProgressVisuals();
@@ -91,14 +97,16 @@ public class Mission : MonoBehaviour
 
     private void UpdateProgressVisuals()
     {
+        Debug.Log("Updating progress visuals to amount = "+missionSaveData.amount);
         progressSlider.value = missionSaveData.amount;
         progressText.text = progressSlider.value + " / " + progressSlider.maxValue;
     }
 
     public void SetActive(bool activate = true)
     {
-        gameObject.SetActive(activate);
         missionSaveData.active = activate;
+        UpdateProgressVisuals();
+        gameObject.SetActive(activate);
     }
 
     public void CheckForTimedReactivation()

@@ -13,8 +13,9 @@ public class MissionReward : MonoBehaviour
 
     public void SetData(MissionRewardData data)
     {
+        
         missionRewardData = data;
-        rewardText.text = missionRewardData.amount.ToString();
+        rewardText.text = (missionRewardData.rewardType == RewardType.Unlock)?((char)(65+missionRewardData.value)).ToString():missionRewardData.value.ToString();
         image.sprite = missionRewardData.sprite;
     }
 }

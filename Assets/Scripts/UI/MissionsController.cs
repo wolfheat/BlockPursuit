@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 public class MissionsController : EscapableBasePanel
 {
@@ -21,7 +24,7 @@ public class MissionsController : EscapableBasePanel
         //missionHolder = gameObject;
         Mission.OnMissionComplete += GiveMissionReward;
         SavingUtility.LoadingComplete += MissionDataLoaded;
-        Inputs.Instance.Controls.UI.C.performed += ForgetAllMissions;
+        //Inputs.Instance.Controls.UI.C.performed += ForgetAllMissions;
     }
 
     private void OnDisable()
@@ -43,9 +46,11 @@ public class MissionsController : EscapableBasePanel
 
     public void HandleComletedLevel(LevelDefinition level)
     {
-        Debug.Log("Player completed a level:  Tier: "+level.LevelDiff+" ID: "+level.LevelIndex);
-        Debug.Log("Update Missions from this information");
+        //Debug.Log("Player completed a level:  Tier: "+level.LevelDiff+" ID: "+level.LevelIndex);
+        //Debug.Log("Update Missions from this information");
 
+        bool didUpdateData = false;
+        bool completedMission = false;
 
         foreach (var mission in missions)
         {
@@ -59,20 +64,39 @@ public class MissionsController : EscapableBasePanel
                 if (level.LevelDiff != missionDefinition.tier) continue;
 
                 int completeLevelsOfTier = SavingUtility.playerGameData.PlayerLevelDataList.AmountCompletedOfTier(missionDefinition.tier);
-                
+
                 // Mission complete type is complete tier, correct tier
-                mission.UpdateSetProgress(completeLevelsOfTier);
+                if(mission.UpdateSetProgress(completeLevelsOfTier))
+                    completedMission = true;
+
+                didUpdateData = true;
 
             }
             else if(mission.GetMissionData().completeType == CompleteType.CompleteAnyLevels)
-                mission.UpdateAddProgress(1);
-            
+            {
+                if(completedMission & mission.UpdateAddProgress(1));
+                    completedMission = true;
+                didUpdateData = true;
+            }
         }
 
-        //mission.UpdateProgress();
-
+        if(didUpdateData)
+            PlayerGameData.MissionUpdate?.Invoke();
+        if (completedMission)
+        {
+            Debug.Log("Completed a mission Update Amount on Level Select");
+            PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
+        }
     }
-    
+
+    private int CompletedMissionsAmount()
+    {
+        int amt = 0;
+        foreach (var mission in missions)
+            if (mission.Completed) amt++;
+        return amt;
+    }
+
     private void GiveMissionReward(Mission mission)
     {
         Debug.Log("Get mission reward for: "+mission.Name);
@@ -82,8 +106,16 @@ public class MissionsController : EscapableBasePanel
         
         // Update completionTime (invokes save)
         SavingUtility.playerGameData.UpdateMissionCompletion(missionSaveDatas[mission.GetMissionData().ID]);
-                
+        Debug.Log("Completing mission and settin amount to 0");
+
         mission.SetActive(false);
+
+        if (mission.GetMissionData().type == MissionType.Pool)
+            UnlockRandomPooledMission();
+
+        PlayerGameData.MissionUpdate?.Invoke();
+
+        PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
     }
 
     private void ClearMissions()
@@ -104,6 +136,7 @@ public class MissionsController : EscapableBasePanel
         SetMissionDataFromFile();
         ClearMissions();
         CreateMissions();
+        PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
     }
 
     private void UpdateTierMissionsGoalAmount()
@@ -217,6 +250,7 @@ public class MissionsController : EscapableBasePanel
             }
         }
         UpdateTimedMissions();
+        UnlockRandomPooledMission();
     }
 
     private void Update()
@@ -239,6 +273,27 @@ public class MissionsController : EscapableBasePanel
     {
         foreach(var mission in timedMissions)
             mission.CheckForTimedReactivation();
+    }
+
+    private void UnlockRandomPooledMission()
+    {
+        if (AnyPooledMissionActive()) return;
+
+        int variants = pooledMissions.Count;
+        int randomVariant = Random.Range(0,variants);
+
+        Mission mission = pooledMissions[randomVariant];
+        mission.SetActive();
+        mission.Initiate();
+        Debug.Log("Activating pooled mission: " + mission.GetMissionData().missionName);
+    }
+
+    private bool AnyPooledMissionActive()
+    {
+        foreach (var mission in pooledMissions)
+            if(mission.gameObject.activeSelf) return true;
+        Debug.Log("No active pooled missions");
+        return false;
     }
 }
 

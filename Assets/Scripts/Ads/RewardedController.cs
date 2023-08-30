@@ -91,10 +91,10 @@ namespace MyGameAds
             else
             {
                 Debug.LogError("Rewarded ad is not ready yet.");
+                // Inform the UI that the ad is not ready.
+                ActivateAdReady(false);
             }
 
-            // Inform the UI that the ad is not ready.
-            ActivateAdReady(false);
         }
 
         public void DestroyAd()

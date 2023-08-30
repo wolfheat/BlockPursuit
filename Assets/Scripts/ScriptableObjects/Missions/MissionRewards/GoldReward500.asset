@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27164b33664a72245a961051ae0fa051, type: 3}
   m_Name: GoldReward500
   m_EditorClassIdentifier: 
-  amount: 500
+  value: 500
   rewardType: 0
   sprite: {fileID: 21300000, guid: 180c8eff00750c141a006ad21f1fbdcc, type: 3}
