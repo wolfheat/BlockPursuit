@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -77,6 +77,7 @@ public class LevelSelect : EscapableBasePanel
     {
         Debug.Log("Loaded transmitted");
         GenerateButtonLevels();
+        UpdateTierCompletionCheckMarks();
         infoScreen.latestButton = buttonLists[0][0];
     }
 
@@ -86,6 +87,25 @@ public class LevelSelect : EscapableBasePanel
         LevelButton buttonToUpdate = buttonLists[tier][lev];
         buttonToUpdate.playerLevelData = data;
         buttonToUpdate.ShowCheckmark();
+
+        UpdateTierCompletionCheckMarks();
+    }
+
+    private void UpdateTierCompletionCheckMarks()
+    {
+        for (int i = 0; i < buttonLists.Length; i++)
+        {
+            bool completed = true;
+            for (int j = 0; j < buttonLists[i].Count; j++)
+            {
+                if (!buttonLists[i][j].IsCompleted)
+                {
+                    completed = false;
+                    break;
+                }
+            }
+            if(completed) tierButtons[i].SetAsCompleted();
+        }
     }
 
     public void ResetLevelSelect()
@@ -109,7 +129,7 @@ public class LevelSelect : EscapableBasePanel
 
     private void GenerateButtonLevels()
     {
-        Debug.Log("Generating Button Levels");
+        //Debug.Log("Generating Button Levels");
 
         for (int i = 0; i < Levels.LevelDefinitions.Length; i++)
         {
@@ -124,7 +144,7 @@ public class LevelSelect : EscapableBasePanel
                 newButton.levelDefinition = Levels.LevelDefinitions[i][j];
 
                 PlayerLevelData levelDef = SavingUtility.playerGameData.PlayerLevelDataList.GetByID(newButton.levelDefinition.levelID);
-                if (levelDef.levelID != -1 || Levels.LevelDefinitions[i][j].unlockRequirements == 0)
+                if (levelDef.levelID != -1 || Levels.LevelDefinitions[i][j].unlockRequirements == 0) // Unlocks levels that is in save or if free
                 {
                     newButton.playerLevelData = levelDef;
                     Levels.LevelDefinitions[i][j].unlocked = true;
@@ -142,9 +162,8 @@ public class LevelSelect : EscapableBasePanel
 
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
-        //Debug.Log("Updating ScrollRect/Info screen");
-        // New selected button
-        scrollRect.content.localPosition = scrollRect.GetSnapToVerticalPositionToBringChildIntoViewB(button.GetComponent<RectTransform>());
+        // Enables keyboard to be used in scrollrect - centering the selected item correctly
+        scrollRect.content.localPosition = scrollRect.GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
 
         infoScreen.UpdateInfo(button);
     }
@@ -306,9 +325,9 @@ public class LevelSelect : EscapableBasePanel
 
 public static class ScrollRectExtensions
 {
-    public static Vector2 GetSnapToVerticalPositionToBringChildIntoViewB(this ScrollRect instance, RectTransform child)
+    // Enables keyboard to be used in scrollrect - centering the selected item correctly
+    public static Vector2 GetSnapToVerticalPositionToBringChildIntoView(this ScrollRect instance, RectTransform child)
     {
-        Debug.Log("-------------------------------");
         Canvas.ForceUpdateCanvases();
         
         // Force to top row
@@ -354,81 +373,5 @@ public static class ScrollRectExtensions
         // THis is Good
         return new Vector2(0, contentPosition + correction);
         //return new Vector2(viewportLocalPosition.x, viewportLocalPosition.y+0);
-    }
-    public static Vector2 GetSnapToVerticalPositionToBringChildIntoView(this ScrollRect instance, RectTransform child)
-    {
-        Debug.Log("-------------------------------");
-        Canvas.ForceUpdateCanvases();
-        Vector2 viewportLocalPosition = instance.viewport.localPosition;
-        Vector2 childLocalPosition = child.localPosition;
-        float padding = instance.content.gameObject.GetComponent<GridLayoutGroup>().padding.top;
-        float correctPosition = 107.15f;
-        float correctedContentPosition = -instance.content.localPosition.y+correctPosition;
-
-        float parentTopPos = 0;
-        float parentBottomPos = instance.viewport.rect.height;
-
-        float childBottomPos = -child.localPosition.y + child.rect.height;
-        float childTopPos = -child.localPosition.y;
-
-        Debug.Log("Child position in content: ("+childTopPos+","+childBottomPos+")"+" parent position/size: ("+parentTopPos+","+parentBottomPos+")");
-        Debug.Log("Contents Y position: "+ correctedContentPosition);
-        // Childs position when taking contents position into account
-        float childBottomPosAdjusted = childBottomPos + correctedContentPosition;
-        float childTopPosAdjusted = childTopPos + correctedContentPosition;
-        Debug.Log("Child position in viewPort: ("+ childTopPosAdjusted + ","+ childBottomPosAdjusted + ")");
-
-        // If child is outside of viewport scroll it inside
-        bool isBelow = childBottomPosAdjusted > instance.viewport.rect.height;
-        bool isAbove = childTopPosAdjusted < parentTopPos;
-        
-        // If below check how much below and move up that amount
-
-
-        //Debug.Log("Below "+isBelow +" childPos: "+childLocalPosition.y+" ScrollHeight: "+instance.viewport.rect.height);
-
-        Vector2 newPos = new Vector2();
-
-        if (isBelow)
-        {
-            float amountBelow = childBottomPosAdjusted - parentBottomPos + padding;
-            Debug.Log("Button is below - Move Scrollrect Up amount: "+amountBelow);
-            
-            newPos = new Vector2(viewportLocalPosition.x, correctPosition + correctedContentPosition + amountBelow);
-
-            Debug.Log("New position for content: "+newPos.y);
-
-            childTopPosAdjusted -= amountBelow;
-            childBottomPosAdjusted -= amountBelow;
-            Debug.Log("Child supposed to have this position in viewPort after adjustment: ");
-            Debug.Log("(" + childTopPosAdjusted + ","+ childBottomPosAdjusted + ") Should be within [0-"+ parentBottomPos+"]");
-
-            //newPos = new Vector2(viewportLocalPosition.x, -viewportLocalPosition.y + amountBelow);
-            return newPos;
-        }
-        if (isAbove)
-        {
-            float amountBelow = childTopPosAdjusted - parentBottomPos - padding;
-            Debug.Log("Button is above - Move Scrollrect Up amount: " + amountBelow+" padding: "+ padding);
-            newPos = new Vector2(viewportLocalPosition.x, correctPosition + amountBelow);
-            Debug.Log("New position for content: " + newPos.y);
-
-        }
-        Debug.Log("Do not move scrollrect");
-        Debug.Log("ViewPort Local Position: "+viewportLocalPosition);
-        Debug.Log("ChildLocal position: "+childLocalPosition);
-
-        return new Vector2(viewportLocalPosition.x, correctPosition + correctedContentPosition + 0);
-    }
-    public static Vector2 GetSnapToPositionToBringChildIntoView(this ScrollRect instance, RectTransform child)
-    {
-        Canvas.ForceUpdateCanvases();
-        Vector2 viewportLocalPosition = instance.viewport.localPosition;
-        Vector2 childLocalPosition = child.localPosition;
-        Vector2 result = new Vector2(
-            0 - (viewportLocalPosition.x + childLocalPosition.x),
-            0 - (viewportLocalPosition.y + childLocalPosition.y)
-        );
-        return result;
     }
 }

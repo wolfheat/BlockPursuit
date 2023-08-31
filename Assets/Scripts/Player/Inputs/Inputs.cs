@@ -6,6 +6,8 @@ public class Inputs : MonoBehaviour
     //Singelton
     public static Inputs Instance { get; private set; }
     public PlayerControls Controls { get; private set; }
+
+
     public bool PointerOverUI { get; private set; }
 
     private void Update()
@@ -22,11 +24,10 @@ public class Inputs : MonoBehaviour
         }
 
         Instance = this;
-        Controls = new PlayerControls();
-        
     }
     private void OnEnable()
     {
+        if(Controls == null) Controls = new PlayerControls();
         Controls.Enable();
     }
 

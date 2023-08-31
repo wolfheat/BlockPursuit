@@ -55,20 +55,16 @@ public class AchievementsController : EscapableBasePanel
     }
     private void SetAchievementsFromData()
     {
-        Debug.Log(" -- Load Achievements values from file -- ");
+        //Debug.Log(" -- Load Achievements values from file -- ");
         achievements = SavingUtility.playerGameData.AchievementData;
 
         if (achievements == null)
         {
-            Debug.Log("Achievements null");
+            Debug.LogWarning("Achievements null, initiate new achievemnts data array and initiate save to file");
             // This handles initiation of the array
             // (This should never happen for players since if there is no save file yet the entire save is initialized in saveutility catch)
             achievements = new AchievementData() { Data = new bool[achieventGraphics.Count] };
             SavingUtility.playerGameData.AchievementData = achievements;
-        }
-        else
-        {
-            Debug.Log("Achievements not null");
         }
 
         UpdateGraphics();

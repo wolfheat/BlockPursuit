@@ -3,7 +3,7 @@ using UnityEngine;
 public class InfoButton : MonoBehaviour
 {
     [SerializeField] InfoData infoData;
-    [SerializeField] GameObject button;
+    [SerializeField] BasePanel sourcePanel;
     private InfoPopup infoPopup;
 
     private void Start()
@@ -15,10 +15,10 @@ public class InfoButton : MonoBehaviour
     {
         if(infoData == null)
         {
-            infoPopup.ShowInfo(new InfoData() {informationText = " NO INFO SET" },gameObject);
+            infoPopup.ShowInfo(new InfoData() {informationText = " NO INFO SET" }, sourcePanel);
             return;
         }
-        infoPopup.ShowInfo(infoData, gameObject);
+        infoPopup.ShowInfo(infoData, sourcePanel);
     }
 
 }

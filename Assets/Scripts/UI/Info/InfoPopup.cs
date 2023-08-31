@@ -2,18 +2,17 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InfoPopup : BasePanel
 {
     [SerializeField] TextMeshProUGUI infoField;
     [SerializeField] RectTransform infoContentObject;
-    private GameObject button;
+    private ISetSelected sourcePanel;
     private const float PopupTextVerticalMargins = 200f;
 
-    internal void ShowInfo(InfoData infoData, GameObject selectedButton)
+    internal void ShowInfo(InfoData infoData, ISetSelected source)
     {
-        button = selectedButton;
+        sourcePanel = source;
         infoField.text = infoData.informationText;
 
         StartCoroutine(DetermineSize());
@@ -25,7 +24,7 @@ public class InfoPopup : BasePanel
     {   
         HidePanel();
 
-        EventSystem.current.SetSelectedGameObject(button.gameObject);
+        sourcePanel.SetSelected();
     }
 
     private IEnumerator DetermineSize()

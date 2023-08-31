@@ -18,7 +18,7 @@ public class BoostData
     
     public void SetNewUsedTime(DateTime t)
     {
-        Debug.Log("Updating Last Used Time for: "+type+" from: "+lastUsed+" to: "+t);
+        //Debug.Log("Updating Last Used Time for: "+type+" from: "+lastUsed+" to: "+t);
         lastUsed = t;
         Update();
     }

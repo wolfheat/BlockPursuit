@@ -39,6 +39,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] InterstitialController interstitialController;
 
     [SerializeField] List<Section> sectionPrefabs = new List<Section>();
+    [SerializeField] TierButton[] tierButtons;
 
     LevelComplete levelComplete;
     BoostController boostController;
@@ -350,10 +351,11 @@ public class LevelCreator : MonoBehaviour
             tileGain = current.completeReward;
 
         }else
-            Debug.Log("Level in save, Do Not Give Reward");
+            Debug.Log("Level in save, Do Not Give Tile Reward");
 
         int coinGain = (int)(GameSettings.CoinDefaultGain * (1f + (boostController.B_BoostData.active ? boostController.B_BoostData.boostMultiplier : 0)));
 
+        Debug.Log("SAVE INVOKE - ADDING COINS AND TILES");
         SavingUtility.playerGameData.AddCoinsAndTiles(coinGain,tileGain);
 
         levelComplete.UpdateStats(coinGain,tileGain);
@@ -364,7 +366,7 @@ public class LevelCreator : MonoBehaviour
         //Next level
         TransitionScreen.Instance.StartTransition(GameAction.ShowLevelComplete);
     }
-
+        
     public void ClearLevel()
     {
         for (int i = sections.Count-1; i >= 0; i--)

@@ -49,7 +49,7 @@ public class BoostController : EscapableBasePanel
     }
     protected void UpdateBoostDataLoading()
     {
-        Debug.Log("UpdateBoostData from Loading Complete");
+        //Debug.Log("UpdateBoostData from Loading Complete");
         UpdateBoostData();
     }
     protected void UpdateBoostData()
@@ -80,8 +80,11 @@ public class BoostController : EscapableBasePanel
         Debug.Log("BoostController Return from ad, Gain focus");
         SetSelected();
 
+
+        Debug.Log("SAVE INVOKE - ANY BOOST IS UPDATED");
+
         //If first reward is allready active activate second reward?
-        if(!A_BoostData.active)
+        if (!A_BoostData.active)
             // Set a new Boost Time
             SavingUtility.playerGameData.SetABoostTime(DateTime.UtcNow);
         else if (!B_BoostData.active)

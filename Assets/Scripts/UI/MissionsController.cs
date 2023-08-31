@@ -80,11 +80,13 @@ public class MissionsController : EscapableBasePanel
             }
         }
 
-        if(didUpdateData)
+        if (didUpdateData)
+        {
+            Debug.Log("SAVE INVOKE - ANY ACTIVE MISSION DATA UPDATED");
             PlayerGameData.MissionUpdate?.Invoke();
+        }
         if (completedMission)
         {
-            Debug.Log("Completed a mission Update Amount on Level Select");
             PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
         }
     }
@@ -156,6 +158,7 @@ public class MissionsController : EscapableBasePanel
         Debug.Log(" *** Forgetting Mission Data ***");
     
         SavingUtility.playerGameData.MissionsSaveData = new MissionsSaveData();
+        Debug.Log("SAVE CALLED - FORGETTING ALL MISSIONS");
         SavingUtility.Instance.SavePlayerDataToFile();
     }
 
@@ -171,7 +174,7 @@ public class MissionsController : EscapableBasePanel
 
     private void GenerateMissingMissionData()
     {
-        Debug.Log("Generating missing data: MIssion Definitions: "+ missionDefinitions.Length + " Save Data: "+missionSaveDatas.Count);
+        Debug.Log("Generating missing data: Amount of Missions Defined in Game: "+ missionDefinitions.Length + " Amount stored in Save Data: "+missionSaveDatas.Count);
         foreach (var missionDefinition in missionDefinitions)
         {
             // For each defined mission in game
@@ -184,11 +187,7 @@ public class MissionsController : EscapableBasePanel
                 if (missionDefinition.type == MissionType.Pool) missionSaveDatas[missionDefinition.ID].active = false;
                 continue;
             }
-                Debug.Log("Save contain key "+ missionDefinition.ID+" Value is (time) "+ missionSaveDatas[missionDefinition.ID].lastCompletion.ToString());
-
-
-
-
+            Debug.Log("Save contains ID: "+ missionDefinition.ID+" with latest completion: "+ missionSaveDatas[missionDefinition.ID].lastCompletion.ToString());
         }
     }
 
@@ -233,7 +232,7 @@ public class MissionsController : EscapableBasePanel
             // Generate The mission
             Mission newMission = Instantiate(missionPrefab, missionHolder.transform);
             newMission.SetData(missionDefinition, correspondingSave);
-            missions.Add(newMission); Debug.Log("Generated Mission " + missionDefinition.missionName + ", active:"+correspondingSave.active);
+            missions.Add(newMission); //Debug.Log("Generated Mission " + missionDefinition.missionName + ", active:"+correspondingSave.active);
 
             // Add to correct List
             switch (missionDefinition.type)

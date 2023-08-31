@@ -9834,6 +9834,10 @@ PrefabInstance:
       propertyPath: infoData
       value: 
       objectReference: {fileID: 11400000, guid: c13b778fc4df6614183b7afb9072388b, type: 2}
+    - target: {fileID: 1745710486908877397, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: sourcePanel
+      value: 
+      objectReference: {fileID: 859531056}
     - target: {fileID: 7877195872566029387, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
       propertyPath: m_Name
       value: InfoButtonSquare
@@ -13626,6 +13630,10 @@ PrefabInstance:
       propertyPath: infoData
       value: 
       objectReference: {fileID: 11400000, guid: b40d2065b55db6a4f9ab17f87ea27b91, type: 2}
+    - target: {fileID: 1745710486908877397, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: sourcePanel
+      value: 
+      objectReference: {fileID: 819952016}
     - target: {fileID: 2000310997892864616, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0
@@ -25229,6 +25237,10 @@ PrefabInstance:
       propertyPath: infoData
       value: 
       objectReference: {fileID: 11400000, guid: 47a53b3e05a51f24ba355c40445b8018, type: 2}
+    - target: {fileID: 1745710486908877397, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
+      propertyPath: sourcePanel
+      value: 
+      objectReference: {fileID: 1095021284}
     - target: {fileID: 7877195872566029387, guid: 416f48c31dd707d4aaca1a6a0c7c6345, type: 3}
       propertyPath: m_Name
       value: InfoButtonSquare

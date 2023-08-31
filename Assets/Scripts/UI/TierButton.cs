@@ -9,6 +9,7 @@ public class TierButton : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] Color HighLightColor;
     [SerializeField] Color DiffuseColor;
+    [SerializeField] GameObject checkmark;
 
     public int ID = 0;
 
@@ -20,6 +21,11 @@ public class TierButton : MonoBehaviour
     public void HighLight(bool set = true)
     {
         image.color = set?HighLightColor:DiffuseColor;
+    }
+    
+    public void SetAsCompleted()
+    {
+        checkmark.SetActive(true);
     }
 
 }

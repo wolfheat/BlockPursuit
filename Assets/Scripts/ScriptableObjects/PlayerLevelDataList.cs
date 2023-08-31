@@ -39,7 +39,6 @@ public class PlayerLevelDataList
     
     public PlayerLevelData AddNewOrRetrieveLevel(int ID)
     {
-        Debug.Log("Adding new Level data to save file");
 
         if (LevelExists(ID,out int index))
         {
@@ -49,6 +48,7 @@ public class PlayerLevelDataList
         {
             PlayerLevelData data = new PlayerLevelData(ID);
             LevelsList.Add(data);
+            Debug.Log("SAVE INVOKE - NEW LEVEL ADDED TO SAVE");
             PlayerLevelDataListUpdate?.Invoke(); // Dispatch Event and save data to file if level is added to the level-list of data
             return data;
         }
@@ -81,6 +81,7 @@ public class PlayerLevelDataList
             if (hasUpdatedData)
             {
                 LevelsList[index] = foundLevel;
+                Debug.Log("SAVE INVOKE - LEVEL DATA UPDATED");
                 PlayerLevelDataListUpdate?.Invoke();
             }
             // Place the modified level into the list

@@ -18,6 +18,6 @@ MonoBehaviour:
   completeType: 0
   tier: 0
   missionLogoSprite: {fileID: 21300000, guid: b83898f39d73ce94d8a85d51b3dfb771, type: 3}
-  missionName: Complete 10 levels
+  missionName: 10 levels
   missionDescription: Complete any 10 levels
   missionRewardData: {fileID: 11400000, guid: 0fdb1b796b8927349a9660c42f308b87, type: 2}

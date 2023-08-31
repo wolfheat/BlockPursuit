@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Canvas))]
-public class BasePanel : MonoBehaviour
+public class BasePanel : MonoBehaviour, ISetSelected
 {
 
     [SerializeField] private GameObject panel;
@@ -32,7 +32,6 @@ public class BasePanel : MonoBehaviour
     {
         if (canvas == null)
         {
-            Debug.Log("No available canvas");
             canvas = GetComponent<Canvas>();
             if(canvas == null)
             {
@@ -56,4 +55,9 @@ public class BasePanel : MonoBehaviour
     {
         canvas = GetComponent<Canvas>();
     }
+}
+
+public interface ISetSelected
+{
+    public void SetSelected();
 }

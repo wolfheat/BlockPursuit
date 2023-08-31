@@ -38,7 +38,7 @@ public class Mission : MonoBehaviour
         missionData = data;
         missionSaveData = correspondingSave;
 
-        Debug.Log("Mission "+ data.missionName +" is active: "+ missionSaveData.active+" and progressComplete: " + (missionSaveData.amount >= missionData.completeAmount));
+        Debug.Log("Mission ["+ data.missionName +"] is active: "+ missionSaveData.active+" and progressComplete: " + (missionSaveData.amount >= missionData.completeAmount));
         Initiate();
     }
 
@@ -97,7 +97,7 @@ public class Mission : MonoBehaviour
 
     private void UpdateProgressVisuals()
     {
-        Debug.Log("Updating progress visuals to amount = "+missionSaveData.amount);
+        //Debug.Log("Updating progress visuals to amount = "+missionSaveData.amount);
         progressSlider.value = missionSaveData.amount;
         progressText.text = progressSlider.value + " / " + progressSlider.maxValue;
     }

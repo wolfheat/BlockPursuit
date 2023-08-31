@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public enum DifficultLevel{Easy,Medium,Hard,ABC}
 
@@ -16,9 +15,11 @@ public class LevelButton : MonoBehaviour, ISelectHandler
     [SerializeField] GameObject checkmark;
     [SerializeField] GameObject lockObject;
 
+    public bool IsCompleted => checkmark.activeSelf;
+
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("Selecting level button, updating playerdata.time to "+playerLevelData.bestTime);
+        //Debug.Log("Selecting level button, updating playerdata.time to "+playerLevelData.bestTime);
         FindObjectOfType<LevelSelect>().UpdateLatestSelectedInfo(this);
     }
 

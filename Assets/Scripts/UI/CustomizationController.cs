@@ -82,6 +82,7 @@ public class CustomizationController : EscapableBasePanel
         if (didChange)
         {
             ChangePlayerAvatar(newType);
+            Debug.Log("SAVE INVOKE - AVATAR CHANGED");
             SavingUtility.playerGameData.SetCharacter(newType);
             oldType = newType;
         }

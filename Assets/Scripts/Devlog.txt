@@ -197,18 +197,13 @@ Jun 2023
 		* Fixed some issues with missions, pooling seems to work
 		* Keyboard navigation work for mission screen
 		* Fixed scaling for sprites in mission screen
-
-		* Have debug state why save was made, try to limits saves if possible
-
-		* Make a checkbox on tab when fully completed
+31/8	* Added Debug telling whats calling it (to limit the calls later)
+		* Made Closing InfoText call SetSelected for the parent menu (need to set this in button though, is there a better solution?)
+		* Added checkmarks for tabs showing when completed (comfirmed)
+		* Start Error issue seems to be because Input systems Controls did not exist in OnEnable.
 
 		* Make sure unlimited tiers can be added without issues
-
-		* Have completed items in missions notify player by flashing button showing in level select?
-			* Maybe have small numbered circle with amount of completed missions?
 		
-		* Figure out what makes the ad errors in beginning of game when run in unity.
-
 		TEXT FIELDS
 		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
 		
