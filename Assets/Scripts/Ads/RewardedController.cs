@@ -85,6 +85,7 @@ namespace MyGameAds
                                             reward.Type));
                     FindObjectOfType<LevelComplete>().GetReward();
 
+                    SavingUtility.playerGameData.AddWatchedAds(1);
 
                 });
             }

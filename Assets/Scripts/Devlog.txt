@@ -201,6 +201,7 @@ Jun 2023
 		* Made Closing InfoText call SetSelected for the parent menu (need to set this in button though, is there a better solution?)
 		* Added checkmarks for tabs showing when completed (comfirmed)
 		* Start Error issue seems to be because Input systems Controls did not exist in OnEnable.
+1/9		* Added saving for minutes played and ads watched
 
 		* Make sure unlimited tiers can be added without issues
 		
@@ -213,10 +214,6 @@ Jun 2023
 		MISSIONS PAGE (better name for it?)
 		* Maybe have completed missions animate/fade away and new missions animate/fade into view?
 		* Acheivements requirements show here with reward as well? or remove achievements?
-		* Keep track of active playtime? Have reward for this?
-		 - YES - IMPLEMENTED
-		* Able to claim free gold button spawn ever hour/day(22h)? Use a stored Timer in save for this.		
-		* Pooled missions have one pooled mission always active.
 		
 		MISSIONS IDEAS
 		* Get 0-5 ads watched to get reward
@@ -230,8 +227,6 @@ Jun 2023
 			Pro Sound Collection - Gamemaster Audio - €24.45
 			Game Makers Sound Effects Kit 3 - Epic Stock Media - €163.67
 			Mobile Game 3 - App & Phone Sound Effects Library - Epic Stock Media - €58.88
-
-
 
 		BUGS
 		* player sometimes on mobile keeps running after moving to a tile, why?

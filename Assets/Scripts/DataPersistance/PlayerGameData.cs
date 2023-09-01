@@ -62,6 +62,8 @@ public class PlayerGameData
     public int Coins { get; set; } = 100;
     public DateTime AtypeBoostTime { get; set; }
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
+    public int PlayTime { get; set; } = 0;
+    public int AdsWatched { get; set; } = 0;
 
     // Totals
     public int TotalGoldCollected { get; set; } = 0;
@@ -90,8 +92,6 @@ public class PlayerGameData
 
     public PlayerGameData()
     {
-        Tiles = 0;
-        Coins = 100;
         PlayerLevelDataList = new PlayerLevelDataList();
         AchievementData = new AchievementData();
     }
@@ -190,6 +190,15 @@ public class PlayerGameData
         MissionUpdate?.Invoke();
 
         return missionSaveData.amount >= completeAmount;
+    }
+
+    public void AddWatchedAds(int amt)
+    {
+        AdsWatched += amt;
+    }
+    public void AddPlayTimeMinutes(int amt)
+    {
+        PlayTime += amt;
     }
 }
 

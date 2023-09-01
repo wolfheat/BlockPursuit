@@ -133,7 +133,18 @@ public class SavingUtility : MonoBehaviour
             Debug.Log(" -- Loading From File -- FINALLY");
             LogLoadInfo();
             LoadingComplete.Invoke();
+
+            StartCoroutine(KeepTrackOfPlaytime());
+
         }
     }
 
+    private IEnumerator KeepTrackOfPlaytime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(60f);
+            playerGameData.AddPlayTimeMinutes(1);
+        }
+    }
 }
