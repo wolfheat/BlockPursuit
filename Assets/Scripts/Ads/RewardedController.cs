@@ -85,12 +85,13 @@ namespace MyGameAds
                                             reward.Type));
                     FindObjectOfType<LevelComplete>().GetReward();
 
-                    SavingUtility.playerGameData.AddWatchedAds(1);
+                    SavingUtility.playerGameData.AddWatchedAds();
 
                 });
             }
             else
             {
+                //TODO This error is reached fix (Not reached in result screen why)
                 Debug.LogError("Rewarded ad is not ready yet.");
                 // Inform the UI that the ad is not ready.
                 ActivateAdReady(false);

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "MissionData", menuName = "New Mission")]
 public class MissionDefinition : ScriptableObject
@@ -18,4 +16,4 @@ public class MissionDefinition : ScriptableObject
 }
 
 public enum MissionType{Single, Hourly, Daily, Weekly, Pool}
-public enum CompleteType { CompleteAnyLevels, CompleteTier}
+public enum CompleteType { CompleteAnyLevels, CompleteTier, WatchAds, PlayTime}

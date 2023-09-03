@@ -29,6 +29,7 @@ public class Mission : MonoBehaviour
     public MissionRewardData GetMissionRewardData() => missionData.missionRewardData;
     public MissionDefinition GetMissionData() => missionData;
     public bool Completed => gameObject.activeSelf && (missionSaveData.amount >= missionData.completeAmount);
+    public bool IsActive => gameObject.activeSelf && missionSaveData.active;
     public MissionSaveData GetMissionSaveData() => missionSaveData;
 
     public void CompleteMission() => OnMissionComplete?.Invoke(this);

@@ -23,8 +23,8 @@ public class InfoPopup : BasePanel
     public void HideInfo()
     {   
         HidePanel();
-
-        sourcePanel.SetSelected();
+        
+        sourcePanel?.SetSelected();
     }
 
     private IEnumerator DetermineSize()

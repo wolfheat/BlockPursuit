@@ -202,7 +202,9 @@ Jun 2023
 		* Added checkmarks for tabs showing when completed (comfirmed)
 		* Start Error issue seems to be because Input systems Controls did not exist in OnEnable.
 1/9		* Added saving for minutes played and ads watched
-3/9		* Minor  
+3/9		* Added Watch ad missions
+
+		* Finalize implementing time played missions
 
 		* Make sure unlimited tiers can be added without issues
 		

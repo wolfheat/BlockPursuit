@@ -84,6 +84,7 @@ public class PlayerGameData
     // Action Events
     public static Action InventoryUpdate;
     public static Action MissionUpdate;
+    public static Action AdsWatchedAdded;
     public static Action<int> MissionCompleted;
     public static Action<int> AchievementUnlocked;
     public static Action BoostTimeUpdated;
@@ -192,9 +193,10 @@ public class PlayerGameData
         return missionSaveData.amount >= completeAmount;
     }
 
-    public void AddWatchedAds(int amt)
+    public void AddWatchedAds()
     {
-        AdsWatched += amt;
+        AdsWatched++;
+        AdsWatchedAdded?.Invoke();
     }
     public void AddPlayTimeMinutes(int amt)
     {

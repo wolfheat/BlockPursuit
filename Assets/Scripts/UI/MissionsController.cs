@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public class MissionsController : EscapableBasePanel
@@ -24,6 +22,7 @@ public class MissionsController : EscapableBasePanel
         //missionHolder = gameObject;
         Mission.OnMissionComplete += GiveMissionReward;
         SavingUtility.LoadingComplete += MissionDataLoaded;
+        PlayerGameData.AdsWatchedAdded += HandleWatchedAd;
         //Inputs.Instance.Controls.UI.C.performed += ForgetAllMissions;
     }
 
@@ -31,6 +30,7 @@ public class MissionsController : EscapableBasePanel
     {
         Mission.OnMissionComplete -= GiveMissionReward;
         SavingUtility.LoadingComplete -= MissionDataLoaded;
+        PlayerGameData.AdsWatchedAdded -= HandleWatchedAd;
     }
 
     public override void RequestESC()
@@ -75,6 +75,38 @@ public class MissionsController : EscapableBasePanel
             else if(mission.GetMissionData().completeType == CompleteType.CompleteAnyLevels)
             {
                 if(completedMission & mission.UpdateAddProgress(1));
+                    completedMission = true;
+                didUpdateData = true;
+            }
+        }
+
+        if (didUpdateData)
+        {
+            Debug.Log("SAVE INVOKE - ANY ACTIVE MISSION DATA UPDATED");
+            PlayerGameData.MissionUpdate?.Invoke();
+        }
+        if (completedMission)
+        {
+            PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
+        }
+    }
+    
+    public void HandleWatchedAd()
+    {
+        bool didUpdateData = false;
+        bool completedMission = false;
+
+        foreach (var mission in missions)
+        {
+            if (!mission.IsActive) continue;
+            
+            MissionDefinition missionDefinition = mission.GetMissionData();
+
+            if (missionDefinition.completeType == CompleteType.WatchAds)
+            {
+                if(missionDefinition.type == MissionType.Pool && mission.UpdateSetProgress(SavingUtility.playerGameData.AdsWatched))
+                    completedMission = true;
+                if (missionDefinition.type == MissionType.Single && mission.UpdateAddProgress(1))
                     completedMission = true;
                 didUpdateData = true;
             }
@@ -181,7 +213,7 @@ public class MissionsController : EscapableBasePanel
             // Create a corresponding save data entrance in the dictionary
             if (!missionSaveDatas.ContainsKey(missionDefinition.ID))
             {
-                Debug.Log("Save does not contain key "+ missionDefinition.ID+" Adding it to save");
+                Debug.Log("Save does not contain key "+ missionDefinition.ID+" Adding it to save: Missiondefinition is: " + missionDefinition.type);
                 missionSaveDatas.Add(missionDefinition.ID, new MissionSaveData());
                 // If Pool Definition start inactive
                 if (missionDefinition.type == MissionType.Pool) missionSaveDatas[missionDefinition.ID].active = false;
