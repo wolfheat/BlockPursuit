@@ -19,6 +19,8 @@ public class LevelComplete : EscapableBasePanel
     [SerializeField] GameObject[] personalBests;
     [SerializeField] TextMeshProUGUI[] improvements;
 
+    [SerializeField] GameObject adHolder;
+
     LevelSelect levelSelect;
     private int latestCoins;
 
@@ -66,6 +68,8 @@ public class LevelComplete : EscapableBasePanel
         loadingAdsController.ShowPanel();
         Debug.Log("LoadBoostClicked");
         rewardedController.LoadAd();
+        // Remove possibility to call ad
+        adHolder.SetActive(false);
     }
 
     internal void UpdateStats(int coins, int tiles)
@@ -113,6 +117,9 @@ public class LevelComplete : EscapableBasePanel
         SetSelected();
 
         CheckForAchievementsGained();
+
+        // Make it possible to call ad
+        adHolder.SetActive(true);
     }
 
     private void CheckForAchievementsGained()
@@ -176,6 +183,8 @@ public class LevelComplete : EscapableBasePanel
         coinGainText.text = (latestCoins*2).ToString();
         SavingUtility.playerGameData.AddCoins(latestCoins);
         SoundController.Instance.PlaySFX(SFX.GainCoin);
+        // Disable the ad button
+        
         
     }
 

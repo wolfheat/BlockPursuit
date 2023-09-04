@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Timer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 79f7453c6189b024a96dd6135d1591f3, type: 2}
-  m_sharedMaterial: {fileID: 2163990400817755069, guid: 79f7453c6189b024a96dd6135d1591f3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 98271481e4a286144a1d5aa6909251be, type: 2}
+  m_sharedMaterial: {fileID: 2163990400817755069, guid: 98271481e4a286144a1d5aa6909251be, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

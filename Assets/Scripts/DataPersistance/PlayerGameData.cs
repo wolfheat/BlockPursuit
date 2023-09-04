@@ -62,10 +62,10 @@ public class PlayerGameData
     public int Coins { get; set; } = 100;
     public DateTime AtypeBoostTime { get; set; }
     public DateTime BtypeBoostTime { get; set; } // Having these private set wont let the load method write these values
-    public int PlayTime { get; set; } = 0;
-    public int AdsWatched { get; set; } = 0;
 
     // Totals
+    public int PlayTime { get; set; } = 0;
+    public int AdsWatched { get; set; } = 0;
     public int TotalGoldCollected { get; set; } = 0;
     public int TotalTilesCollected { get; set; } = 0;
 
@@ -85,6 +85,7 @@ public class PlayerGameData
     public static Action InventoryUpdate;
     public static Action MissionUpdate;
     public static Action AdsWatchedAdded;
+    public static Action MinuteWatched;
     public static Action<int> MissionCompleted;
     public static Action<int> AchievementUnlocked;
     public static Action BoostTimeUpdated;
@@ -201,6 +202,7 @@ public class PlayerGameData
     public void AddPlayTimeMinutes(int amt)
     {
         PlayTime += amt;
+        MinuteWatched?.Invoke();
     }
 }
 

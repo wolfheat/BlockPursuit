@@ -27,7 +27,7 @@ public class Mission : MonoBehaviour
     public string Name => missionName.text;
 
     public MissionRewardData GetMissionRewardData() => missionData.missionRewardData;
-    public MissionDefinition GetMissionData() => missionData;
+    public MissionDefinition GetMissionDefinition() => missionData;
     public bool Completed => gameObject.activeSelf && (missionSaveData.amount >= missionData.completeAmount);
     public bool IsActive => gameObject.activeSelf && missionSaveData.active;
     public MissionSaveData GetMissionSaveData() => missionSaveData;

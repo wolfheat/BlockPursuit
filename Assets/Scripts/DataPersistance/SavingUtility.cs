@@ -145,6 +145,7 @@ public class SavingUtility : MonoBehaviour
         {
             yield return new WaitForSeconds(60f);
             playerGameData.AddPlayTimeMinutes(1);
+            Debug.Log("Tick ONE minute played Total: "+playerGameData.PlayTime);
         }
     }
 }

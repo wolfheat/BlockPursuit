@@ -35,8 +35,11 @@ public class SettingsController : EscapableBasePanel, IReturnMenuType
         // Opened Settings page place data
         Debug.Log("Setting music and SFX from stored values: "+ SavingUtility.gameSettingsData.soundSettings.MusicVolume+","+ SavingUtility.gameSettingsData.soundSettings.SFXVolume);
         music.SetSlider(SavingUtility.gameSettingsData.soundSettings.MusicVolume);
+        music.SliderChange(); // Makes sure text is updated even if 0 is the stored value
         SFX.SetSlider(SavingUtility.gameSettingsData.soundSettings.SFXVolume);
+        SFX.SliderChange();
         brightness.SetSlider(SavingUtility.gameSettingsData.lightSettings.LightIntensity/ IntensityScale);
+        brightness.SliderChange();
         shakeToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.UseShake;
         waterToggle.isOn = SavingUtility.gameSettingsData.gameEffectsSettings.AnimatedWater;
         SetWaterText();

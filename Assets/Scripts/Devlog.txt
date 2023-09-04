@@ -203,13 +203,15 @@ Jun 2023
 		* Start Error issue seems to be because Input systems Controls did not exist in OnEnable.
 1/9		* Added saving for minutes played and ads watched
 3/9		* Added Watch ad missions
+		* Finalized implementing time played missions
+4/9		* Changed order of NO/YES in unlock screen
+		* Added menu click sounds for all general buttons
+		* Fixed issue where settings screens text isnt updated if the stored value is 0
+		* Fixed so Ad only can be called once on Level complete screen
 
-		* Finalize implementing time played missions
-
-		* Make sure unlimited tiers can be added without issues
 		
 		TEXT FIELDS
-		* Textfields are using different text types colors and sizes fix. (particularily information text is blobby)
+		* Levels ID on Level select still have different text font
 		
 		IAP
 		* Create the IAP page? Maybe not to much work?
@@ -219,7 +221,8 @@ Jun 2023
 		* Acheivements requirements show here with reward as well? or remove achievements?
 		
 		MISSIONS IDEAS
-		* Get 0-5 ads watched to get reward
+		* Missions use simliar methods for adding MinutePlayed/Ads watched/ Level completed , mashc into reused methods if possible
+		* Maybe, Make sure play time only counts when at a level?
 
 		LEVELS
 		* Tiers have different - Backgrounds, Tiletypes?, Ambient Sound, Music
@@ -236,6 +239,7 @@ Jun 2023
 		* Issue with goal targets clipping, not always showing, prob has something to do with the rendering. 
 		* Shallows in water show up in scene but not in game view (not possible to show shallows in mobile build?)
 		* Animation moves player forward slightly. Does not really matter at runtime since its always animating, but in scene mode the position is not correct why?
+		* Make sure unlimited tiers can be added without issues
 		
 		BEFORE PLAYTEST
 		* Check that ingame menu is positioned correctly on build
@@ -259,7 +263,7 @@ Jun 2023
 		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
 
 		SOUND
-		* Check if want to change to use audio mixer
+		* Check if want to change to use audio mixer (wont work for WebGl and maybe mobile issue?)
 		* Rework of sounds, decide what to use rework needed
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
 		* Need better pick up and place sound combo. Remove or change step sound its terrible.
@@ -356,7 +360,6 @@ Jun 2023
 		* Calibrate tile cost for level unlock as well as rewarded tiles.
 		* Clean Up tile definition and way levels are stored when created at runtime
 		* Have stored data Encrypyted?
-		* Change saveLoad data to scriptable objects?
 		
 		UI STUFF:
 		* Change Load Screen between scenes to animation or not? Current solution, made it faster blackscreen 0.1 seconds.
