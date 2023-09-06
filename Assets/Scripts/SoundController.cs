@@ -220,6 +220,22 @@ public class SoundController : MonoBehaviour
         ambientSource.Play();
 
     }
+
+    private void OnEnable()
+    {
+        PlayerGameData.InventoryUpdate += InventoryUpdate;
+    }
+
+    private void InventoryUpdate()
+    {
+        PlaySFX(SFX.GainCoin);
+    }
+
+    private void OnDisable()
+    {
+        PlayerGameData.InventoryUpdate -= InventoryUpdate;        
+    }
+
     public void PlaySFX(SFX type, bool playMulti=true)
 	{
         // If not able to play multiple sounds exit if already playing

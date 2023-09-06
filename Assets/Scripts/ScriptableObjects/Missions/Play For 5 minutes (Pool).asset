@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 4
   completeType: 3
   tier: 0
-  missionLogoSprite: {fileID: 21300000, guid: b83898f39d73ce94d8a85d51b3dfb771, type: 3}
+  missionLogoSprite: {fileID: 21300000, guid: 9371fbb9edb2235468a5368fbd8798f4, type: 3}
   missionName: Play For 5 minutes
   missionDescription: Play For 5 minutes
   missionRewardData: {fileID: 11400000, guid: 89b7a26d4d72d434ab88394aa91f9295, type: 2}

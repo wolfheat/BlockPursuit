@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e53774ebe12148f469cfcb51a0dbe560, type: 3}
-  m_Name: Play For 15 minutes
+  m_Name: Watch 50 Ads Total
   m_EditorClassIdentifier: 
-  ID: 1011
-  completeAmount: 15
+  ID: 1013
+  completeAmount: 50
   type: 0
-  completeType: 3
+  completeType: 2
   tier: 0
-  missionLogoSprite: {fileID: 21300000, guid: 9371fbb9edb2235468a5368fbd8798f4, type: 3}
-  missionName: Play For 15 minutes
-  missionDescription: Play For 15 minutes total
+  missionLogoSprite: {fileID: 21300000, guid: af5c7df29e9686c429cdefd5e4f85ad7, type: 3}
+  missionName: 50 Ads
+  missionDescription: Watch 50 Ads Total
   missionRewardData: {fileID: 11400000, guid: ea809b5f17ad3bf45a7009d4f41ee7fe, type: 2}

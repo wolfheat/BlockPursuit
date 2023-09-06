@@ -96,8 +96,6 @@ public class LevelComplete : EscapableBasePanel
         }
         current = GameSettings.CurrentLevelDefinition;
 
-        SoundController.Instance.PlaySFX(SFX.GainCoin);
-
         //FIX
         levelText.text = StringConverter.LevelAsString(current.LevelDiff, current.LevelIndex);
 
@@ -182,10 +180,6 @@ public class LevelComplete : EscapableBasePanel
         // Determin reward
         coinGainText.text = (latestCoins*2).ToString();
         SavingUtility.playerGameData.AddCoins(latestCoins);
-        SoundController.Instance.PlaySFX(SFX.GainCoin);
-        // Disable the ad button
-        
-        
     }
 
     internal void FixTextFields()

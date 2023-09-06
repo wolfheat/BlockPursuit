@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 0
   completeType: 2
   tier: 0
-  missionLogoSprite: {fileID: 21300000, guid: b83898f39d73ce94d8a85d51b3dfb771, type: 3}
+  missionLogoSprite: {fileID: 21300000, guid: af5c7df29e9686c429cdefd5e4f85ad7, type: 3}
   missionName: 20 Ads
   missionDescription: Watch 20 Ads Total
   missionRewardData: {fileID: 11400000, guid: ea809b5f17ad3bf45a7009d4f41ee7fe, type: 2}

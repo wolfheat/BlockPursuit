@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 4
   completeType: 3
   tier: 0
-  missionLogoSprite: {fileID: 21300000, guid: b83898f39d73ce94d8a85d51b3dfb771, type: 3}
+  missionLogoSprite: {fileID: 21300000, guid: af5c7df29e9686c429cdefd5e4f85ad7, type: 3}
   missionName: 5 ads
   missionDescription: Watch 5 ads
   missionRewardData: {fileID: 11400000, guid: a79c61db6da91e94eb68cd3d1f32d407, type: 2}

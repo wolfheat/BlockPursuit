@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 98.79352, y: 0}
-  m_SizeDelta: {x: 93.3935, y: 26}
+  m_AnchoredPosition: {x: 114.00275, y: 0}
+  m_SizeDelta: {x: 110.2207, y: 26}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &8761218264184657902
 CanvasRenderer:
@@ -142,7 +142,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50/100
+  m_text: '119/120
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98271481e4a286144a1d5aa6909251be, type: 2}
   m_sharedMaterial: {fileID: 2163990400817755069, guid: 98271481e4a286144a1d5aa6909251be, type: 2}
@@ -1498,7 +1500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2648648520911130076, guid: 66db153d51a7f2f4b8168ec8c72b1064, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 2648648520911130076, guid: 66db153d51a7f2f4b8168ec8c72b1064, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1506,7 +1508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2648648520911130076, guid: 66db153d51a7f2f4b8168ec8c72b1064, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5038861240574105105, guid: 66db153d51a7f2f4b8168ec8c72b1064, type: 3}
       propertyPath: m_PreserveAspect
