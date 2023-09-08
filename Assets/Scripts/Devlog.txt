@@ -212,7 +212,8 @@ Jun 2023
 6/9		* Fixed gold gain sound whenever changing tiles or gold amount
 		* Info Popup now blocks menu below from being interactable
 		* Added icon for ads and playtime on missions
-
+8/9		* Fixed issue where boost panel tried to load ad when the loadingscreen should take care of this
+		
 
 		* Have mission watch ads only show one active at once?
 

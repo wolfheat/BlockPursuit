@@ -57,6 +57,7 @@ namespace MyGameAds
 
         private void ActivateAdReady(bool value)
         {
+            Debug.Log("Activate Ad Ready: "+value);
             if (!value)
             {
                 Debug.Log("Ad was not ready");
@@ -93,6 +94,9 @@ namespace MyGameAds
             {
                 //TODO This error is reached fix (Not reached in result screen why)
                 Debug.LogError("Rewarded ad is not ready yet.");
+                Debug.LogError("_rewardedAd: "+ _rewardedAd);
+                Debug.LogError("_rewardedAd.CanShowAd(): " + _rewardedAd.CanShowAd());
+
                 // Inform the UI that the ad is not ready.
                 ActivateAdReady(false);
             }

@@ -25,28 +25,15 @@ public class BoostController : EscapableBasePanel
     private void OnEnable()
     {
         PlayerGameData.BoostTimeUpdated += UpdateBoostData;
-        RewardedController.Loaded += AdFullyLoaded;
         SavingUtility.LoadingComplete += UpdateBoostDataLoading;
     }
 
     private void OnDisable()
     {
         PlayerGameData.BoostTimeUpdated -= UpdateBoostData;
-        RewardedController.Loaded -= AdFullyLoaded;
         SavingUtility.LoadingComplete -= UpdateBoostDataLoading;
     }
 
-    private void AdFullyLoaded()
-    {
-        if (!Enabled())
-        {
-            Debug.Log("Ad Fully loaded but Boost panel is not active, do not show ad"); 
-            return;
-        }
-
-        Debug.Log("Ad Fully Loaded Show Ad");
-        ShowLoadedAd();
-    }
     protected void UpdateBoostDataLoading()
     {
         //Debug.Log("UpdateBoostData from Loading Complete");
@@ -114,12 +101,6 @@ public class BoostController : EscapableBasePanel
 
     }
     
-    public void ShowLoadedAd()
-    {
-        Debug.Log("Request Boost Ad, show ad and return here");
-        rewardedController.ShowAd();
-    }
-
     public void BackToLevelSelect()
     {
         TransitionScreen.Instance.StartTransition(GameAction.ShowLevelSelect);

@@ -12,4 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2174a07116d034691e9c5ea13a419c, type: 3}
   m_Name: MissionInfo
   m_EditorClassIdentifier: 
-  informationText: Here you can claim the rewards for completing certain tasks.
+  informationText: 'Here you can claim the rewards for completing certain tasks.
+
+
+    LIGHT
+    BLUE - Free rewards Hourly or Daily
+
+
+    GREEN - Pooled Missions (One active
+    at a time)
+
+
+    GREY - One time only Missions'
