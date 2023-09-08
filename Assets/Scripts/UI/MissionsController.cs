@@ -13,6 +13,8 @@ public class MissionsController : EscapableBasePanel
     private List<Mission> missions = new List<Mission>();
     private List<Mission> timedMissions = new List<Mission>();
     private List<Mission> pooledMissions = new List<Mission>();
+    private List<Mission> playTimeMissions = new List<Mission>();
+    private List<Mission> watchAdMissions = new List<Mission>();
     private Dictionary<int, MissionSaveData> missionSaveDatas = new Dictionary<int, MissionSaveData>();
     private float updateTimer = 0;
     private const float UpdateTime = 2f;
@@ -181,6 +183,22 @@ public class MissionsController : EscapableBasePanel
         if (mission.GetMissionDefinition().type == MissionType.Pool)
             UnlockRandomPooledMission();
 
+
+        if (mission.GetMissionDefinition().type == MissionType.Single && mission.GetMissionDefinition().completeType == CompleteType.PlayTime)
+        {
+            missions.Remove(mission);
+            playTimeMissions.Remove(mission);
+            ShowBestMissionForSpecificMissionList(playTimeMissions);
+            Destroy(mission.gameObject);
+        }
+        if (mission.GetMissionDefinition().type == MissionType.Single && mission.GetMissionDefinition().completeType == CompleteType.WatchAds)
+        {
+            missions.Remove(mission);
+            watchAdMissions.Remove(mission);
+            ShowBestMissionForSpecificMissionList(watchAdMissions); 
+            Destroy(mission.gameObject);
+        }
+
         PlayerGameData.MissionUpdate?.Invoke();
 
         PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
@@ -195,6 +213,8 @@ public class MissionsController : EscapableBasePanel
         missions.Clear();
         timedMissions.Clear();
         pooledMissions.Clear();
+        playTimeMissions.Clear();
+        watchAdMissions.Clear();
     }
 
     // INITIALIZING MISSIONS
@@ -219,6 +239,7 @@ public class MissionsController : EscapableBasePanel
         }
     }
 
+    /*
     private void ForgetAllMissions(InputAction.CallbackContext context)
     {
         Debug.Log(" *** Forgetting Mission Data ***");
@@ -226,7 +247,7 @@ public class MissionsController : EscapableBasePanel
         SavingUtility.playerGameData.MissionsSaveData = new MissionsSaveData();
         Debug.Log("SAVE CALLED - FORGETTING ALL MISSIONS");
         SavingUtility.Instance.SavePlayerDataToFile();
-    }
+    }*/
 
     private void SetMissionDataFromFile()
     {
@@ -236,6 +257,24 @@ public class MissionsController : EscapableBasePanel
 
         // Generate the data that is missing in the file
         GenerateMissingMissionData();
+
+        // Update missions that are dependent on total amount
+        UpdateMissionsTotalsValues();
+    }
+
+    private void UpdateMissionsTotalsValues()
+    {
+        foreach (var missionDefinition in missionDefinitions)
+        {
+            // For adsWatched and Timeplayed missions update process value
+            if (missionDefinition.type == MissionType.Single)
+            {
+                if (missionDefinition.completeType == CompleteType.PlayTime)
+                    missionSaveDatas[missionDefinition.ID].amount = SavingUtility.playerGameData.PlayTime;
+                if (missionDefinition.completeType == CompleteType.WatchAds)
+                    missionSaveDatas[missionDefinition.ID].amount = SavingUtility.playerGameData.AdsWatched;
+            }
+        }
     }
 
     private void GenerateMissingMissionData()
@@ -304,6 +343,11 @@ public class MissionsController : EscapableBasePanel
             switch (missionDefinition.type)
             {
                 case MissionType.Single:
+                    if(missionDefinition.completeType == CompleteType.PlayTime)
+                        playTimeMissions.Add(newMission);
+                    else if (missionDefinition.completeType == CompleteType.WatchAds)
+                        watchAdMissions.Add(newMission);
+                    break;
                 case MissionType.Hourly:
                 case MissionType.Daily:
                 case MissionType.Weekly:
@@ -314,8 +358,37 @@ public class MissionsController : EscapableBasePanel
                     break;
             }
         }
+
         UpdateTimedMissions();
+        UpdateOnlyOneMissions();
         UnlockRandomPooledMission();
+    }
+
+    private void UpdateOnlyOneMissions()
+    {
+        ShowBestMissionForSpecificMissionList(playTimeMissions);
+        ShowBestMissionForSpecificMissionList(watchAdMissions);
+    }
+
+    private void ShowBestMissionForSpecificMissionList(List<Mission> list)
+    {
+        if (list.Count == 0) return;
+
+        Mission bestMission = list[0];
+        bestMission.SetActive(true);
+
+        if (list.Count == 1) return;
+
+        for (int i = 1; i < list.Count; i++)
+        {
+            if (list[i].GetMissionDefinition().completeAmount < bestMission.GetMissionDefinition().completeAmount)
+            {
+                bestMission.SetActive(false);
+                bestMission = list[i];
+                continue;
+            }
+            list[i].SetActive(false);
+        }
     }
 
     private void Update()

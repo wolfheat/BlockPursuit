@@ -329,6 +329,7 @@ public class LevelCreator : MonoBehaviour
 
     private void LevelCompleteCheatButton(InputAction.CallbackContext context)
     {
+        if (GameSettings.IsPaused) return;
         StartCoroutine(LevelCompleteDelayCoroutine());
     }
     private IEnumerator LevelCompleteDelayCoroutine()

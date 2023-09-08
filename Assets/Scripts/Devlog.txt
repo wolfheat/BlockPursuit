@@ -213,11 +213,13 @@ Jun 2023
 		* Info Popup now blocks menu below from being interactable
 		* Added icon for ads and playtime on missions
 8/9		* Fixed issue where boost panel tried to load ad when the loadingscreen should take care of this
-		
+		* Made so only one AdsWatched and one TimePlayed mission is active at a time
+		* Fixed Watched Ads and Time played missions update correctly
 
-		* Have mission watch ads only show one active at once?
+
 
 		TEXT FIELDS
+		* Currently different text types for info and unlockConfirmation screen, keep it separate or confirm?
 		* Levels ID on Level select still have different text font
 		
 		IAP
@@ -347,11 +349,8 @@ Jun 2023
 		
 		RESOLUTION:
 		* Make mobile detect what size the on screen touch inputs should be to fit the player
-		* Issue with ingame menu not scaling correctly when changing res.
 		* Make sure game scales correctly for different mobile resolutions
-		* Need to figure out why the game wont scale to phone correctly
 			* Resolution makes bottom part of game get outside of screen
-			* Still cant figure this one out, tried changing build for widescreen native resolution without success
 		* Older phone does not grant rewards from ads nor save/load game data on file, why?
 		
 		TUTORIAL: (Fill in stuff that needs to be thaught)
