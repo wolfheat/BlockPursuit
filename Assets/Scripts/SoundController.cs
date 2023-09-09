@@ -94,7 +94,7 @@ public class SoundController : MonoBehaviour
     {
         musicSource.volume = presetVolume;
         sfxSource.volume = presetSFXVolume;
-
+        ambientSource.volume = presetSFXVolume;
         DoMusicSetting();
     }
 
@@ -246,10 +246,10 @@ public class SoundController : MonoBehaviour
 
         switch (type)
 		{
-            case SFX.MenuStep:
+			case SFX.MenuSelect:
                 sfxSource.PlayOneShot(menu[0]);
                 break;
-			case SFX.MenuSelect:
+            case SFX.MenuStep:
                 sfxSource.PlayOneShot(menu[1]);
                 break;
 			case SFX.MenuError:

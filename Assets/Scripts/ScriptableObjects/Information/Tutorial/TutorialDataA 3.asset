@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
+  m_Name: TutorialDataA 3
+  m_EditorClassIdentifier: 
+  informationText: How you grab hold of a tile determines how it's being held and
+    how you will be able to place it.
+  sprites:
+  - {fileID: -306261517, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1699591426, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 283295996, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1373832423, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1374717378, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1316559562, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 561889718, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1902267834, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1146468495, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1688429769, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 95577736, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -663116991, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 550031926, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -250396506, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -921227451, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -553070362, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 780010201, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -188283480, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 191421780, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1274366581, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 766201618, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 547527217, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -974427466, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1198563364, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 807978917, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 981810613, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -2021277668, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1299124466, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 390406036, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -2004033921, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 882500802, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 2125538018, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -560825736, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1858636528, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1317662237, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1983281501, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 35014783, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 369994646, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1037707939, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -26999598, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 823282044, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1075185102, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -2032081804, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1909360537, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 303141016, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -2070057045, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -52842151, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 44237954, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1025739671, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1772202827, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -2115208535, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -100480090, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1365794976, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -371670406, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -442661426, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1611415371, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -46995034, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 191828580, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1137635821, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -293250460, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1185093365, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 753791439, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 222353103, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -346843293, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -294253123, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 984886676, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1266730761, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1465274789, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 2114511995, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -1619382398, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -2040205776, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -462200706, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 739069457, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: 1977103681, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}
+  - {fileID: -768311396, guid: 337ad9ddc6b1dd549999552cab282b59, type: 3}

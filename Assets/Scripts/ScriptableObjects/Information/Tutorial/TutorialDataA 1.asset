@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
+  m_Name: TutorialDataA 1
+  m_EditorClassIdentifier: 
+  informationText: You can only turn by moving one step so if you can't take a step
+    towards a tile then you can not lift it up.
+  sprites:
+  - {fileID: -1326787727, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1050003119, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1574834268, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 88082222, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 420002034, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 959877372, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -73962591, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -883588780, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -531927156, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -850420357, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1939693142, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 890428413, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -794777963, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 201036508, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1130227495, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -269141275, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1752730352, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 696364442, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1956838799, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1212785639, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1812809424, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 947084269, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1998084341, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1615821212, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 304474685, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1774206194, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 675284336, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -943529355, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1835377803, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1133663060, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -372176274, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1672060758, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -52663559, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -79720381, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 323517148, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 813925228, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -402102269, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1554070697, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -525574215, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 686521958, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1875835481, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -154618226, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1347405458, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: 1541913430, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -60571031, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -203428114, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1450388079, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}
+  - {fileID: -1428734372, guid: 982a687268dc4294b8fd3d6ccd38fa07, type: 3}

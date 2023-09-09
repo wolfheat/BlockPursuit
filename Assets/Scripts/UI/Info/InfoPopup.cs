@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,9 +7,9 @@ public class InfoPopup : BasePanel
     [SerializeField] TextMeshProUGUI infoField;
     [SerializeField] RectTransform infoContentObject;
     private ISetSelected sourcePanel;
-    private const float PopupTextVerticalMargins = 200f;
+    private const float PopupTextVerticalMargins = 230f;
 
-    internal void ShowInfo(InfoData infoData, ISetSelected source)
+    public void ShowInfo(InfoData infoData, ISetSelected source)
     {
         sourcePanel = source;
         infoField.text = infoData.informationText;

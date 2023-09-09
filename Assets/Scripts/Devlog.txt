@@ -11,9 +11,6 @@ Jun 2023
 	* After completing level show ad if more than 5min has passed?
 
 
-
-
-
 14/6	* Starting with simple prototype
 		* Square play area
 		* Player can roll around the game area and box has different colors on each side
@@ -215,15 +212,18 @@ Jun 2023
 8/9		* Fixed issue where boost panel tried to load ad when the loadingscreen should take care of this
 		* Made so only one AdsWatched and one TimePlayed mission is active at a time
 		* Fixed Watched Ads and Time played missions update correctly
-
-
+9/9		* Changed MenuClick sound, changed text look for information
+		* Created Tutorial screen similar to info screen but with description and animation
+		
+		* Tutorial might need better descriptions (have Tutorial exchanged for title description?)
+		* Tutorial resolution is to low fix somehow
+		* Better arrows in tutorial
+		* Have tutorial for each piece that shows in what direction you can pick up stuff?
 
 		TEXT FIELDS
 		* Currently different text types for info and unlockConfirmation screen, keep it separate or confirm?
 		* Levels ID on Level select still have different text font
 		
-		IAP
-		* Create the IAP page? Maybe not to much work?
 		
 		MISSIONS PAGE (better name for it?)
 		* Maybe have completed missions animate/fade away and new missions animate/fade into view?
@@ -322,6 +322,7 @@ Jun 2023
 		* Make separate game loop for paying player / Have a payable version on steam?
 
 		IAP:
+		* Create the IAP page? Maybe not to much work?
 		* Maybe have gems as currency? Maybe implement later, not now.
 		* Have skins that player can buy and use as player?
 		* Make Shop Screen
@@ -391,10 +392,6 @@ Jun 2023
 		* Android / IoS port
 		* Google AdMob
 		* Boxmon, Android Dependency Manager
-
-
-
-
 
 		CHECKLIST FOR BETTER PLAYER EXPERIENCE
 
