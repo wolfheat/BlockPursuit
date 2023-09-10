@@ -213,8 +213,10 @@ Jun 2023
 		* Made so only one AdsWatched and one TimePlayed mission is active at a time
 		* Fixed Watched Ads and Time played missions update correctly
 9/9		* Changed MenuClick sound, changed text look for information
-		* Created Tutorial screen similar to info screen but with description and animation
+		* Created Tutorial screen similar to info screen but with description and animation, Added button to ingame menu
+		* Used my own implementation for gif that use coroutine and array of png sprites that loops around
 		
+
 		* Tutorial might need better descriptions (have Tutorial exchanged for title description?)
 		* Tutorial resolution is to low fix somehow
 		* Better arrows in tutorial
