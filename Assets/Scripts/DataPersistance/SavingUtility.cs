@@ -124,7 +124,7 @@ public class SavingUtility : MonoBehaviour
             // Add listener to update of data to save
             PlayerLevelDataList.PlayerLevelDataListUpdate += SavePlayerDataToFile;
             PlayerGameData.InventoryUpdate += SavePlayerDataToFile;
-            PlayerGameData.MissionUpdate += SavePlayerDataToFile;
+            MissionSaveData.MissionUpdate += SavePlayerDataToFile;
             PlayerGameData.BoostTimeUpdated += SavePlayerDataToFile;
             PlayerGameData.AvatarChange += SavePlayerDataToFile;
 

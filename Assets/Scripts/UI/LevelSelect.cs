@@ -12,7 +12,12 @@ public class LevelSelect : EscapableBasePanel
     [SerializeField] GameObject levelMediumButtonHolder;
     [SerializeField] GameObject levelHardButtonHolder;
     [SerializeField] GameObject levelABCButtonHolder;
-    private GameObject[] levelButtonHolders;
+    [SerializeField] private List<GameObject> levelButtonHolders = new List<GameObject>();
+
+    [SerializeField] private GameObject levelButtonHolderPrefab;
+    [SerializeField] private GameObject levelButtonHolderParent;
+    [SerializeField] private RectTransform levelButtonHolderViewportRecttransform;
+
     private List<LevelButton>[] buttonLists;
 
     [SerializeField] private LevelButton[] LevelButtonPrefabs;
@@ -31,26 +36,11 @@ public class LevelSelect : EscapableBasePanel
     [SerializeField] private GameObject completedMissionsObject;
     [SerializeField] private TextMeshProUGUI completedMissionsText;
 
-
-    private SavingUtility savingUtility;
-
-    private List<LevelButton> easybuttonList = new List<LevelButton>();
-    private List<LevelButton> mediumButtonList = new List<LevelButton>();
-    private List<LevelButton> HardButtonList = new List<LevelButton>();
-    private List<LevelButton> ABCButtonList = new List<LevelButton>();
-
     public override void RequestESC()
     {
         if (!Enabled()) return;
         Debug.Log("ESC from menu");
         RequestGoToMainMenu();
-    }
-    void Start()
-    {
-        levelButtonHolders = new GameObject[4] { levelEasyButtonHolder,levelMediumButtonHolder,levelHardButtonHolder, levelABCButtonHolder };
-        buttonLists = new List<LevelButton>[4] { easybuttonList, mediumButtonList, HardButtonList, ABCButtonList };
-        //LevelButtonPrefabs = new LevelButton[3] { levelButtonPrefab, mediumLevelButtonPrefab, hardLevelButtonPrefab };
-        //GenerateButtonLevels();
     }
 
     private void OnEnable()
@@ -129,13 +119,13 @@ public class LevelSelect : EscapableBasePanel
 
     private void GenerateButtonLevels()
     {
-        //Debug.Log("Generating Button Levels");
+        IntializeListsIfNecessary();
 
         for (int i = 0; i < Levels.LevelDefinitions.Length; i++)
-        {
+        {   
             for (int j = 0; j < Levels.LevelDefinitions[i].Count; j++)
             {
-                //Reset all buttons to locked by default
+                //Reset levels to locked by default
                 Levels.LevelDefinitions[i][j].unlocked = false;
 
                 LevelButton newButton = Instantiate(LevelButtonPrefabs[i], levelButtonHolders[i].transform);
@@ -160,10 +150,34 @@ public class LevelSelect : EscapableBasePanel
         }
     }
 
+    private void IntializeListsIfNecessary()
+    {
+        if (buttonLists != null) return; // Already initialized
+
+        buttonLists = new List<LevelButton>[Levels.LevelDefinitions.Length];
+        
+        // Generate Holders for Each Tier
+        for (int i = 0; i < Levels.LevelDefinitions.Length; i++)
+        {
+            buttonLists[i] = new List<LevelButton>();
+            GameObject newHolder = Instantiate(levelButtonHolderPrefab, levelButtonHolderParent.transform);
+            newHolder.name = "Holder" + (i + 1);
+            newHolder.GetComponent<ScrollRect>().viewport = levelButtonHolderViewportRecttransform;
+            GameObject holderChild = newHolder.transform.GetChild(0).gameObject;
+            holderChild.name = "Holder" + (i + 1);
+            levelButtonHolders.Add(holderChild);
+        }
+    }
+
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
+        Debug.Log("Update SnapPosition");
+        Debug.Log("activetab = "+ activeTab);
+        Debug.Log("levelButtonHolders[activeTab].transform.parent = " + levelButtonHolders[activeTab].transform.parent.name);
+
         // Enables keyboard to be used in scrollrect - centering the selected item correctly
-        scrollRect.content.localPosition = scrollRect.GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
+        levelButtonHolders[activeTab].transform.parent.localPosition = levelButtonHolders[activeTab].transform.parent.GetComponent<ScrollRect>().GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
+        //scrollRect.content.localPosition = scrollRect.GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
 
         infoScreen.UpdateInfo(button);
     }
@@ -332,7 +346,11 @@ public static class ScrollRectExtensions
         
         // Force to top row
         Vector2 viewportLocalPosition = instance.viewport.localPosition;
+        Debug.Log("viewportLocalPosition: "+ viewportLocalPosition);
         Vector2 childLocalPosition = child.localPosition;
+        Debug.Log("childLocalPosition: " + childLocalPosition);
+        Vector2 thisRectPosition = instance.GetComponent<RectTransform>().localPosition;
+        Debug.Log("thisRectPosition: " + thisRectPosition);
         float padding = instance.content.gameObject.GetComponent<GridLayoutGroup>().padding.top;
         float correction = instance.viewport.rect.height / 2; //107.15f;
         float contentPosition = instance.content.localPosition.y-correction;

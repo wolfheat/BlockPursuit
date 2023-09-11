@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
 public class MissionsController : EscapableBasePanel
@@ -87,7 +89,7 @@ public class MissionsController : EscapableBasePanel
         if (didUpdateData)
         {
             Debug.Log("SAVE INVOKE - ANY ACTIVE MISSION DATA UPDATED");
-            PlayerGameData.MissionUpdate?.Invoke();
+            MissionSaveData.MissionUpdate?.Invoke();
         }
         if (completedMission)
         {
@@ -119,7 +121,7 @@ public class MissionsController : EscapableBasePanel
         if (didUpdateData)
         {
             Debug.Log("SAVE INVOKE - ANY ACTIVE MISSION DATA UPDATED");
-            PlayerGameData.MissionUpdate?.Invoke();
+            MissionSaveData.MissionUpdate?.Invoke();
         }
         if (completedMission)
         {
@@ -151,7 +153,7 @@ public class MissionsController : EscapableBasePanel
         if (didUpdateData)
         {
             Debug.Log("SAVE INVOKE - ANY ACTIVE MISSION DATA UPDATED");
-            PlayerGameData.MissionUpdate?.Invoke();
+            MissionSaveData.MissionUpdate?.Invoke();
         }
         if (completedMission)
         {
@@ -173,33 +175,37 @@ public class MissionsController : EscapableBasePanel
         
         // Give the reward
         SavingUtility.playerGameData.HandleMissionReward(mission.GetMissionRewardData());
-        
+
         // Update completionTime (invokes save)
-        SavingUtility.playerGameData.UpdateMissionCompletion(missionSaveDatas[mission.GetMissionDefinition().ID]);
-        Debug.Log("Completing mission and settin amount to 0");
+        missionSaveDatas[mission.GetMissionDefinition().ID].SetMissionCompletionInfo();
+
 
         mission.SetActive(false);
 
-        if (mission.GetMissionDefinition().type == MissionType.Pool)
+        MissionDefinition missionDefinition = mission.GetMissionDefinition();
+
+        if (missionDefinition.type == MissionType.Pool)
             UnlockRandomPooledMission();
-
-
-        if (mission.GetMissionDefinition().type == MissionType.Single && mission.GetMissionDefinition().completeType == CompleteType.PlayTime)
+        else if (missionDefinition.type == MissionType.Single)
         {
+
+            if(missionDefinition.completeType == CompleteType.PlayTime)
+            {
+                playTimeMissions.Remove(mission);
+                ShowBestMissionForSpecificMissionList(playTimeMissions);
+            }
+
+            if (missionDefinition.completeType == CompleteType.WatchAds)
+            {
+                watchAdMissions.Remove(mission);
+                ShowBestMissionForSpecificMissionList(watchAdMissions); 
+            }
+
             missions.Remove(mission);
-            playTimeMissions.Remove(mission);
-            ShowBestMissionForSpecificMissionList(playTimeMissions);
             Destroy(mission.gameObject);
         }
-        if (mission.GetMissionDefinition().type == MissionType.Single && mission.GetMissionDefinition().completeType == CompleteType.WatchAds)
-        {
-            missions.Remove(mission);
-            watchAdMissions.Remove(mission);
-            ShowBestMissionForSpecificMissionList(watchAdMissions); 
-            Destroy(mission.gameObject);
-        }
 
-        PlayerGameData.MissionUpdate?.Invoke();
+        MissionSaveData.MissionUpdate?.Invoke();
 
         PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
     }
@@ -220,21 +226,30 @@ public class MissionsController : EscapableBasePanel
     // INITIALIZING MISSIONS
     private void MissionDataLoaded()
     {
-        UpdateTierMissionsGoalAmount();
         SetMissionDataFromFile();
+        UpdateMissionsWithSpecialConditions();
+
         ClearMissions();
         CreateMissions();
         PlayerGameData.MissionCompleted?.Invoke(CompletedMissionsAmount());
     }
 
-    private void UpdateTierMissionsGoalAmount()
+    private void UpdateMissionsWithSpecialConditions()
     {
         foreach(var missionDefinition in missionDefinitions)
         {
-            if(missionDefinition.completeType == CompleteType.CompleteTier)
+            // For adsWatched and Timeplayed missions update process value
+            if (missionDefinition.type == MissionType.Single)
             {
-                int amountForTier = Levels.LevelDefinitions[missionDefinition.tier].Count;
-                missionDefinition.completeAmount = amountForTier;
+                if(missionDefinition.completeType == CompleteType.CompleteTier)
+                {
+                    int totalAmountLevelsForTier = Levels.LevelDefinitions[missionDefinition.tier].Count;
+                    missionDefinition.completeAmount = totalAmountLevelsForTier;
+                }
+                if (missionDefinition.completeType == CompleteType.PlayTime)
+                    missionSaveDatas[missionDefinition.ID].amount = SavingUtility.playerGameData.PlayTime;
+                if (missionDefinition.completeType == CompleteType.WatchAds)
+                    missionSaveDatas[missionDefinition.ID].amount = SavingUtility.playerGameData.AdsWatched;
             }
         }
     }
@@ -257,24 +272,6 @@ public class MissionsController : EscapableBasePanel
 
         // Generate the data that is missing in the file
         GenerateMissingMissionData();
-
-        // Update missions that are dependent on total amount
-        UpdateMissionsTotalsValues();
-    }
-
-    private void UpdateMissionsTotalsValues()
-    {
-        foreach (var missionDefinition in missionDefinitions)
-        {
-            // For adsWatched and Timeplayed missions update process value
-            if (missionDefinition.type == MissionType.Single)
-            {
-                if (missionDefinition.completeType == CompleteType.PlayTime)
-                    missionSaveDatas[missionDefinition.ID].amount = SavingUtility.playerGameData.PlayTime;
-                if (missionDefinition.completeType == CompleteType.WatchAds)
-                    missionSaveDatas[missionDefinition.ID].amount = SavingUtility.playerGameData.AdsWatched;
-            }
-        }
     }
 
     private void GenerateMissingMissionData()
@@ -389,6 +386,13 @@ public class MissionsController : EscapableBasePanel
             }
             list[i].SetActive(false);
         }
+
+        // Make sure that the newly enabled mission get its save data updated
+        if (bestMission.GetMissionDefinition().completeType == CompleteType.PlayTime)
+            missionSaveDatas[bestMission.GetMissionDefinition().ID].amount = SavingUtility.playerGameData.PlayTime;
+        if (bestMission.GetMissionDefinition().completeType == CompleteType.WatchAds)
+            missionSaveDatas[bestMission.GetMissionDefinition().ID].amount = SavingUtility.playerGameData.AdsWatched;
+
     }
 
     private void Update()
@@ -432,6 +436,5 @@ public class MissionsController : EscapableBasePanel
             if(mission.gameObject.activeSelf) return true;
         Debug.Log("No active pooled missions");
         return false;
-    }
+    }    
 }
-

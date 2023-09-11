@@ -17,6 +17,10 @@ public class MissionSaveData
     public bool active = true;
     public int amount = 0;
     public DateTime lastCompletion = DateTime.MinValue;
+
+
+    public static Action MissionUpdate;
+
     public bool LockTimeHasPassed(MissionType type)
     {
         switch (type)
@@ -31,6 +35,27 @@ public class MissionSaveData
                 return false;// Does not care about time
         }
     }
+
+    public void SetMissionCompletionInfo()
+    {
+        // Set new last completiontime
+        lastCompletion = DateTime.UtcNow;
+        everCompleted = true;
+        amount = 0;
+
+        MissionUpdate?.Invoke();
+    }
+
+    public bool CompleteStepForMission(int completeAmount)
+    {
+        amount++;
+
+        // Invoke if not completed (if completed UpdateMissionCompletion will be called which invokes the save)
+        MissionUpdate?.Invoke();
+
+        return amount >= completeAmount;
+    }
+
 }
 
 [Serializable]
@@ -83,7 +108,6 @@ public class PlayerGameData
 
     // Action Events
     public static Action InventoryUpdate;
-    public static Action MissionUpdate;
     public static Action AdsWatchedAdded;
     public static Action MinuteWatched;
     public static Action<int> MissionCompleted;
@@ -172,26 +196,6 @@ public class PlayerGameData
                 UnlockTier?.Invoke(missionRewardData.value);
                 break;
         }
-    }
-
-    public void UpdateMissionCompletion(MissionSaveData missionSaveData)
-    {
-        // Set new last completiontime
-        missionSaveData.lastCompletion = DateTime.UtcNow;
-        missionSaveData.everCompleted = true;
-        missionSaveData.amount = 0;
-        
-        MissionUpdate?.Invoke();
-    }
-
-    public bool CompleteStepForMission(MissionSaveData missionSaveData,int completeAmount)
-    {
-        missionSaveData.amount++;
-
-        // Invoke if not completed (if completed UpdateMissionCompletion will be called which invokes the save)
-        MissionUpdate?.Invoke();
-
-        return missionSaveData.amount >= completeAmount;
     }
 
     public void AddWatchedAds()

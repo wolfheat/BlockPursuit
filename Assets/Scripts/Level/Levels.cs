@@ -8,12 +8,13 @@ public class Levels : MonoBehaviour
     [SerializeField] private List<LevelDefinition> levelsMedium = new List<LevelDefinition>();
     [SerializeField] private List<LevelDefinition> levelsHard = new List<LevelDefinition>();
     [SerializeField] private List<LevelDefinition> levelsABC = new List<LevelDefinition>();
+    [SerializeField] private List<LevelDefinition> levelsImpossible = new List<LevelDefinition>();
 
     public static List<LevelDefinition>[] LevelDefinitions { get; private set; }
 
     private void Awake()
     {
-        LevelDefinitions = new List<LevelDefinition>[4] { levelsEasy, levelsMedium, levelsHard, levelsABC };
+        LevelDefinitions = new List<LevelDefinition>[5] { levelsEasy, levelsMedium, levelsHard, levelsABC, levelsImpossible };
 
         DefineLevelIndexes();
     }
