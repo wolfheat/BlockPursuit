@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
   m_Name: TutorialDataA
   m_EditorClassIdentifier: 
+  headerText: Pick Up Tiles
   informationText: To be able to pick a tile up you need to be standing towards it.
+    Tap to pick up and drop tiles.
   sprites:
   - {fileID: 1160448087, guid: 41aa90b161e4e2c439e284f74ab7a1c1, type: 3}
   - {fileID: 439394851, guid: 41aa90b161e4e2c439e284f74ab7a1c1, type: 3}

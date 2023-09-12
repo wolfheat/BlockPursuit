@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
   m_Name: TutorialDataA 2
   m_EditorClassIdentifier: 
+  headerText: Travel
   informationText: Use the tiles to move around the level.
   sprites:
   - {fileID: -1348451208, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}

@@ -432,7 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2281668006996238769}
   - component: {fileID: 4859509748547044534}
-  - component: {fileID: 6720682667966680070}
+  - component: {fileID: 1073986865444196768}
   m_Layer: 5
   m_Name: BBoost
   m_TagString: Untagged
@@ -472,7 +472,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6688666192004890359}
   m_CullTransparentMesh: 1
---- !u!114 &6720682667966680070
+--- !u!114 &1073986865444196768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -481,9 +481,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6688666192004890359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439806a4fb83e7844a4cb98bd888f8f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a2aac1d29c1fe94b9caa96dc2cb9308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostText: {fileID: 5043657216584176492}
-  boostImageActive: {fileID: 1699285231643059032}
-  boostImageInactive: {fileID: 4522624608630668491}
+  boostTimeText: {fileID: 0}
+  boostTimeObject: {fileID: 0}
+  boostTimeObjectDisabled: {fileID: 0}
+  boostValueEnabled: {fileID: 0}
+  boostValueDisabled: {fileID: 0}
+  boostImageActive: {fileID: 0}
+  boostImageInactive: {fileID: 0}

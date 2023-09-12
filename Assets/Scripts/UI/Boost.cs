@@ -1,12 +1,16 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 public enum BoostType { TileBoost, CoinBoost}
-public abstract class Boost : MonoBehaviour
+public class Boost : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI boostText;
-    //[SerializeField] Image boostImage;
+    [SerializeField] TextMeshProUGUI boostTimeText;
+    [SerializeField] GameObject boostTimeObject;
+    [SerializeField] GameObject boostTimeObjectDisabled;
+
+    [SerializeField] GameObject boostValueEnabled;
+    [SerializeField] GameObject boostValueDisabled;
+
     [SerializeField] GameObject boostImageActive;
     [SerializeField] GameObject boostImageInactive;
     protected BoostData data;
@@ -18,12 +22,12 @@ public abstract class Boost : MonoBehaviour
 
     protected void SetText(string text)
     {
-        boostText.text = text;
+        boostTimeText.text = text;
     }
 
     private void FixedUpdate()
     {
-
+        if (data == null) return;
         UpdateTimer();
 
     }
@@ -32,7 +36,6 @@ public abstract class Boost : MonoBehaviour
     {
         if(data.timeLeft <= 0)
         {
-            SetText("Not Active");
             SetActive(false);
             
         }
@@ -49,7 +52,16 @@ public abstract class Boost : MonoBehaviour
     }
     public void SetActive(bool v)
     {
+        //Image
         boostImageActive.SetActive(v);
         boostImageInactive.SetActive(!v);
+
+        // Value
+        boostTimeObject.SetActive(v);
+        boostTimeObjectDisabled.SetActive(!v);
+
+        // Type
+        boostValueEnabled.SetActive(v);
+        boostValueDisabled.SetActive(!v);
     }
 }

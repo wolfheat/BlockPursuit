@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
   m_Name: TutorialDataA 3
   m_EditorClassIdentifier: 
+  headerText: Lift position
   informationText: How you grab hold of a tile determines how it's being held and
     how you will be able to place it.
   sprites:

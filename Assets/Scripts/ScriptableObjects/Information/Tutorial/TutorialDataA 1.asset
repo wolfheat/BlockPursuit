@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
   m_Name: TutorialDataA 1
   m_EditorClassIdentifier: 
+  headerText: Turning
   informationText: You can only turn by moving one step so if you can't take a step
     towards a tile then you can not lift it up.
   sprites:

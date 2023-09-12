@@ -218,18 +218,18 @@ Jun 2023
 11/9	* Rework of level Select screen
 12/9	* Fixed ScrollRect for level select again		
 		* Forced update of visuals for watched time when changing Only One target
+		* Boost panel now show grey when inactive
+		* Changed arrows in tutorial
+		* Created a fake swiper that shows swiping, used for tutorial
+		* Added Swipe tutorial
+		* Added Descriptive name for each tutorial
 
-	
 
-		* Tutorial might need better descriptions (have Tutorial exchanged for title description?)
 		* Tutorial resolution is to low fix somehow
-		* Better arrows in tutorial
-		* Have tutorial for each piece that shows in what direction you can pick up stuff?
 
 		TEXT FIELDS
 		* Currently different text types for info and unlockConfirmation screen, keep it separate or confirm?
 		* Levels ID on Level select still have different text font
-		
 		
 		MISSIONS PAGE (better name for it?)
 		* Maybe have completed missions animate/fade away and new missions animate/fade into view?

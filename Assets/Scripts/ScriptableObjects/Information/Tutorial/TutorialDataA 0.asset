@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
+  m_Name: TutorialDataA 0
+  m_EditorClassIdentifier: 
+  headerText: Move Around
+  informationText: Swipe in a direction to move around. You can take one step per
+    swipe. You can only walk on tiles.
+  sprites:
+  - {fileID: 244605813, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 2119775215, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 966718562, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -357075425, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 1655083524, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 1026612364, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1770862179, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1208436312, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -320832102, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -108220996, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -803663103, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -163675520, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 1537226381, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1782425738, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -948818535, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1116364839, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 48783370, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1262081635, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 709483471, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -310618526, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 95908686, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 853234642, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1059683950, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -74067214, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1706181218, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 378213153, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1222931597, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 1948915308, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 221058900, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1807767589, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1328229741, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 1362405615, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -584681491, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 606602186, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 1163127737, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: 546667068, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1003338160, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -1862099058, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -943636293, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}
+  - {fileID: -261535488, guid: cdfa6b23dcef50447a9cd75d9d79a327, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
   m_Name: TutorialDataA 4
   m_EditorClassIdentifier: 
+  headerText: Finish level
   informationText: Fill the targets to complete the level.
   sprites:
   - {fileID: -1033780675, guid: 9559aa48198e1284c921749a932a84c9, type: 3}

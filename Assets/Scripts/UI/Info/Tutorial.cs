@@ -9,6 +9,7 @@ public class Tutorial : BasePanel
 {
     [SerializeField] TextMeshProUGUI infoField;
     [SerializeField] TextMeshProUGUI indexText;
+    [SerializeField] TextMeshProUGUI headerText;
     [SerializeField] RectTransform infoContentObject;
     [SerializeField] Image image;
 
@@ -68,6 +69,7 @@ public class Tutorial : BasePanel
     private void ShowInfoForIndex()
     {
         infoField.text = infos[array].informationText;
+        headerText.text = infos[array].headerText;
         indexText.text = (array+1).ToString();
         StartCoroutine(DetermineSize());
     }

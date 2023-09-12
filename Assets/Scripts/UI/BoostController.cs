@@ -6,8 +6,8 @@ public class BoostController : EscapableBasePanel
 {
     [SerializeField] RewardedController rewardedController;
     [SerializeField] LoadingAdsController loadingAdsController;
-    [SerializeField] TypeABoost aBoost;
-    [SerializeField] TypeBBoost bBoost;
+    [SerializeField] Boost aBoost;
+    [SerializeField] Boost bBoost;
     [SerializeField] BoostIcon aBoostIcon;
     [SerializeField] BoostIcon bBoostIcon;
     [SerializeField] GameObject loadBoostButton;
