@@ -48,6 +48,8 @@ public class LevelSelect : EscapableBasePanel
         SavingUtility.LoadingComplete += GenerateButtonLevelsWhenLoadingIsComplete; 
         PlayerGameData.MissionCompleted += UpdateCompletedMissionsTo; 
         PlayerGameData.UnlockTier += UnlockTier; 
+        LevelButton.SelectButton += UpdateLatestSelectedInfo; 
+        LevelButton.ClickedButton += ClickedLevelButton; 
     }
     
     private void OnDisable()
@@ -55,6 +57,8 @@ public class LevelSelect : EscapableBasePanel
         SavingUtility.LoadingComplete -= GenerateButtonLevelsWhenLoadingIsComplete;
         PlayerGameData.MissionCompleted -= UpdateCompletedMissionsTo; 
         PlayerGameData.UnlockTier -= UnlockTier;
+        LevelButton.SelectButton -= UpdateLatestSelectedInfo; 
+        LevelButton.ClickedButton -= ClickedLevelButton; 
     }
 
     public void UpdateCompletedMissionsTo(int amt)
@@ -171,13 +175,10 @@ public class LevelSelect : EscapableBasePanel
 
     public void UpdateLatestSelectedInfo(LevelButton button)
     {
-        Debug.Log("Update SnapPosition");
-        Debug.Log("activetab = "+ activeTab);
-        Debug.Log("levelButtonHolders[activeTab].transform.parent = " + levelButtonHolders[activeTab].transform.parent.name);
+        Transform currentLevelButtonHolder = levelButtonHolders[activeTab].transform.parent;
 
-        // Enables keyboard to be used in scrollrect - centering the selected item correctly
-        levelButtonHolders[activeTab].transform.parent.localPosition = levelButtonHolders[activeTab].transform.parent.GetComponent<ScrollRect>().GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
-        //scrollRect.content.localPosition = scrollRect.GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
+        // Centering the selected item correctly - Enables keyboard to be used in scrollrect
+        levelButtonHolders[activeTab].transform.localPosition = currentLevelButtonHolder.GetComponent<ScrollRect>().GetSnapToVerticalPositionToBringChildIntoView(button.GetComponent<RectTransform>());
 
         infoScreen.UpdateInfo(button);
     }
@@ -199,23 +200,7 @@ public class LevelSelect : EscapableBasePanel
         Debug.Log("Request start Random level of tier: "+tier);
     }
 
-    public void ConfirmLevelSelectJumpToStartButton(LevelButton button)
-    {
-        if (Inputs.Instance.Controls.UI.Submit.WasPressedThisFrame())
-            ClickLevelByKeyboard(button);
-        else
-            ClickLevelByTouch(button);
-    }
-
-    private void ClickLevelByTouch(LevelButton button)
-    {
-        Debug.Log("Click by Mouse");
-        // Click level by Mouse or touch
-        // Do nothing? Only want to select with touch
-
-    }
-
-    private void ClickLevelByKeyboard(LevelButton button)
+    public void ClickedLevelButton(LevelButton button)
     {
         // Info screen already showing now start level or show unlock screen
         Debug.Log("Click by Keyboard");
@@ -333,63 +318,4 @@ public class LevelSelect : EscapableBasePanel
         tierButtons[tierID].gameObject.SetActive(true);
     }
 
-}
-
-
-
-public static class ScrollRectExtensions
-{
-    // Enables keyboard to be used in scrollrect - centering the selected item correctly
-    public static Vector2 GetSnapToVerticalPositionToBringChildIntoView(this ScrollRect instance, RectTransform child)
-    {
-        Canvas.ForceUpdateCanvases();
-        
-        // Force to top row
-        Vector2 viewportLocalPosition = instance.viewport.localPosition;
-        Debug.Log("viewportLocalPosition: "+ viewportLocalPosition);
-        Vector2 childLocalPosition = child.localPosition;
-        Debug.Log("childLocalPosition: " + childLocalPosition);
-        Vector2 thisRectPosition = instance.GetComponent<RectTransform>().localPosition;
-        Debug.Log("thisRectPosition: " + thisRectPosition);
-        float padding = instance.content.gameObject.GetComponent<GridLayoutGroup>().padding.top;
-        float correction = instance.viewport.rect.height / 2; //107.15f;
-        float contentPosition = instance.content.localPosition.y-correction;
-
-        float parentTopPos = 0;
-        float parentBottomPos = instance.viewport.rect.height;
-        float childBottomPos = -child.localPosition.y + child.rect.height;
-        float childTopPos = -child.localPosition.y;
-
-       // Childs position when taking contents position into account
-        float childBottomPosAdjusted = childBottomPos - contentPosition;
-        float childTopPosAdjusted = childTopPos - contentPosition;
-        
-        // If child is outside of viewport scroll it inside
-        bool isBelow = childBottomPosAdjusted > instance.viewport.rect.height;
-        bool isAbove = childTopPosAdjusted < parentTopPos;
-        
-        // If below check how much below and move up that amount
-
-
-        //Debug.Log("Below "+isBelow +" childPos: "+childLocalPosition.y+" ScrollHeight: "+instance.viewport.rect.height);
-
-        Vector2 newPos = new Vector2();
-
-        if (isBelow)
-        {
-            float amountBelow = childBottomPosAdjusted - parentBottomPos + padding;
-            newPos = new Vector2(viewportLocalPosition.x, correction + contentPosition + amountBelow);
-            return newPos;
-        }
-        if (isAbove)
-        {
-            float amountBelow = childTopPosAdjusted - parentTopPos - padding;
-            newPos = new Vector2(viewportLocalPosition.x, correction + contentPosition + amountBelow);
-            return newPos;
-        }
-
-        // THis is Good
-        return new Vector2(0, contentPosition + correction);
-        //return new Vector2(viewportLocalPosition.x, viewportLocalPosition.y+0);
-    }
 }

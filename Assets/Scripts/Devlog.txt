@@ -216,9 +216,10 @@ Jun 2023
 		* Created Tutorial screen similar to info screen but with description and animation, Added button to ingame menu
 		* Used my own implementation for gif that use coroutine and array of png sprites that loops around
 11/9	* Rework of level Select screen
+12/9	* Fixed ScrollRect for level select again		
+		* Forced update of visuals for watched time when changing Only One target
 
-		* Force update of watched time for next item when changing active one
-
+	
 
 		* Tutorial might need better descriptions (have Tutorial exchanged for title description?)
 		* Tutorial resolution is to low fix somehow

@@ -393,6 +393,7 @@ public class MissionsController : EscapableBasePanel
         if (bestMission.GetMissionDefinition().completeType == CompleteType.WatchAds)
             missionSaveDatas[bestMission.GetMissionDefinition().ID].amount = SavingUtility.playerGameData.AdsWatched;
 
+        bestMission.UpdateProgressVisuals();
     }
 
     private void Update()

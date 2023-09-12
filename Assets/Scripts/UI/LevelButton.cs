@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +10,6 @@ public class LevelButton : MonoBehaviour, ISelectHandler
     public int level = 0;
     public DifficultLevel difficulty;
     public TextMeshProUGUI levelIDText;
-    public GameObject selectedBorder;
     public LevelDefinition levelDefinition;
     public PlayerLevelData playerLevelData;
     [SerializeField] GameObject checkmark;
@@ -17,10 +17,12 @@ public class LevelButton : MonoBehaviour, ISelectHandler
 
     public bool IsCompleted => checkmark.activeSelf;
 
+    public static Action<LevelButton> SelectButton;
+    public static Action<LevelButton> ClickedButton;
+
     public void OnSelect(BaseEventData eventData)
     {
-        //Debug.Log("Selecting level button, updating playerdata.time to "+playerLevelData.bestTime);
-        FindObjectOfType<LevelSelect>().UpdateLatestSelectedInfo(this);
+        SelectButton.Invoke(this);        
     }
 
     public void SetLevel(int l)
@@ -48,12 +50,9 @@ public class LevelButton : MonoBehaviour, ISelectHandler
 
     public void ClickingButton()
     {
-        FindObjectOfType<LevelSelect>().ConfirmLevelSelectJumpToStartButton(this);
+        // Checks if button was "clicked" by keyboard rather than mouse
+        if (Inputs.Instance.Controls.UI.Submit.WasPressedThisFrame())
+            ClickedButton.Invoke(this);
     }
 
-    public void Select(bool doSelect = true)
-    {
-        selectedBorder.SetActive(doSelect);
-    }
-    
 }

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53774ebe12148f469cfcb51a0dbe560, type: 3}
+  m_Name: Watch 37 Ads Total
+  m_EditorClassIdentifier: 
+  ID: 1021
+  completeAmount: 37
+  type: 0
+  completeType: 2
+  tier: 0
+  missionLogoSprite: {fileID: 21300000, guid: af5c7df29e9686c429cdefd5e4f85ad7, type: 3}
+  missionName: 37 Ads
+  missionDescription: Watch 37 Ads Total
+  missionRewardData: {fileID: 11400000, guid: ea809b5f17ad3bf45a7009d4f41ee7fe, type: 2}

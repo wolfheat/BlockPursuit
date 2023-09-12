@@ -96,7 +96,7 @@ public class Mission : MonoBehaviour
         CompleteObject.SetActive(set);
     }
 
-    private void UpdateProgressVisuals()
+    public void UpdateProgressVisuals()
     {
         //Debug.Log("Updating progress visuals to amount = "+missionSaveData.amount);
         progressSlider.value = missionSaveData.amount;
