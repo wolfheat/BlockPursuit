@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
-  m_Name: TutorialDataA 4
+  m_Name: Tutorial5_FinishLevel
   m_EditorClassIdentifier: 
   headerText: Finish level
   informationText: Fill the targets to complete the level.
@@ -39,23 +39,3 @@ MonoBehaviour:
   - {fileID: -513267317, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
   - {fileID: -390801649, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
   - {fileID: 1243309832, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 700943155, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -1706623840, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 1662212216, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -1020002152, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -705101810, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -417099080, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 579879949, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 1753781893, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 1992281836, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 948337144, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -220940475, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -1398784125, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -1705932225, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 240617806, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 1209636370, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 767585451, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -119314072, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 1475192245, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: 493145253, guid: 9559aa48198e1284c921749a932a84c9, type: 3}
-  - {fileID: -542895009, guid: 9559aa48198e1284c921749a932a84c9, type: 3}

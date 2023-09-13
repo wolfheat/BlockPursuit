@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
-  m_Name: TutorialDataA
+  m_Name: Tutorial0_PickUpTiles
   m_EditorClassIdentifier: 
   headerText: Pick Up Tiles
   informationText: To be able to pick a tile up you need to be standing towards it.

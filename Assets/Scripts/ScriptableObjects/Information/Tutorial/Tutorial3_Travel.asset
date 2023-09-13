@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
-  m_Name: TutorialDataA 2
+  m_Name: Tutorial3_Travel
   m_EditorClassIdentifier: 
   headerText: Travel
   informationText: Use the tiles to move around the level.
@@ -63,24 +63,3 @@ MonoBehaviour:
   - {fileID: -293033233, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
   - {fileID: 1235085033, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
   - {fileID: -792840215, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -1255792666, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -1407419557, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -216760661, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 660773465, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -436206759, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 1414248914, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 2127239759, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 1028360294, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 918534, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -1800042440, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -103601237, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 1302005239, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -950153893, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 174916501, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -653109846, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -674217921, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -165866493, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: 1093321461, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -1589517449, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -1586619573, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}
-  - {fileID: -1168030029, guid: 4237d5b303f2ca44ab1ded81aa421582, type: 3}

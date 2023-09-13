@@ -153,7 +153,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -174,7 +174,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -195,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -216,7 +216,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -237,7 +237,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -258,7 +258,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -279,7 +279,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -300,7 +300,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 1024
+        y: 767
         width: 128
         height: 128
       alignment: 0
@@ -321,7 +321,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -342,7 +342,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -363,7 +363,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -384,7 +384,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -405,7 +405,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -426,7 +426,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -447,7 +447,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -468,7 +468,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 896
+        y: 639
         width: 128
         height: 128
       alignment: 0
@@ -489,7 +489,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -510,7 +510,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -531,7 +531,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -552,7 +552,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -573,7 +573,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -594,7 +594,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -615,7 +615,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -636,7 +636,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 768
+        y: 511
         width: 128
         height: 128
       alignment: 0
@@ -657,7 +657,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -678,7 +678,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -699,7 +699,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -720,7 +720,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -741,7 +741,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -762,7 +762,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -783,7 +783,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -804,7 +804,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 640
+        y: 383
         width: 128
         height: 128
       alignment: 0
@@ -825,7 +825,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -846,7 +846,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -867,7 +867,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -888,7 +888,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -909,7 +909,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -930,7 +930,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -951,7 +951,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -972,7 +972,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 512
+        y: 255
         width: 128
         height: 128
       alignment: 0
@@ -993,7 +993,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1014,7 +1014,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 128
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1035,7 +1035,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1056,7 +1056,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1077,7 +1077,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1098,7 +1098,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 640
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1119,7 +1119,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1140,7 +1140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 896
-        y: 384
+        y: 127
         width: 128
         height: 128
       alignment: 0
@@ -1152,510 +1152,6 @@ TextureImporter:
       bones: []
       spriteID: e80cb1f5b92a819488d898a44a96ac9e
       internalID: -792840215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_48
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e185acdfb511be043a38defd4bd70d52
-      internalID: -1255792666
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_49
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9456527f6d0390b4d9add68c985da7b6
-      internalID: -1407419557
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_50
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c911ac2aef6875c44b7fccbad6bcfef0
-      internalID: -216760661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_51
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: adb0c2e8d1af6a04db1a70d3fbe63e3c
-      internalID: 660773465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_52
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9eeed37f54583f43ba99977afbc89ea
-      internalID: -436206759
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_53
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 23089282efc43704ab0419c4418afd31
-      internalID: 1414248914
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_54
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 68540024c1f95704dabb9c4749b71195
-      internalID: 2127239759
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_55
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 422d7d9a025892945a44ab37b25e217e
-      internalID: 1028360294
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_56
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 44a882cb937335a42864537996909c07
-      internalID: 918534
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_57
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc6d86b73cc66e84093adb53f9768ab7
-      internalID: -1800042440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_58
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8775226641383c46b5bdc6f173afac7
-      internalID: -103601237
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_59
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c96adebd80c6088409a377213c565f92
-      internalID: 1302005239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_60
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2c2d264772dbb9469db4a7d0404fb79
-      internalID: -950153893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_61
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5680e5753a4358e42bf0390ad135d25b
-      internalID: 174916501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_62
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7de9afd6f96ca046914ba8f05b1770d
-      internalID: -653109846
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_63
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ced2f83cd7eab4c488c67f95e7a84b6f
-      internalID: -674217921
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_64
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc88538f4a7ec1146a230dafa3649dc4
-      internalID: -165866493
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_65
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34ebe533a2e8995468f5a0846d9e4e9f
-      internalID: 1093321461
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_66
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c11db2f8d9b23814c959e05da5be6577
-      internalID: -1589517449
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_67
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0bb49dc9df99deb4f89b297352b73af8
-      internalID: -1586619573
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_68
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da8e6d30aa8cc2c41bd1cf63d817e6e4
-      internalID: -1168030029
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_69
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90adb9703e5fb9b4ab13a5c911da9d3b
-      internalID: 1768391237
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_70
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 885349130229ff444a1cb9350d5de9cf
-      internalID: -551725364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tutorial_TranslatingLevel_128x128_SpriteSheet_71
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6cc1eb0ee49f19d48ad67c3e8f5ef499
-      internalID: -1297230288
       vertices: []
       indices: 
       edges: []
@@ -1714,33 +1210,9 @@ TextureImporter:
       Tutorial_TranslatingLevel_128x128_SpriteSheet_45: -293033233
       Tutorial_TranslatingLevel_128x128_SpriteSheet_46: 1235085033
       Tutorial_TranslatingLevel_128x128_SpriteSheet_47: -792840215
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_48: -1255792666
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_49: -1407419557
       Tutorial_TranslatingLevel_128x128_SpriteSheet_5: -717572079
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_50: -216760661
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_51: 660773465
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_52: -436206759
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_53: 1414248914
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_54: 2127239759
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_55: 1028360294
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_56: 918534
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_57: -1800042440
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_58: -103601237
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_59: 1302005239
       Tutorial_TranslatingLevel_128x128_SpriteSheet_6: 999165432
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_60: -950153893
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_61: 174916501
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_62: -653109846
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_63: -674217921
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_64: -165866493
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_65: 1093321461
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_66: -1589517449
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_67: -1586619573
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_68: -1168030029
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_69: 1768391237
       Tutorial_TranslatingLevel_128x128_SpriteSheet_7: 934564838
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_70: -551725364
-      Tutorial_TranslatingLevel_128x128_SpriteSheet_71: -1297230288
       Tutorial_TranslatingLevel_128x128_SpriteSheet_8: -644921853
       Tutorial_TranslatingLevel_128x128_SpriteSheet_9: 796298812
   mipmapLimitGroupName: 

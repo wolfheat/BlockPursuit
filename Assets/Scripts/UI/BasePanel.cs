@@ -46,6 +46,7 @@ public class BasePanel : MonoBehaviour, ISetSelected
     public bool Enabled() => canvas.enabled;
     public void TogglePanel()
     {
+        if(canvas == null) canvas = GetComponent<Canvas>();
         bool current = canvas.enabled;
         panel.SetActive(!current);
         canvas.enabled = !current;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bc9e563a2c51764abca35a3eafbb844, type: 3}
-  m_Name: TutorialDataA 0
+  m_Name: Tutorial1_MoveAround
   m_EditorClassIdentifier: 
   headerText: Move Around
   informationText: Swipe in a direction to move around. You can take one step per

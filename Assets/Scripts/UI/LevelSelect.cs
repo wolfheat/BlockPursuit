@@ -8,10 +8,6 @@ using UnityEngine.UI;
 
 public class LevelSelect : EscapableBasePanel
 {
-    [SerializeField] GameObject levelEasyButtonHolder;
-    [SerializeField] GameObject levelMediumButtonHolder;
-    [SerializeField] GameObject levelHardButtonHolder;
-    [SerializeField] GameObject levelABCButtonHolder;
     [SerializeField] private List<GameObject> levelButtonHolders = new List<GameObject>();
 
     [SerializeField] private GameObject levelButtonHolderPrefab;

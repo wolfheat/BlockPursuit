@@ -223,21 +223,17 @@ Jun 2023
 		* Created a fake swiper that shows swiping, used for tutorial
 		* Added Swipe tutorial
 		* Added Descriptive name for each tutorial
+13/9	* Made tutorial spritesheets smaller (square size)
+		* Added editor script Toggle Button to Base Panels, makes it fast to turn on/off menus
 
-
-		* Tutorial resolution is to low fix somehow
 
 		TEXT FIELDS
-		* Currently different text types for info and unlockConfirmation screen, keep it separate or confirm?
+		* Currently different text types for info and unlockConfirmation screen, keep it separate or conform?
 		* Levels ID on Level select still have different text font
 		
 		MISSIONS PAGE (better name for it?)
 		* Maybe have completed missions animate/fade away and new missions animate/fade into view?
 		* Acheivements requirements show here with reward as well? or remove achievements?
-		
-		MISSIONS IDEAS
-		* Missions use simliar methods for adding MinutePlayed/Ads watched/ Level completed , mashc into reused methods if possible
-		* Maybe, Make sure play time only counts when at a level?
 
 		LEVELS
 		* Tiers have different - Backgrounds, Tiletypes?, Ambient Sound, Music
@@ -278,11 +274,10 @@ Jun 2023
 		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
 
 		SOUND
-		* Check if want to change to use audio mixer (wont work for WebGl and maybe mobile issue?)
 		* Rework of sounds, decide what to use rework needed
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
 		* Need better pick up and place sound combo. Remove or change step sound its terrible.
-		* Sound Effects are lagging after for some reason
+		* Sound Effects are lagging for some reason
 				
 		CONSIDER CHANGES:
 		* Should boosts be available from within a game played? Giving player chance to boost before completing a started level? No?
@@ -361,13 +356,8 @@ Jun 2023
 		* Older phone does not grant rewards from ads nor save/load game data on file, why?
 		
 		TUTORIAL: (Fill in stuff that needs to be thaught)
-		* Show in tutorial the different input modes for touch
-		* Show how touch is used to move player
-		* Show that player need to stand towards tile to pick it up. Clarify that there has to be two spots before that tile to be facing correctly.
-			TECHNIQUES	
-			* Show shuffling technique like in A.2
+		* Tutorial resolution is to low fix somehow
 			* Show that sometimes there are more tile parts than goals, just need to fill them
-			* Show that sometimes the order is important A.13?
 
 		DATA STUFF:
 		* Calibrate tile cost for level unlock as well as rewarded tiles.
