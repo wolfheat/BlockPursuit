@@ -257,7 +257,7 @@ Jun 2023
 		* Fix achievements 
 
 		BEFORE RELEASE
-		* Add more interfaces where needed
+		* Add more interfaces/namespaces where needed
 		* Have a Support/Rate link button in the settings page? Somewhere have a text stating that the game exists on steam for pc as well?
 		* Need Asset Bundle or Adressables??
 		* Add Statistics / retention / dashboard / Unitys ?
@@ -268,11 +268,6 @@ Jun 2023
 				* Selecting level in level select, buff the touched button and make fancier load of info into infoscreen
 			* AssetKits UI particle Image asset might be useful for effects
 		
-		GAMEPLAY RESPONSE
-		* Need to make animation to character to grab hold of tiles
-		* Make player aware when standing towards a tile that can be picked up. Maybe lift it slightly, colorize tint or animate? - Currently Shake/Change it?
-		* Mouse is not registred correctly when using build tool. Figure out why and try to fix. Maybe use input debugger.(Solution, disable touch screen simulation)
-
 		SOUND
 		* Rework of sounds, decide what to use rework needed
 		* Make Sound clips used OGG files to lower size and maybe compress quality?
