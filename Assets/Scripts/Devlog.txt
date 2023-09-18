@@ -227,6 +227,8 @@ Jun 2023
 		* Added editor script Toggle Button to Base Panels, makes it fast to turn on/off menus
 
 
+		* Add Language Localization?
+
 		TEXT FIELDS
 		* Currently different text types for info and unlockConfirmation screen, keep it separate or conform?
 		* Levels ID on Level select still have different text font
